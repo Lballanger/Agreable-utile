@@ -1,30 +1,20 @@
 {
   "name": "agreable-utile",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint \"src/**/*.{js,jsx}\" --fix --cache",
-    "prepare": "husky install"
+    "lint:back": "cd ./back && npm run lint",
+    "lint:front": "cd ./front && npm run lint"
   },
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lballanger/Agreable-utile.git"
   },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^1.0.7",
-    "eslint": "^8.13.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.29.4",
-    "eslint-plugin-react-hooks": "^4.4.0",
-    "prettier": "^2.6.2",
-    "vite": "^2.9.0",
-    "husky": "^7.0.0"
-  }
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lballanger/Agreable-utile/issues"
+  },
+  "homepage": "https://github.com/Lballanger/Agreable-utile#readme"
 }
