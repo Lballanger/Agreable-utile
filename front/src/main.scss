@@ -1,0 +1,11 @@
+@import "./styles/reset.scss";
+
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  padding: 1rem;
+  background-color: #ffe1e1;
+}
