@@ -1,5 +1,8 @@
 import "./Homepage.scss";
 import delphine from "../../assets/img/delphine.jpg";
+import faitmain from "../../assets/img/faitmain.svg";
+import oeko from "../../assets/img/oeko-tex.svg";
+import madeinfrance from "../../assets/img/made-in-france.svg";
 
 function Homepage() {
   return (
@@ -73,6 +76,49 @@ function Homepage() {
               <br />
               L&#8217;Agréable Utile by Sandrine
             </p>
+          </div>
+        </div>
+      </div>
+      <div className="main__quality">
+        <h2 className="main__quality__title">Une sélection de choix</h2>
+        <div className="main__quality__container">
+          <div className="main__quality__container__label">
+            <div className="main__quality__container__label__img-container">
+              <img
+                className="main__quality__container__label__img-container__img"
+                src={faitmain}
+                alt=""
+              />
+            </div>
+            <p>
+              Oeko-Tex est un label de qualité comprenant plusieurs normes
+              <br />
+              techniques, visant à certifier les qualités sanitaires et
+              <br />
+              écologiques des textiles et cuirs, en garantissant l&#8217;absence
+              <br />
+              de produits toxiques pour le corps et pour l&#8217;environnement.
+            </p>
+          </div>
+          <div className="main__quality__container__label">
+            <div className="main__quality__container__label__img-container">
+              <img
+                className="main__quality__container__label__img-container__img"
+                src={oeko}
+                alt=""
+              />
+            </div>
+            <p>Tous les tissus sont d&#8217;origine Française.</p>
+          </div>
+          <div className="main__quality__container__label">
+            <div className="main__quality__container__label__img-container">
+              <img
+                className="main__quality__container__label__img-container__img"
+                src={madeinfrance}
+                alt=""
+              />
+            </div>
+            <p>Toutes les créations sont faite main par moi même.</p>
           </div>
         </div>
       </div>
