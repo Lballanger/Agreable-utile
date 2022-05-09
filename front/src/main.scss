@@ -1,5 +1,10 @@
 @import "./styles/reset.scss";
 
+@font-face {
+  font-family: "Afrah-Regular";
+  src: url(./assets/fonts/Afrah-Regular.woff) format("woff");
+}
+
 * {
   box-sizing: border-box;
   font-family: sans-serif;
