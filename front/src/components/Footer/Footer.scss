@@ -4,12 +4,8 @@
   display: flex;
   justify-content: space-evenly;
 
-  a,
-  a:visited,
   ul > li {
     padding-bottom: 0.5rem;
-    text-decoration: none;
-    color: black;
   }
 
   &__web-policy {
