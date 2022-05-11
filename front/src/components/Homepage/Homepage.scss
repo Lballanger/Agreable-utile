@@ -1,8 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap");
+
 .main {
+  font-family: "Inter", sans-serif;
+
   &__presentation {
     padding-bottom: 4rem;
     &__title {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 500;
       padding: 3rem 0;
     }
@@ -11,64 +15,99 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      padding-bottom: 2rem;
 
       &__image-container {
         min-width: 10%;
-        max-width: 28%;
+        max-width: 15%;
         padding-right: 2.5rem;
-
         &__img {
           width: 100%;
-          border-radius: 30%;
+          border-radius: 40%;
+          filter: grayscale(100%);
         }
       }
 
       &__container {
         display: flex;
-        max-width: 40%;
+        max-width: 30%;
 
         &__description {
-          font-size: 0.8rem;
-          text-align: center;
-          line-height: 1.2rem;
+          font-size: 1rem;
+          text-align: justify;
+          font-style: italic;
         }
       }
     }
   }
 
-  &__quality {
+  &__background {
     margin: 0 -3rem;
-    background-color: pink;
+    background-image: url("../../assets/img/background2.jpg");
+    background-attachment: fixed;
+    height: 320px;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    margin: 0 -3rem;
+    font-size: 1.7rem;
+    font-weight: 500;
+    text-align: center;
+    color: rgb(168, 112, 131);
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.103);
+    padding: 1rem 0;
+  }
+
+  &__quality {
     font-size: 0.8rem;
-    &__title {
-      font-size: 1.5rem;
-      font-weight: 500;
-      text-align: center;
-      color: white;
-      border-bottom: 1px dashed white;
-      padding: 1rem 0;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+
+    border-bottom: 1px dashed rgba(235, 138, 183, 0.322);
 
     &__container {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      flex-direction: column;
       flex-wrap: nowrap;
+      width: 60%;
+      margin-right: -14rem;
 
       &__label {
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
         align-items: center;
-        padding: 2.5rem 0;
+        width: 50%;
+        // border: 1px dashed rgba(192, 99, 145, 0.164);
+
+        &__content {
+          padding: 2rem;
+          text-align: center;
+        }
+
         &__img-container {
-          width: 20%;
-          padding-bottom: 2rem;
+          display: flex;
+          justify-content: center;
+          width: 76%;
+          // border-right: 1px dashed rgba(192, 99, 145, 0.164);
+          // border-left: 1px dashed rgba(192, 99, 145, 0.164);
           &__img {
-            border-radius: 50%;
-            width: 100%;
+            width: 55%;
           }
         }
+      }
+    }
+    &__produits {
+      display: flex;
+      justify-content: flex-start;
+      width: 30%;
+
+      &__image {
+        border-radius: 5px;
+        width: 65%;
       }
     }
   }
