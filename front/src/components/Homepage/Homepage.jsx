@@ -1,25 +1,26 @@
 import "./Homepage.scss";
-import delphine from "../../assets/img/delphine.jpg";
+import sandrine from "../../assets/img/sandrine.jpg";
 import faitmain from "../../assets/img/faitmain.svg";
 import oeko from "../../assets/img/oeko-tex.svg";
 import madeinfrance from "../../assets/img/made-in-france.svg";
+import produits2 from "../../assets/img/produits2.svg";
 
 function Homepage() {
   return (
     <main className="main">
       <div className="main__presentation">
-        <h2 className="main__presentation__title">Qui je suis ?</h2>
+        <h2 className="main__presentation__title" />
         <div className="main__presentation__content ">
           <div className="main__presentation__content__image-container">
             <img
               className="main__presentation__content__image-container__img"
-              src={delphine}
-              alt="delphine"
+              src={sandrine}
+              alt="sandrine"
             />
           </div>
           <div className="main__presentation__content__container">
             <p className="main__presentation__content__container__description">
-              Prénommée Sandrine et passionnée d&#8217;Art de vivre, j&#8217;ai
+              {/* Prénommée Sandrine et passionnée d&#8217;Art de vivre, j&#8217;ai
               décidé après une carrière de 15 ans en gestion d&#8217;entreprise,
               d&#8217;exploiter mon goût pour la décoration et
               l&#8217;artisanat.
@@ -74,13 +75,21 @@ function Homepage() {
               Faites-moi confiance, vous ne le regretterez pas.
               <br />
               <br />
-              L&#8217;Agréable Utile by Sandrine
+              L&#8217;Agréable Utile by Sandrine */}
+              Sandrine est passionnée d&#8217;art de vivre.
+              <br />
+              Elle conçoit et fabrique dans son atelier à Thorigny-sur-Marne, en
+              pièce unique, des accessoires textiles pour l&#8217;univers de la
+              petite enfance, les plaisirs de la maison, la beauté et le
+              bien-être ainsi que la mode pour les hommes et les femmes.
             </p>
           </div>
         </div>
       </div>
+      <div className="main__background" />
+
+      <h2 className="main__title">Une sélection de choix</h2>
       <div className="main__quality">
-        <h2 className="main__quality__title">Une sélection de choix</h2>
         <div className="main__quality__container">
           <div className="main__quality__container__label">
             <div className="main__quality__container__label__img-container">
@@ -90,15 +99,21 @@ function Homepage() {
                 alt=""
               />
             </div>
-            <p>
-              Oeko-Tex est un label de qualité comprenant plusieurs normes
-              <br />
-              techniques, visant à certifier les qualités sanitaires et
-              <br />
-              écologiques des textiles et cuirs, en garantissant l&#8217;absence
-              <br />
-              de produits toxiques pour le corps et pour l&#8217;environnement.
+            <p className="main__quality__container__label__content">
+              Toutes les créations sont faites main par moi-même.
             </p>
+          </div>
+          <div className="main__quality__container__label">
+            <p className="main__quality__container__label__content">
+              Tous les tissus utilisés sont d&#8217;origine Française.
+            </p>
+            <div className="main__quality__container__label__img-container">
+              <img
+                className="main__quality__container__label__img-container__img"
+                src={madeinfrance}
+                alt=""
+              />
+            </div>
           </div>
           <div className="main__quality__container__label">
             <div className="main__quality__container__label__img-container">
@@ -108,18 +123,24 @@ function Homepage() {
                 alt=""
               />
             </div>
-            <p>Tous les tissus sont d&#8217;origine Française.</p>
+
+            <p className="main__quality__container__label__content">
+              Oeko-Tex est un label de qualité comprenant plusieurs normes
+              <br />
+              techniques, visant à certifier les qualités sanitaires et
+              <br />
+              écologiques des textiles et cuirs, en garantissant l&#8217;absence
+              <br />
+              de produits toxiques pour le corps et pour l&#8217;environnement.
+            </p>
           </div>
-          <div className="main__quality__container__label">
-            <div className="main__quality__container__label__img-container">
-              <img
-                className="main__quality__container__label__img-container__img"
-                src={madeinfrance}
-                alt=""
-              />
-            </div>
-            <p>Toutes les créations sont faite main par moi même.</p>
-          </div>
+        </div>
+        <div className="main__quality__produits">
+          <img
+            className="main__quality__produits__image"
+            src={produits2}
+            alt="produits"
+          />
         </div>
       </div>
     </main>
