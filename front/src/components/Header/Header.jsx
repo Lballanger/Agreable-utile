@@ -1,5 +1,4 @@
 import "./Header.scss";
-import logo from "../../assets/img/logo.svg";
 import facebook from "../../assets/img/facebook.svg";
 import instagram from "../../assets/img/instagram.svg";
 
@@ -34,13 +33,6 @@ function Header() {
           </ul>
         </nav>
         <div className="header__navigation__logo-container">
-          <a className="header__navigation__logo-container__link" href="/">
-            <img
-              className="header__navigation__logo-container__link__logo"
-              src={logo}
-              alt="logo"
-            />
-          </a>
           <h1 className="header__navigation__logo-container__title">
             <a href="/">L&apos;agréable Utile</a>
           </h1>
