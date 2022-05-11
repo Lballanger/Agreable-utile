@@ -1,8 +1,20 @@
 import "./Header.scss";
+
+import { useState, useEffect } from "react";
+
+import Connexion from "../Connexion/Connexion";
+
 import facebook from "../../assets/img/facebook.svg";
 import instagram from "../../assets/img/instagram.svg";
 
 function Header() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCloseModal = (event) => {
+    event.stopPropagation();
+    setIsModalOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="header__social-container">
@@ -17,7 +29,6 @@ function Header() {
           </a>
         </div>
       </div>
-
       <div className="header__navigation">
         <nav className="header__navigation__nav">
           <ul className="header__navigation__nav__menu">
@@ -43,7 +54,9 @@ function Header() {
         <nav className="header__navigation__nav">
           <ul className="header__navigation__nav__menu">
             <li className="header__navigation__nav__menu__item">
-              <a href="#">Connexion</a>
+              <a onClick={() => setIsModalOpen(true)} href="#">
+                Connexion
+              </a>
             </li>
             <li className="header__navigation__nav__menu__item">
               <a href="#">Inscription</a>
@@ -51,6 +64,7 @@ function Header() {
           </ul>
         </nav>
       </div>
+      {isModalOpen && <Connexion handleCloseModal={handleCloseModal} />}
     </header>
   );
 }
