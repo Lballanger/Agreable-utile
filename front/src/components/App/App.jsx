@@ -1,3 +1,5 @@
+import { Routes, Route } from "react-router-dom";
+
 import Header from "../Header/Header";
 import Homepage from "../Homepage/Homepage";
 import Achievements from "../Achievements/Achievements";
@@ -10,10 +12,12 @@ function App() {
   return (
     <div className="container">
       <Header />
-      {/* <Homepage /> */}
-      {/* <Achievements /> */}
-      {/* <Register /> */}
-      <Shop />
+      <Routes>
+        <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/achievements" element={<Achievements />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/shop" element={<Shop />} />
+      </Routes>
       <Footer />
     </div>
   );
