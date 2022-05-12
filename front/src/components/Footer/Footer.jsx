@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "./Footer.scss";
 
 function Footer() {
@@ -6,29 +8,42 @@ function Footer() {
       <div className="footer__web-policy">
         <ul>
           <li>
-            <a href="#">Conditions générales de vente et d&#8217;utilisation</a>
+            <Link to="/cgv">
+              Conditions générales de vente et d&#8217;utilisation
+            </Link>
           </li>
           <li>
-            <a href="#">Politique de confidentialité</a>
+            <Link to="/confidentiality-cookies">
+              Protection de la vie privée et cookies
+            </Link>
           </li>
           <li>
-            <a href="#">Politique Cookies</a>
-          </li>
-          <li>
-            <a href="#">Mentions légales</a>
+            <Link to="/legals">Mentions légales</Link>
           </li>
         </ul>
       </div>
       <div className="footer__social-network">
         <ul>
           <li>
-            <a href="#">Contact</a>
+            <Link to="/contact">Contact</Link>
           </li>
           <li>
-            <a href="#">Facebook</a>
+            <a
+              target="_blank"
+              href="https://www.facebook.com/lagreablutile/"
+              rel="noreferrer"
+            >
+              Facebook
+            </a>
           </li>
           <li>
-            <a href="#">Instagram</a>
+            <a
+              target="_blank"
+              href="https://www.instagram.com/l_agreable_utile"
+              rel="noreferrer"
+            >
+              Instagram
+            </a>
           </li>
         </ul>
       </div>

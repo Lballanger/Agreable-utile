@@ -20,12 +20,20 @@ function Header() {
     <header className="header">
       <div className="header__social-container">
         <div className="header__social-container__facebook">
-          <a href="https://www.facebook.com/lagreablutile/">
+          <a
+            target="_blank"
+            href="https://www.facebook.com/lagreablutile/"
+            rel="noreferrer"
+          >
             <img src={facebook} alt="facebook" />
           </a>
         </div>
         <div className="header__social-container__instagram">
-          <a href="https://www.instagram.com/l_agreable_utile">
+          <a
+            target="_blank"
+            href="https://www.instagram.com/l_agreable_utile"
+            rel="noreferrer"
+          >
             <img src={instagram} alt="instagram" />
           </a>
         </div>
