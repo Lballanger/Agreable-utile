@@ -1,5 +1,6 @@
 import "./Header.scss";
 
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Connexion from "../Connexion/Connexion";
@@ -33,33 +34,33 @@ function Header() {
         <nav className="header__navigation__nav">
           <ul className="header__navigation__nav__menu">
             <li className="header__navigation__nav__menu__item">
-              <a href="/">Accueil</a>
+              <Link to="/">Accueil</Link>
             </li>
             <li className="header__navigation__nav__menu__item">
-              <a href="/achievements">Mes réalisations</a>
+              <Link to="/achievements">Mes réalisations</Link>
             </li>
             <li className="header__navigation__nav__menu__item">
-              <a href="/shop">Boutique </a>
+              <Link to="/shop">Boutique</Link>
             </li>
           </ul>
         </nav>
         <div className="header__navigation__logo-container">
           <h1 className="header__navigation__logo-container__title">
-            <a href="/">L&apos;agréable Utile</a>
+            <Link to="/">L&apos;agréable Utile</Link>
           </h1>
           <h2 className="header__navigation__logo-container__subtitle">
-            <a href="/">Création de textiles fait main</a>
+            <Link to="/">Création de textiles fait main</Link>
           </h2>
         </div>
         <nav className="header__navigation__nav">
           <ul className="header__navigation__nav__menu">
             <li className="header__navigation__nav__menu__item">
-              <a onClick={() => setIsModalOpen(true)} href="#">
+              <button type="button" onClick={() => setIsModalOpen(true)}>
                 Connexion
-              </a>
+              </button>
             </li>
             <li className="header__navigation__nav__menu__item">
-              <a href="/register">Inscription</a>
+              <Link to="/register">Inscription</Link>
             </li>
           </ul>
         </nav>
