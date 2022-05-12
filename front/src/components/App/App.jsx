@@ -1,6 +1,7 @@
 import Header from "../Header/Header";
 import Homepage from "../Homepage/Homepage";
 import Achievements from "../Achievements/Achievements";
+import Shop from "../Shop/Shop";
 import Register from "../Register/Register";
 import Footer from "../Footer/Footer";
 import "./App.scss";
@@ -11,7 +12,8 @@ function App() {
       <Header />
       {/* <Homepage /> */}
       {/* <Achievements /> */}
-      <Register />
+      {/* <Register /> */}
+      <Shop />
       <Footer />
     </div>
   );
