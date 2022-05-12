@@ -36,7 +36,7 @@ function Header() {
               <a href="/">Accueil</a>
             </li>
             <li className="header__navigation__nav__menu__item">
-              <a href="/realisations">Mes réalisations</a>
+              <a href="/achievements">Mes réalisations</a>
             </li>
             <li className="header__navigation__nav__menu__item">
               <a href="/shop">Boutique </a>
@@ -59,7 +59,7 @@ function Header() {
               </a>
             </li>
             <li className="header__navigation__nav__menu__item">
-              <a href="#">Inscription</a>
+              <a href="/register">Inscription</a>
             </li>
           </ul>
         </nav>
