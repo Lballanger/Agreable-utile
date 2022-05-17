@@ -11,9 +11,10 @@ class User {
 
   static async getById(id) {
     try {
-      const result = await client.query(`SELECT * FROM "user" WHERE id = $1 `, [
-        id,
-      ]);
+      const result = await client.query(
+        `SELECT * FROM private."user" WHERE id = $1 `,
+        [id],
+      );
       if (result.rows.length === 0) {
         return null;
       }
