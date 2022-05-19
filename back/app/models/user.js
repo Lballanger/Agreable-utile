@@ -23,6 +23,21 @@ class User {
       throw new Error(error);
     }
   }
+
+  static async getByEmail(email) {
+    try {
+      const { rows } = await client.query(
+        `SELECT id, civility, firstname, lastname, email, city, postal_code, date_of_birth FROM private.user where email= $1`,
+        [email],
+      );
+
+      if (rows.length === 0) return null;
+
+      return new User(rows[0]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = User;
