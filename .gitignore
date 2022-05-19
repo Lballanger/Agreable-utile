@@ -11,6 +11,8 @@ front/node_modules
 front/dist
 front/dist-ssr
 back/node_modules
+back/sqitch.conf
+back/api.http
 *.local
 */.env
 
