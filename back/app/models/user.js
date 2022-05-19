@@ -27,7 +27,7 @@ class User {
   static async getByEmail(email) {
     try {
       const { rows } = await client.query(
-        `SELECT id, civility, firstname, lastname, email, city, postal_code, date_of_birth FROM private."user" where email= $1`,
+        `SELECT * FROM private."user" where email= $1`,
         [email],
       );
 
