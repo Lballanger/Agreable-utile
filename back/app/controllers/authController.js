@@ -17,10 +17,15 @@ const authController = {
       delete user.email_verified_at;
 
       const accessToken = await jwtService.generateToken({ id: user.id });
+      const refreshToken = await jwtService.generateToken(
+        { id: user.id },
+        true,
+      );
 
       return response.json({
         ...user,
         accessToken,
+        refreshToken,
       });
     } catch (error) {
       return response.status(500).json(error.message);
