@@ -12,7 +12,7 @@ class User {
   static async getById(id) {
     try {
       const result = await client.query(
-        `SELECT * FROM private."user" WHERE id = $1 `,
+        `SELECT id, civility, firstname, lastname, email, city, postal_code, date_of_birth FROM private."user" WHERE id = $1 `,
         [id],
       );
       if (result.rows.length === 0) {
@@ -27,7 +27,7 @@ class User {
   static async getByEmail(email) {
     try {
       const { rows } = await client.query(
-        `SELECT id, civility, firstname, lastname, email, city, postal_code, date_of_birth FROM private.user where email= $1`,
+        `SELECT id, civility, firstname, lastname, email, city, postal_code, date_of_birth FROM private."user" where email= $1`,
         [email],
       );
 
