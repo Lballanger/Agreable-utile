@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 const jwtService = {
   generateToken: async (payload) => {
     try {
-      const expiresIn = parseInt(process.env.SECRET_DURATION, 10);
+      const expiresIn = parseInt(process.env.JWT_SECRET_DURATION, 10);
 
-      const result = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+      const result = jwt.sign(payload, process.env.JWT_ACCESS_TOKEN_SECRET, {
         expiresIn,
       });
 
