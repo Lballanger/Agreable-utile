@@ -1,0 +1,45 @@
+.register {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-size: 2rem;
+    padding: 2rem 0;
+  }
+
+  &__container {
+    width: 30%;
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+
+      &__label {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        padding-bottom: 1rem;
+
+        &__input {
+          border: 1px solid rgba(128, 128, 128, 0.247);
+          padding: 0.3rem;
+          margin-top: 0.4rem;
+        }
+      }
+
+      &__submit {
+        border: none;
+        background-color: #44c260;
+        color: white;
+        width: 50%;
+        padding: 1rem 0;
+        margin-top: 1.2rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
