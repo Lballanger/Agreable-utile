@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Waterfall&display=swap");
-
 .header {
   margin: 0 -3rem;
   padding-bottom: 5rem;
@@ -46,7 +44,6 @@
         font-family: "Waterfall", cursive;
         font-size: 5.5rem;
         padding-bottom: 1.2rem;
-        //text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.342);
       }
 
       &__subtitle {
@@ -62,6 +59,18 @@
 
         &__item {
           padding: 0 2rem;
+
+          &__connection {
+            border: none;
+            background-color: white;
+            font-size: 1rem;
+            font-family: serif;
+            cursor: pointer;
+          }
+
+          &__register {
+            font-size: 1rem;
+          }
         }
         &__menu {
           display: flex;
