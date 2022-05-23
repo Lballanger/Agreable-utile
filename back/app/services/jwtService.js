@@ -24,6 +24,20 @@ const jwtService = {
       return error;
     }
   },
+
+  validateToken: async (token, isRefresh = false) => {
+    try {
+      const decoded = jwt.verify(
+        token,
+        isRefresh
+          ? process.JWT_REFRESH_TOKEN_SECRET
+          : process.JWT_ACCESS_TOKEN_SECRET,
+      );
+      return decoded;
+    } catch (error) {
+      return null;
+    }
+  },
 };
 
 module.exports = jwtService;
