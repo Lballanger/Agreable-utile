@@ -31,6 +31,16 @@ const authController = {
       return response.status(500).json(error.message);
     }
   },
+
+  refreshToken: async (request, response) => {
+    const { id } = request.user;
+    try {
+      const newToken = jwtService.generateToken({ id });
+      return response.json({ accessToken: newToken });
+    } catch (error) {
+      return response.status(500).json(error.message);
+    }
+  },
 };
 
 module.exports = authController;
