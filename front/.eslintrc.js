@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     "no-shadow": "off",
     "react/react-in-jsx-scope": "off",
+    "no-underscore-dangle": "off",
     "prettier/prettier": [
       "error",
       {
