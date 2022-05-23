@@ -63,12 +63,21 @@ function Header() {
         <nav className="header__navigation__nav">
           <ul className="header__navigation__nav__menu">
             <li className="header__navigation__nav__menu__item">
-              <button type="button" onClick={() => setIsModalOpen(true)}>
+              <button
+                className="header__navigation__nav__menu__item__connection"
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+              >
                 Connexion
               </button>
             </li>
             <li className="header__navigation__nav__menu__item">
-              <Link to="/register">Inscription</Link>
+              <Link
+                className="header__navigation__nav__menu__item__register"
+                to="/register"
+              >
+                Inscription
+              </Link>
             </li>
           </ul>
         </nav>

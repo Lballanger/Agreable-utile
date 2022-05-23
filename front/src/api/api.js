@@ -9,8 +9,7 @@ const instance = axios.create({
 
 const login = async (body) => {
   try {
-    const { data } = await instance.post("/auth/login", { body });
-    console.log("Données récupérées :", data);
+    const { data } = await instance.post("/auth/login", body);
     return data;
   } catch (error) {
     throw new Error(error.response.data);
