@@ -1,0 +1,9 @@
+.shop {
+  display: flex;
+  justify-content: center;
+
+  &__title {
+    padding: 2rem 0;
+    font-size: 2rem;
+  }
+}

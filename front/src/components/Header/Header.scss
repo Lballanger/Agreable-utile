@@ -1,0 +1,85 @@
+.header {
+  margin: 0 -3rem;
+  padding-bottom: 5rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.075);
+
+  &__social-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0.6rem;
+    padding-top: 0.6rem;
+
+    &__facebook {
+      width: 1.5%;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &__instagram {
+      width: 1.5%;
+      margin-left: 1rem;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &__navigation {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &__logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      bottom: -2.1rem;
+      padding-right: 6rem;
+
+      &__title {
+        font-family: "Waterfall", cursive;
+        font-size: 5.5rem;
+        padding-bottom: 1.2rem;
+      }
+
+      &__subtitle {
+        font-size: 0.8rem;
+      }
+    }
+
+    &__nav {
+      &__menu {
+        display: flex;
+        padding-top: 2.5rem;
+        display: flex;
+
+        &__item {
+          padding: 0 2rem;
+
+          &__connection {
+            border: none;
+            background-color: white;
+            font-size: 1rem;
+            font-family: serif;
+            cursor: pointer;
+          }
+
+          &__register {
+            font-size: 1rem;
+          }
+        }
+        &__menu {
+          display: flex;
+
+          &__item {
+            padding: 0 2rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -12,7 +12,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
+    ecmaVersion: "latest",
     sourceType: "module",
   },
   plugins: ["react", "prettier"],
@@ -22,9 +22,16 @@ module.exports = {
     "prettier/prettier": [
       "error",
       {
-        singleQuote: true,
+        singleQuote: false,
         semi: true,
         endOfLine: "auto",
+      },
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        props: true,
+        ignorePropertyModificationsFor: ["state"],
       },
     ],
   },
