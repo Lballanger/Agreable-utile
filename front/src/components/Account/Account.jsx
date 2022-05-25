@@ -21,8 +21,8 @@ function Account() {
 
   return (
     <div className="account">
-      <h3>CONTENT</h3>
       <AccountMenu userData={userData} />
+      <h3>CONTENT</h3>
       <Outlet />
     </div>
   );

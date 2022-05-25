@@ -1,5 +1,6 @@
-import PropTypes from "prop-types";
+import "./AccountMenu.scss";
 
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function AccountMenu({ userData }) {
@@ -8,32 +9,44 @@ function AccountMenu({ userData }) {
       <div className="account__left-container__user-info">
         <div className="account__left-container__user-info__img-container">
           <img
+            className="account__left-container__user-info__img-container__img"
             src={`https://ui-avatars.com/api/?name=${userData.firstname}+${userData.lastname}&background=F987A8&color=fff&rounded=true&size=95&font-size=0.33`}
             alt="avatar"
           />
-          <div className="account__left-container__user-info__title">
-            <h2>
-              Bonjour{" "}
-              <span className="account__left-container__user-info__title__strong">
-                {userData.firstname} {userData.lastname}
-              </span>{" "}
-              !
-            </h2>
-          </div>
         </div>
+        <h2 className="account__left-container__user-info__title-container">
+          Bonjour{" "}
+          <span className="account__left-container__user-info__title-container__content">
+            {userData.firstname}
+          </span>{" "}
+          !
+        </h2>
       </div>
       <div className="account__left-container__navigation">
         <ul className="account__left-container__navigation__navigation-container">
           <li className="account__left-container__navigation__navigation-container__item">
-            <Link to={`/account/${userData.id}/profil`}>
+            <Link
+              className="account__left-container__navigation__navigation-container__item__link"
+              to={`/account/${userData.id}/profil`}
+            >
               Mes informations personnelles
             </Link>
           </li>
           <li className="account__left-container__navigation__navigation-container__item">
-            <Link to={`/account/${userData.id}/orders`}>Mes commandes</Link>
+            <Link
+              className="account__left-container__navigation__navigation-container__item__link"
+              to={`/account/${userData.id}/orders`}
+            >
+              Mes commandes
+            </Link>
           </li>
           <li className="account__left-container__navigation__navigation-container__item">
-            <Link to="/contact">Une question ?</Link>
+            <Link
+              className="account__left-container__navigation__navigation-container__item__link"
+              to="/contact"
+            >
+              Une question ?
+            </Link>
           </li>
         </ul>
       </div>
