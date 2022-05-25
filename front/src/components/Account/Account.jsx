@@ -17,12 +17,10 @@ function Account() {
       date_of_birth: state.userSlice.user.date_of_birth,
     };
   });
-  console.log(userData);
 
   return (
     <div className="account">
       <AccountMenu userData={userData} />
-      <h3>CONTENT</h3>
       <Outlet />
     </div>
   );

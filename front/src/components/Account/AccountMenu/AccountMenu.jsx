@@ -5,44 +5,44 @@ import { Link } from "react-router-dom";
 
 function AccountMenu({ userData }) {
   return (
-    <div className="account__left-container">
-      <div className="account__left-container__user-info">
-        <div className="account__left-container__user-info__img-container">
+    <div className="left-container">
+      <div className="left-container__user-info">
+        <div className="left-container__user-info__img-container">
           <img
-            className="account__left-container__user-info__img-container__img"
+            className="left-container__user-info__img-container__img"
             src={`https://ui-avatars.com/api/?name=${userData.firstname}+${userData.lastname}&background=F987A8&color=fff&rounded=true&size=95&font-size=0.33`}
             alt="avatar"
           />
         </div>
-        <h2 className="account__left-container__user-info__title-container">
+        <h2 className="left-container__user-info__title-container">
           Bonjour{" "}
-          <span className="account__left-container__user-info__title-container__content">
+          <span className="left-container__user-info__title-container__content">
             {userData.firstname}
           </span>{" "}
           !
         </h2>
       </div>
-      <div className="account__left-container__navigation">
-        <ul className="account__left-container__navigation__navigation-container">
-          <li className="account__left-container__navigation__navigation-container__item">
+      <div className="left-container__navigation">
+        <ul className="left-container__navigation__navigation-container">
+          <li className="left-container__navigation__navigation-container__item">
             <Link
-              className="account__left-container__navigation__navigation-container__item__link"
+              className="left-container__navigation__navigation-container__item__link"
               to={`/account/${userData.id}/profil`}
             >
               Mes informations personnelles
             </Link>
           </li>
-          <li className="account__left-container__navigation__navigation-container__item">
+          <li className="left-container__navigation__navigation-container__item">
             <Link
-              className="account__left-container__navigation__navigation-container__item__link"
+              className="left-container__navigation__navigation-container__item__link"
               to={`/account/${userData.id}/orders`}
             >
               Mes commandes
             </Link>
           </li>
-          <li className="account__left-container__navigation__navigation-container__item">
+          <li className="left-container__navigation__navigation-container__item">
             <Link
-              className="account__left-container__navigation__navigation-container__item__link"
+              className="left-container__navigation__navigation-container__item__link"
               to="/contact"
             >
               Une question ?

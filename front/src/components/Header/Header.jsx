@@ -58,7 +58,9 @@ function Header() {
         </nav>
         <div className="header__navigation__logo-container">
           <h1 className="header__navigation__logo-container__title">
-            <Link to="/">L&apos;agréable Utile</Link>
+            <Link to="/">
+              <strong>L&apos;agréable Utile</strong>
+            </Link>
           </h1>
           <h2 className="header__navigation__logo-container__subtitle">
             <Link to="/">Création de textiles fait main</Link>
