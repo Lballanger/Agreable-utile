@@ -1,0 +1,28 @@
+.profil {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  padding: 1rem;
+
+  &__title {
+    font-size: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+
+    &__content-container {
+      padding-bottom: 1.8rem;
+      &__title {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      &__content {
+        padding-top: 0.6rem;
+      }
+    }
+  }
+}

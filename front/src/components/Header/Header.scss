@@ -55,8 +55,8 @@
       &__menu {
         display: flex;
         padding-top: 2.5rem;
-        display: flex;
 
+        /** Connection **/
         &__item {
           padding: 0 2rem;
 
@@ -72,13 +72,50 @@
             font-size: 1rem;
           }
         }
-        &__menu {
+      }
+
+      /** Connected **/
+
+      &__connected-menu {
+        padding-top: 2.5rem;
+
+        &__item {
           display: flex;
 
-          &__item {
-            padding: 0 2rem;
+          &__profil-link {
+            display: flex;
+            &__img-container {
+              position: relative;
+              top: 0.2rem;
+              margin-left: 0.5rem;
+              width: 8%;
+              &__img {
+                width: 100%;
+              }
+            }
           }
         }
+      }
+
+      &:hover &__drop-menu {
+        display: flex;
+        flex-direction: column;
+
+        position: absolute;
+        padding-top: 0.5rem;
+
+        &__item {
+          padding-top: 0.7rem;
+
+          &__link:hover {
+            text-decoration: underline;
+            text-decoration-color: rgb(231, 165, 176);
+            text-decoration-thickness: 0.15rem;
+          }
+        }
+      }
+      &__drop-menu {
+        display: none;
       }
     }
   }

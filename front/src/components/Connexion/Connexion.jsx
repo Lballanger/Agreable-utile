@@ -32,7 +32,7 @@ function Connexion({ handleCloseModal }) {
       const data = await API.login(inputs);
       dispatch(setUserData(data));
       handleCloseModal(event);
-      history("/");
+      history(`/account/${data.id}`);
     } catch (error) {
       console.log(error);
     }
