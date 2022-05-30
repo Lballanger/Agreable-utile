@@ -2,3 +2,4 @@
 %project=l_agreable_utile
 
 init 2022-05-14T12:26:05Z Loïc Ballanger <ballanger.loic@gmail.com> # Sqitch initialisation
+order_line 2022-05-30T09:45:37Z Loïc Ballanger <ballanger.loic@gmail.com> # Creation of the order_line table

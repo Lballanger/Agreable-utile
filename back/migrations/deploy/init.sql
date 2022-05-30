@@ -29,7 +29,7 @@ CREATE TABLE private.order (
   user_id INT NOT NULL REFERENCES private."user"(id),
   order_number INT NOT NULL UNIQUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  statut BOOLEAN DEFAULT false
+  status BOOLEAN DEFAULT false
 );
 
 COMMIT;
