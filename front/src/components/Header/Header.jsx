@@ -2,22 +2,29 @@ import "./Header.scss";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Connexion from "../Connexion/Connexion";
 
 import facebook from "../../assets/img/facebook.svg";
 import instagram from "../../assets/img/instagram.svg";
 import arrow from "../../assets/img/arrow.png";
+import { setUserData } from "../../slices/userSlice";
 
 function Header() {
   const { user } = useSelector((state) => state.userSlice);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleCloseModal = (event) => {
     event.stopPropagation();
     setIsModalOpen(false);
+  };
+
+  const handleLogout = () => {
+    dispatch(setUserData(""));
   };
 
   return (
@@ -104,7 +111,13 @@ function Header() {
                   </Link>
                 </li>
                 <li className="header__navigation__nav__drop-menu__item">
-                  Déconnexion
+                  <button
+                    className="header__navigation__nav__drop-menu__item__link"
+                    type="button"
+                    onClick={handleLogout}
+                  >
+                    Déconnexion
+                  </button>
                 </li>
               </ul>
             </>
