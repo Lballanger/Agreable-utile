@@ -7,7 +7,8 @@ CREATE TABLE private.article (
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     image TEXT,
-    price_wt MONEY NOT NULL 
+    price_wt MONEY NOT NULL, 
+    category_id INT REFERENCES private.category(id)
 );
 
 COMMIT;
