@@ -2,3 +2,6 @@
 %project=l_agreable_utile
 
 init 2022-05-14T12:26:05Z Loïc Ballanger <ballanger.loic@gmail.com> # Sqitch initialisation
+category 2022-05-30T14:11:22Z Loïc Ballanger <ballanger.loic@gmail.com> # Creation of the category table
+article 2022-05-30T12:21:23Z Loïc Ballanger <ballanger.loic@gmail.com> # Creation of the article table
+order_line 2022-05-30T09:45:37Z Loïc Ballanger <ballanger.loic@gmail.com> # Creation of the order_line table
