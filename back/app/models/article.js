@@ -17,6 +17,19 @@ class Article {
       return new Error(error.detail ? error.detail : error.message);
     }
   }
+
+  static async findOneById(id) {
+    try {
+      const { rows } = await client.query(
+        'SELECT * FROM private.article WHERE id=$1',
+        [id],
+      );
+
+      return new Article(rows[0]);
+    } catch (error) {
+      return new Error(error.detail ? error.detail : error.message);
+    }
+  }
 }
 
 module.exports = Article;
