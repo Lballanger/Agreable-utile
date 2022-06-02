@@ -24,8 +24,8 @@ class Article {
         'SELECT * FROM private.article WHERE id=$1',
         [id],
       );
-
-      return new Article(rows[0]);
+      if (rows.length > 0) return new Article(rows[0]);
+      return { error: `Article with id ${id} doesn't exist` };
     } catch (error) {
       return new Error(error.detail ? error.detail : error.message);
     }
