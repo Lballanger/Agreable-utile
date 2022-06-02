@@ -16,5 +16,6 @@ router.post('/api/auth/refresh-token', authController.refreshToken);
 /** ********************** ARTICLE *********************** */
 
 router.get('/api/articles', articleController.findAll);
+router.get('/api/article/:id', articleController.findOneById);
 
 module.exports = router;
