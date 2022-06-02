@@ -20,6 +20,15 @@ const login = async (body) => {
   }
 };
 
+const getAllArticles = async () => {
+  try {
+    const { data } = await instance.get("/articles");
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data);
+  }
+};
+
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -50,4 +59,5 @@ instance.interceptors.response.use(
 
 export default {
   login,
+  getAllArticles,
 };
