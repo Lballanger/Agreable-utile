@@ -1,8 +1,20 @@
 import "./Achievements.scss";
 
-import epongeVisage from "../../assets/img/eponge-visage.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setArticlesData } from "../../slices/articlesSlice";
+import API from "../../api/api";
 
 function Achievements() {
+  const dispatch = useDispatch();
+
+  const articles = useSelector((state) => state.articlesSlice.articles);
+
+  useEffect(async () => {
+    const data = await API.getAllArticles();
+    dispatch(setArticlesData(data));
+  }, []);
+
   return (
     <main className="achievements">
       <div className="achievements__header">
@@ -15,270 +27,31 @@ function Achievements() {
         </div>
       </div>
       <div className="achievements__container">
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
-        <div className="achievements__container__product">
-          <div className="achievements__container__product__image-container">
-            <img
-              className="achievements__container__product__image-container__image"
-              src={epongeVisage}
-              alt=""
-            />
-          </div>
-          <h2 className="achievements__container__product__title">
-            Eponge visage
-          </h2>
-          <div className="achievements__container__product__content">
-            <p className="achievements__container__product__content__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Mollitia, deleniti quisquam quidem molestias facilis blanditiis
-              voluptate ipsa porro sed odio id beatae autem distinctio quas
-              laborum praesentium, qui magni doloremque! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Quo impedit ipsa hic explicabo
-              iure, beatae temporibus aperiam doloribus inventore sit
-              consequatur, laborum placeat iste fugiat a ducimus distinctio
-              illum expedita!
-            </p>
-          </div>
-        </div>
+        {/* <Item /> */}
+        {articles
+          ? articles.map((article) => (
+              <div
+                className="achievements__container__product"
+                key={article.id}
+              >
+                <div className="achievements__container__product__image-container">
+                  <img
+                    className="achievements__container__product__image-container__image"
+                    src={article.image}
+                    alt=""
+                  />
+                </div>
+                <h2 className="achievements__container__product__title">
+                  {article.name}
+                </h2>
+                <div className="achievements__container__product__content">
+                  <p className="achievements__container__product__content__description">
+                    {article.description}
+                  </p>
+                </div>
+              </div>
+            ))
+          : "Pas de réalisation disponible"}
       </div>
     </main>
   );
