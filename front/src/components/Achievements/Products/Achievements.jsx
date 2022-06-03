@@ -2,8 +2,9 @@ import "./Achievements.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setArticlesData } from "../../slices/articlesSlice";
-import API from "../../api/api";
+import { Link } from "react-router-dom";
+import { setArticlesData } from "../../../slices/articlesSlice";
+import API from "../../../api/api";
 
 function Achievements() {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ function Achievements() {
         </div>
       </div>
       <div className="achievements__container">
-        {/* <Item /> */}
         {articles
           ? articles.map((article) => (
               <div
@@ -35,18 +35,22 @@ function Achievements() {
                 key={article.id}
               >
                 <div className="achievements__container__product__image-container">
-                  <img
-                    className="achievements__container__product__image-container__image"
-                    src={article.image}
-                    alt=""
-                  />
+                  <Link to={`/achievements/${article.id}`}>
+                    <img
+                      className="achievements__container__product__image-container__image"
+                      src={article.image}
+                      alt=""
+                    />
+                  </Link>
                 </div>
                 <h2 className="achievements__container__product__title">
-                  {article.name}
+                  <Link to={`/achievements/${article.id}`}>{article.name}</Link>
                 </h2>
                 <div className="achievements__container__product__content">
                   <p className="achievements__container__product__content__description">
-                    {article.description}
+                    <Link to={`/achievements/${article.id}`}>
+                      {article.description}
+                    </Link>
                   </p>
                 </div>
               </div>
