@@ -4,7 +4,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import Header from "../Header/Header";
 import Homepage from "../Homepage/Homepage";
-import Achievements from "../Achievements/Achievements";
+import Achievements from "../Achievements/Products/Achievements";
+import Detail from "../Achievements/Detail/Detail";
 import Shop from "../Shop/Shop";
 import Register from "../Register/Register";
 import Account from "../Account/Account";
@@ -12,6 +13,7 @@ import Profil from "../Account/Profil/Profil";
 import Orders from "../Account/Orders/Orders";
 import Footer from "../Footer/Footer";
 import useAuth from "../../hooks/useAuth";
+import Index from "../Achievements";
 
 function App() {
   return (
@@ -19,7 +21,10 @@ function App() {
       <Header />
       <Routes>
         <Route exact path="/" element={<Homepage />} />
-        <Route exact path="/achievements" element={<Achievements />} />
+        <Route exact element={<Index />}>
+          <Route exact path="/achievements" element={<Achievements />} />
+          <Route exact path="/achievements/:id" element={<Detail />} />
+        </Route>
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/shop" element={<Shop />} />
         <Route
