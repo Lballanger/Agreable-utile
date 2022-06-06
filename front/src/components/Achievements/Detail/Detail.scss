@@ -37,17 +37,19 @@
       position: sticky;
       top: 1rem;
       padding-top: 3rem;
+    }
 
-      &__composition {
-        padding-top: 3rem;
+    &__composition {
+      position: sticky;
+      top: 5rem;
+      padding-top: 3rem;
 
-        &__list {
-          &__item {
-            padding-bottom: 1rem;
+      &__list {
+        &__item {
+          padding-bottom: 1rem;
 
-            &__categorie {
-              font-weight: 600;
-            }
+          &__categorie {
+            font-weight: 600;
           }
         }
       }

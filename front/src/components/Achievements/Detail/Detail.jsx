@@ -51,22 +51,22 @@ function Detail() {
             <div className="detail__info-container__description">
               <p>{article.description}</p>
             </div>
-            <div className="detail__info-container__description__composition">
-              <ul className="detail__info-container__description__composition__list">
-                <li className="detail__info-container__description__composition__list__item">
-                  <span className="detail__info-container__description__composition__list__item__categorie">
+            <div className="detail__info-container__composition">
+              <ul className="detail__info-container__composition__list">
+                <li className="detail__info-container__composition__list__item">
+                  <span className="detail__info-container__composition__list__item__categorie">
                     Composition:
                   </span>{" "}
                   100% coton
                 </li>
-                <li className="detail__info-container__description__composition__list__item">
-                  <span className="detail__info-container__description__composition__list__item__categorie">
+                <li className="detail__info-container__composition__list__item">
+                  <span className="detail__info-container__composition__list__item__categorie">
                     Matière:
                   </span>{" "}
                   Jersey
                 </li>
-                <li className="detail__info-container__description__composition__list__item">
-                  <span className="detail__info-container__description__composition__list__item__categorie">
+                <li className="detail__info-container__composition__list__item">
+                  <span className="detail__info-container__composition__list__item__categorie">
                     Conseils d entretien:
                   </span>{" "}
                   Lavage en machine à 30°C
