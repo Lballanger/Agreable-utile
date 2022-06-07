@@ -1,0 +1,18 @@
+.field {
+  width: 230px;
+  &__label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 0.7rem;
+
+    &__input {
+      margin: 0.5rem 0;
+      padding: 0.4rem;
+      width: 100%;
+
+      background: none;
+      border: 1px solid rgba(128, 128, 128, 0.247);
+    }
+  }
+}
