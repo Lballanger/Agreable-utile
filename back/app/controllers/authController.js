@@ -32,6 +32,58 @@ const authController = {
     }
   },
 
+  register: async (request, response) => {
+    try {
+      const {
+        civility,
+        firstname,
+        lastname,
+        email,
+        password,
+        city,
+        postalCode,
+        dateOfBirth,
+      } = request.body;
+
+      const existingUser = await User.getByEmail(email);
+
+      if (!existingUser)
+        return response.status(400).json('User already exists');
+
+      const user = new User({
+        civility,
+        firstname,
+        lastname,
+        email,
+        password,
+        city,
+        postalCode,
+        dateOfBirth,
+      }).create();
+
+      const accessToken = await jwtService.generateToken({ id: user.id });
+      const refreshToken = await jwtService.generateToken(
+        { id: user.id },
+        true,
+      );
+
+      return response.json({
+        id: user.id,
+        civility: user.civility,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        city: user.city,
+        postalCode: user.postalCode,
+        date_of_birth: user.dateOfBirth,
+        accessToken,
+        refreshToken,
+      });
+    } catch (error) {
+      return response.status(500).json(error.message);
+    }
+  },
+
   refreshToken: async (request, response) => {
     const { id } = request.user;
     try {
