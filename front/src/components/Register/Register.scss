@@ -18,27 +18,17 @@
       align-items: center;
       padding: 1rem;
 
-      &__label {
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-        padding-bottom: 1rem;
-
-        &__input {
-          border: 1px solid rgba(128, 128, 128, 0.247);
-          padding: 0.3rem;
-          margin-top: 0.4rem;
-        }
-      }
-
       &__submit {
         border: none;
         background-color: #44c260;
         color: white;
-        width: 50%;
-        padding: 1rem 0;
+        padding: 1rem 2rem;
         margin-top: 1.2rem;
         cursor: pointer;
+
+        &--disabled {
+          background-color: grey;
+        }
       }
     }
   }
