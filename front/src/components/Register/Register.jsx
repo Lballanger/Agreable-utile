@@ -17,6 +17,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [disabled, setDisabled] = useState(true);
 
   const emailRule =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -88,6 +89,7 @@ function Register() {
       default:
         break;
     }
+    if (Object.keys(errors).length < 1) setDisabled(false);
   };
 
   const handleSubmit = (event) => {
@@ -141,7 +143,15 @@ function Register() {
             value={passwordConfirm}
             error={errors.passwordConfirm}
           />
-          <button className="register__container__form__submit" type="submit">
+          <button
+            className={
+              !disabled
+                ? "register__container__form__submit"
+                : "register__container__form__submit register__container__form__submit--disabled"
+            }
+            type="submit"
+            disabled={disabled}
+          >
             Créer mon compte
           </button>
         </form>

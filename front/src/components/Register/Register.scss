@@ -22,10 +22,13 @@
         border: none;
         background-color: #44c260;
         color: white;
-        width: 50%;
-        padding: 1rem 0;
+        padding: 1rem 2rem;
         margin-top: 1.2rem;
         cursor: pointer;
+
+        &--disabled {
+          background-color: grey;
+        }
       }
     }
   }
