@@ -43,7 +43,7 @@ class User {
     try {
       const { rows } = await client.query(
         `INSERT INTO private."user" (civility, firstname, lastname, email, password, city, postal_code, date_of_birth) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING civility, firstname, lastname, email, city, postal_code, date_of_birth`,
         [
           this.civility,
           this.firstname,

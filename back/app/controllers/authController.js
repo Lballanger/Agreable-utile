@@ -47,10 +47,9 @@ const authController = {
 
       const existingUser = await User.getByEmail(email);
 
-      if (!existingUser)
-        return response.status(400).json('User already exists');
+      if (existingUser) return response.status(400).json('User already exists');
 
-      const user = new User({
+      const user = await new User({
         civility,
         firstname,
         lastname,
@@ -74,8 +73,8 @@ const authController = {
         lastname: user.lastname,
         email: user.email,
         city: user.city,
-        postalCode: user.postalCode,
-        date_of_birth: user.dateOfBirth,
+        postalCode: user.postal_code,
+        dateOfBirth: user.date_of_birth,
         accessToken,
         refreshToken,
       });
