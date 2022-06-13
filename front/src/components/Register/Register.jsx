@@ -101,6 +101,13 @@ function Register() {
       <h2 className="register__title">Rejoindre l&#8217;Agréable Utile</h2>
       <div className="register__container">
         <form onSubmit={handleSubmit} className="register__container__form">
+          <legend className="register__container__form__legend">
+            Civilité
+          </legend>
+          <div className="register__container__form__radio-container">
+            <Field id="mr" label="Mr." type="radio" checked />
+            <Field id="mr" label="Mme" type="radio" />
+          </div>
           <Field
             id="firstname"
             label="Prénom"

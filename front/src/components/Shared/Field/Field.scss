@@ -1,16 +1,14 @@
 .field {
   position: relative;
-  width: 350px;
+  width: 100%;
   &__label {
     display: flex;
     flex-direction: column;
-    width: 100%;
     margin-bottom: 2.7rem;
 
     &__input {
       margin: 0.5rem 0;
       padding: 0.4rem;
-      width: 77%;
       background: none;
       border: 1px solid rgba(128, 128, 128, 0.247);
     }
