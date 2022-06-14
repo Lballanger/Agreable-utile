@@ -9,6 +9,17 @@ const instance = axios.create({
 
 const REFRESH_KEY = "REFRESH_KEY";
 
+const register = async (body) => {
+  try {
+    const { data } = await instance.post("/auth/register", body);
+    instance.defaults.headers.authorization = `Bearer ${data.accessToken}`;
+    localStorage.setItem(REFRESH_KEY, data.refreshToken);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data);
+  }
+};
+
 const login = async (body) => {
   try {
     const { data } = await instance.post("/auth/login", body);
@@ -58,6 +69,7 @@ instance.interceptors.response.use(
 );
 
 export default {
+  register,
   login,
   getAllArticles,
 };

@@ -10,20 +10,33 @@
   }
 
   &__container {
-    width: 30%;
-
     &__form {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      width: 350px;
+      margin: 0 auto;
       padding: 1rem;
 
+      &__legend {
+        width: 350px;
+        padding-bottom: 1.3rem;
+      }
+
+      &__radio-container {
+        display: flex;
+        width: 350px;
+        margin-bottom: 1.8rem;
+        padding: 0 1rem;
+      }
+
       &__submit {
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 1.2rem;
+        color: white;
         border: none;
         background-color: #44c260;
-        color: white;
         padding: 1rem 2rem;
-        margin-top: 1.2rem;
         cursor: pointer;
 
         &--disabled {

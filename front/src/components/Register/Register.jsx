@@ -1,6 +1,10 @@
-import "./Register.scss";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import API from "../../api/api";
+import "./Register.scss";
 import Field from "../Shared/Field/Field";
+import { setUserData } from "../../slices/userSlice";
 
 function Register() {
   const initialErrors = {
@@ -11,7 +15,11 @@ function Register() {
     passwordConfirm: false,
   };
 
+  const dispatch = useDispatch();
+  const history = useNavigate();
+
   const [errors, setErrors] = useState(initialErrors);
+  const [civility, setCivility] = useState("mme");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -27,6 +35,12 @@ function Register() {
 
   const handleChange = (event) => {
     switch (event.target.name) {
+      case "mr":
+        setCivility(event.target.value);
+        break;
+      case "mme":
+        setCivility(event.target.value);
+        break;
       case "firstname":
         setFirstname(event.target.value);
         if (event.target.value.trim().length < 2) {
@@ -92,8 +106,25 @@ function Register() {
     if (Object.keys(errors).length < 1) setDisabled(false);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const inputs = {
+      civility,
+      firstname,
+      lastname,
+      email,
+      password,
+      city: "noisy le grand",
+      postalCode: 93160,
+      dateOfBirth: "1996-05-17",
+    };
+    try {
+      const data = await API.register(inputs);
+      dispatch(setUserData(data));
+      history(`/account/${data.id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -101,6 +132,27 @@ function Register() {
       <h2 className="register__title">Rejoindre l&#8217;Agréable Utile</h2>
       <div className="register__container">
         <form onSubmit={handleSubmit} className="register__container__form">
+          <legend className="register__container__form__legend">
+            Civilité
+          </legend>
+          <div className="register__container__form__radio-container">
+            <Field
+              id="mme"
+              label="Mme"
+              type="radio"
+              onChange={handleChange}
+              value="mme"
+              checked={civility === "mme"}
+            />
+            <Field
+              id="mr"
+              label="Mr."
+              type="radio"
+              onChange={handleChange}
+              value="mr"
+              checked={civility === "mr"}
+            />
+          </div>
           <Field
             id="firstname"
             label="Prénom"
