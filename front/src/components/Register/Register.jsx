@@ -1,6 +1,9 @@
-import "./Register.scss";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import API from "../../api/api";
+import "./Register.scss";
 import Field from "../Shared/Field/Field";
+import { setUserData } from "../../slices/userSlice";
 
 function Register() {
   const initialErrors = {
@@ -11,7 +14,10 @@ function Register() {
     passwordConfirm: false,
   };
 
+  const dispatch = useDispatch();
+
   const [errors, setErrors] = useState(initialErrors);
+  const [civility, setCivility] = useState("mme");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -27,6 +33,15 @@ function Register() {
 
   const handleChange = (event) => {
     switch (event.target.name) {
+      case "mme":
+        setCivility(event.target.value);
+        break;
+      case "mlle":
+        setCivility(event.target.value);
+        break;
+      case "mr":
+        setCivility(event.target.value);
+        break;
       case "firstname":
         setFirstname(event.target.value);
         if (event.target.value.trim().length < 2) {
@@ -92,8 +107,21 @@ function Register() {
     if (Object.keys(errors).length < 1) setDisabled(false);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const inputs = {
+      civility,
+      firstname,
+      lastname,
+      email,
+      password,
+    };
+    try {
+      const data = await API.register(inputs);
+      dispatch(setUserData(data));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -105,8 +133,30 @@ function Register() {
             Civilité
           </legend>
           <div className="register__container__form__radio-container">
-            <Field id="mr" label="Mr." type="radio" checked />
-            <Field id="mr" label="Mme" type="radio" />
+            <Field
+              id="mme"
+              label="Mme"
+              type="radio"
+              onChange={handleChange}
+              value="mme"
+              checked={civility === "mme"}
+            />
+            <Field
+              id="mlle"
+              label="Mlle"
+              type="radio"
+              onChange={handleChange}
+              value="mlle"
+              checked={civility === "mlle"}
+            />
+            <Field
+              id="mr"
+              label="Mr."
+              type="radio"
+              onChange={handleChange}
+              value="mr"
+              checked={civility === "mr"}
+            />
           </div>
           <Field
             id="firstname"

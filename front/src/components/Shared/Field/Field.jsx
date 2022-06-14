@@ -5,7 +5,7 @@ import "./Field.scss";
 function Field({
   id,
   label,
-  type = "text",
+  type,
   value,
   onChange,
   disabled,
@@ -23,6 +23,7 @@ function Field({
               id={id}
               name={id}
               value={value}
+              onChange={onChange}
               checked={checked}
             />
             {label}
@@ -89,7 +90,7 @@ Field.defaultProps = {
 Field.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
-  type: PropTypes.oneOf(["text", "number", "password", "email"]),
+  type: PropTypes.oneOf(["text", "number", "password", "email", "radio"]),
   value: PropTypes.string,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
