@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import API from "../../api/api";
 import "./Register.scss";
 import Field from "../Shared/Field/Field";
@@ -15,6 +16,7 @@ function Register() {
   };
 
   const dispatch = useDispatch();
+  const history = useNavigate();
 
   const [errors, setErrors] = useState(initialErrors);
   const [civility, setCivility] = useState("mme");
@@ -33,13 +35,10 @@ function Register() {
 
   const handleChange = (event) => {
     switch (event.target.name) {
-      case "mme":
-        setCivility(event.target.value);
-        break;
-      case "mlle":
-        setCivility(event.target.value);
-        break;
       case "mr":
+        setCivility(event.target.value);
+        break;
+      case "mme":
         setCivility(event.target.value);
         break;
       case "firstname":
@@ -115,10 +114,14 @@ function Register() {
       lastname,
       email,
       password,
+      city: "noisy le grand",
+      postalCode: 93160,
+      dateOfBirth: "1996-05-17",
     };
     try {
       const data = await API.register(inputs);
       dispatch(setUserData(data));
+      history(`/account/${data.id}`);
     } catch (error) {
       console.log(error);
     }
@@ -140,14 +143,6 @@ function Register() {
               onChange={handleChange}
               value="mme"
               checked={civility === "mme"}
-            />
-            <Field
-              id="mlle"
-              label="Mlle"
-              type="radio"
-              onChange={handleChange}
-              value="mlle"
-              checked={civility === "mlle"}
             />
             <Field
               id="mr"
