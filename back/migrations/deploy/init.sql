@@ -19,9 +19,9 @@ CREATE TABLE private."user" (
   email email_type UNIQUE,
   email_verified_at TIMESTAMPTZ DEFAULT NULL,
   password TEXT NOT NULL,
-  date_of_birth DATE NOT NULL
+  date_of_birth DATE NOT NULL,
   city TEXT,
-  postal_code INT,
+  postal_code INT
 );
 
 CREATE TABLE private.order (
