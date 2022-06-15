@@ -19,9 +19,9 @@ CREATE TABLE private."user" (
   email email_type UNIQUE,
   email_verified_at TIMESTAMPTZ DEFAULT NULL,
   password TEXT NOT NULL,
-  city TEXT NOT NULL,
-  postal_code INT NOT NULL,
-  date_of_birth DATE NOT NULL
+  date_of_birth DATE NOT NULL,
+  city TEXT,
+  postal_code INT
 );
 
 CREATE TABLE private.order (
@@ -29,7 +29,7 @@ CREATE TABLE private.order (
   user_id INT NOT NULL REFERENCES private."user"(id),
   order_number INT NOT NULL UNIQUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  statut BOOLEAN DEFAULT false
+  status BOOLEAN DEFAULT false
 );
 
 COMMIT;
