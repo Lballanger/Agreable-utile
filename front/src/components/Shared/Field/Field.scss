@@ -4,7 +4,7 @@
   &__label {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.2rem;
 
     &__input {
       margin: 0.5rem 0;
@@ -24,7 +24,7 @@
       position: absolute;
       top: 3.6rem;
       color: red;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
   }
   &__number-container {
@@ -35,7 +35,7 @@
 
     &__label {
       position: absolute;
-      top: 0.5rem;
+      top: 1rem;
       left: 0.5rem;
       font-size: 0.9rem;
 
@@ -43,6 +43,7 @@
         position: absolute;
         left: 3rem;
         font-size: 0.5rem;
+        font-weight: 600;
       }
     }
 
@@ -52,10 +53,12 @@
       margin: 0 0.2rem;
       background: none;
       border: 1px solid rgba(128, 128, 128, 0.247);
+      margin-top: 0.5rem;
     }
 
     &__error {
-      font-size: 0.6rem;
+      font-size: 0.56rem;
+      font-weight: 600;
       color: red;
       margin: 0.4rem 0 0 0.2rem;
     }

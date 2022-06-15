@@ -13,7 +13,7 @@ function Field({
   disabled,
   error,
   checked = false,
-  onClick,
+  onFocus,
   focus = false,
 }) {
   return (
@@ -104,7 +104,7 @@ function Field({
             min={min}
             max={max}
             onChange={onChange}
-            onClick={onClick}
+            onFocus={onFocus}
           />
           {error && id === "day" ? (
             <div className="field__number-container__error">
@@ -142,7 +142,7 @@ Field.defaultProps = {
   min: 1,
   max: 0,
   onChange: () => {},
-  onClick: () => {},
+  onFocus: () => {},
   disabled: false,
   error: false,
   checked: false,
@@ -157,7 +157,7 @@ Field.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   onChange: PropTypes.func,
-  onClick: PropTypes.func,
+  onFocus: PropTypes.func,
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   checked: PropTypes.bool,

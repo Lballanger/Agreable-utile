@@ -62,11 +62,11 @@ function Register() {
     }
   };
 
-  const handleClick = () => setfocus(true);
+  const handleFocus = () => setfocus(true);
 
   const handleChange = (event) => {
     switch (event.target.name) {
-      case "mr":
+      case "m":
         setCivility(event.target.value);
         break;
       case "mme":
@@ -81,7 +81,7 @@ function Register() {
               firstname: true,
             };
           });
-        } else if (errors.firstname) delete errors.firstname;
+        } else delete errors.firstname;
         break;
 
       case "lastname":
@@ -93,7 +93,7 @@ function Register() {
               lastname: true,
             };
           });
-        } else if (errors.lastname) delete errors.lastname;
+        } else delete errors.lastname;
         break;
 
       case "day":
@@ -111,7 +111,7 @@ function Register() {
               day: true,
             };
           });
-        } else if (errors.day) delete errors.day;
+        } else delete errors.day;
 
         break;
 
@@ -130,7 +130,7 @@ function Register() {
               month: true,
             };
           });
-        } else if (errors.month) delete errors.month;
+        } else delete errors.month;
         break;
 
       case "year":
@@ -148,7 +148,7 @@ function Register() {
               year: true,
             };
           });
-        } else if (errors.year) delete errors.year;
+        } else delete errors.year;
         break;
 
       case "email":
@@ -160,7 +160,7 @@ function Register() {
               email: true,
             };
           });
-        } else if (errors.email) delete errors.email;
+        } else delete errors.email;
         break;
 
       case "password":
@@ -172,7 +172,7 @@ function Register() {
               password: true,
             };
           });
-        } else if (errors.password) delete errors.password;
+        } else delete errors.password;
         break;
 
       case "password-confirm":
@@ -184,7 +184,7 @@ function Register() {
               passwordConfirm: true,
             };
           });
-        } else if (errors.passwordConfirm) delete errors.passwordConfirm;
+        } else delete errors.passwordConfirm;
         break;
       default:
         break;
@@ -206,16 +206,16 @@ function Register() {
               label="Mme"
               type="radio"
               onChange={handleChange}
-              value="mme"
-              checked={civility === "mme"}
+              value="Mme"
+              checked={civility === "Mme"}
             />
             <Field
-              id="mr"
-              label="Mr."
+              id="m"
+              label="M."
               type="radio"
               onChange={handleChange}
-              value="mr"
-              checked={civility === "mr"}
+              value="M."
+              checked={civility === "M."}
             />
           </div>
           <Field
@@ -249,7 +249,7 @@ function Register() {
                 id="day"
                 type="number"
                 onChange={handleChange}
-                onClick={handleClick}
+                onFocus={handleFocus}
                 focus={focus}
                 value={day}
                 min={1}
@@ -261,7 +261,7 @@ function Register() {
                 id="month"
                 type="number"
                 onChange={handleChange}
-                onClick={handleClick}
+                onFocus={handleFocus}
                 focus={focus}
                 value={month}
                 min={1}
@@ -273,7 +273,7 @@ function Register() {
                 id="year"
                 type="number"
                 onChange={handleChange}
-                onClick={handleClick}
+                onFocus={handleFocus}
                 focus={focus}
                 value={year}
                 min={1917}
