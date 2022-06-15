@@ -1,19 +1,30 @@
 import "./Header.scss";
 
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Connexion from "../Connexion/Connexion";
 
 import facebook from "../../assets/img/facebook.svg";
 import instagram from "../../assets/img/instagram.svg";
+import arrow from "../../assets/img/arrow.png";
+import { setUserData } from "../../slices/userSlice";
 
 function Header() {
+  const { user } = useSelector((state) => state.userSlice);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleCloseModal = (event) => {
     event.stopPropagation();
     setIsModalOpen(false);
+  };
+
+  const handleLogout = () => {
+    dispatch(setUserData(""));
   };
 
   return (
@@ -54,23 +65,83 @@ function Header() {
         </nav>
         <div className="header__navigation__logo-container">
           <h1 className="header__navigation__logo-container__title">
-            <Link to="/">L&apos;agréable Utile</Link>
+            <Link to="/">
+              <strong>L&apos;agréable Utile</strong>
+            </Link>
           </h1>
           <h2 className="header__navigation__logo-container__subtitle">
             <Link to="/">Création de textiles fait main</Link>
           </h2>
         </div>
         <nav className="header__navigation__nav">
-          <ul className="header__navigation__nav__menu">
-            <li className="header__navigation__nav__menu__item">
-              <button type="button" onClick={() => setIsModalOpen(true)}>
-                Connexion
-              </button>
-            </li>
-            <li className="header__navigation__nav__menu__item">
-              <Link to="/register">Inscription</Link>
-            </li>
-          </ul>
+          {user ? (
+            <>
+              <ul className="header__navigation__nav__connected-menu">
+                <li className="header__navigation__nav__connected-menu__item">
+                  <Link
+                    className="header__navigation__nav__connected-menu__item__profil-link"
+                    to={`/account/${user.id}/profil`}
+                  >
+                    Mon compte
+                    <div className="header__navigation__nav__connected-menu__item__profil-link__img-container">
+                      <img
+                        className="header__navigation__nav__connected-menu__item__profil-link__img-container__img"
+                        src={arrow}
+                        alt=""
+                      />
+                    </div>
+                  </Link>
+                </li>
+              </ul>
+              <ul className="header__navigation__nav__drop-menu">
+                <li className="header__navigation__nav__drop-menu__item">
+                  <Link
+                    className="header__navigation__nav__drop-menu__item__link"
+                    to={`/account/${user.id}/profil`}
+                  >
+                    Mes informations
+                  </Link>
+                </li>
+                <li className="header__navigation__nav__drop-menu__item">
+                  <Link
+                    className="header__navigation__nav__drop-menu__item__link"
+                    to={`/account/${user.id}/orders`}
+                  >
+                    Mes commandes
+                  </Link>
+                </li>
+                <li className="header__navigation__nav__drop-menu__item">
+                  <button
+                    className="header__navigation__nav__drop-menu__item__link"
+                    type="button"
+                    onClick={handleLogout}
+                  >
+                    Déconnexion
+                  </button>
+                </li>
+              </ul>
+            </>
+          ) : (
+            <ul className="header__navigation__nav__menu">
+              <li className="header__navigation__nav__menu__item">
+                <button
+                  className="header__navigation__nav__menu__item__connection"
+                  type="button"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  Connexion
+                </button>
+              </li>
+              <li className="header__navigation__nav__menu__item">
+                <Link
+                  className="header__navigation__nav__menu__item__register"
+                  to="/register"
+                >
+                  Inscription
+                </Link>
+              </li>
+            </ul>
+          )}
         </nav>
       </div>
       {isModalOpen && <Connexion handleCloseModal={handleCloseModal} />}

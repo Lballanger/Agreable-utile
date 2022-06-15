@@ -1,0 +1,58 @@
+.detail {
+  margin: 0 -2rem;
+  padding: 1rem 0;
+  display: flex;
+
+  &__pictures-container {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+
+    &__image-container {
+      padding-bottom: 0.3rem;
+      &__image {
+        object-fit: cover;
+        height: 800px;
+        width: 100%;
+      }
+    }
+  }
+
+  &__info-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 45%;
+    padding-left: 1.5rem;
+
+    &__header {
+      position: sticky;
+      top: 1rem;
+      &__title {
+        font-size: 1.8rem;
+      }
+    }
+
+    &__description {
+      position: sticky;
+      top: 1rem;
+      padding-top: 3rem;
+    }
+
+    &__composition {
+      position: sticky;
+      top: 5rem;
+      padding-top: 3rem;
+
+      &__list {
+        &__item {
+          padding-bottom: 1rem;
+
+          &__categorie {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}

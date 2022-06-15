@@ -1,5 +1,7 @@
 @import "./styles/reset.scss";
 
+@import url("https://fonts.googleapis.com/css2?family=Waterfall&display=swap");
+
 @font-face {
   font-family: "Afrah-Regular";
   src: url(./assets/fonts/Afrah-Regular.woff) format("woff");
@@ -7,7 +9,6 @@
 
 * {
   box-sizing: border-box;
-  font-family: sans-serif;
   text-decoration: none;
 }
 
