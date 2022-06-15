@@ -4,7 +4,7 @@
   &__label {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2.7rem;
+    margin-bottom: 1.5rem;
 
     &__input {
       margin: 0.5rem 0;
@@ -25,6 +25,39 @@
       top: 3.6rem;
       color: red;
       font-size: 0.8rem;
+    }
+  }
+  &__number-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 0.6rem;
+
+    &__label {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      font-size: 0.9rem;
+
+      &--active {
+        position: absolute;
+        left: 3rem;
+        font-size: 0.5rem;
+      }
+    }
+
+    &__number-input {
+      width: 90%;
+      padding: 0.4rem;
+      margin: 0 0.2rem;
+      background: none;
+      border: 1px solid rgba(128, 128, 128, 0.247);
+    }
+
+    &__error {
+      font-size: 0.6rem;
+      color: red;
+      margin: 0.4rem 0 0 0.2rem;
     }
   }
 }

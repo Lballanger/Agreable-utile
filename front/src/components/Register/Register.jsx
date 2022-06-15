@@ -1,15 +1,18 @@
+import "./Register.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import API from "../../api/api";
-import "./Register.scss";
-import Field from "../Shared/Field/Field";
 import { setUserData } from "../../slices/userSlice";
+import API from "../../api/api";
+import Field from "../Shared/Field/Field";
 
 function Register() {
   const initialErrors = {
     firstname: false,
     lastname: false,
+    day: false,
+    month: false,
+    year: false,
     email: false,
     password: false,
     passwordConfirm: false,
@@ -18,10 +21,14 @@ function Register() {
   const dispatch = useDispatch();
   const history = useNavigate();
 
+  const [focus, setfocus] = useState(false);
   const [errors, setErrors] = useState(initialErrors);
   const [civility, setCivility] = useState("mme");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -32,6 +39,30 @@ function Register() {
 
   const passwordRule =
     /^.*(?=.{6,120})(?!.*\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!\@\#\$\%\^\&\*\(\)\-\=\¡\£\_\+\`\~\.\,\<\>\/\?\;\:\'\"\\\|\[\]\{\}]).*$/;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const inputs = {
+      civility,
+      firstname,
+      lastname,
+      email,
+      password,
+      dateOfBirth: `${year}-${month}-${day}`,
+    };
+    try {
+      const error = Object.values(errors);
+      if (error.length === 0) {
+        const data = await API.register(inputs);
+        dispatch(setUserData(data));
+        history(`/account/${data.id}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleClick = () => setfocus(true);
 
   const handleChange = (event) => {
     switch (event.target.name) {
@@ -63,6 +94,61 @@ function Register() {
             };
           });
         } else if (errors.lastname) delete errors.lastname;
+        break;
+
+      case "day":
+        setDay(event.target.value);
+        if (
+          event.target.value.length > 2 ||
+          event.target.value.length < 1 ||
+          event.target.value === 0 ||
+          event.target.value > 31 ||
+          event.target.value < 1
+        ) {
+          setErrors((state) => {
+            return {
+              ...state,
+              day: true,
+            };
+          });
+        } else if (errors.day) delete errors.day;
+
+        break;
+
+      case "month":
+        setMonth(event.target.value);
+        if (
+          event.target.value.length > 2 ||
+          event.target.value.length < 1 ||
+          event.target.value === 0 ||
+          event.target.value > 12 ||
+          event.target.value < 1
+        ) {
+          setErrors((state) => {
+            return {
+              ...state,
+              month: true,
+            };
+          });
+        } else if (errors.month) delete errors.month;
+        break;
+
+      case "year":
+        setYear(event.target.value);
+        if (
+          event.target.value.length > 4 ||
+          event.target.value.length < 2 ||
+          event.target.value === 0 ||
+          event.target.value > 2022 ||
+          event.target.value < 1917
+        ) {
+          setErrors((state) => {
+            return {
+              ...state,
+              year: true,
+            };
+          });
+        } else if (errors.year) delete errors.year;
         break;
 
       case "email":
@@ -104,27 +190,6 @@ function Register() {
         break;
     }
     if (Object.keys(errors).length < 1) setDisabled(false);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const inputs = {
-      civility,
-      firstname,
-      lastname,
-      email,
-      password,
-      city: "noisy le grand",
-      postalCode: 93160,
-      dateOfBirth: "1996-05-17",
-    };
-    try {
-      const data = await API.register(inputs);
-      dispatch(setUserData(data));
-      history(`/account/${data.id}`);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
@@ -171,9 +236,56 @@ function Register() {
             error={errors.lastname}
           />
 
+          <div className="register__container__form__birth-container">
+            <legend className="register__container__form__birth-container__legend">
+              Date de naissance{" "}
+              <span className="register__container__form__birth-container__legend__example">
+                (ex: 01/01/1970)
+              </span>
+            </legend>
+            <div className="register__container__form__birth-container__input-container">
+              <Field
+                label="Jour"
+                id="day"
+                type="number"
+                onChange={handleChange}
+                onClick={handleClick}
+                focus={focus}
+                value={day}
+                min={1}
+                max={31}
+                error={errors.day}
+              />
+              <Field
+                label="Mois"
+                id="month"
+                type="number"
+                onChange={handleChange}
+                onClick={handleClick}
+                focus={focus}
+                value={month}
+                min={1}
+                max={12}
+                error={errors.month}
+              />
+              <Field
+                label="Année"
+                id="year"
+                type="number"
+                onChange={handleChange}
+                onClick={handleClick}
+                focus={focus}
+                value={year}
+                min={1917}
+                max={2022}
+                error={errors.year}
+              />
+            </div>
+          </div>
+
           <Field
             id="email"
-            label="E-mail"
+            label="Adresse e-mail"
             type="email"
             onChange={handleChange}
             value={email}

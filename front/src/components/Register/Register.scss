@@ -29,6 +29,29 @@
         padding: 0 1rem;
       }
 
+      &__birth-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 1.8rem;
+
+        &__input-container {
+          display: flex;
+        }
+
+        &__legend {
+          display: flex;
+          align-items: center;
+
+          &__example {
+            padding-left: 0.3rem;
+            font-size: 0.75rem;
+            font-style: italic;
+            font-weight: 600;
+          }
+        }
+      }
+
       &__submit {
         width: 70%;
         margin: 0 auto;

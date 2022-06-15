@@ -7,10 +7,14 @@ function Field({
   label,
   type,
   value,
+  min,
+  max,
   onChange,
   disabled,
   error,
   checked = false,
+  onClick,
+  focus = false,
 }) {
   return (
     <div className="field">
@@ -19,7 +23,7 @@ function Field({
           <label className="field__container__label" htmlFor={id}>
             <input
               className="field__container__label__radio-input"
-              type="radio"
+              type={type}
               id={id}
               name={id}
               value={value}
@@ -30,6 +34,9 @@ function Field({
           </label>
         </div>
       ) : (
+        ""
+      )}
+      {type !== "radio" && type !== "number" ? (
         <label className="field__label" htmlFor={id}>
           {label}
           <input
@@ -50,7 +57,7 @@ function Field({
           )}
           {error && type === "email" ? (
             <div className="field__label__error">
-              L&#8217; e-mail saisie n&#8217;est pas valide
+              L&#8217; e-mail saisi n&#8217;est pas valide
             </div>
           ) : (
             ""
@@ -72,6 +79,57 @@ function Field({
             ""
           )}
         </label>
+      ) : (
+        ""
+      )}
+
+      {type === "number" ? (
+        <div className="field__number-container">
+          <label
+            className={
+              focus
+                ? "field__number-container__label field__number-container__label--active"
+                : "field__number-container__label"
+            }
+            htmlFor={id}
+          >
+            {label}
+          </label>
+          <input
+            className="field__number-container__number-input"
+            type={type}
+            id={id}
+            name={id}
+            value={value}
+            min={min}
+            max={max}
+            onChange={onChange}
+            onClick={onClick}
+          />
+          {error && id === "day" ? (
+            <div className="field__number-container__error">
+              Le jour saisi n&#8217;est pas valide
+            </div>
+          ) : (
+            ""
+          )}
+          {error && id === "month" ? (
+            <div className="field__number-container__error">
+              Le mois saisi n&#8217;est pas valide
+            </div>
+          ) : (
+            ""
+          )}
+          {error && id === "year" ? (
+            <div className="field__number-container__error">
+              L&#8217;année saisie n&#8217;est pas valide
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+      ) : (
+        ""
       )}
     </div>
   );
@@ -81,10 +139,14 @@ Field.defaultProps = {
   label: "",
   type: "text",
   value: "",
+  min: 1,
+  max: 0,
   onChange: () => {},
+  onClick: () => {},
   disabled: false,
   error: false,
   checked: false,
+  focus: false,
 };
 
 Field.propTypes = {
@@ -92,10 +154,14 @@ Field.propTypes = {
   label: PropTypes.string,
   type: PropTypes.oneOf(["text", "number", "password", "email", "radio"]),
   value: PropTypes.string,
+  min: PropTypes.number,
+  max: PropTypes.number,
   onChange: PropTypes.func,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   checked: PropTypes.bool,
+  focus: PropTypes.bool,
 };
 
 export default Field;
