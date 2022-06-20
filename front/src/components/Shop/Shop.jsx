@@ -1,10 +1,23 @@
 import "./Shop.scss";
-import exampleimage from "../../assets/img/exampleimage3.jpg";
-import exampleimage4 from "../../assets/img/exampleimage4.jpg";
-import exampleimage5 from "../../assets/img/exampleimage5.jpg";
-import exampleimage6 from "../../assets/img/exampleimage6.jpg";
+
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setArticlesData } from "../../slices/articlesSlice";
+import API from "../../api/api";
+
+import headerPicture from "../../assets/img/shop/header.jpg";
 
 function Shop() {
+  const dispatch = useDispatch();
+  const articles = useSelector((state) => state.articlesSlice.articles);
+
+  useEffect(async () => {
+    if (!articles) {
+      const data = await API.getAllArticles();
+      dispatch(setArticlesData(data));
+    }
+  }, []);
+
   return (
     <div className="shop">
       <div className="shop__title-container">
@@ -12,203 +25,38 @@ function Shop() {
         <div className="shop__title-container__img-container">
           <img
             className="shop__title-container__img-container__img"
-            src={exampleimage}
+            src={headerPicture}
             alt=""
           />
         </div>
       </div>
       <div className="shop__main-container">
-        <div className="shop__main-container__product">
-          <div className="shop__main-container__product__img-container">
-            <img
-              src={exampleimage4}
-              alt=""
-              className="shop__main-container__product__img-container__img"
-            />
-          </div>
-          <div className="shop__main-container__product__infos-container">
-            <h2 className="shop__main-container__product__infos-container__infos">
-              <div className="shop__main-container__product__infos-container__infos__title">
-                Lingettes lavable
+        {articles && Object.keys(articles).length > 0
+          ? articles.map((article) => (
+              <div key={article.id} className="shop__main-container__product">
+                <div className="shop__main-container__product__img-container">
+                  <img
+                    src={`/src/assets/img/shop/articles/${article.image}`}
+                    alt=""
+                    className="shop__main-container__product__img-container__img"
+                  />
+                </div>
+                <div className="shop__main-container__product__infos-container">
+                  <h2 className="shop__main-container__product__infos-container__infos">
+                    <div className="shop__main-container__product__infos-container__infos__title">
+                      {article.name}
+                    </div>
+                    <div className="shop__main-container__product__infos-container__infos__description">
+                      {article.description}
+                    </div>
+                  </h2>
+                  <div className="shop__main-container__product__infos-container__price">
+                    {article.price_wt}
+                  </div>
+                </div>
               </div>
-              <div className="shop__main-container__product__infos-container__infos__description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-                inventore explicabo corrupti veritatis. Quasi eum veritatis
-              </div>
-            </h2>
-            <div className="shop__main-container__product__infos-container__price">
-              17,29€
-            </div>
-          </div>
-        </div>
-
-        <div className="shop__main-container__product">
-          <div className="shop__main-container__product__img-container">
-            <img
-              src={exampleimage5}
-              alt=""
-              className="shop__main-container__product__img-container__img"
-            />
-          </div>
-          <div className="shop__main-container__product__infos-container">
-            <h2 className="shop__main-container__product__infos-container__infos">
-              <div className="shop__main-container__product__infos-container__infos__title">
-                Lingettes lavable
-              </div>
-              <div className="shop__main-container__product__infos-container__infos__description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-                inventore explicabo corrupti veritatis. Quasi eum veritatis
-              </div>
-            </h2>
-            <div className="shop__main-container__product__infos-container__price">
-              17,29€
-            </div>
-          </div>
-        </div>
-
-        <div className="shop__main-container__product">
-          <div className="shop__main-container__product__img-container">
-            <img
-              src={exampleimage6}
-              alt=""
-              className="shop__main-container__product__img-container__img"
-            />
-          </div>
-          <div className="shop__main-container__product__infos-container">
-            <h2 className="shop__main-container__product__infos-container__infos">
-              <div className="shop__main-container__product__infos-container__infos__title">
-                Lingettes lavable
-              </div>
-              <div className="shop__main-container__product__infos-container__infos__description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-                inventore explicabo corrupti veritatis. Quasi eum veritatis
-              </div>
-            </h2>
-            <div className="shop__main-container__product__infos-container__price">
-              17,29€
-            </div>
-          </div>
-        </div>
-
-        <div className="shop__main-container__product">
-          <div className="shop__main-container__product__img-container">
-            <img
-              src={exampleimage}
-              alt=""
-              className="shop__main-container__product__img-container__img"
-            />
-          </div>
-          <div className="shop__main-container__product__infos-container">
-            <h2 className="shop__main-container__product__infos-container__infos">
-              <div className="shop__main-container__product__infos-container__infos__title">
-                Lingettes lavable
-              </div>
-              <div className="shop__main-container__product__infos-container__infos__description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-                inventore explicabo corrupti veritatis. Quasi eum veritatis
-              </div>
-            </h2>
-            <div className="shop__main-container__product__infos-container__price">
-              17,29€
-            </div>
-          </div>
-        </div>
-
-        <div className="shop__main-container__product">
-          <div className="shop__main-container__product__img-container">
-            <img
-              src={exampleimage}
-              alt=""
-              className="shop__main-container__product__img-container__img"
-            />
-          </div>
-          <div className="shop__main-container__product__infos-container">
-            <h2 className="shop__main-container__product__infos-container__infos">
-              <div className="shop__main-container__product__infos-container__infos__title">
-                Lingettes lavable
-              </div>
-              <div className="shop__main-container__product__infos-container__infos__description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-                inventore explicabo corrupti veritatis. Quasi eum veritatis
-              </div>
-            </h2>
-            <div className="shop__main-container__product__infos-container__price">
-              17,29€
-            </div>
-          </div>
-        </div>
-
-        <div className="shop__main-container__product">
-          <div className="shop__main-container__product__img-container">
-            <img
-              src={exampleimage}
-              alt=""
-              className="shop__main-container__product__img-container__img"
-            />
-          </div>
-          <div className="shop__main-container__product__infos-container">
-            <h2 className="shop__main-container__product__infos-container__infos">
-              <div className="shop__main-container__product__infos-container__infos__title">
-                Lingettes lavable
-              </div>
-              <div className="shop__main-container__product__infos-container__infos__description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-                inventore explicabo corrupti veritatis. Quasi eum veritatis
-              </div>
-            </h2>
-            <div className="shop__main-container__product__infos-container__price">
-              17,29€
-            </div>
-          </div>
-        </div>
-
-        <div className="shop__main-container__product">
-          <div className="shop__main-container__product__img-container">
-            <img
-              src={exampleimage}
-              alt=""
-              className="shop__main-container__product__img-container__img"
-            />
-          </div>
-          <div className="shop__main-container__product__infos-container">
-            <h2 className="shop__main-container__product__infos-container__infos">
-              <div className="shop__main-container__product__infos-container__infos__title">
-                Lingettes lavable
-              </div>
-              <div className="shop__main-container__product__infos-container__infos__description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-                inventore explicabo corrupti veritatis. Quasi eum veritatis
-              </div>
-            </h2>
-            <div className="shop__main-container__product__infos-container__price">
-              17,29€
-            </div>
-          </div>
-        </div>
-
-        <div className="shop__main-container__product">
-          <div className="shop__main-container__product__img-container">
-            <img
-              src={exampleimage}
-              alt=""
-              className="shop__main-container__product__img-container__img"
-            />
-          </div>
-          <div className="shop__main-container__product__infos-container">
-            <h2 className="shop__main-container__product__infos-container__infos">
-              <div className="shop__main-container__product__infos-container__infos__title">
-                Lingettes lavable
-              </div>
-              <div className="shop__main-container__product__infos-container__infos__description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-                inventore explicabo corrupti veritatis. Quasi eum veritatis
-              </div>
-            </h2>
-            <div className="shop__main-container__product__infos-container__price">
-              17,29€
-            </div>
-          </div>
-        </div>
+            ))
+          : ""}
       </div>
     </div>
   );
