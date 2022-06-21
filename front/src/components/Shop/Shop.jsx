@@ -2,6 +2,7 @@ import "./Shop.scss";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { setArticlesData } from "../../slices/articlesSlice";
 import API from "../../api/api";
 
@@ -34,26 +35,30 @@ function Shop() {
         {articles && Object.keys(articles).length > 0
           ? articles.map((article) => (
               <div key={article.id} className="shop__main-container__product">
-                <div className="shop__main-container__product__img-container">
-                  <img
-                    src={`/src/assets/img/shop/articles/${article.image}`}
-                    alt=""
-                    className="shop__main-container__product__img-container__img"
-                  />
-                </div>
-                <div className="shop__main-container__product__infos-container">
-                  <h2 className="shop__main-container__product__infos-container__infos">
-                    <div className="shop__main-container__product__infos-container__infos__title">
-                      {article.name}
-                    </div>
-                    <div className="shop__main-container__product__infos-container__infos__description">
-                      {article.description}
-                    </div>
-                  </h2>
-                  <div className="shop__main-container__product__infos-container__price">
-                    {article.price_wt}
+                <Link to={`/shop/${article.id}`}>
+                  <div className="shop__main-container__product__img-container">
+                    <img
+                      src={`/src/assets/img/shop/articles/${article.image}`}
+                      alt=""
+                      className="shop__main-container__product__img-container__img"
+                    />
                   </div>
-                </div>
+                </Link>
+                <Link to={`/shop/${article.id}`}>
+                  <div className="shop__main-container__product__infos-container">
+                    <h2 className="shop__main-container__product__infos-container__infos">
+                      <div className="shop__main-container__product__infos-container__infos__title">
+                        {article.name}
+                      </div>
+                      <div className="shop__main-container__product__infos-container__infos__description">
+                        {article.description}
+                      </div>
+                    </h2>
+                    <div className="shop__main-container__product__infos-container__price">
+                      {article.price_wt}
+                    </div>
+                  </div>
+                </Link>
               </div>
             ))
           : ""}

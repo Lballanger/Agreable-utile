@@ -27,6 +27,7 @@ function App() {
         </Route>
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/shop" element={<Shop />} />
+        <Route exact path="/shop/:id" element={<Detail />} />
         <Route
           path="/account/:id"
           element={
