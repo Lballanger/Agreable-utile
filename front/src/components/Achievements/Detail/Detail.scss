@@ -12,44 +12,61 @@
       padding-bottom: 0.3rem;
       &__image {
         object-fit: cover;
-        height: 800px;
+        height: 500px;
         width: 100%;
       }
     }
   }
 
-  &__info-container {
+  &__container {
     display: flex;
     flex-direction: column;
-
     width: 45%;
     padding-left: 1.5rem;
 
-    &__header {
+    &__info {
+      height: 70vh;
       position: sticky;
-      top: 1rem;
-      &__title {
-        font-size: 1.8rem;
+      top: 7rem;
+
+      &__header {
+        &__title {
+          font-size: 1.8rem;
+        }
       }
-    }
 
-    &__description {
-      position: sticky;
-      top: 1rem;
-      padding-top: 3rem;
-    }
+      &__description {
+        padding-top: 3rem;
+      }
 
-    &__composition {
-      position: sticky;
-      top: 5rem;
-      padding-top: 3rem;
+      &__composition {
+        padding-top: 3rem;
 
-      &__list {
-        &__item {
-          padding-bottom: 1rem;
+        &__list {
+          &__item {
+            padding-bottom: 1rem;
 
-          &__categorie {
-            font-weight: 600;
+            &__categorie {
+              font-weight: 600;
+            }
+          }
+        }
+      }
+      &__add-container {
+        display: flex;
+        justify-content: center;
+
+        &__button {
+          width: 60%;
+          padding: 1.2rem 0rem;
+          margin-top: 3.5rem;
+          background-color: black;
+          color: white;
+          transition: 0.7s;
+
+          &:hover {
+            cursor: pointer;
+            background-color: rgba(216, 135, 196, 0.685);
           }
         }
       }
