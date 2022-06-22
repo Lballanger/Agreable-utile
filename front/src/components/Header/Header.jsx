@@ -13,6 +13,7 @@ import { setUserData } from "../../slices/userSlice";
 
 function Header() {
   const { user } = useSelector((state) => state.userSlice);
+  const cart = useSelector((state) => state.articlesSlice.cart);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -75,52 +76,52 @@ function Header() {
         </div>
         <nav className="header__navigation__nav">
           {user ? (
-            <>
-              <ul className="header__navigation__nav__connected-menu">
-                <li className="header__navigation__nav__connected-menu__item">
+            <ul className="header__navigation__nav__connected-menu">
+              <li className="header__navigation__nav__connected-menu__item">
+                <Link
+                  className="header__navigation__nav__connected-menu__item__profil-link"
+                  to={`/account/${user.id}/profil`}
+                >
+                  Mon compte
+                  <div className="header__navigation__nav__connected-menu__item__profil-link__img-container">
+                    <img
+                      className="header__navigation__nav__connected-menu__item__profil-link__img-container__img"
+                      src={arrow}
+                      alt=""
+                    />
+                  </div>
+                </Link>
+              </li>
+
+              <li className="header__navigation__nav__connected-menu__list">
+                <li className="header__navigation__nav__connected-menu__list__link-container">
                   <Link
-                    className="header__navigation__nav__connected-menu__item__profil-link"
-                    to={`/account/${user.id}/profil`}
-                  >
-                    Mon compte
-                    <div className="header__navigation__nav__connected-menu__item__profil-link__img-container">
-                      <img
-                        className="header__navigation__nav__connected-menu__item__profil-link__img-container__img"
-                        src={arrow}
-                        alt=""
-                      />
-                    </div>
-                  </Link>
-                </li>
-              </ul>
-              <ul className="header__navigation__nav__drop-menu">
-                <li className="header__navigation__nav__drop-menu__item">
-                  <Link
-                    className="header__navigation__nav__drop-menu__item__link"
+                    className="header__navigation__nav__connected-menu__list__link-container__link"
                     to={`/account/${user.id}/profil`}
                   >
                     Mes informations
                   </Link>
                 </li>
-                <li className="header__navigation__nav__drop-menu__item">
+
+                <li className="header__navigation__nav__connected-menu__list__link-container">
                   <Link
-                    className="header__navigation__nav__drop-menu__item__link"
+                    className="header__navigation__nav__connected-menu__list__link-container__link"
                     to={`/account/${user.id}/orders`}
                   >
                     Mes commandes
                   </Link>
                 </li>
-                <li className="header__navigation__nav__drop-menu__item">
+                <li className="header__navigation__nav__connected-menu__list__link-container">
                   <button
-                    className="header__navigation__nav__drop-menu__item__link"
+                    className="header__navigation__nav__connected-menu__list__link-container__link"
                     type="button"
                     onClick={handleLogout}
                   >
                     Déconnexion
                   </button>
                 </li>
-              </ul>
-            </>
+              </li>
+            </ul>
           ) : (
             <ul className="header__navigation__nav__menu">
               <li className="header__navigation__nav__menu__item">
@@ -142,6 +143,73 @@ function Header() {
               </li>
             </ul>
           )}
+          <ul className="header__navigation__nav__cart">
+            <li className="header__navigation__nav__cart__item">
+              <div className="header__navigation__nav__cart__item__img-container">
+                <img
+                  className="header__navigation__nav__cart__item__img-container__img"
+                  src="https://api.iconify.design/ri:shopping-cart-2-fill.svg"
+                  alt=""
+                  srcSet=""
+                />
+                <p className="header__navigation__nav__cart__item__img-container__cart-counter">
+                  {cart.length === 0 ? "" : `${cart.length}`}
+                </p>
+              </div>
+              <div className="header__navigation__nav__cart__item__cart-container">
+                <div className="header__navigation__nav__cart__item__cart-container__title">
+                  <Link
+                    className="header__navigation__nav__cart__item__cart-container__title__link"
+                    to="/cart"
+                  >
+                    MON PANIER
+                  </Link>
+                </div>
+                <div className="header__navigation__nav__cart__item__cart-container__articles-container">
+                  {cart.length > 0
+                    ? cart.map((article) => (
+                        <Link to="/cart">
+                          <div
+                            className="header__navigation__nav__cart__item__cart-container__articles-container__product"
+                            key={article.id}
+                          >
+                            <div className="header__navigation__nav__cart__item__cart-container__articles-container__product__img-container">
+                              <img
+                                className="header__navigation__nav__cart__item__cart-container__articles-container__product__img-container__img"
+                                src={`/src/assets/img/shop/articles/${article.image}`}
+                                alt={article.name}
+                                srcSet=""
+                              />
+                            </div>
+                            <div className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container">
+                              <div className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__infos">
+                                <p className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__infos__title">
+                                  {article.name}
+                                </p>
+                                <p className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__infos__price">
+                                  {article.price_wt}
+                                </p>
+                              </div>
+                              <div className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__quantity-container">
+                                Quantité :{" "}
+                                <span className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__infos__quantity">
+                                  {article.quantity}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      ))
+                    : ""}
+                  <div className="header__navigation__nav__cart__item__cart-container__footer">
+                    <div className="header__navigation__nav__cart__item__cart-container__footer__button">
+                      MON PANIER {`(${cart.length})`}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
         </nav>
       </div>
       {isModalOpen && <Connexion handleCloseModal={handleCloseModal} />}
