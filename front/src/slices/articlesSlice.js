@@ -13,7 +13,11 @@ const articlesSlice = createSlice({
 
     getOldCart(state) {
       const oldCart = localStorage.getItem("CART");
-      state.cart = JSON.parse(oldCart);
+      if (!oldCart) {
+        state.cart = [];
+      } else {
+        state.cart = JSON.parse(oldCart);
+      }
     },
 
     addToCart(state, { payload }) {
