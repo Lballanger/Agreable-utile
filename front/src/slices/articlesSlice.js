@@ -11,6 +11,11 @@ const articlesSlice = createSlice({
       state.articles = payload;
     },
 
+    getOldCart(state) {
+      const oldCart = localStorage.getItem("CART");
+      state.cart = JSON.parse(oldCart);
+    },
+
     addToCart(state, { payload }) {
       const params = payload;
 
@@ -35,5 +40,5 @@ const articlesSlice = createSlice({
   },
 });
 
-export const { setArticlesData, addToCart } = articlesSlice.actions;
+export const { setArticlesData, getOldCart, addToCart } = articlesSlice.actions;
 export default articlesSlice.reducer;
