@@ -203,7 +203,12 @@ function Header() {
                     : ""}
                   <div className="header__navigation__nav__cart__item__cart-container__footer">
                     <div className="header__navigation__nav__cart__item__cart-container__footer__button">
-                      MON PANIER {`(${cart.length})`}
+                      <Link
+                        className="header__navigation__nav__cart__item__cart-container__footer__button"
+                        to="/cart"
+                      >
+                        MON PANIER {`(${cart.length})`}
+                      </Link>
                     </div>
                   </div>
                 </div>
