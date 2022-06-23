@@ -145,17 +145,19 @@ function Header() {
           )}
           <ul className="header__navigation__nav__cart">
             <li className="header__navigation__nav__cart__item">
-              <div className="header__navigation__nav__cart__item__img-container">
-                <img
-                  className="header__navigation__nav__cart__item__img-container__img"
-                  src="https://api.iconify.design/ri:shopping-cart-2-fill.svg"
-                  alt=""
-                  srcSet=""
-                />
-                <p className="header__navigation__nav__cart__item__img-container__cart-counter">
-                  {cart.length === 0 ? "" : `${cart.length}`}
-                </p>
-              </div>
+              <Link to="/cart">
+                <div className="header__navigation__nav__cart__item__img-container">
+                  <img
+                    className="header__navigation__nav__cart__item__img-container__img"
+                    src="https://api.iconify.design/ri:shopping-cart-2-fill.svg"
+                    alt=""
+                    srcSet=""
+                  />
+                  <p className="header__navigation__nav__cart__item__img-container__cart-counter">
+                    {cart.length === 0 ? "" : `${cart.length}`}
+                  </p>
+                </div>
+              </Link>
               <div className="header__navigation__nav__cart__item__cart-container">
                 <div className="header__navigation__nav__cart__item__cart-container__title">
                   <Link
@@ -203,7 +205,12 @@ function Header() {
                     : ""}
                   <div className="header__navigation__nav__cart__item__cart-container__footer">
                     <div className="header__navigation__nav__cart__item__cart-container__footer__button">
-                      MON PANIER {`(${cart.length})`}
+                      <Link
+                        className="header__navigation__nav__cart__item__cart-container__footer__button"
+                        to="/cart"
+                      >
+                        MON PANIER {`(${cart.length})`}
+                      </Link>
                     </div>
                   </div>
                 </div>
