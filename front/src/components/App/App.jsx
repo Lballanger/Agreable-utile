@@ -1,6 +1,9 @@
 import "./App.scss";
 
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getOldCart } from "../../slices/articlesSlice";
 
 import Header from "../Header/Header";
 import Homepage from "../Homepage/Homepage";
@@ -16,6 +19,12 @@ import useAuth from "../../hooks/useAuth";
 import Index from "../Achievements";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(async () => {
+    dispatch(getOldCart());
+  }, []);
+
   return (
     <div className="container">
       <Header />
@@ -27,6 +36,7 @@ function App() {
         </Route>
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/shop" element={<Shop />} />
+        <Route exact path="/shop/:id" element={<Detail />} />
         <Route
           path="/account/:id"
           element={
