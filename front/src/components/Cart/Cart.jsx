@@ -1,9 +1,16 @@
 import "./Cart.scss";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from "../../slices/articlesSlice";
 
 function Cart() {
+  const dispatch = useDispatch();
   const articlesInCart = useSelector((state) => state.articlesSlice.cart);
+
+  const handleClick = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
   return (
     <div className="cart">
       {articlesInCart.length > 0 ? (
@@ -47,7 +54,7 @@ function Cart() {
                     </div>
                   </div>
                   <div className="cart__cart-container__articles-container__product-container__infos__quantity-container">
-                    <select
+                    {/* <select
                       className="cart__cart-container__articles-container__product-container__infos__quantity-container__quantity"
                       value={article.quantity}
                       name=""
@@ -59,7 +66,7 @@ function Cart() {
                       <option value="4">4</option>
                       <option value="5">5</option>
                       <option value="6">6</option>
-                    </select>
+                    </select> */}
                   </div>
                   <div className="cart__cart-container__articles-container__product-container__infos__content-bottom">
                     <div className="cart__cart-container__articles-container__product-container__infos__content-bottom__delete-container">
@@ -75,6 +82,7 @@ function Cart() {
                         <button
                           className="cart__cart-container__articles-container__product-container__infos__content-bottom__delete-container__button-container__button"
                           type="button"
+                          onClick={() => handleClick(article.id)}
                         >
                           Supprimer
                         </button>
