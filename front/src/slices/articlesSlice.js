@@ -42,12 +42,33 @@ const articlesSlice = createSlice({
       }
     },
 
+    changeTheCartQuantity(state, { payload }) {
+      let indexArticle = null;
+      const findArticle = state.cart.find((article, index) => {
+        if (article.id === payload.id) {
+          indexArticle = index;
+          return article;
+        }
+        return undefined;
+      });
+
+      if (findArticle !== undefined) {
+        state.cart[indexArticle].quantity = payload.value;
+        localStorage.setItem("CART", JSON.stringify(state.cart));
+      }
+    },
+
     removeFromCart(state, { payload }) {
       state.cart = state.cart.filter((article) => article.id !== payload);
     },
   },
 });
 
-export const { setArticlesData, getOldCart, addToCart, removeFromCart } =
-  articlesSlice.actions;
+export const {
+  setArticlesData,
+  getOldCart,
+  addToCart,
+  changeTheCartQuantity,
+  removeFromCart,
+} = articlesSlice.actions;
 export default articlesSlice.reducer;

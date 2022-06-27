@@ -1,7 +1,10 @@
 import "./Cart.scss";
 
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../../slices/articlesSlice";
+import {
+  removeFromCart,
+  changeTheCartQuantity,
+} from "../../slices/articlesSlice";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -9,6 +12,10 @@ function Cart() {
 
   const handleClick = (id) => {
     dispatch(removeFromCart(id));
+  };
+
+  const handleChange = (id, e) => {
+    dispatch(changeTheCartQuantity({ id, value: e.target.value }));
   };
 
   const totalPriceCalculation = () => {
@@ -65,19 +72,21 @@ function Cart() {
                     </div>
                   </div>
                   <div className="cart__cart-container__articles-container__product-container__infos__quantity-container">
-                    {/* <select
+                    <select
                       className="cart__cart-container__articles-container__product-container__infos__quantity-container__quantity"
                       value={article.quantity}
-                      name=""
-                      id=""
+                      onChange={(e) => handleChange(article.id, e)}
                     >
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
                       <option value="5">5</option>
-                      <option value="6">6</option>
-                    </select> */}
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
                   </div>
                   <div className="cart__cart-container__articles-container__product-container__infos__content-bottom">
                     <div className="cart__cart-container__articles-container__product-container__infos__content-bottom__delete-container">
