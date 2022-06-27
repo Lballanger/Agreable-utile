@@ -53,7 +53,7 @@ const articlesSlice = createSlice({
       });
 
       if (findArticle !== undefined) {
-        state.cart[indexArticle].quantity = payload.value;
+        state.cart[indexArticle].quantity = Number(payload.value);
         localStorage.setItem("CART", JSON.stringify(state.cart));
       }
     },
