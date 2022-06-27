@@ -11,6 +11,17 @@ function Cart() {
     dispatch(removeFromCart(id));
   };
 
+  const totalPriceCalculation = () => {
+    const price = articlesInCart
+      .reduce(
+        (previousValue, currentValue) =>
+          previousValue + currentValue.quantity * currentValue.price_wt,
+        0,
+      )
+      .toFixed(2);
+    return price.toString().replace(".", ",");
+  };
+
   return (
     <div className="cart">
       {articlesInCart.length > 0 ? (
@@ -89,7 +100,10 @@ function Cart() {
                       </div>
                     </div>
                     <div className="cart__cart-container__articles-container__product-container__infos__content-bottom__price-container">
-                      {article.price_wt}
+                      {(article.price_wt * article.quantity)
+                        .toFixed(2)
+                        .replace(".", ",")}{" "}
+                      €
                     </div>
                   </div>
                 </div>
@@ -110,7 +124,7 @@ function Cart() {
                   Sous-total
                 </p>
                 <p className="cart__cart-container__summary__detail-container__subtotal-container__price">
-                  100,00 €
+                  {totalPriceCalculation()} €
                 </p>
               </div>
               <div className="cart__cart-container__summary__detail-container__delivery-container">
