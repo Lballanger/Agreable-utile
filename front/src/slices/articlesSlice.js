@@ -59,7 +59,9 @@ const articlesSlice = createSlice({
     },
 
     removeFromCart(state, { payload }) {
-      state.cart = state.cart.filter((article) => article.id !== payload);
+      const result = state.cart.filter((article) => article.id !== payload);
+      state.cart = result;
+      localStorage.setItem("CART", JSON.stringify(result));
     },
   },
 });
