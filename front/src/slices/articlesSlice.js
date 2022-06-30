@@ -41,8 +41,36 @@ const articlesSlice = createSlice({
         localStorage.setItem("CART", JSON.stringify(state.cart));
       }
     },
+
+    changeTheCartQuantity(state, { payload }) {
+      let indexArticle = null;
+      const findArticle = state.cart.find((article, index) => {
+        if (article.id === payload.id) {
+          indexArticle = index;
+          return article;
+        }
+        return undefined;
+      });
+
+      if (findArticle !== undefined) {
+        state.cart[indexArticle].quantity = Number(payload.value);
+        localStorage.setItem("CART", JSON.stringify(state.cart));
+      }
+    },
+
+    removeFromCart(state, { payload }) {
+      const result = state.cart.filter((article) => article.id !== payload);
+      state.cart = result;
+      localStorage.setItem("CART", JSON.stringify(result));
+    },
   },
 });
 
-export const { setArticlesData, getOldCart, addToCart } = articlesSlice.actions;
+export const {
+  setArticlesData,
+  getOldCart,
+  addToCart,
+  changeTheCartQuantity,
+  removeFromCart,
+} = articlesSlice.actions;
 export default articlesSlice.reducer;

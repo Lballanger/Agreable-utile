@@ -170,11 +170,8 @@ function Header() {
                 <div className="header__navigation__nav__cart__item__cart-container__articles-container">
                   {cart.length > 0
                     ? cart.map((article) => (
-                        <Link to="/cart">
-                          <div
-                            className="header__navigation__nav__cart__item__cart-container__articles-container__product"
-                            key={article.id}
-                          >
+                        <Link to={`/shop/${article.id}`} key={article.id}>
+                          <div className="header__navigation__nav__cart__item__cart-container__articles-container__product">
                             <div className="header__navigation__nav__cart__item__cart-container__articles-container__product__img-container">
                               <img
                                 className="header__navigation__nav__cart__item__cart-container__articles-container__product__img-container__img"
@@ -204,9 +201,9 @@ function Header() {
                       ))
                     : ""}
                   <div className="header__navigation__nav__cart__item__cart-container__footer">
-                    <div className="header__navigation__nav__cart__item__cart-container__footer__button">
+                    <div className="header__navigation__nav__cart__item__cart-container__footer__button-container">
                       <Link
-                        className="header__navigation__nav__cart__item__cart-container__footer__button"
+                        className="header__navigation__nav__cart__item__cart-container__footer__button-container__button"
                         to="/cart"
                       >
                         MON PANIER {`(${cart.length})`}
