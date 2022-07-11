@@ -15,6 +15,7 @@ import Account from "../Account/Account";
 import Profil from "../Account/Profil/Profil";
 import Orders from "../Account/Orders/Orders";
 import Cart from "../Cart/Cart";
+import PlaceOrder from "../PlaceOrder/PlaceOrder";
 import Footer from "../Footer/Footer";
 import useAuth from "../../hooks/useAuth";
 import Index from "../Achievements";
@@ -22,7 +23,7 @@ import Index from "../Achievements";
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(getOldCart());
   }, []);
 
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/shop" element={<Shop />} />
         <Route exact path="/shop/:id" element={<Detail />} />
         <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/place-order" element={<PlaceOrder />} />
         <Route
           path="/account/:id"
           element={

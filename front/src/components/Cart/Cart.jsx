@@ -1,6 +1,7 @@
 import "./Cart.scss";
 
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   removeFromCart,
   changeTheCartQuantity,
@@ -154,12 +155,14 @@ function Cart() {
                 </p>
               </div>
               <div className="cart__cart-container__summary__detail-container__submit-container">
-                <button
-                  className="cart__cart-container__summary__detail-container__submit-container__button"
-                  type="button"
-                >
-                  COMMANDER
-                </button>
+                <Link to="/place-order">
+                  <button
+                    className="cart__cart-container__summary__detail-container__submit-container__button"
+                    type="button"
+                  >
+                    COMMANDER
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
