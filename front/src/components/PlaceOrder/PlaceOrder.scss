@@ -1,0 +1,101 @@
+.place-order {
+  display: flex;
+  justify-content: center;
+  width: 75%;
+  margin: 0 auto;
+
+  &__info-container {
+    width: 50%;
+    padding: 1.5rem 3rem 1rem 0;
+    border-right: 1px solid rgba(128, 128, 128, 0.37);
+
+    &__form-container {
+      &__form {
+        display: flex;
+        flex-direction: column;
+        &__legend {
+          width: 80%;
+          padding-bottom: 0.6rem;
+          margin-bottom: 2.2rem;
+          font-size: 1.2rem;
+          border-bottom: 1px solid rgba(128, 128, 128, 0.37);
+        }
+
+        &__half {
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+
+          &__wrapper {
+            width: 48%;
+          }
+        }
+
+        &__label {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 2.2rem;
+
+          &__select {
+            margin: 0.5rem 0;
+            padding: 0.4rem;
+            background: none;
+            border: 1px solid rgba(128, 128, 128, 0.247);
+            border-radius: 5px;
+          }
+        }
+
+        &__button {
+          width: 100%;
+          background-color: rgb(247, 114, 136);
+          text-align: center;
+          padding: 1rem;
+          color: white;
+          cursor: pointer;
+          align-self: flex-end;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    &__create-account {
+      &__label {
+        display: block;
+        margin-bottom: 2.2rem;
+        &__input {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-color: #fff;
+          cursor: pointer;
+          width: 2rem;
+          height: 2rem;
+          border: 0.01rem solid rgba(128, 128, 128, 0.247);
+          border-radius: 1rem;
+          transform: translateY(0.8rem);
+          margin-right: 0.7rem;
+          padding: 0.2rem;
+        }
+        :checked {
+          background-color: rgb(247, 114, 136);
+          background: rgb(247, 114, 136)
+            url("data:image/gif;base64,R0lGODlhCwAKAIABAP////3cnSH5BAEKAAEALAAAAAALAAoAAAIUjH+AC73WHIsw0UCjglraO20PNhYAOw==")
+            3px 3px no-repeat;
+          background-position: 0.65rem 0.65rem;
+        }
+      }
+
+      &__password-container {
+        margin-top: 2.2rem;
+      }
+    }
+  }
+
+  &__cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 1.5rem 0 1rem 3rem;
+  }
+}
