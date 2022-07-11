@@ -48,7 +48,7 @@ function Field({
             onChange={onChange}
             disabled={disabled}
           />
-          {error && type === "text" ? (
+          {error && type === "text" && id === "firstname" ? (
             <div className="field__label__error">
               Votre prénom doit contenir au minimum 2 caractères
             </div>
@@ -74,6 +74,20 @@ function Field({
           {error && type === "password" && id === "password-confirm" ? (
             <div className="field__label__password-error">
               Les mots de passe ne correspondent pas
+            </div>
+          ) : (
+            ""
+          )}
+          {error && type === "text" && id === "phone" ? (
+            <div className="field__label__error">
+              Le numéro de téléphone saisi n&#8217;est pas valide
+            </div>
+          ) : (
+            ""
+          )}
+          {error && type === "text" && id === "postal-code" ? (
+            <div className="field__label__error">
+              Le code postal saisi n&#8217;est pas valide
             </div>
           ) : (
             ""
