@@ -1,0 +1,33 @@
+.suggestions {
+  width: 100%;
+  border: 1px solid rgb(172, 172, 172);
+  border-radius: 0.2rem;
+  position: absolute;
+  top: 3.6rem;
+  z-index: 5;
+  background-color: white;
+
+  &__header {
+    padding: 0.3rem 0;
+    font-size: 0.75rem;
+    color: gray;
+    font-family: sans-serif;
+    padding: 0.3rem 0.7rem;
+  }
+
+  &__address-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    &__address {
+      width: 100%;
+      padding: 0.3rem 0.7rem;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+      }
+    }
+  }
+}

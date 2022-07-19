@@ -54,6 +54,14 @@
           cursor: pointer;
           align-self: flex-end;
           text-transform: uppercase;
+
+          &--disabled {
+            background-color: grey;
+          }
+        }
+
+        &__address-container {
+          position: relative;
         }
       }
     }
@@ -62,6 +70,7 @@
       &__label {
         display: block;
         margin-bottom: 2.2rem;
+
         &__input {
           -webkit-appearance: none;
           -moz-appearance: none;
@@ -76,6 +85,7 @@
           margin-right: 0.7rem;
           padding: 0.2rem;
         }
+
         :checked {
           background-color: rgb(247, 114, 136);
           background: rgb(247, 114, 136)

@@ -1,8 +1,9 @@
 import "./PlaceOrder.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Field from "../Shared/Field/Field";
+import AddressControl from "../Shared/AddressControl/AddressControl";
 
 function PlaceOrder() {
   const navigate = useNavigate();
@@ -13,17 +14,11 @@ function PlaceOrder() {
   if (!cart.length) navigate("/cart", { replace: true });
 
   const initialErrors = {
-    email: false,
-    firstname: false,
-    lastname: false,
-    country: false,
-    address: false,
-    addressInformation: false,
-    city: false,
-    postalCode: false,
-    phone: false,
-    password: false,
-    passwordConfirm: false,
+    email: null,
+    firstname: null,
+    lastname: null,
+    phone: null,
+    postalCode: null,
   };
 
   const [errors, setErrors] = useState(initialErrors);
@@ -33,6 +28,7 @@ function PlaceOrder() {
   const [lastname, setLastName] = useState("");
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
+  const [suggestion, setSuggestion] = useState(false);
   const [addressInformation, setAddressInformation] = useState("");
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
@@ -40,6 +36,7 @@ function PlaceOrder() {
   const [createAccount, setCreateAccount] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [disabled, setDisabled] = useState(true);
 
   const emailRule =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -52,11 +49,35 @@ function PlaceOrder() {
   const passwordRule =
     /^.*(?=.{6,120})(?!.*\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!\@\#\$\%\^\&\*\(\)\-\=\¡\£\_\+\`\~\.\,\<\>\/\?\;\:\'\"\\\|\[\]\{\}]).*$/;
 
+  useEffect(() => {
+    if (createAccount) {
+      setErrors((state) => {
+        return {
+          ...state,
+          password: false,
+          passwordConfirm: false,
+        };
+      });
+      setDisabled(true);
+    }
+  }, [createAccount]);
+
+  useEffect(() => {
+    if (Object.keys(errors).length && !disabled) setDisabled(true);
+  }, [errors]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  };
+
   const handleChange = (event) => {
     switch (event.target.name) {
       case "email-order":
         setEmail(event.target.value);
-        if (!emailRule.test(event.target.value)) {
+        if (
+          !emailRule.test(event.target.value) &&
+          event.target.value.length > 0
+        ) {
           setErrors((state) => {
             return {
               ...state,
@@ -69,7 +90,10 @@ function PlaceOrder() {
         break;
       case "firstname":
         setFirstname(event.target.value);
-        if (event.target.value.trim().length < 2) {
+        if (
+          event.target.value.trim().length < 2 &&
+          event.target.value.length > 0
+        ) {
           setErrors((state) => {
             return {
               ...state,
@@ -80,7 +104,10 @@ function PlaceOrder() {
         break;
       case "lastname":
         setLastName(event.target.value);
-        if (event.target.value.trim().length < 2) {
+        if (
+          event.target.value.trim().length < 2 &&
+          event.target.value.length > 0
+        ) {
           setErrors((state) => {
             return {
               ...state,
@@ -103,7 +130,10 @@ function PlaceOrder() {
         break;
       case "postal-code":
         setPostalCode(event.target.value);
-        if (!postalCodeRule.test(event.target.value)) {
+        if (
+          !postalCodeRule.test(event.target.value) &&
+          event.target.value.length > 0
+        ) {
           setErrors((state) => {
             return {
               ...state,
@@ -116,7 +146,10 @@ function PlaceOrder() {
         break;
       case "phone":
         setPhone(event.target.value);
-        if (!phoneRule.test(event.target.value)) {
+        if (
+          !phoneRule.test(event.target.value) &&
+          event.target.value.length > 0
+        ) {
           setErrors((state) => {
             return {
               ...state,
@@ -153,6 +186,13 @@ function PlaceOrder() {
       default:
         break;
     }
+    if (!Object.keys(errors).length) setDisabled(false);
+  };
+
+  const setCitySuggest = (data) => {
+    setAddress(`${data.housenumber} ${data.street}`);
+    setCity(data.city);
+    setPostalCode(data.postcode);
   };
 
   return (
@@ -161,7 +201,7 @@ function PlaceOrder() {
         <div className="place-order__info-container__form-container">
           <form
             className="place-order__info-container__form-container__form"
-            action=""
+            onSubmit={handleSubmit}
           >
             {!user ? (
               <>
@@ -262,13 +302,23 @@ function PlaceOrder() {
                 </option>
               </select>
             </label>
-            <Field
-              id="delivery-address"
-              label="Adresse de livraison"
-              type="text"
-              value={address}
-              onChange={handleChange}
-            />
+            <div className="place-order__info-container__form-container__form__address-container">
+              <Field
+                id="delivery-address"
+                label="Adresse de livraison"
+                type="text"
+                value={address}
+                onChange={handleChange}
+                onFocus={() => setSuggestion(true)}
+                onBlur={() => suggestion}
+              />
+              <AddressControl
+                setCitySuggest={setCitySuggest}
+                inputValue={address}
+                setFocus={suggestion}
+                setSuggestionFocus={setSuggestion}
+              />
+            </div>
             <Field
               id="address-information"
               label="Appartement, étage, code d'accès (facultatif)"
@@ -347,8 +397,13 @@ function PlaceOrder() {
               ""
             )}
             <button
-              className="place-order__info-container__form-container__form__button"
-              type="button"
+              className={
+                !disabled
+                  ? "place-order__info-container__form-container__form__button"
+                  : "place-order__info-container__form-container__form__button place-order__info-container__form-container__form__button--disabled"
+              }
+              type="submit"
+              disabled={disabled}
             >
               Continuer
             </button>

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import React from "react";
 
 import "./Field.scss";
 
@@ -14,6 +15,7 @@ function Field({
   error,
   checked = false,
   onFocus,
+  onBlur,
   focus = false,
 }) {
   return (
@@ -46,6 +48,8 @@ function Field({
             name={id}
             value={value}
             onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
             disabled={disabled}
           />
           {error && type === "text" && id === "firstname" ? (
@@ -149,20 +153,6 @@ function Field({
   );
 }
 
-Field.defaultProps = {
-  label: "",
-  type: "text",
-  value: "",
-  min: 1,
-  max: 0,
-  onChange: () => {},
-  onFocus: () => {},
-  disabled: false,
-  error: false,
-  checked: false,
-  focus: false,
-};
-
 Field.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
@@ -172,10 +162,26 @@ Field.propTypes = {
   max: PropTypes.number,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   checked: PropTypes.bool,
   focus: PropTypes.bool,
+};
+
+Field.defaultProps = {
+  label: "",
+  type: "text",
+  value: "",
+  min: 1,
+  max: 0,
+  onChange: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  disabled: false,
+  error: false,
+  checked: false,
+  focus: false,
 };
 
 export default Field;
