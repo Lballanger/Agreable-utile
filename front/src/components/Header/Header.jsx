@@ -9,10 +9,10 @@ import Connexion from "../Connexion/Connexion";
 import facebook from "../../assets/img/facebook.svg";
 import instagram from "../../assets/img/instagram.svg";
 import arrow from "../../assets/img/arrow.png";
-import { setUserData } from "../../slices/userSlice";
+import { signOut } from "../../slices/userSlice";
 
 function Header() {
-  const { user } = useSelector((state) => state.userSlice);
+  const userData = useSelector((state) => state.userSlice.userData);
   const cart = useSelector((state) => state.articlesSlice.cart);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +25,7 @@ function Header() {
   };
 
   const handleLogout = () => {
-    dispatch(setUserData(""));
+    dispatch(signOut());
   };
 
   return (
@@ -75,12 +75,12 @@ function Header() {
           </h2>
         </div>
         <nav className="header__navigation__nav">
-          {user ? (
+          {userData ? (
             <ul className="header__navigation__nav__connected-menu">
               <li className="header__navigation__nav__connected-menu__item">
                 <Link
                   className="header__navigation__nav__connected-menu__item__profil-link"
-                  to={`/account/${user.id}/profil`}
+                  to={`/account/${userData.id}/profil`}
                 >
                   Mon compte
                   <div className="header__navigation__nav__connected-menu__item__profil-link__img-container">
@@ -97,7 +97,7 @@ function Header() {
                 <li className="header__navigation__nav__connected-menu__list__link-container">
                   <Link
                     className="header__navigation__nav__connected-menu__list__link-container__link"
-                    to={`/account/${user.id}/profil`}
+                    to={`/account/${userData.id}/profil`}
                   >
                     Mes informations
                   </Link>
@@ -106,7 +106,7 @@ function Header() {
                 <li className="header__navigation__nav__connected-menu__list__link-container">
                   <Link
                     className="header__navigation__nav__connected-menu__list__link-container__link"
-                    to={`/account/${user.id}/orders`}
+                    to={`/account/${userData.id}/orders`}
                   >
                     Mes commandes
                   </Link>
