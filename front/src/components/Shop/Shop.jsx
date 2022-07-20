@@ -3,8 +3,7 @@ import "./Shop.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { setArticlesData } from "../../slices/articlesSlice";
-import API from "../../api/api";
+import { fetchArticles } from "../../slices/articlesSlice";
 
 import headerPicture from "../../assets/img/shop/header.jpg";
 
@@ -14,8 +13,7 @@ function Shop() {
 
   useEffect(async () => {
     if (!articles) {
-      const data = await API.getAllArticles();
-      dispatch(setArticlesData(data));
+      dispatch(fetchArticles());
     }
   }, []);
 
