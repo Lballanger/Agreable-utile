@@ -2,7 +2,7 @@ import "./Profil.scss";
 import { useSelector } from "react-redux";
 
 function Profil() {
-  const data = useSelector((state) => state.userSlice.user);
+  const data = useSelector((state) => state.userSlice.userData);
   const date = new Date(data.date_of_birth).toLocaleDateString("fr");
   return (
     <div className="profil">
