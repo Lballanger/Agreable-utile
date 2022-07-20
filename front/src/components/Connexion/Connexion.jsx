@@ -1,12 +1,10 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setUserData } from "../../slices/userSlice";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../../slices/userSlice";
 
 import "./Connexion.scss";
-
-import API from "../../api/api";
 
 const initialState = {
   email: "",
@@ -17,6 +15,12 @@ function Connexion({ handleCloseModal }) {
   const dispatch = useDispatch();
   const history = useNavigate();
 
+  const userId = useSelector((state) => state.userSlice.userData?.id);
+
+  useEffect(() => {
+    history(`/account/${userId}`);
+  }, [userId]);
+
   const [inputs, setInputs] = useState({ ...initialState });
 
   const inputChange = (event) => {
@@ -26,16 +30,10 @@ function Connexion({ handleCloseModal }) {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      const data = await API.login(inputs);
-      dispatch(setUserData(data));
-      handleCloseModal(event);
-      history(`/account/${data.id}`);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(login(inputs));
+    handleCloseModal(event);
   };
 
   return (
