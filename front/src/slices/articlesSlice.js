@@ -1,10 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import instance from "../utils/axiosConfig";
+
+export const fetchArticles = createAsyncThunk("/articles", async () => {
+  const response = await instance.get("/articles");
+  return response.data;
+});
 
 const articlesSlice = createSlice({
   name: "articles",
   initialState: {
+    loading: false,
     articles: null,
     cart: [],
+    error: "",
   },
   reducers: {
     setArticlesData(state, { payload }) {
@@ -63,6 +71,18 @@ const articlesSlice = createSlice({
       state.cart = result;
       localStorage.setItem("CART", JSON.stringify(result));
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchArticles.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchArticles.fulfilled, (state, action) => {
+      state.loading = false;
+      state.articles = action.payload;
+    });
+    builder.addCase(fetchArticles.rejected, (state, action) => {
+      state.error = action.error.message;
+    });
   },
 });
 
