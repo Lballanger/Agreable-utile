@@ -8,13 +8,13 @@ import AccountMenu from "./AccountMenu/AccountMenu";
 function Account() {
   const userData = useSelector((state) => {
     return {
-      id: state.userSlice.user.id,
-      civility: state.userSlice.user.civility,
-      firstname: state.userSlice.user.firstname,
-      lastname: state.userSlice.user.lastname,
-      email: state.userSlice.user.email,
-      city: state.userSlice.user.city,
-      date_of_birth: state.userSlice.user.date_of_birth,
+      id: state.userSlice.userData.id,
+      civility: state.userSlice.userData.civility,
+      firstname: state.userSlice.userData.firstname,
+      lastname: state.userSlice.userData.lastname,
+      email: state.userSlice.userData.email,
+      city: state.userSlice.userData.city,
+      date_of_birth: state.userSlice.userData.date_of_birth,
     };
   });
 
