@@ -6,6 +6,12 @@ import App from "./components/App/App";
 import store from "./store/store";
 
 import "./main.scss";
+import { getToken } from "./utils/tokenStorage";
+import { fetchUserData } from "./slices/userSlice";
+
+if (getToken()) {
+  store.dispatch(fetchUserData());
+}
 
 ReactDOM.render(
   <React.StrictMode>
