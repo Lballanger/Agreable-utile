@@ -1,4 +1,4 @@
-const Achievement = require('../models/achievement');
+const Achievement = require("../models/achievement");
 
 const achievementController = {
   findAll: async (request, response) => {

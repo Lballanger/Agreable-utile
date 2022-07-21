@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require("../models/user");
 
 const userController = {
   user: async (request, response) => {
@@ -11,7 +11,7 @@ const userController = {
 
     try {
       const user = await User.getById(id);
-      if (!user) return response.status(404).json('User not found');
+      if (!user) return response.status(404).json("User not found");
       return response.json({
         id: user.id,
         civility: user.civility,

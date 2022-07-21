@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const jwtService = require('../services/jwtService');
+const User = require("../models/user");
+const jwtService = require("../services/jwtService");
 
 const authController = {
   login: async (request, response) => {
@@ -8,9 +8,9 @@ const authController = {
     try {
       const user = await User.getByEmail(email);
 
-      if (!user) return response.status(400).json('Invalid credentials');
+      if (!user) return response.status(400).json("Invalid credentials");
       if (password !== user.password) {
-        return response.status(400).json('Invalid credentials');
+        return response.status(400).json("Invalid credentials");
       }
 
       delete user.password;
@@ -47,7 +47,7 @@ const authController = {
 
       const existingUser = await User.getByEmail(email);
 
-      if (existingUser) return response.status(400).json('User already exists');
+      if (existingUser) return response.status(400).json("User already exists");
 
       const user = await new User({
         civility,
