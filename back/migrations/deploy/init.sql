@@ -16,12 +16,10 @@ CREATE TABLE private."user" (
   civility TEXT NOT NULL,
   firstname TEXT NOT NULL,
   lastname TEXT NOT NULL,
-  email email_type UNIQUE,
-  email_verified_at TIMESTAMPTZ DEFAULT NULL,
+  email email_type NOT NULL UNIQUE,
+  email_verified BOOLEAN DEFAULT FALSE,
   password TEXT NOT NULL,
-  date_of_birth DATE NOT NULL,
-  city TEXT,
-  postal_code INT
+  date_of_birth DATE NOT NULL
 );
 
 CREATE TABLE private.order (
