@@ -2,11 +2,6 @@ const User = require("../models/user");
 
 const userController = {
   user: async (request, response) => {
-    // test with a false request
-    request.user = {
-      id: 1,
-    };
-
     const { id } = request.user;
 
     try {
