@@ -7,13 +7,19 @@ const authController = require("./controllers/authController");
 const articleController = require("./controllers/articleController");
 const achievementController = require("./controllers/achievementController");
 
+const authMiddleware = require("./middlewares/authMiddleware");
+
 /** ********************** USER *********************** */
-router.get("/api/user", userController.user);
+router.get("/api/user", authMiddleware(), userController.user);
 
 /** ********************** AUTH *********************** */
 router.post("/api/auth/register", authController.register);
 router.post("/api/auth/login", authController.login);
-router.post("/api/auth/refresh-token", authController.refreshToken);
+router.post(
+  "/api/auth/refresh-token",
+  authMiddleware(true),
+  authController.refreshToken,
+);
 
 /** ********************** ARTICLE *********************** */
 
