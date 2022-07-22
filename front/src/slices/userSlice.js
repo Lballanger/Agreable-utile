@@ -2,6 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setToken, removeToken } from "../utils/tokenStorage";
 import instance from "../utils/axiosConfig";
 
+export const register = createAsyncThunk("/auth/register", async (payload) => {
+  const response = await instance.post("/auth/register", payload);
+  instance.defaults.headers.authorization = `Bearer ${response.data.accessToken}`;
+  setToken(response.data.refreshToken);
+  return response.data;
+});
+
 export const login = createAsyncThunk("/auth/login", async (payload) => {
   const response = await instance.post("/auth/login", payload);
   instance.defaults.headers.Authorization = `Bearer ${response.data.accessToken}`;
@@ -21,6 +28,7 @@ export const signOut = createAsyncThunk("/auth/signOut", async () => {
 const userSlice = createSlice({
   name: "user",
   initialState: {
+    token: localStorage?.getItem("REFRESH_KEY") || null,
     loading: false,
     userData: null,
     error: "",
@@ -31,6 +39,7 @@ const userSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(login.fulfilled, (state, action) => {
+      state.token = action.payload.accessToken;
       state.loading = false;
       state.userData = action.payload;
       state.error = "";
@@ -41,6 +50,7 @@ const userSlice = createSlice({
       state.error = action.error.message;
     });
     builder.addCase(signOut.fulfilled, (state) => {
+      state.token = null;
       state.userData = null;
     });
     builder.addCase(fetchUserData.pending, (state) => {
@@ -52,8 +62,20 @@ const userSlice = createSlice({
     builder.addCase(fetchUserData.rejected, (state, action) => {
       state.error = action.error.message;
     });
+    builder.addCase(register.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(register.fulfilled, (state, action) => {
+      state.token = action.payload.accessToken;
+      state.loading = false;
+      state.userData = action.payload;
+      state.error = "";
+    });
+    builder.addCase(register.rejected, (state, action) => {
+      state.error = action.error.message;
+    });
   },
 });
 
-export const { setUserData } = userSlice.actions;
+export const {} = userSlice.actions;
 export default userSlice.reducer;

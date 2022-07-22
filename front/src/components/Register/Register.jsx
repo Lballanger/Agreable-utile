@@ -1,9 +1,8 @@
 import "./Register.scss";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUserData } from "../../slices/userSlice";
-import API from "../../api/api";
+import { register } from "../../slices/userSlice";
 import Field from "../Shared/Field/Field";
 
 function Register() {
@@ -19,7 +18,7 @@ function Register() {
   };
 
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const [focus, setfocus] = useState(false);
   const [errors, setErrors] = useState(initialErrors);
@@ -40,6 +39,14 @@ function Register() {
   const passwordRule =
     /^.*(?=.{6,120})(?!.*\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!\@\#\$\%\^\&\*\(\)\-\=\¡\£\_\+\`\~\.\,\<\>\/\?\;\:\'\"\\\|\[\]\{\}]).*$/;
 
+  const userData = useSelector((state) => state.userSlice.userData);
+
+  useEffect(() => {
+    if (userData?.id) {
+      navigate(`/account/${userData.id}`);
+    }
+  }, [userData]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const inputs = {
@@ -53,9 +60,7 @@ function Register() {
     try {
       const error = Object.values(errors);
       if (error.length === 0) {
-        const data = await API.register(inputs);
-        dispatch(setUserData(data));
-        history(`/account/${data.id}`);
+        await dispatch(register(inputs));
       }
     } catch (error) {
       console.log(error);
