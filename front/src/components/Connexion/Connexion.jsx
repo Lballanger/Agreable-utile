@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../slices/userSlice";
 
 import "./Connexion.scss";
@@ -13,15 +13,17 @@ const initialState = {
 
 function Connexion({ handleCloseModal }) {
   const dispatch = useDispatch();
-  const history = useNavigate();
-
-  const userId = useSelector((state) => state.userSlice.userData?.id);
-
-  useEffect(() => {
-    history(`/account/${userId}`);
-  }, [userId]);
+  const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({ ...initialState });
+
+  const userData = useSelector((state) => state.userSlice.userData);
+
+  useEffect(() => {
+    if (userData?.id) {
+      navigate(`/account/${userData.id}`);
+    }
+  }, [userData]);
 
   const inputChange = (event) => {
     setInputs((state) => ({
@@ -30,10 +32,14 @@ function Connexion({ handleCloseModal }) {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(login(inputs));
-    handleCloseModal(event);
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      await dispatch(login(inputs));
+      handleCloseModal(event);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
