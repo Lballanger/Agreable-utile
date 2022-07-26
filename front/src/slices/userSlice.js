@@ -2,12 +2,19 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setToken, removeToken } from "../utils/tokenStorage";
 import instance from "../utils/axiosConfig";
 
-export const register = createAsyncThunk("/auth/register", async (payload) => {
-  const response = await instance.post("/auth/register", payload);
-  instance.defaults.headers.authorization = `Bearer ${response.data.accessToken}`;
-  setToken(response.data.refreshToken);
-  return response.data;
-});
+export const register = createAsyncThunk(
+  "/auth/register",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await instance.post("/auth/register", payload);
+      instance.defaults.headers.authorization = `Bearer ${response.data.accessToken}`;
+      setToken(response.data.refreshToken);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
 
 export const login = createAsyncThunk("/auth/login", async (payload) => {
   const response = await instance.post("/auth/login", payload);
@@ -60,6 +67,7 @@ const userSlice = createSlice({
       state.userData = action.payload;
     });
     builder.addCase(fetchUserData.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.error.message;
     });
     builder.addCase(register.pending, (state) => {
