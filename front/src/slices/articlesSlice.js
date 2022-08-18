@@ -12,6 +12,7 @@ const articlesSlice = createSlice({
     loading: false,
     articles: null,
     cart: [],
+    subtotal: 0,
     error: "",
   },
   reducers: {
@@ -20,11 +21,14 @@ const articlesSlice = createSlice({
     },
 
     getOldCart(state) {
-      const oldCart = localStorage.getItem("CART");
+      const oldCart = JSON.parse(localStorage.getItem("CART"));
       if (!oldCart) {
         state.cart = [];
       } else {
-        state.cart = JSON.parse(oldCart);
+        state.cart = oldCart;
+        oldCart.forEach((article) => {
+          state.subtotal += article.quantity * article.price_wt;
+        });
       }
     },
 
@@ -42,28 +46,31 @@ const articlesSlice = createSlice({
         );
         state.cart = result;
         state.cart.push(foundArticle);
+        state.subtotal += Number(payload.price_wt);
         localStorage.setItem("CART", JSON.stringify(state.cart));
       } else {
         params.quantity = 1;
         state.cart.push(params);
+        state.subtotal += Number(payload.price_wt);
         localStorage.setItem("CART", JSON.stringify(state.cart));
       }
     },
 
     changeTheCartQuantity(state, { payload }) {
-      let indexArticle = null;
-      const findArticle = state.cart.find((article, index) => {
+      state.cart.find((article, index) => {
         if (article.id === payload.id) {
-          indexArticle = index;
-          return article;
+          const oldPrice = Number(
+            state.cart[index].price_wt * state.cart[index].quantity,
+          );
+          state.subtotal -= oldPrice;
+
+          state.subtotal += Number(state.cart[index].price_wt * payload.value);
+
+          state.cart[index].quantity = Number(payload.value);
+          localStorage.setItem("CART", JSON.stringify(state.cart));
         }
         return undefined;
       });
-
-      if (findArticle !== undefined) {
-        state.cart[indexArticle].quantity = Number(payload.value);
-        localStorage.setItem("CART", JSON.stringify(state.cart));
-      }
     },
 
     removeFromCart(state, { payload }) {
