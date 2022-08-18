@@ -12,8 +12,10 @@ import arrow from "../../assets/img/arrow.png";
 import { signOut } from "../../slices/userSlice";
 
 function Header() {
+  const token = useSelector((state) => state.userSlice.token);
   const userData = useSelector((state) => state.userSlice.userData);
   const cart = useSelector((state) => state.articlesSlice.cart);
+  const subtotal = useSelector((state) => state.articlesSlice.subtotal);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -75,7 +77,7 @@ function Header() {
           </h2>
         </div>
         <nav className="header__navigation__nav">
-          {userData ? (
+          {token && userData ? (
             <ul className="header__navigation__nav__connected-menu">
               <li className="header__navigation__nav__connected-menu__item">
                 <Link
@@ -94,24 +96,24 @@ function Header() {
               </li>
 
               <li className="header__navigation__nav__connected-menu__list">
-                <li className="header__navigation__nav__connected-menu__list__link-container">
+                <div className="header__navigation__nav__connected-menu__list__link-container">
                   <Link
                     className="header__navigation__nav__connected-menu__list__link-container__link"
                     to={`/account/${userData.id}/profil`}
                   >
                     Mes informations
                   </Link>
-                </li>
+                </div>
 
-                <li className="header__navigation__nav__connected-menu__list__link-container">
+                <div className="header__navigation__nav__connected-menu__list__link-container">
                   <Link
                     className="header__navigation__nav__connected-menu__list__link-container__link"
                     to={`/account/${userData.id}/orders`}
                   >
                     Mes commandes
                   </Link>
-                </li>
-                <li className="header__navigation__nav__connected-menu__list__link-container">
+                </div>
+                <div className="header__navigation__nav__connected-menu__list__link-container">
                   <button
                     className="header__navigation__nav__connected-menu__list__link-container__link"
                     type="button"
@@ -119,7 +121,7 @@ function Header() {
                   >
                     Déconnexion
                   </button>
-                </li>
+                </div>
               </li>
             </ul>
           ) : (
@@ -200,6 +202,14 @@ function Header() {
                         </Link>
                       ))
                     : ""}
+                  <div className="header__navigation__nav__cart__item__cart-container__subtotal-container">
+                    <p className="header__navigation__nav__cart__item__cart-container__subtotal-container__subtotal">
+                      Total (TVA incluse)
+                    </p>
+                    <p className="header__navigation__nav__cart__item__cart-container__subtotal-container__price">
+                      {subtotal.toFixed(2).toString().replace(".", ",")} €
+                    </p>
+                  </div>
                   <div className="header__navigation__nav__cart__item__cart-container__footer">
                     <div className="header__navigation__nav__cart__item__cart-container__footer__button-container">
                       <Link
