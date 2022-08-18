@@ -9,6 +9,8 @@ import {
 
 function Cart() {
   const dispatch = useDispatch();
+
+  const subtotal = useSelector((state) => state.articlesSlice.subtotal);
   const articlesInCart = useSelector((state) => state.articlesSlice.cart);
 
   const handleClick = (id) => {
@@ -17,17 +19,6 @@ function Cart() {
 
   const handleChange = (id, e) => {
     dispatch(changeTheCartQuantity({ id, value: e.target.value }));
-  };
-
-  const totalPriceCalculation = () => {
-    const price = articlesInCart
-      .reduce(
-        (previousValue, currentValue) =>
-          previousValue + currentValue.quantity * currentValue.price_wt,
-        0,
-      )
-      .toFixed(2);
-    return price.toString().replace(".", ",");
   };
 
   return (
@@ -135,7 +126,7 @@ function Cart() {
                   Sous-total
                 </p>
                 <p className="cart__cart-container__summary__detail-container__subtotal-container__price">
-                  {totalPriceCalculation()} €
+                  {subtotal.toFixed(2).toString().replace(".", ",")} €
                 </p>
               </div>
               <div className="cart__cart-container__summary__detail-container__delivery-container">
@@ -151,7 +142,7 @@ function Cart() {
                   Total (TVA incluse)
                 </p>
                 <p className="cart__cart-container__summary__detail-container__total-container__price">
-                  100,00 €
+                  {subtotal.toFixed(2).toString().replace(".", ",")} €
                 </p>
               </div>
               <div className="cart__cart-container__summary__detail-container__submit-container">
@@ -168,7 +159,10 @@ function Cart() {
           </div>
         </div>
       ) : (
-        ""
+        <div>
+          <div>Votre panier est vide</div>
+          <Link to="/shop">Visiter la boutique</Link>
+        </div>
       )}
     </div>
   );
