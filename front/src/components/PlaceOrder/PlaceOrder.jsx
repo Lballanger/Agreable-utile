@@ -1,32 +1,48 @@
 import "./PlaceOrder.scss";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Field from "../Shared/Field/Field";
 import AddressControl from "../Shared/AddressControl/AddressControl";
+import { register } from "../../slices/userSlice";
+import { createAddress } from "../../slices/orderSlice";
 
 function PlaceOrder() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.userSlice.user);
+  const user = useSelector((state) => state.userSlice.userData);
   const cart = useSelector((state) => state.articlesSlice.cart);
 
   if (!cart.length) navigate("/cart", { replace: true });
 
   const initialErrors = {
-    email: null,
-    firstname: null,
-    lastname: null,
-    phone: null,
-    postalCode: null,
+    email: {
+      error: false,
+      message: "",
+    },
+    firstname: {
+      error: false,
+      message: "",
+    },
+    lastname: {
+      error: false,
+      message: "",
+    },
+    postalCode: {
+      error: false,
+      message: "",
+    },
   };
 
   const [errors, setErrors] = useState(initialErrors);
 
   const [email, setEmail] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [country, setCountry] = useState("");
+  const [firstname, setFirstname] = useState(
+    user?.firstname ? user.firstname : "",
+  );
+  const [lastname, setLastName] = useState(user?.lastname ? user.lastname : "");
+  const [country, setCountry] = useState("France");
   const [address, setAddress] = useState("");
   const [suggestion, setSuggestion] = useState(false);
   const [addressInformation, setAddressInformation] = useState("");
@@ -54,11 +70,15 @@ function PlaceOrder() {
       setErrors((state) => {
         return {
           ...state,
-          password: false,
-          passwordConfirm: false,
+          password: { error: false, message: "" },
+          passwordConfirm: { error: false, message: "" },
         };
       });
       setDisabled(true);
+    } else {
+      delete errors.password;
+      delete errors.passwordConfirm;
+      if (!Object.keys(errors).length) setDisabled(false);
     }
   }, [createAccount]);
 
@@ -68,6 +88,92 @@ function PlaceOrder() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const error = Object.values(errors);
+
+    if (error.length === 0) {
+      // In the case of account creation
+      if (createAccount) {
+        await dispatch(
+          register({
+            civility: "Mr",
+            firstname,
+            lastname,
+            email,
+            password,
+            // The user wishes to create an account
+            registred: true,
+          }),
+        )
+          .unwrap()
+          .then((data) => {
+            dispatch(
+              createAddress({
+                country,
+                address,
+                city,
+                postalCode,
+                additionalInfo: addressInformation,
+                email: data.email,
+              }),
+            );
+            navigate("/payment");
+          })
+          .catch((error) => {
+            console.error(error);
+            if (error === "User already exists") {
+              setErrors((state) => {
+                return {
+                  ...state,
+                  email: {
+                    error: true,
+                    message:
+                      "L'adresse e-mail est déjà utilisée, merci de vous connecter ou de créer un compte",
+                  },
+                };
+              });
+            }
+          });
+        // In the case of a user already logged in
+      } else if (user) {
+        dispatch(
+          createAddress({
+            country,
+            address,
+            city,
+            postalCode,
+            additionalInfo: addressInformation,
+            email: user.email,
+          }),
+        );
+      } else {
+        dispatch(
+          register({
+            civility: "Mr",
+            firstname,
+            lastname,
+            email,
+            password,
+            // The user does not wish to create an account
+            registred: false,
+          }),
+        )
+          .unwrap()
+          .then(() => {
+            dispatch(
+              createAddress({
+                country,
+                address,
+                city,
+                postalCode,
+                additionalInfo: addressInformation,
+                email,
+              }),
+            );
+            navigate("/payment");
+          });
+      }
+    }
   };
 
   const handleChange = (event) => {
@@ -81,7 +187,10 @@ function PlaceOrder() {
           setErrors((state) => {
             return {
               ...state,
-              email: true,
+              email: {
+                error: true,
+                message: `L'e-mail saisi n'est pas valide`,
+              },
             };
           });
         } else {
@@ -97,7 +206,10 @@ function PlaceOrder() {
           setErrors((state) => {
             return {
               ...state,
-              firstname: true,
+              firstname: {
+                error: true,
+                message: `Votre prénom doit contenir au minimum 2 caractères`,
+              },
             };
           });
         } else delete errors.firstname;
@@ -111,7 +223,10 @@ function PlaceOrder() {
           setErrors((state) => {
             return {
               ...state,
-              lastname: true,
+              lastname: {
+                error: true,
+                message: `Votre nom doit contenir au minimum 2 caractères`,
+              },
             };
           });
         } else delete errors.lastname;
@@ -137,7 +252,10 @@ function PlaceOrder() {
           setErrors((state) => {
             return {
               ...state,
-              postalCode: true,
+              postalCode: {
+                error: true,
+                message: `Le code postal saisi n'est pas valide`,
+              },
             };
           });
         } else {
@@ -153,7 +271,10 @@ function PlaceOrder() {
           setErrors((state) => {
             return {
               ...state,
-              phone: true,
+              phone: {
+                error: true,
+                message: `Le numéro de téléphone saisi n'est pas valide`,
+              },
             };
           });
         } else {
@@ -166,7 +287,12 @@ function PlaceOrder() {
           setErrors((state) => {
             return {
               ...state,
-              password: true,
+              password: {
+                error: true,
+                message: `Votre mot de passe doit doit avoir au minimum 6 caractères
+              contenir au moins une lettre minuscule, une lettre majuscule, un
+              chiffre et un caractère spécial`,
+              },
             };
           });
         } else delete errors.password;
@@ -178,7 +304,10 @@ function PlaceOrder() {
           setErrors((state) => {
             return {
               ...state,
-              passwordConfirm: true,
+              passwordConfirm: {
+                error: true,
+                message: `Les mots de passe ne correspondent pas`,
+              },
             };
           });
         } else delete errors.passwordConfirm;
@@ -193,6 +322,8 @@ function PlaceOrder() {
     setAddress(`${data.housenumber} ${data.street}`);
     setCity(data.city);
     setPostalCode(data.postcode);
+
+    delete errors.postalCode;
   };
 
   return (
@@ -203,46 +334,45 @@ function PlaceOrder() {
             className="place-order__info-container__form-container__form"
             onSubmit={handleSubmit}
           >
+            <legend className="place-order__info-container__form-container__form__legend">
+              Coordonnées
+            </legend>
             {!user ? (
-              <>
-                <legend className="place-order__info-container__form-container__form__legend">
-                  Coordonnées
-                </legend>
-                <Field
-                  id="email-order"
-                  label="Adresse e-mail"
-                  type="email"
-                  onChange={handleChange}
-                  value={email}
-                  error={errors.email}
-                />
-
-                <div className="place-order__info-container__form-container__form__half">
-                  <div className="place-order__info-container__form-container__form__half__wrapper">
-                    <Field
-                      id="firstname"
-                      label="Prénom"
-                      type="text"
-                      onChange={handleChange}
-                      value={firstname}
-                      error={errors.firstname}
-                    />
-                  </div>
-                  <div className="place-order__info-container__form-container__form__half__wrapper">
-                    <Field
-                      id="lastname"
-                      label="Nom"
-                      type="text"
-                      onChange={handleChange}
-                      value={lastname}
-                      error={errors.lastname}
-                    />
-                  </div>
-                </div>
-              </>
+              <Field
+                id="email-order"
+                label="Adresse e-mail"
+                type="email"
+                onChange={handleChange}
+                value={email}
+                error={errors.email}
+              />
             ) : (
               ""
             )}
+
+            <div className="place-order__info-container__form-container__form__half">
+              <div className="place-order__info-container__form-container__form__half__wrapper">
+                <Field
+                  id="firstname"
+                  label="Prénom"
+                  type="text"
+                  onChange={handleChange}
+                  value={firstname}
+                  error={errors.firstname}
+                />
+              </div>
+              <div className="place-order__info-container__form-container__form__half__wrapper">
+                <Field
+                  id="lastname"
+                  label="Nom"
+                  type="text"
+                  onChange={handleChange}
+                  value={lastname}
+                  error={errors.lastname}
+                />
+              </div>
+            </div>
+
             <legend className="place-order__info-container__form-container__form__legend">
               Adresse de livraison
             </legend>
