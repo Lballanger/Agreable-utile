@@ -6,6 +6,12 @@ export const createAddress = createAsyncThunk("/address", async (payload) => {
   return response.data;
 });
 
+export const paymentIntent = createAsyncThunk("/payment", async (payload) => {
+  const response = await instance.post("/payment", { cart: payload });
+
+  return response.data;
+});
+
 const orderSlice = createSlice({
   name: "order",
   initialState: {
