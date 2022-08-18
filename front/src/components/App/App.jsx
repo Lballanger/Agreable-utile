@@ -19,6 +19,7 @@ import PlaceOrder from "../PlaceOrder/PlaceOrder";
 import Footer from "../Footer/Footer";
 import useAuth from "../../hooks/useAuth";
 import Index from "../Achievements";
+import Payment from "../Payment/Payment";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
         <Route exact path="/shop/:id" element={<Detail />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/place-order" element={<PlaceOrder />} />
+        <Route exact path="/payment" element={<Payment />} />
         <Route
           path="/account/:id"
           element={
