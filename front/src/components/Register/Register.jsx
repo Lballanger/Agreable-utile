@@ -7,14 +7,14 @@ import Field from "../Shared/Field/Field";
 
 function Register() {
   const initialErrors = {
-    firstname: false,
-    lastname: false,
-    day: false,
-    month: false,
-    year: false,
-    email: false,
-    password: false,
-    passwordConfirm: false,
+    firstname: { error: false, message: `` },
+    lastname: { error: false, message: `` },
+    day: { error: false, message: `` },
+    month: { error: false, message: `` },
+    year: { error: false, message: `` },
+    email: { error: false, message: `` },
+    password: { error: false, message: `` },
+    passwordConfirm: { error: false, message: `` },
   };
 
   const dispatch = useDispatch();
@@ -60,7 +60,23 @@ function Register() {
     try {
       const error = Object.values(errors);
       if (error.length === 0) {
-        await dispatch(register(inputs));
+        await dispatch(register({ ...inputs, registred: true }))
+          .unwrap()
+          .catch((error) => {
+            console.error(error);
+            if (error === "User already exists") {
+              setErrors((state) => {
+                return {
+                  ...state,
+                  email: {
+                    error: true,
+                    message:
+                      "L'adresse e-mail est déjà utilisée, merci de vous connecter ou de créer un compte",
+                  },
+                };
+              });
+            }
+          });
       }
     } catch (error) {
       console.log(error);
@@ -83,7 +99,10 @@ function Register() {
           setErrors((state) => {
             return {
               ...state,
-              firstname: true,
+              firstname: {
+                error: true,
+                message: `Votre prénom doit contenir au minimum 2 caractères`,
+              },
             };
           });
         } else delete errors.firstname;
@@ -95,7 +114,10 @@ function Register() {
           setErrors((state) => {
             return {
               ...state,
-              lastname: true,
+              lastname: {
+                error: true,
+                message: `Votre nom doit contenir au minimum 2 caractères`,
+              },
             };
           });
         } else delete errors.lastname;
@@ -113,7 +135,10 @@ function Register() {
           setErrors((state) => {
             return {
               ...state,
-              day: true,
+              day: {
+                error: true,
+                message: `Le jour saisi n'est pas valide`,
+              },
             };
           });
         } else delete errors.day;
@@ -132,7 +157,10 @@ function Register() {
           setErrors((state) => {
             return {
               ...state,
-              month: true,
+              month: {
+                error: true,
+                message: `Le mois saisi n'est pas valide`,
+              },
             };
           });
         } else delete errors.month;
@@ -150,7 +178,10 @@ function Register() {
           setErrors((state) => {
             return {
               ...state,
-              year: true,
+              year: {
+                error: true,
+                message: `L'année saisie n'est pas valide`,
+              },
             };
           });
         } else delete errors.year;
@@ -162,7 +193,10 @@ function Register() {
           setErrors((state) => {
             return {
               ...state,
-              email: true,
+              email: {
+                error: true,
+                message: `L'e-mail saisi n'est pas valide`,
+              },
             };
           });
         } else delete errors.email;
@@ -174,7 +208,7 @@ function Register() {
           setErrors((state) => {
             return {
               ...state,
-              password: true,
+              password: { error: true, message: `` },
             };
           });
         } else delete errors.password;
@@ -186,7 +220,7 @@ function Register() {
           setErrors((state) => {
             return {
               ...state,
-              passwordConfirm: true,
+              passwordConfirm: { error: true, message: `` },
             };
           });
         } else delete errors.passwordConfirm;
