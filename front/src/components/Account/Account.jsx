@@ -6,22 +6,12 @@ import { Outlet } from "react-router-dom";
 import AccountMenu from "./AccountMenu/AccountMenu";
 
 function Account() {
-  const userData = useSelector((state) => {
-    return {
-      id: state.userSlice.userData.id,
-      civility: state.userSlice.userData.civility,
-      firstname: state.userSlice.userData.firstname,
-      lastname: state.userSlice.userData.lastname,
-      email: state.userSlice.userData.email,
-      city: state.userSlice.userData.city,
-      date_of_birth: state.userSlice.userData.date_of_birth,
-    };
-  });
+  const userData = useSelector((state) => state.userSlice.userData);
 
   return (
     <div className="account">
       <AccountMenu userData={userData} />
-      <Outlet />
+      <Outlet userData={userData} />
     </div>
   );
 }
