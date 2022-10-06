@@ -20,6 +20,7 @@ import Footer from "../Footer/Footer";
 import useAuth from "../../hooks/useAuth";
 import Index from "../Achievements";
 import Payment from "../Payment/Payment";
+import Success from "../Success/Success";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/place-order" element={<PlaceOrder />} />
         <Route exact path="/payment" element={<Payment />} />
+        <Route exact path="/success" element={<Success />} />
         <Route
           path="/account/:id"
           element={
