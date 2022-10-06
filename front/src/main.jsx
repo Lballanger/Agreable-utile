@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import App from "./components/App/App";
 import store from "./store/store";
+import ScrollToTop from "./hooks/useScrollTop";
 
 import "./main.scss";
 import { getToken } from "./utils/tokenStorage";
@@ -17,6 +18,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
+        <ScrollToTop />
         <App />
       </Router>
     </Provider>
