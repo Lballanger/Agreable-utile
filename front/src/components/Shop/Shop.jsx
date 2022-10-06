@@ -1,66 +1,126 @@
 import "./Shop.scss";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchArticles } from "../../slices/articlesSlice";
+import { fetchArticles, fetchCategories } from "../../slices/articlesSlice";
 
-import headerPicture from "../../assets/img/shop/header.jpg";
+import loader from "../../assets/img/loader.svg";
 
 function Shop() {
   const dispatch = useDispatch();
   const articles = useSelector((state) => state.articlesSlice.articles);
+  const categories = useSelector((state) => state.articlesSlice.categories);
+  const isLoading = useSelector((state) => state.articlesSlice.loading);
+
+  const [filter, setFilter] = useState({});
+  const [categorySelected, setCategorySelected] = useState("");
 
   useEffect(async () => {
     if (!articles) {
       dispatch(fetchArticles());
     }
-  }, []);
+  }, [articles]);
+
+  useEffect(async () => {
+    if (!categories) {
+      dispatch(fetchCategories());
+    }
+  }, [categories]);
+
+  useEffect(async () => {
+    if (Object.keys(filter).length > 0) return null;
+  }, [filter]);
 
   return (
     <div className="shop">
-      <div className="shop__title-container">
-        <h2 className="shop__title-container__title">Boutique</h2>
-        <div className="shop__title-container__img-container">
+      {isLoading ? (
+        <div className="shop__loader-container">
           <img
-            className="shop__title-container__img-container__img"
-            src={headerPicture}
-            alt=""
+            className="shop__loader-container__loader"
+            src={loader}
+            alt="loader"
           />
         </div>
-      </div>
-      <div className="shop__main-container">
-        {articles && Object.keys(articles).length > 0
-          ? articles.map((article) => (
-              <div key={article.id} className="shop__main-container__product">
-                <Link to={`/shop/${article.id}`}>
-                  <div className="shop__main-container__product__img-container">
-                    <img
-                      src={`/src/assets/img/shop/articles/${article.image}`}
-                      alt=""
-                      className="shop__main-container__product__img-container__img"
-                    />
-                  </div>
-                </Link>
-                <Link to={`/shop/${article.id}`}>
-                  <div className="shop__main-container__product__infos-container">
-                    <h2 className="shop__main-container__product__infos-container__infos">
-                      <div className="shop__main-container__product__infos-container__infos__title">
-                        {article.name}
+      ) : (
+        <>
+          <div className="shop__category-container">
+            <h3 className="shop__category-container__title">Categorie</h3>
+            <ul className="shop__category-container__list">
+              {categories && Object.keys(categories).length > 0
+                ? categories.map((category) => (
+                    <li
+                      key={category.name}
+                      className="shop__category-container__list__link-container"
+                    >
+                      <input
+                        className="shop__category-container__list__link-container__input"
+                        type="checkbox"
+                        name={category.name}
+                        id={category.name}
+                        checked={categorySelected === category.name}
+                        onChange={() =>
+                          setCategorySelected(
+                            categorySelected === category.name
+                              ? ""
+                              : category.name,
+                          )
+                        }
+                      />
+                      <label htmlFor={category.name}> {category.name}</label>
+                    </li>
+                  ))
+                : " "}
+            </ul>
+          </div>
+          <div className="shop__articles-container">
+            <div className="shop__articles-container__main-container">
+              {articles && Object.keys(articles).length > 0
+                ? articles
+                    .filter((filter) => {
+                      if (categorySelected) {
+                        return filter.category_name === categorySelected;
+                      }
+                      return filter;
+                    })
+                    .map((article) => (
+                      <div
+                        key={article.article_id}
+                        className="shop__articles-container__main-container__product"
+                      >
+                        <Link to={`/shop/${article.article_id}`}>
+                          <div className="shop__articles-container__main-container__product__img-container">
+                            <img
+                              src={`/src/assets/img/shop/articles/${article.image[0]}`}
+                              alt=""
+                              className="shop__articles-container__main-container__product__img-container__img"
+                            />
+                          </div>
+                        </Link>
+                        <Link to={`/shop/${article.article_id}`}>
+                          <div className="shop__articles-container__main-container__product__infos-container">
+                            <h2 className="shop__articles-container__main-container__product__infos-container__infos">
+                              <div className="shop__articles-container__main-container__product__infos-container__infos__title">
+                                {article.article_name}
+                              </div>
+                              <div className="shop__articles-container__main-container__product__infos-container__infos__description">
+                                {article.description.length > 80
+                                  ? `${article.description.slice(0, 80)}...`
+                                  : article.description}
+                              </div>
+                            </h2>
+                            <div className="shop__articles-container__main-container__product__infos-container__price">
+                              {article.price_wt} €
+                            </div>
+                          </div>
+                        </Link>
                       </div>
-                      <div className="shop__main-container__product__infos-container__infos__description">
-                        {article.description}
-                      </div>
-                    </h2>
-                    <div className="shop__main-container__product__infos-container__price">
-                      {article.price_wt}
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))
-          : ""}
-      </div>
+                    ))
+                : ""}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
