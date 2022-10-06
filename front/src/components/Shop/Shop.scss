@@ -1,91 +1,120 @@
 .shop {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  margin: 0 -3rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
 
-  &__title-container {
-    position: relative;
-    margin-bottom: 4rem;
+  &__loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+
+    &__loader {
+      width: 11%;
+    }
+  }
+
+  &__category-container {
+    position: sticky;
+    top: 5rem;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    height: 80vh;
+    width: 10%;
+    padding-top: 5rem;
 
     &__title {
-      display: flex;
-      justify-content: center;
-      position: relative;
-      height: 0;
-      top: 80px;
-      z-index: 1;
-      font-size: 3rem;
-      color: white;
-      text-shadow: 1px 1px 1.5px rgba(0, 0, 0, 0.767);
+      font-weight: 600;
+      padding-bottom: 0.5rem;
     }
 
-    &__img-container {
-      width: 100%;
+    &__list {
+      &__link-container {
+        padding: 0.3rem 0 0.3rem 0.3rem;
+        &__link {
+          font-weight: 300;
+          line-height: 29px;
+          font-family: "Avenir LT Pro", Arial, Helvetica, sans-serif;
+          color: white;
 
-      &__img {
-        width: 100%;
-        max-height: 15rem;
-        object-fit: cover;
-        object-position: 50% 60%;
-        filter: blur(1px);
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
 
-  &__main-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    width: 80%;
-    margin: 0 auto;
+  &__articles-container {
+    padding-top: 5rem;
+    width: 90%;
 
-    &__product {
+    &__title-container {
+      position: relative;
+      margin-bottom: 4rem;
+    }
+
+    &__main-container {
       display: flex;
-      flex-direction: column;
-      width: 29%;
-      margin: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-start;
 
-      &__img-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 300px;
-        border: 1px solid rgba(128, 128, 128, 0.123);
+      &__product {
+        width: 429.5px;
+        padding: 0 1.5rem 2.5rem 1.5rem;
 
-        &__img {
+        &__img-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           height: 300px;
-          width: 100%;
-          object-fit: cover;
-          transition-duration: 0.7s;
+          border: 1px solid rgba(128, 128, 128, 0.123);
 
-          &:hover {
-            height: 270px;
-            width: 90%;
-            cursor: pointer;
-          }
-        }
-      }
-
-      &__infos-container {
-        padding: 1.2rem 2rem;
-        border-left: 1px solid rgba(128, 128, 128, 0.123);
-        border-right: 1px solid rgba(128, 128, 128, 0.123);
-        border-bottom: 1px solid rgba(128, 128, 128, 0.123);
-        &__infos {
-          padding-bottom: 2rem;
-          &__title {
-            font-size: 1.2rem;
-            color: rgb(201, 121, 181);
-            padding-bottom: 0.6rem;
-          }
-
-          &__description {
-            font-size: 0.8rem;
+          &__img {
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+            transition-duration: 0.7s;
           }
         }
 
-        &__price {
-          text-align: right;
+        &__infos-container {
+          padding: 1.2rem 2rem;
+          border-left: 1px solid rgba(128, 128, 128, 0.123);
+          border-right: 1px solid rgba(128, 128, 128, 0.123);
+          border-bottom: 1px solid rgba(128, 128, 128, 0.123);
+          min-height: 30px;
+          &__infos {
+            padding-bottom: 2rem;
+            &__title {
+              font-size: 1.2rem;
+              color: rgb(201, 121, 181);
+              padding-bottom: 0.6rem;
+            }
+
+            &__description {
+              font-size: 0.8rem;
+            }
+          }
+
+          &__price {
+            text-align: right;
+          }
+        }
+
+        &:hover & {
+          &__img-container {
+            &__img {
+              height: 270px;
+              width: 94%;
+              cursor: pointer;
+            }
+          }
         }
       }
     }

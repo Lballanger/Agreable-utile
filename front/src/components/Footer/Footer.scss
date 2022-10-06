@@ -1,9 +1,12 @@
 .footer {
-  margin: 0 -3rem;
   padding: 2rem 0rem;
   display: flex;
   justify-content: space-evenly;
-  border-top: 1px dashed rgba(235, 138, 183, 0.322);
+  background-color: #805050;
+
+  a {
+    color: white;
+  }
 
   ul > li {
     padding-bottom: 0.5rem;
