@@ -4,6 +4,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { useSelector } from "react-redux";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -11,6 +12,8 @@ export default function CheckoutForm() {
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const subtotal = useSelector((state) => state.articlesSlice.subtotal);
 
   useEffect(() => {
     if (!stripe) {
@@ -58,7 +61,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        return_url: "http://localhost:3000/success",
       },
     });
 
@@ -85,7 +88,11 @@ export default function CheckoutForm() {
         id="submit"
       >
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner" /> : "Continuer"}
+          {isLoading ? (
+            <div className="spinner" id="spinner" />
+          ) : (
+            `Payer ${subtotal}  €`
+          )}
         </span>
       </button>
       {/* Show any error or success messages */}
