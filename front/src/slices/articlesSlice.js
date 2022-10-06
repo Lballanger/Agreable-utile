@@ -6,12 +6,18 @@ export const fetchArticles = createAsyncThunk("/articles", async () => {
   return response.data;
 });
 
+export const fetchCategories = createAsyncThunk("/categories", async () => {
+  const response = await instance.get("/categories");
+  return response.data;
+});
+
 const articlesSlice = createSlice({
   name: "articles",
   initialState: {
     loading: false,
     articles: null,
     cart: [],
+    categories: null,
     subtotal: 0,
     error: "",
   },
@@ -40,7 +46,7 @@ const articlesSlice = createSlice({
       );
 
       if (foundArticle !== undefined) {
-        foundArticle.quantity += 1;
+        foundArticle.quantity += payload.quantity;
         const result = state.cart.filter(
           (article) => article.id !== foundArticle.id,
         );
@@ -49,7 +55,7 @@ const articlesSlice = createSlice({
         state.subtotal += Number(payload.price_wt);
         localStorage.setItem("CART", JSON.stringify(state.cart));
       } else {
-        params.quantity = 1;
+        params.quantity = payload.quantity;
         state.cart.push(params);
         state.subtotal += Number(payload.price_wt);
         localStorage.setItem("CART", JSON.stringify(state.cart));
@@ -74,6 +80,8 @@ const articlesSlice = createSlice({
     },
 
     removeFromCart(state, { payload }) {
+      const findArticle = state.cart.find((article) => article.id === payload);
+      state.subtotal -= findArticle.price_wt * findArticle.quantity;
       const result = state.cart.filter((article) => article.id !== payload);
       state.cart = result;
       localStorage.setItem("CART", JSON.stringify(result));
@@ -88,6 +96,18 @@ const articlesSlice = createSlice({
       state.articles = action.payload;
     });
     builder.addCase(fetchArticles.rejected, (state, action) => {
+      state.error = action.error.message;
+    });
+
+    // Fetch categories
+    builder.addCase(fetchCategories.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchCategories.fulfilled, (state, action) => {
+      state.loading = false;
+      state.categories = action.payload;
+    });
+    builder.addCase(fetchCategories.rejected, (state, action) => {
       state.error = action.error.message;
     });
   },
