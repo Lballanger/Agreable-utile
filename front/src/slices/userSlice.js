@@ -53,7 +53,6 @@ const userSlice = createSlice({
     });
     builder.addCase(login.rejected, (state, action) => {
       state.loading = false;
-      state.userData = {};
       state.error = action.error.message;
     });
     builder.addCase(signOut.fulfilled, (state) => {
