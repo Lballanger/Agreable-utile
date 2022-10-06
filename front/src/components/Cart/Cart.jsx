@@ -17,6 +17,12 @@ function Cart() {
     dispatch(removeFromCart(id));
   };
 
+  const changeQuantity = (id, quantity) => {
+    if (quantity >= 1 && quantity <= 99) {
+      dispatch(changeTheCartQuantity({ id, value: quantity }));
+    }
+  };
+
   const handleChange = (id, e) => {
     dispatch(changeTheCartQuantity({ id, value: e.target.value }));
   };
@@ -28,7 +34,13 @@ function Cart() {
           <div className="cart__cart-container__articles-container">
             <div className="cart__cart-container__articles-container__title-container">
               <h2 className="cart__cart-container__articles-container__title-container__title">
-                Mon panier ( {articlesInCart.length} article
+                Mon panier ({" "}
+                {articlesInCart.reduce(
+                  (previousValue, currentValue) =>
+                    previousValue + currentValue.quantity,
+                  0,
+                )}{" "}
+                article
                 {articlesInCart.length > 1 ? "s" : ""} )
               </h2>
             </div>
@@ -41,7 +53,7 @@ function Cart() {
                 <div className="cart__cart-container__articles-container__product-container__img-container">
                   <img
                     className="cart__cart-container__articles-container__product-container__img-container__img"
-                    src={`/src/assets/img/shop/articles/${article.image}`}
+                    src={`/src/assets/img/shop/articles/${article.image[0]}`}
                     alt={article.name}
                   />
                 </div>
@@ -64,22 +76,32 @@ function Cart() {
                     </div>
                   </div>
                   <div className="cart__cart-container__articles-container__product-container__infos__quantity-container">
-                    <select
-                      className="cart__cart-container__articles-container__product-container__infos__quantity-container__quantity"
-                      value={article.quantity}
-                      onChange={(e) => handleChange(article.id, e)}
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                    </select>
+                    <div className="cart__cart-container__articles-container__product-container__infos__quantity-container__quantity">
+                      <button
+                        className="cart__cart-container__articles-container__product-container__infos__quantity-container__quantity__dec-button"
+                        type="button"
+                        onClick={() =>
+                          changeQuantity(article.id, article.quantity - 1)
+                        }
+                      >
+                        -
+                      </button>
+                      <input
+                        className="cart__cart-container__articles-container__product-container__infos__quantity-container__quantity__input"
+                        type="number"
+                        value={article.quantity}
+                        onChange={(e) => handleChange(article.id, e)}
+                      />
+                      <button
+                        className="cart__cart-container__articles-container__product-container__infos__quantity-container__quantity__inc-button"
+                        type="button"
+                        onClick={() =>
+                          changeQuantity(article.id, article.quantity + 1)
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
                   <div className="cart__cart-container__articles-container__product-container__infos__content-bottom">
                     <div className="cart__cart-container__articles-container__product-container__infos__content-bottom__delete-container">
