@@ -1,7 +1,7 @@
 import "./Header.scss";
 
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Connexion from "../Connexion/Connexion";
@@ -12,14 +12,21 @@ import arrow from "../../assets/img/arrow.png";
 import { signOut } from "../../slices/userSlice";
 
 function Header() {
+  const dispatch = useDispatch();
+
   const token = useSelector((state) => state.userSlice.token);
   const userData = useSelector((state) => state.userSlice.userData);
   const cart = useSelector((state) => state.articlesSlice.cart);
   const subtotal = useSelector((state) => state.articlesSlice.subtotal);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [small, setSmall] = useState(false);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", () => setSmall(window.scrollY >= 120));
+    }
+  }, []);
 
   const handleCloseModal = (event) => {
     event.stopPropagation();
@@ -31,7 +38,7 @@ function Header() {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${small ? "small" : ""}`}>
       <div className="header__social-container">
         <div className="header__social-container__facebook">
           <a
@@ -56,25 +63,45 @@ function Header() {
         <nav className="header__navigation__nav">
           <ul className="header__navigation__nav__menu">
             <li className="header__navigation__nav__menu__item">
-              <Link to="/">Accueil</Link>
+              <Link
+                className="header__navigation__nav__menu__item__link"
+                to="/"
+              >
+                Accueil
+              </Link>
             </li>
             <li className="header__navigation__nav__menu__item">
-              <Link to="/achievements">Mes réalisations</Link>
+              <Link
+                className="header__navigation__nav__menu__item__link"
+                to="/shop"
+              >
+                Boutique
+              </Link>
             </li>
             <li className="header__navigation__nav__menu__item">
-              <Link to="/shop">Boutique</Link>
+              <Link
+                className="header__navigation__nav__menu__item__link"
+                to="/sewing"
+              >
+                Couture
+              </Link>
+            </li>
+            <li className="header__navigation__nav__menu__item">
+              <Link
+                className="header__navigation__nav__menu__item__link"
+                to="/sewing"
+              >
+                Tissues
+              </Link>
             </li>
           </ul>
         </nav>
         <div className="header__navigation__logo-container">
           <h1 className="header__navigation__logo-container__title">
-            <Link to="/">
+            <Link className="header__navigation__logo-container__title" to="/">
               <strong>L&apos;agréable Utile</strong>
             </Link>
           </h1>
-          <h2 className="header__navigation__logo-container__subtitle">
-            <Link to="/">Création de textiles fait main</Link>
-          </h2>
         </div>
         <nav className="header__navigation__nav">
           {token && userData ? (
@@ -170,38 +197,42 @@ function Header() {
                   </Link>
                 </div>
                 <div className="header__navigation__nav__cart__item__cart-container__articles-container">
-                  {cart.length > 0
-                    ? cart.map((article) => (
-                        <Link to={`/shop/${article.id}`} key={article.id}>
-                          <div className="header__navigation__nav__cart__item__cart-container__articles-container__product">
-                            <div className="header__navigation__nav__cart__item__cart-container__articles-container__product__img-container">
-                              <img
-                                className="header__navigation__nav__cart__item__cart-container__articles-container__product__img-container__img"
-                                src={`/src/assets/img/shop/articles/${article.image}`}
-                                alt={article.name}
-                                srcSet=""
-                              />
-                            </div>
-                            <div className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container">
-                              <div className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__infos">
-                                <p className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__infos__title">
-                                  {article.name}
-                                </p>
-                                <p className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__infos__price">
-                                  {article.price_wt}
-                                </p>
+                  <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles">
+                    {cart.length > 0
+                      ? cart.map((article) => (
+                          <Link to={`/shop/${article.id}`} key={article.id}>
+                            <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product">
+                              <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
+                                <img
+                                  className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container__img"
+                                  src={`/src/assets/img/shop/articles/${article.image[0]}`}
+                                  alt={article.name}
+                                  srcSet=""
+                                />
                               </div>
-                              <div className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__quantity-container">
-                                Quantité :{" "}
-                                <span className="header__navigation__nav__cart__item__cart-container__articles-container__product__info-container__infos__quantity">
-                                  {article.quantity}
-                                </span>
+                              <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container">
+                                <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__infos">
+                                  <p className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__infos__title">
+                                    {article.name}
+                                  </p>
+                                </div>
+                                <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container">
+                                  <span className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container__quantity">
+                                    Quantité : {article.quantity}
+                                  </span>
+                                  <p className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container__price">
+                                    {(article.price_wt * article.quantity)
+                                      .toFixed(2)
+                                      .replace(".", ",")}{" "}
+                                    €
+                                  </p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </Link>
-                      ))
-                    : ""}
+                          </Link>
+                        ))
+                      : ""}
+                  </div>
                   <div className="header__navigation__nav__cart__item__cart-container__subtotal-container">
                     <p className="header__navigation__nav__cart__item__cart-container__subtotal-container__subtotal">
                       Total (TVA incluse)
