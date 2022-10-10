@@ -22,7 +22,6 @@
       display: flex;
       flex-direction: column;
       width: 80%;
-      padding: 2rem;
       margin: 1.5rem 0;
       border: 1px solid rgba(128, 128, 128, 0.205);
       border-radius: 5px;
@@ -31,36 +30,78 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
-        margin-bottom: 1rem;
+        padding: 1rem 2rem;
 
-        &__img-container {
+        &__articles {
           display: flex;
-          height: 200px;
-          width: 70%;
+          height: 250px;
+          width: 80%;
 
-          &__img {
-            object-fit: cover;
-            max-height: 190px;
-            width: 20%;
-            margin-right: 1.5rem;
-            border-radius: 5px;
+          &__img-container {
+            width: 25%;
+            height: 250px;
+            padding-right: 1rem;
+
+            &__img {
+              object-fit: cover;
+              height: 90%;
+              width: 100%;
+              margin-right: 1.5rem;
+              border-radius: 5px;
+            }
           }
+        }
+
+        &__button-container {
+          width: 20%;
         }
       }
 
       &__bottom-container {
         display: flex;
-        margin: 0 1rem;
+        flex-direction: column;
 
-        &__number-container {
-          padding-right: 1.7rem;
-          &__title {
-            padding: 0.3rem 0;
-            font-weight: 600;
+        &__info {
+          display: flex;
+          flex-wrap: nowrap;
+          width: 100%;
+          padding: 1rem 2rem;
+
+          &__container {
+            padding-right: 3rem;
+
+            &__title {
+              padding: 0.3rem 0;
+              font-weight: 600;
+            }
+
+            &__content {
+              padding: 0.5rem 0;
+            }
           }
+        }
 
-          &__number {
-            padding: 0.3rem 0;
+        &__link-container {
+          display: flex;
+          border-top: 1px solid rgba(128, 128, 128, 0.205);
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          margin-top: 1rem;
+
+          &__link,
+          :visited {
+            width: 100%;
+            text-align: center;
+            padding: 1rem 0;
+            transition: 0.7s;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+
+            &:hover {
+              background-color: pink;
+              color: white;
+              cursor: pointer;
+            }
           }
         }
       }
