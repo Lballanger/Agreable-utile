@@ -7,8 +7,7 @@ import { getOldCart } from "../../slices/articlesSlice";
 
 import Header from "../Header/Header";
 import Homepage from "../Homepage/Homepage";
-import Achievements from "../Achievements/Products/Achievements";
-import Detail from "../Achievements/Detail/Detail";
+import Product from "../Product/Product";
 import Shop from "../Shop/Shop";
 import Register from "../Register/Register";
 import Account from "../Account/Account";
@@ -18,7 +17,6 @@ import Cart from "../Cart/Cart";
 import PlaceOrder from "../PlaceOrder/PlaceOrder";
 import Footer from "../Footer/Footer";
 import useAuth from "../../hooks/useAuth";
-import Index from "../Achievements";
 import Payment from "../Payment/Payment";
 import Success from "../Success/Success";
 
@@ -34,13 +32,9 @@ function App() {
       <Header />
       <Routes>
         <Route exact path="/" element={<Homepage />} />
-        <Route exact element={<Index />}>
-          <Route exact path="/achievements" element={<Achievements />} />
-          <Route exact path="/achievements/:id" element={<Detail />} />
-        </Route>
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/shop" element={<Shop />} />
-        <Route exact path="/shop/:id" element={<Detail />} />
+        <Route exact path="/shop/:id" element={<Product />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/place-order" element={<PlaceOrder />} />
         <Route exact path="/payment" element={<Payment />} />

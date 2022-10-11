@@ -1,16 +1,16 @@
-import "./Detail.scss";
+import "./Product.scss";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import API from "../../../api/api";
+import API from "../../api/api";
 import {
   setArticlesData,
   addToCart,
   changeTheCartQuantity,
-} from "../../../slices/articlesSlice";
+} from "../../slices/articlesSlice";
 
-import arrow from "../../../assets/img/arrow.svg";
+import arrow from "../../assets/img/arrow.svg";
 
 function Detail() {
   const dispatch = useDispatch();
