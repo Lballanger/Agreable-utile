@@ -13,24 +13,19 @@ function Shop() {
   const categories = useSelector((state) => state.articlesSlice.categories);
   const isLoading = useSelector((state) => state.articlesSlice.loading);
 
-  const [filter, setFilter] = useState({});
   const [categorySelected, setCategorySelected] = useState("");
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!articles) {
       dispatch(fetchArticles());
     }
   }, [articles]);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!categories) {
       dispatch(fetchCategories());
     }
   }, [categories]);
-
-  useEffect(async () => {
-    if (Object.keys(filter).length > 0) return null;
-  }, [filter]);
 
   return (
     <div className="shop">
@@ -77,11 +72,11 @@ function Shop() {
             <div className="shop__articles-container__main-container">
               {articles && Object.keys(articles).length > 0
                 ? articles
-                    .filter((filter) => {
+                    .filter((article) => {
                       if (categorySelected) {
-                        return filter.category_name === categorySelected;
+                        return article.category_name === categorySelected;
                       }
-                      return filter;
+                      return article;
                     })
                     .map((article) => (
                       <div
