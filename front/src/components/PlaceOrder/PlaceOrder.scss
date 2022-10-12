@@ -1,9 +1,14 @@
 .place-order {
   display: flex;
+  position: relative;
   justify-content: space-between;
   width: 75%;
   margin: 0 auto;
   padding: 4rem 0;
+
+  &__address-container {
+    width: 40%;
+  }
 
   &__info-container {
     width: 50%;

@@ -47,10 +47,8 @@ function PlaceOrder() {
   const [errors, setErrors] = useState(initialErrors);
 
   const [email, setEmail] = useState("");
-  const [firstname, setFirstname] = useState(
-    user?.firstname ? user.firstname : "",
-  );
-  const [lastname, setLastName] = useState(user?.lastname ? user.lastname : "");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastName] = useState("");
   const [country, setCountry] = useState("France");
   const [address, setAddress] = useState("");
   const [suggestion, setSuggestion] = useState(false);
