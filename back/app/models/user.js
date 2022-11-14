@@ -12,9 +12,10 @@ class User {
   static async getById(id) {
     try {
       const result = await client.query(
-        `SELECT id, civility, firstname, lastname, email, city, postal_code, date_of_birth FROM private."user" WHERE id = $1 `,
+        `SELECT r.id, r.civility, r.firstname, r.lastname, r.email, r.date_of_birth, array_to_json(array_remove(array_agg(address.*), NULL)) AS address FROM private."user" AS r LEFT JOIN private.address ON r.id=address.user_id WHERE r.id = $1 GROUP BY r.id;`,
         [id],
       );
+
       if (result.rows.length === 0) {
         return null;
       }
@@ -39,20 +40,32 @@ class User {
     }
   }
 
+  static async getAlreadyRegistred(email) {
+    try {
+      const { rows } = await client.query(
+        `SELECT r.*, array_to_json(array_remove(array_agg(address.*), NULL)) AS address FROM private."user" AS r LEFT JOIN private.address ON r.id=address.user_id WHERE r.email=$1 AND registred=true GROUP BY r.id;`,
+        [email],
+      );
+
+      if (rows.length === 0) return null;
+
+      return new User(rows[0]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async create() {
     try {
       const { rows } = await client.query(
-        `INSERT INTO private."user" (civility, firstname, lastname, email, password, city, postal_code, date_of_birth) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id, civility, firstname, lastname, email, city, postal_code, date_of_birth`,
+        `INSERT INTO private."user" (civility, firstname, lastname, email, password) 
+      VALUES ($1, $2, $3, $4, $5) RETURNING id, civility, firstname, lastname, email`,
         [
           this.civility,
           this.firstname,
           this.lastname,
           this.email,
           this.password,
-          this.city,
-          this.postalCode,
-          this.dateOfBirth,
         ],
       );
       return new User(rows[0]);

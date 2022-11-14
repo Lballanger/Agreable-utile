@@ -11,7 +11,9 @@ class Article {
 
   static async findAll() {
     try {
-      const { rows } = await client.query("SELECT * FROM private.article");
+      const { rows } = await client.query(
+        "SELECT article.id AS article_id, description, image, article.name AS article_name, price_wt, category.name AS category_name, category.id AS category_id FROM private.article  JOIN private.category ON article.category_id= category.id;",
+      );
       return rows.map((article) => new Article(article));
     } catch (error) {
       return new Error(error.detail ? error.detail : error.message);

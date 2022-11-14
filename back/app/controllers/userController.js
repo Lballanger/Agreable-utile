@@ -6,6 +6,7 @@ const userController = {
 
     try {
       const user = await User.getById(id);
+
       if (!user) return response.status(404).json("User not found");
       return response.json({
         id: user.id,
@@ -13,9 +14,8 @@ const userController = {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
-        city: user.city,
-        postal_code: user.postal_code,
         date_of_birth: user.date_of_birth,
+        addresses: user.address,
       });
     } catch (error) {
       return response.status(500).json(error.message);
