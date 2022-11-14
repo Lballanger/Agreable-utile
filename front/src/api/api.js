@@ -40,6 +40,15 @@ const getAllArticles = async () => {
   }
 };
 
+const getArticle = async (id) => {
+  try {
+    const { data } = await instance.get(`/article/${id}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data);
+  }
+};
+
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -72,4 +81,5 @@ export default {
   register,
   login,
   getAllArticles,
+  getArticle,
 };

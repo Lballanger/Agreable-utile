@@ -53,14 +53,17 @@
       }
 
       &__submit {
-        width: 70%;
-        margin: 0 auto;
-        margin-top: 1.2rem;
+        width: 100%;
+        padding: 1rem 0rem;
+        background-color: #d0b2a9;
         color: white;
-        border: none;
-        background-color: #44c260;
-        padding: 1rem 2rem;
-        cursor: pointer;
+        border-radius: 15px;
+        transition: 0.4s;
+
+        &:hover {
+          cursor: pointer;
+          background-color: #ead8c5;
+        }
 
         &--disabled {
           background-color: grey;

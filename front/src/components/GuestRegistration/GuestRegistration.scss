@@ -1,0 +1,46 @@
+.guest-registration {
+  display: flex;
+  padding: 4rem;
+
+  &__left-container {
+    width: 50%;
+
+    &__title {
+      text-transform: uppercase;
+      padding-bottom: 3rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.1rem;
+    }
+
+    &__form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      &__full-container {
+        position: relative;
+        width: 100%;
+      }
+
+      &__half-container {
+        width: 48%;
+      }
+
+      &__button {
+        width: 80%;
+        background-color: rgb(247, 114, 136);
+        text-align: center;
+        padding: 1rem;
+        color: white;
+        cursor: pointer;
+        align-self: flex-end;
+        text-transform: uppercase;
+        border-radius: 5px;
+
+        &--disabled {
+          background-color: grey;
+        }
+      }
+    }
+  }
+}

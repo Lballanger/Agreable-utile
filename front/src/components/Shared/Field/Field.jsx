@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import React from "react";
 
 import "./Field.scss";
 
@@ -14,6 +15,7 @@ function Field({
   error,
   checked = false,
   onFocus,
+  onBlur,
   focus = false,
 }) {
   return (
@@ -40,41 +42,52 @@ function Field({
         <label className="field__label" htmlFor={id}>
           {label}
           <input
-            className="field__label__input"
+            className={
+              error.error
+                ? "field__label__input field__label__input--error"
+                : "field__label__input"
+            }
             id={id}
             type={type}
             name={id}
             value={value}
             onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
             disabled={disabled}
           />
-          {error && type === "text" ? (
-            <div className="field__label__error">
-              Votre prénom doit contenir au minimum 2 caractères
-            </div>
+          {error && type === "text" && id === "firstname" ? (
+            <div className="field__label__error">{error.message}</div>
+          ) : (
+            ""
+          )}
+          {error && type === "text" && id === "lastname" ? (
+            <div className="field__label__error">{error.message}</div>
           ) : (
             ""
           )}
           {error && type === "email" ? (
-            <div className="field__label__error">
-              L&#8217; e-mail saisi n&#8217;est pas valide
-            </div>
+            <div className="field__label__error">{error.message}</div>
           ) : (
             ""
           )}
           {error && type === "password" && id === "password" ? (
-            <div className="field__label__password-error">
-              Votre mot de passe doit doit avoir au minimum 6 caractères
-              contenir au moins une lettre minuscule, une lettre majuscule, un
-              chiffre et un caractère spécial
-            </div>
+            <div className="field__label__password-error">{error.message}</div>
           ) : (
             ""
           )}
           {error && type === "password" && id === "password-confirm" ? (
-            <div className="field__label__password-error">
-              Les mots de passe ne correspondent pas
-            </div>
+            <div className="field__label__password-error">{error.message}</div>
+          ) : (
+            ""
+          )}
+          {error && type === "text" && id === "phone" ? (
+            <div className="field__label__error">{error.message}</div>
+          ) : (
+            ""
+          )}
+          {error && type === "text" && id === "postal-code" ? (
+            <div className="field__label__error">{error.message}</div>
           ) : (
             ""
           )}
@@ -96,7 +109,11 @@ function Field({
             {label}
           </label>
           <input
-            className="field__number-container__number-input"
+            className={
+              error.error
+                ? "field__number-container__number-input field__number-container__number-input--error"
+                : "field__number-container__number-input"
+            }
             type={type}
             id={id}
             name={id}
@@ -108,21 +125,21 @@ function Field({
           />
           {error && id === "day" ? (
             <div className="field__number-container__error">
-              Le jour saisi n&#8217;est pas valide
+              {error.message}
             </div>
           ) : (
             ""
           )}
           {error && id === "month" ? (
             <div className="field__number-container__error">
-              Le mois saisi n&#8217;est pas valide
+              {error.message}
             </div>
           ) : (
             ""
           )}
           {error && id === "year" ? (
             <div className="field__number-container__error">
-              L&#8217;année saisie n&#8217;est pas valide
+              {error.message}
             </div>
           ) : (
             ""
@@ -135,20 +152,6 @@ function Field({
   );
 }
 
-Field.defaultProps = {
-  label: "",
-  type: "text",
-  value: "",
-  min: 1,
-  max: 0,
-  onChange: () => {},
-  onFocus: () => {},
-  disabled: false,
-  error: false,
-  checked: false,
-  focus: false,
-};
-
 Field.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
@@ -158,10 +161,32 @@ Field.propTypes = {
   max: PropTypes.number,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
   disabled: PropTypes.bool,
-  error: PropTypes.bool,
+  error: PropTypes.shape({
+    error: PropTypes.bool,
+    message: PropTypes.string,
+  }),
   checked: PropTypes.bool,
   focus: PropTypes.bool,
+};
+
+Field.defaultProps = {
+  label: "",
+  type: "text",
+  value: "",
+  min: 1,
+  max: 0,
+  onChange: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  disabled: false,
+  error: {
+    error: false,
+    message: "",
+  },
+  checked: false,
+  focus: false,
 };
 
 export default Field;

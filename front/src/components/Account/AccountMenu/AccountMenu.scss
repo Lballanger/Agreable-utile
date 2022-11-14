@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  margin-left: -3rem;
   padding: 2rem 1rem;
   width: 25%;
   min-height: 600px;
@@ -46,12 +45,14 @@
       &__item {
         margin-bottom: 1rem;
         border: 1px solid rgba(128, 128, 128, 0.075);
+        border-radius: 5px;
 
         &:hover {
           background-color: pink;
           cursor: pointer;
           text-decoration-thickness: 0.12rem;
           text-underline-offset: 0.15rem;
+          border: 1px solid rgba(165, 165, 165, 0.384);
         }
 
         &__link {
