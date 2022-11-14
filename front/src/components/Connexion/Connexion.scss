@@ -2,10 +2,11 @@
   font-family: "Inter", sans-serif;
   position: fixed;
   top: 0;
+  left: 0;
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.349);
-  z-index: 1;
+  z-index: 999;
 
   &__modal {
     display: flex;
@@ -14,58 +15,65 @@
     height: 100%;
 
     &__container {
+      position: relative;
       display: flex;
       justify-content: center;
-      padding: 2rem 0;
-      height: 25rem;
-      width: 30rem;
-      background-color: rgb(255, 199, 209);
-      border-radius: 7%;
+      padding: 1.5rem 0;
+      width: 30%;
+      background-color: white;
+      box-shadow: rgb(0 0 0 / 25%) 0px 3px 4px;
+      border-radius: 5px;
 
       &__form {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 95%;
 
         &__close {
           display: flex;
           justify-content: center;
           align-items: center;
           position: relative;
-          right: -15rem;
-          top: -3rem;
-          height: 3rem;
-          width: 3rem;
-          border-radius: 50%;
-          background-color: black;
-          color: white;
-          font-size: 1.5rem;
-          cursor: pointer;
-        }
-        &__title {
-          padding-bottom: 2rem;
+          right: -49%;
+          top: -4%;
+          color: rgb(165, 73, 73);
           font-size: 1.3rem;
-        }
+          font-weight: 600;
+          cursor: pointer;
 
-        &__label {
-          width: 100%;
-          padding: 0.5rem 0;
-
-          &__input {
-            width: 100%;
-            border: none;
-            padding: 0.3rem;
-            margin-top: 0.5rem;
+          &:hover {
+            color: #d6b179;
           }
         }
+        &__title {
+          padding-bottom: 1.5rem;
+          font-size: 1.5rem;
+          letter-spacing: 0.1rem;
+        }
 
+        &__error {
+          color: red;
+          font-size: 1rem;
+          padding-bottom: 1.5rem;
+        }
+
+        &__inputs-container {
+          width: 48%;
+        }
         &__submit {
-          margin-top: 2rem;
-          padding: 0.4rem;
-          background-color: rgb(88, 115, 206);
+          width: 30%;
+          padding: 0.7rem;
+          background-color: rgb(247, 114, 136);
           border: none;
           color: white;
           cursor: pointer;
+          border-radius: 5px;
+          margin-bottom: 1.5rem;
+
+          &:hover {
+            background-color: #fae0b8;
+          }
         }
       }
     }

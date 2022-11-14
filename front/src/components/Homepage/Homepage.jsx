@@ -1,146 +1,169 @@
 import "./Homepage.scss";
-import sandrine from "../../assets/img/sandrine.jpg";
-import faitmain from "../../assets/img/faitmain.svg";
-import oeko from "../../assets/img/oeko-tex.svg";
-import madeinfrance from "../../assets/img/made-in-france.svg";
-import produits2 from "../../assets/img/produits2.svg";
+
+import { Link } from "react-router-dom";
+
+import sandrine from "../../assets/img/sandrine2.svg";
+import summaryProduct from "../../assets/img/summary-product1.jpg";
+import product3 from "../../assets/img/shop/articles/product6.jpg";
+import product4 from "../../assets/img/shop/articles/product1.jpg";
+import summaryProduct3 from "../../assets/img/summary-product4.jpg";
+import couture from "../../assets/img/couture.jpg";
 
 function Homepage() {
   return (
     <main className="main">
       <div className="main__presentation">
-        <h2 className="main__presentation__title" />
-        <div className="main__presentation__content ">
-          <div className="main__presentation__content__image-container">
+        <div className="main__presentation__content-container ">
+          <div className="main__presentation__content-container__content">
+            <h5 className="main__presentation__content-container__content__title">
+              Bienvenue
+            </h5>
+            <div className="main__presentation__content-container__content__presentation-container">
+              <p className="main__presentation__content-container__content__presentation-container__content">
+                Je suis Sandrine une passionnée par l&#8217;art de vivre.
+              </p>
+              <br />
+              <p className="main__presentation__content-container__content__presentation-container__content">
+                Je conçois et fabrique dans mon atelier à Thorigny-sur-Marne, en
+                pièce unique, des accessoires textiles pour l&#8217;univers de
+                la petite enfance, les plaisirs de la maison, la beauté et le
+                bien-être ainsi que la mode pour les hommes et les femmes.
+              </p>
+            </div>
+          </div>
+          <div className="main__presentation__content-container__image-container">
             <img
-              className="main__presentation__content__image-container__img"
+              className="main__presentation__content-container__image-container__img"
               src={sandrine}
               alt="sandrine"
             />
           </div>
-          <div className="main__presentation__content__container">
-            <p className="main__presentation__content__container__description">
-              {/* Prénommée Sandrine et passionnée d&#8217;Art de vivre, j&#8217;ai
-              décidé après une carrière de 15 ans en gestion d&#8217;entreprise,
-              d&#8217;exploiter mon goût pour la décoration et
-              l&#8217;artisanat.
-              <br />
-              Fondatrice de L&#8217;Agréable Utile, je conçois et fabrique des
-              accessoires textiles pour l&#8217;univers de la petite enfance,
-              les plaisirs de la maison, la beauté et le bien-être ainsi que la
-              mode pour les hommes et les femmes.
-              <br />
-              L&#8217;Agréable Utile, c&#8217;est l&#8217;aboutissement de
-              longues heures de réflexion et de travail acharné, mais aussi le
-              commencement d&#8217;une nouvelle aventure.
-              <br />
-              L&#8217;Agréable Utile, c&#8217;est la création
-              d&#8217;accessoires qui vous ressemblent et qui facilite votre
-              quotidien, en effet ma philosophie est de joindre l&#8217;utile à
-              l&#8217;agréable.
-              <br />
-              L&#8217;Agréable Utile, c&#8217;est l&#8217;alliance de la qualité
-              et de l&#8217;esthétique ; mais aussi l&#8217;alliance des
-              couleurs douces, veloutées, pulpeuses et vitaminées.
-              <br />
-              C&#8217;est un anti conformisme et une volonté d&#8217;être
-              différente, de se distinguer et de surprendre.
-              <br />
-              Chaque modèle est pensé et élaboré de telles sortes à ce
-              qu&#8217;il soit solide et pratique mais surtout original et
-              élégant.
-              <br />
-              Amoureuse des belles choses, j&#8217;ai le goût du détail et de la
-              perfection.
-              <br />
-              Je porte un soin particulier au choix des matières et aux
-              finitions.
-              <br />
-              Pour l&#8217;heure, j&#8217;ai envie de faire de mon activité une
-              pépite tant dans mon travail que dans mes relations humaines.
-              <br />
-              J&#8217;ai envie de mettre à l&#8217;honneur mes valeurs
-              auxquelles je tiens si particulièrement à savoir
-              d&#8217;additionner la bonne humeur et la bienveillance.
-              <br />
-              J&#8217;aime me dire le matin quand je me lève, je veux faire de
-              ma journée, l&#8217;Excellence.
-              <br />
-              Je fabrique des pièces uniques et plus rarement de très petites
-              séries.
-              <br />
-              La fabrication est 100 % artisanale et Française, par moi-même au
-              sein de mon atelier à Thorigny sur marne en Seine et Marne (77).
-              <br />
-              Faites-moi confiance, vous ne le regretterez pas.
-              <br />
-              <br />
-              L&#8217;Agréable Utile by Sandrine */}
-              Sandrine est passionnée d&#8217;art de vivre.
-              <br />
-              Elle conçoit et fabrique dans son atelier à Thorigny-sur-Marne, en
-              pièce unique, des accessoires textiles pour l&#8217;univers de la
-              petite enfance, les plaisirs de la maison, la beauté et le
-              bien-être ainsi que la mode pour les hommes et les femmes.
-            </p>
+        </div>
+      </div>
+
+      <div className="main__shop-presentation">
+        <div className="main__shop-presentation__container">
+          <div className="main__shop-presentation__container__description-container">
+            <div className="main__shop-presentation__container__description-container__description">
+              <div className="main__shop-presentation__container__description-container__description__title-container">
+                <h3 className="main__shop-presentation__container__description-container__description__title-container__title">
+                  La boutique de l&#8217;utile
+                </h3>
+              </div>
+              <div className="main__shop-presentation__container__description-container__description__content">
+                <p className="main__shop-presentation__container__description-container__description__content__paragraph">
+                  Retrouvez des produits réalisé par moi même, chaque pièce est
+                  unique et responsable de l&#8217;environnement et made in
+                  france.
+                  {/* Vous pouvez retrouver tout mes produits dans ma boutique. */}
+                </p>
+              </div>
+              <div className="main__shop-presentation__container__description-container__description__link-container">
+                <Link
+                  className="main__shop-presentation__container__description-container__description__link-container__link"
+                  to="/shop"
+                >
+                  Visiter la boutique
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="main__shop-presentation__container__product-container">
+            <div className="main__shop-presentation__container__product-container__article">
+              <div className="main__shop-presentation__container__product-container__article__img-container">
+                <img
+                  className="main__shop-presentation__container__product-container__article__img-container__img"
+                  src={summaryProduct3}
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className="main__shop-presentation__container__product-container__article">
+              <div className="main__shop-presentation__container__product-container__article__img-container">
+                <img
+                  className="main__shop-presentation__container__product-container__article__img-container__img"
+                  src={summaryProduct}
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className="main__shop-presentation__container__product-container__article">
+              <div className="main__shop-presentation__container__product-container__article__img-container">
+                <img
+                  className="main__shop-presentation__container__product-container__article__img-container__img"
+                  src={product4}
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className="main__shop-presentation__container__product-container__article">
+              <div className="main__shop-presentation__container__product-container__article__img-container">
+                <img
+                  className="main__shop-presentation__container__product-container__article__img-container__img"
+                  src={product3}
+                  alt=""
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="main__background" />
 
-      <h2 className="main__title">Une sélection de choix</h2>
-      <div className="main__quality">
-        <div className="main__quality__container">
-          <div className="main__quality__container__label">
-            <div className="main__quality__container__label__img-container">
-              <img
-                className="main__quality__container__label__img-container__img"
-                src={faitmain}
-                alt=""
-              />
-            </div>
-            <p className="main__quality__container__label__content">
-              Toutes les créations sont faites main par moi-même.
-            </p>
+      <div className="main__sewing">
+        <h3 className="main__sewing__title">
+          Apprendre la couture, ça vous dit ?
+        </h3>
+        <div className="main__sewing__sewing-container">
+          <div className="main__sewing__sewing-container__img-container">
+            <img
+              className="main__sewing__sewing-container__img-container__img"
+              src={couture}
+              alt=""
+            />
           </div>
-          <div className="main__quality__container__label">
-            <p className="main__quality__container__label__content">
-              Tous les tissus utilisés sont d&#8217;origine Française.
-            </p>
-            <div className="main__quality__container__label__img-container">
-              <img
-                className="main__quality__container__label__img-container__img"
-                src={madeinfrance}
-                alt=""
-              />
+          <div className="main__sewing__sewing-container__content-container">
+            <div className="main__sewing__sewing-container__content-container__description">
+              <p className="main__sewing__sewing-container__content-container__description__paragraph">
+                Je vous propose des ateliers de couture sur machine à coudre
+                pour enfants, ados et adultes (à partir de 7 ans). C&#8217;est à
+                Thorigny ! Vous allez pouvoir booster votre créativité.
+              </p>
+              <br />
+              <p className="main__sewing__sewing-container__content-container__description__paragraph">
+                Pour en savoir plus sur les conditions de participation et
+                tarifaires mais aussi pour vous inscrire, je vous invite à me
+                contacter au 06.61.76.76.39
+              </p>
+              <br />
+              <p className="main__sewing__sewing-container__content-container__description__paragraph">
+                Cartes cadeaux disponibles sur demande.
+              </p>
+              <br />
+              <p className="main__sewing__sewing-container__content-container__description__paragraph">
+                Places limités à 4 participants maximum par atelier.{" "}
+              </p>
+              <br />
+              <p className="main__sewing__sewing-container__content-container__description__paragraph">
+                Réservez votre créneau sans plus tarder !{" "}
+              </p>
+              <br />
+              <p className="main__sewing__sewing-container__content-container__description__paragraph">
+                Gel hydroalcoolique fourni.
+              </p>
+              <br />
+              <p className="main__sewing__sewing-container__content-container__description__paragraph">
+                Désinfection après chaque atelier.
+              </p>
+            </div>
+            <div className="main__sewing__sewing-container__content-container__link-container">
+              <Link
+                className="main__sewing__sewing-container__content-container__link-container__link"
+                to="/shop"
+              >
+                En savoir plus
+              </Link>
             </div>
           </div>
-          <div className="main__quality__container__label">
-            <div className="main__quality__container__label__img-container">
-              <img
-                className="main__quality__container__label__img-container__img"
-                src={oeko}
-                alt=""
-              />
-            </div>
-
-            <p className="main__quality__container__label__content">
-              Oeko-Tex est un label de qualité comprenant plusieurs normes
-              <br />
-              techniques, visant à certifier les qualités sanitaires et
-              <br />
-              écologiques des textiles et cuirs, en garantissant l&#8217;absence
-              <br />
-              de produits toxiques pour le corps et pour l&#8217;environnement.
-            </p>
-          </div>
-        </div>
-        <div className="main__quality__produits">
-          <img
-            className="main__quality__produits__image"
-            src={produits2}
-            alt="produits"
-          />
         </div>
       </div>
     </main>

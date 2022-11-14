@@ -7,10 +7,17 @@
     margin-bottom: 2.2rem;
 
     &__input {
-      margin: 0.5rem 0;
-      padding: 0.4rem;
+      margin: 0.4rem 0;
+      padding: 0.3rem;
       background: none;
       border: 1px solid rgba(128, 128, 128, 0.247);
+      border-radius: 5px;
+      &--error {
+        border-color: red;
+        &:focus {
+          outline: 1px solid red;
+        }
+      }
     }
 
     &__error {
@@ -54,6 +61,12 @@
       background: none;
       border: 1px solid rgba(128, 128, 128, 0.247);
       margin-top: 0.5rem;
+      &--error {
+        border-color: red;
+        &:focus {
+          outline: 1px solid red;
+        }
+      }
     }
 
     &__error {
