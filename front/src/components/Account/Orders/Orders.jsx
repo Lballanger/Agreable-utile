@@ -67,7 +67,7 @@ function Orders() {
                     État de la commande
                   </h4>
                   <div className="orders__container__order__bottom-container__info__container__content">
-                    --
+                    {order.status}
                   </div>
                 </div>
               </div>

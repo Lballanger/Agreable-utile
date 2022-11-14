@@ -6,8 +6,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useNavigate } from "react-router-dom";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
-import { paymentIntent } from "../../slices/orderSlice";
+import { paymentIntent } from "../../slices/cartSlice";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -16,6 +17,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
 export default function Payment() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const subtotal = useSelector((state) => state.articlesSlice.subtotal);
   const items = useSelector((state) => state.articlesSlice.cart);
@@ -25,11 +27,13 @@ export default function Payment() {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     if (items.length) {
-      dispatch(paymentIntent(items))
+      dispatch(paymentIntent())
         .unwrap()
         .then((data) => {
           setClientSecret(data.clientSecret);
         });
+    } else {
+      navigate("/payment");
     }
   }, [items]);
 

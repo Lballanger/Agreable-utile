@@ -10,6 +10,14 @@
     padding: 1.2rem 1.2rem;
     background-color: rgba(192, 191, 191, 0.199);
 
+    @include breakpoint(medium) {
+      position: relative;
+      flex-direction: column;
+      width: 100%;
+      padding: 0rem;
+      padding-top: 1.2rem;
+    }
+
     &__articles-container {
       display: flex;
       flex-direction: column;
@@ -17,6 +25,10 @@
       padding: 1rem 1.2rem;
       margin-right: 2rem;
       background-color: white;
+
+      @include breakpoint(medium) {
+        width: 100%;
+      }
 
       &__title-container {
         &__title {
@@ -171,8 +183,24 @@
       padding: 1rem 1.2rem;
       background-color: white;
 
+      @include breakpoint(medium) {
+        height: auto;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+
+        border-top: 1px solid rgba(128, 128, 128, 0.123);
+        padding: 0rem 1rem;
+      }
+
       &__title-container {
         padding-bottom: 2.5rem;
+
+        @include breakpoint(medium) {
+          display: none;
+        }
+
         &__title {
           font-size: 1.35rem;
           font-weight: 600;
@@ -184,6 +212,10 @@
           display: flex;
           justify-content: space-between;
           padding-bottom: 2.5rem;
+
+          @include breakpoint(medium) {
+            padding: 1rem 0;
+          }
         }
 
         &__delivery-container {
@@ -191,6 +223,11 @@
           justify-content: space-between;
           padding-bottom: 2.5rem;
           border-bottom: 1px solid rgba(128, 128, 128, 0.123);
+
+          @include breakpoint(medium) {
+            padding-bottom: 0.5rem;
+            border-bottom: none;
+          }
         }
 
         &__total-container {
@@ -198,6 +235,10 @@
           justify-content: space-between;
           padding: 1.7rem 0 2rem 0;
           font-weight: 600;
+
+          @include breakpoint(medium) {
+            padding: 0.8rem 0;
+          }
         }
 
         &__submit-container {
@@ -210,6 +251,11 @@
             color: white;
             cursor: pointer;
             border-radius: 5px;
+
+            @include breakpoint(medium) {
+              padding: 0.7rem 0;
+              margin: 0.5rem 0;
+            }
           }
         }
       }

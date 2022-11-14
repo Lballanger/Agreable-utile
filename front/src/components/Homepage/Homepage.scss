@@ -18,6 +18,11 @@
       width: 57%;
       margin: 0 auto;
 
+      @include breakpoint(medium) {
+        flex-direction: column;
+        width: 100%;
+      }
+
       &__image-container {
         width: 43%;
         animation: apparition-opacity 1.9s ease-in-out 0s;
@@ -25,6 +30,10 @@
         &__img {
           transform: rotate(3deg);
           width: 69%;
+        }
+
+        @include breakpoint(medium) {
+          order: 1;
         }
       }
 
@@ -36,6 +45,12 @@
         animation: apparition 1.9s ease-in-out 0s, opacity 1.3s ease-in-out 2s;
         padding: 2rem;
 
+        @include breakpoint(medium) {
+          width: 100%;
+          margin-right: 0;
+          order: 2;
+        }
+
         &__title {
           text-transform: uppercase;
           font-size: 3.7rem;
@@ -45,6 +60,10 @@
           letter-spacing: 0.4rem;
           color: #bf3b58;
           backdrop-filter: blur(15px);
+
+          @include breakpoint(medium) {
+            font-size: 2rem;
+          }
         }
 
         &__presentation-container {
@@ -56,6 +75,10 @@
             font-size: 18px;
             font-family: "Avenir LT Pro", Arial, Helvetica, sans-serif;
             color: #bf3b58;
+
+            @include breakpoint(medium) {
+              font-size: 1rem;
+            }
           }
         }
       }
@@ -70,6 +93,10 @@
     width: 100%;
     background-color: #fbf0e9;
 
+    @include breakpoint(medium) {
+      min-height: 100vh;
+    }
+
     &__container {
       display: flex;
       justify-content: space-between;
@@ -77,14 +104,27 @@
       height: 70%;
       width: 85%;
 
+      @include breakpoint(medium) {
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 97%;
+        height: 90%;
+      }
+
       &__description-container {
         width: 40%;
         padding: 1rem;
 
+        @include breakpoint(medium) {
+          width: 100%;
+          order: 2;
+          margin-top: 1rem;
+        }
+
         &__description {
-          position: relative;
           display: flex;
           flex-direction: column;
+          height: 190px;
 
           &__title-container {
             &__title {
@@ -94,6 +134,10 @@
               letter-spacing: 0.1rem;
               color: #d41757;
               padding-bottom: 2rem;
+
+              @include breakpoint(medium) {
+                font-size: 1.5rem;
+              }
             }
           }
 
@@ -101,23 +145,28 @@
             height: 100%;
             width: 80%;
 
+            @include breakpoint(medium) {
+              width: 97%;
+            }
+
             &__paragraph {
               font-weight: 300;
               line-height: 29px;
-              font-size: 18px;
+              font-size: 1rem;
               font-family: "Avenir LT Pro", Arial, Helvetica, sans-serif;
               color: #d41757;
+
+              @include breakpoint(medium) {
+                font-size: 1rem;
+              }
             }
           }
 
           &__link-container {
-            position: relative;
-            top: 6rem;
-            left: 0;
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            height: 2rem;
+            height: 3rem;
             width: 100%;
 
             &__link,
@@ -129,6 +178,11 @@
               text-transform: uppercase;
               font-size: 1.1rem;
               border-radius: 2px;
+
+              @include breakpoint(medium) {
+                padding: 0.7rem 1.3rem;
+                margin-top: 1.5rem;
+              }
             }
           }
         }
@@ -140,6 +194,12 @@
         height: 80%;
         width: 55%;
 
+        @include breakpoint(medium) {
+          width: 97%;
+          height: auto;
+          order: 1;
+        }
+
         &__article {
           height: 50%;
           width: 50%;
@@ -149,6 +209,10 @@
             width: 100%;
             padding-right: 0.3rem;
             padding-bottom: 0.3rem;
+
+            @include breakpoint(medium) {
+              height: 200px;
+            }
 
             &__img {
               height: 100%;
@@ -185,6 +249,11 @@
     margin: 0 auto;
     background-color: #fbf0e9;
 
+    @include breakpoint(medium) {
+      height: auto;
+      width: 97%;
+    }
+
     &__title {
       font-size: 2.5vw;
       font-weight: 600;
@@ -195,12 +264,21 @@
       font-weight: 700;
       margin: 0;
       font-size: 2.5vw;
+
+      @include breakpoint(medium) {
+        font-size: 1.5rem;
+      }
     }
 
     &__sewing-container {
       display: flex;
       width: 70%;
       margin: 0 auto;
+
+      @include breakpoint(medium) {
+        flex-direction: column;
+        width: 97%;
+      }
 
       &__content-container {
         display: flex;
@@ -210,14 +288,27 @@
         width: 40%;
         padding-left: 2rem;
 
+        @include breakpoint(medium) {
+          width: 100%;
+          padding-left: 0;
+        }
+
         &__description {
           line-height: 1.2rem;
           height: 100%;
+
+          @include breakpoint(medium) {
+            line-height: 1rem;
+          }
 
           &__paragraph {
             font-weight: 300;
             line-height: 29px;
             font-family: "Avenir LT Pro", Arial, Helvetica, sans-serif;
+
+            @include breakpoint(medium) {
+              line-height: 17px;
+            }
           }
         }
 
@@ -230,6 +321,11 @@
           align-items: center;
           height: 3rem;
           width: 90%;
+
+          @include breakpoint(medium) {
+            padding: 0.7rem 1.3rem;
+            margin-top: 1.5rem;
+          }
 
           &__link,
           :visited {
@@ -247,6 +343,11 @@
       &__img-container {
         max-height: 800px;
         width: 60%;
+
+        @include breakpoint(medium) {
+          width: 100%;
+          padding-bottom: 1rem;
+        }
 
         &__img {
           height: 100%;

@@ -5,6 +5,10 @@
   flex-wrap: wrap;
   width: 100%;
 
+  @include breakpoint(medium) {
+    flex-direction: column;
+  }
+
   &__loader-container {
     display: flex;
     justify-content: center;
@@ -28,12 +32,23 @@
     width: 10%;
     padding-top: 5rem;
 
+    @include breakpoint(medium) {
+      display: flex;
+      position: static;
+      width: 100%;
+      height: auto;
+    }
+
     &__title {
       font-weight: 600;
       padding-bottom: 0.5rem;
     }
 
     &__list {
+      @include breakpoint(medium) {
+        display: flex;
+      }
+
       &__link-container {
         padding: 0.3rem 0 0.3rem 0.3rem;
         &__link {
@@ -54,6 +69,11 @@
     padding-top: 5rem;
     width: 90%;
 
+    @include breakpoint(medium) {
+      padding-top: 2rem;
+      width: 100%;
+    }
+
     &__title-container {
       position: relative;
       margin-bottom: 4rem;
@@ -65,8 +85,15 @@
       justify-content: flex-start;
 
       &__product {
-        width: 429.5px;
-        padding: 0 1.5rem 2.5rem 1.5rem;
+        flex-basis: 50%;
+        max-width: 48%;
+
+        @include breakpoint(medium) {
+          padding: 0rem;
+          padding-bottom: 1.5rem;
+          margin: 0 auto;
+          width: 250px;
+        }
 
         &__img-container {
           display: flex;
@@ -76,7 +103,7 @@
           border: 1px solid rgba(128, 128, 128, 0.123);
 
           &__img {
-            height: 300px;
+            height: 100%;
             width: 100%;
             object-fit: cover;
             transition-duration: 0.7s;
@@ -84,11 +111,20 @@
         }
 
         &__infos-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           padding: 1.2rem 2rem;
           border-left: 1px solid rgba(128, 128, 128, 0.123);
           border-right: 1px solid rgba(128, 128, 128, 0.123);
           border-bottom: 1px solid rgba(128, 128, 128, 0.123);
           min-height: 30px;
+
+          @include breakpoint(medium) {
+            padding: 1rem;
+            height: 170px;
+          }
+
           &__infos {
             padding-bottom: 2rem;
             &__title {

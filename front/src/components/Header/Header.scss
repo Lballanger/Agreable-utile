@@ -12,6 +12,71 @@
   transition: 0.3s;
   z-index: 3;
 
+  &__mobile-nav {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    &__burger {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25%;
+
+      &__icon {
+        cursor: pointer;
+      }
+    }
+
+    &__logo-container {
+      display: flex;
+      justify-content: center;
+      width: 50%;
+
+      &__logo {
+        width: 35%;
+      }
+    }
+
+    &__nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      background-color: white;
+
+      &__menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+
+        &__item {
+          padding: 2rem 0;
+
+          &__link {
+            font-size: 1.5rem;
+            font-family: "Cormorant Garamond", serif;
+            padding-bottom: 0.2rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+
+            &:hover {
+              border-bottom: 2px solid #ead8c5;
+            }
+          }
+        }
+      }
+    }
+  }
+
   &__social-container {
     position: absolute;
     width: 100%;
@@ -238,10 +303,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative;
         height: 5rem;
         width: 50%;
         z-index: 3;
+
+        @include breakpoint(medium) {
+          width: 25%;
+        }
 
         &__item {
           &__img-container {
@@ -271,8 +339,6 @@
         }
 
         &:hover & {
-          position: relative;
-
           &__item {
             &__cart-container {
               display: flex;
@@ -282,12 +348,18 @@
               top: 5rem;
               right: -1rem;
               box-shadow: rgb(0 0 0 / 25%) 0px 3px 4px;
-              background-color: white;
+
+              @include breakpoint(medium) {
+                width: 100vw;
+                min-height: 605px;
+                right: 0;
+              }
 
               &__title {
                 width: 100%;
                 font-family: "Cormorant Garamond", serif;
                 letter-spacing: 0.2rem;
+                background-color: white;
 
                 &__link {
                   display: flex;
@@ -300,6 +372,7 @@
 
               &__articles-container {
                 padding: 0rem 1rem;
+                background-color: white;
                 &__articles {
                   max-height: 430px;
                   overflow-y: auto;

@@ -5,20 +5,25 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getOldCart } from "../../slices/articlesSlice";
 
+// Components
 import Header from "../Header/Header";
 import Homepage from "../Homepage/Homepage";
 import Product from "../Product/Product";
 import Shop from "../Shop/Shop";
 import Register from "../Register/Register";
+import Logon from "../Logon/Logon";
 import Account from "../Account/Account";
 import Profil from "../Account/Profil/Profil";
 import Orders from "../Account/Orders/Orders";
 import Cart from "../Cart/Cart";
 import PlaceOrder from "../PlaceOrder/PlaceOrder";
 import Footer from "../Footer/Footer";
-import useAuth from "../../hooks/useAuth";
 import Payment from "../Payment/Payment";
 import Success from "../Success/Success";
+
+// Hooks
+import useAuth from "../../hooks/useAuth";
+import GuestRegistration from "../GuestRegistration/GuestRegistration";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +38,12 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/register" element={<Register />} />
+        <Route exact path="/logon" element={<Logon />} />
+        <Route
+          exact
+          path="/order/guest-registration"
+          element={<GuestRegistration />}
+        />
         <Route exact path="/shop" element={<Shop />} />
         <Route exact path="/shop/:id" element={<Product />} />
         <Route exact path="/cart" element={<Cart />} />

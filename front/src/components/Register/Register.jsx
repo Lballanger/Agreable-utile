@@ -60,7 +60,7 @@ function Register() {
     try {
       const error = Object.values(errors);
       if (error.length === 0) {
-        await dispatch(register({ ...inputs, registred: true }))
+        await dispatch(register({ ...inputs }))
           .unwrap()
           .catch((error) => {
             console.error(error);

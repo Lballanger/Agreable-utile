@@ -1,18 +1,23 @@
 import "./PlaceOrder.scss";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { register } from "../../slices/userSlice";
-import { createAddress } from "../../slices/orderSlice";
+import { useNavigate } from "react-router-dom";
+import {
+  register,
+  createAddress,
+  fetchAddressesByUserId,
+} from "../../slices/userSlice";
 
 import Field from "../Shared/Field/Field";
 import AddressControl from "../Shared/AddressControl/AddressControl";
 import Connexion from "../Connexion/Connexion";
+import AddAddress from "../Shared/Modal/AddAddress/AddAddress";
 
-import athome from "../../assets/img/athome.png";
-import workshop from "../../assets/img/workshop.png";
-import inpoint from "../../assets/img/inpoint.png";
-import marketplace from "../../assets/img/marketplace.jpg";
+import athome from "../../assets/img/athome.svg";
+import workshop from "../../assets/img/workshop.svg";
+import inpoint from "../../assets/img/inpoint.svg";
+import marketplace from "../../assets/img/marketplace.svg";
+import { deliverySelected } from "../../slices/cartSlice";
 
 function PlaceOrder() {
   const dispatch = useDispatch();
@@ -20,8 +25,11 @@ function PlaceOrder() {
 
   const user = useSelector((state) => state.userSlice.userData);
   const cart = useSelector((state) => state.articlesSlice.cart);
+  const addresses = useSelector((state) => state.userSlice.addresses);
+  const token = useSelector((state) => state.userSlice.token);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addAddressModalOpen, setAddAddressModalOpen] = useState(false);
 
   if (!cart.length) navigate("/cart", { replace: true });
 
@@ -60,7 +68,7 @@ function PlaceOrder() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [delivery, setDelivery] = useState("at-home");
+  const [delivery, setDelivery] = useState("atHome");
 
   const emailRule =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -74,14 +82,13 @@ function PlaceOrder() {
     /^.*(?=.{6,120})(?!.*\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!\@\#\$\%\^\&\*\(\)\-\=\¡\£\_\+\`\~\.\,\<\>\/\?\;\:\'\"\\\|\[\]\{\}]).*$/;
 
   useEffect(() => {
-    if (user) {
-      setFirstname(user?.firstname);
-      if (firstname) delete errors.firstname;
-      setLastName(user?.lastname);
-      if (lastname) delete errors.lastname;
-
-      delete errors.email;
+    if (!addresses.length && token) {
+      dispatch(fetchAddressesByUserId());
     }
+  }, [addresses, token]);
+
+  useEffect(() => {
+    if (!token) navigate("/logon");
   }, [user]);
 
   useEffect(() => {
@@ -108,6 +115,40 @@ function PlaceOrder() {
   const handleCloseModal = (event) => {
     event.stopPropagation();
     setIsModalOpen(false);
+  };
+
+  const handleCloseAddAddressModal = (event) => {
+    event.stopPropagation();
+    setAddAddressModalOpen(false);
+  };
+
+  const handleClick = (address) => {
+    if ((delivery === "marketplace" || delivery === "onSite") && !phone) {
+      setErrors((state) => {
+        return {
+          ...state,
+          phone: {
+            error: true,
+            message: `Merci de renseigner un numéro afin de vous contacter lorsque votre commande sera prête.`,
+          },
+        };
+      });
+      return;
+    }
+
+    if (
+      (delivery === "marketplace" || delivery === "onSite") &&
+      phone &&
+      !errors.phone
+    ) {
+      dispatch(deliverySelected({ delivery, phone }));
+      navigate("/payment");
+    }
+
+    if (delivery === "atHome") {
+      dispatch(deliverySelected({ delivery, address }));
+      navigate("/payment");
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -367,6 +408,9 @@ function PlaceOrder() {
   return (
     <div className="place-order">
       {isModalOpen && <Connexion handleCloseModal={handleCloseModal} />}
+      {addAddressModalOpen && (
+        <AddAddress handleCloseAddAddressModal={handleCloseAddAddressModal} />
+      )}
       {user ? (
         <>
           <div className="place-order__delivery-container">
@@ -375,7 +419,7 @@ function PlaceOrder() {
             </h2>
             <div
               className="place-order__delivery-container__at-home-container"
-              onClick={() => setDelivery("at-home")}
+              onClick={() => setDelivery("atHome")}
             >
               <div className="place-order__delivery-container__at-home-container__icon-container">
                 <img
@@ -390,10 +434,10 @@ function PlaceOrder() {
               <div className="place-order__delivery-container__at-home-container__input-container">
                 <input
                   className="place-order__delivery-container__at-home-container__input-container__input"
-                  name="at-home"
+                  name="atHome"
                   type="radio"
-                  value="at-home"
-                  checked={delivery === "at-home"}
+                  value="atHome"
+                  checked={delivery === "atHome"}
                   onChange={handleChange}
                 />
               </div>
@@ -425,7 +469,7 @@ function PlaceOrder() {
             </div>
             <div
               className="place-order__delivery-container__on-site-container"
-              onClick={() => setDelivery("on-site")}
+              onClick={() => setDelivery("onSite")}
             >
               <div className="place-order__delivery-container__on-site-container__icon-container">
                 <img
@@ -440,31 +484,31 @@ function PlaceOrder() {
               <div className="place-order__delivery-container__on-site-container__input-container">
                 <input
                   className="place-order__delivery-container__on-site-container__input-container__input"
-                  name="on-site"
+                  name="onSite"
                   type="radio"
-                  value="on-site"
-                  checked={delivery === "on-site"}
+                  value="onSite"
+                  checked={delivery === "onSite"}
                   onChange={handleChange}
                 />
               </div>
             </div>
             <div
-              className="place-order__delivery-container__at-home-container"
+              className="place-order__delivery-container__marketplace-container"
               onClick={() => setDelivery("marketplace")}
             >
-              <div className="place-order__delivery-container__at-home-container__icon-container">
+              <div className="place-order__delivery-container__marketplace-container__icon-container">
                 <img
-                  className="place-order__delivery-container__at-home-container__icon-container__icon"
+                  className="place-order__delivery-container__marketplace-container__icon-container__icon"
                   src={marketplace}
                   alt=""
                 />
               </div>
-              <div className="place-order__delivery-container__at-home-container__content-container">
+              <div className="place-order__delivery-container__marketplace-container__content-container">
                 Récupérer au marché
               </div>
-              <div className="place-order__delivery-container__at-home-container__input-container">
+              <div className="place-order__delivery-container__marketplace-container__input-container">
                 <input
-                  className="place-order__delivery-container__at-home-container__input-container__input"
+                  className="place-order__delivery-container__marketplace-container__input-container__input"
                   name="marketplace"
                   type="radio"
                   value="marketplace"
@@ -474,66 +518,97 @@ function PlaceOrder() {
               </div>
             </div>
           </div>
-          {delivery === "at-home" && (
+          {delivery === "atHome" && (
             <div className="place-order__addresses-container">
               <h2 className="place-order__addresses-container__title">
                 Mes adresses sauvegardées
               </h2>
-              <div className="place-order__addresses-container__list-container">
-                {user.addresses?.map((addressSaved) => (
-                  <div className="place-order__addresses-container__list-container__content-container">
+              {addresses.length > 0 ? (
+                <div className="place-order__addresses-container__list-container">
+                  {addresses.map((addressSaved) => (
                     <div
-                      className="place-order__addresses-container__list-container__content-container__address"
+                      className="place-order__addresses-container__list-container__content-container"
                       key={addressSaved.id}
                     >
-                      <div className="place-order__addresses-container__list-container__content-container__address__identity">
-                        {user.firstname} {user.lastname}
+                      <div className="place-order__addresses-container__list-container__content-container__address">
+                        <div className="place-order__addresses-container__list-container__content-container__address__identity">
+                          {addressSaved.firstname} {addressSaved.lastname}
+                        </div>
+                        <div className="place-order__addresses-container__list-container__content-container__address__street">
+                          {addressSaved.address}
+                        </div>
+                        <div className="place-order__addresses-container__list-container__content-container__address__city">
+                          {addressSaved.city}
+                        </div>
+                        <div className="place-order__addresses-container__list-container__content-container__address__postal-code">
+                          {addressSaved.postal_code}
+                        </div>
+                        <div className="place-order__addresses-container__list-container__content-container__address__postal-code">
+                          {addressSaved.phone}
+                        </div>
+                        <div className="place-order__addresses-container__list-container__content-container__address__country">
+                          France
+                        </div>
                       </div>
-                      <div className="place-order__addresses-container__list-container__content-container__address__street">
-                        {addressSaved.address}
-                      </div>
-                      <div className="place-order__addresses-container__list-container__content-container__address__city">
-                        {addressSaved.city} - {addressSaved.postal_code}
+                      <div className="place-order__addresses-container__list-container__content-container__button-container">
+                        <button
+                          onClick={() => handleClick(addressSaved)}
+                          className="place-order__addresses-container__list-container__content-container__button-container__button"
+                          type="button"
+                        >
+                          Choisir
+                        </button>
                       </div>
                     </div>
-                    <div className="place-order__addresses-container__list-container__content-container__button-container">
-                      <Link
-                        to="/payment"
-                        className="place-order__addresses-container__list-container__content-container__button-container__button"
-                        type="button"
-                      >
-                        Choisir
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-                <div className="place-order__addresses-container__add-address">
-                  <button
-                    className="place-order__addresses-container__add-address__button"
-                    type="button"
-                  >
-                    Ajouter une adresse
-                  </button>
+                  ))}
                 </div>
+              ) : (
+                <div className="">
+                  Vous n'avez pas d'adresse de sauvegardée.
+                </div>
+              )}
+
+              <div className="place-order__addresses-container__add-address">
+                <button
+                  className="place-order__addresses-container__add-address__button"
+                  type="button"
+                  onClick={() => setAddAddressModalOpen(true)}
+                >
+                  Ajouter une adresse
+                </button>
               </div>
             </div>
           )}
-          {delivery === "on-site" && (
-            <div className="place-order__addresses-container">
-              <h2 className="place-order__addresses-container__title">
-                Informations
+          {delivery === "onSite" && (
+            <div className="place-order__information">
+              <h2 className="place-order__information__title">
+                Informations atelier
               </h2>
-              <div className="place-order__addresses-container__list-container">
-                <div className="">
-                  Je vous contacterai lorsque votre commande sera prête pour que
-                  nous convenions ensemble d'un rendez-vous.
+              <div className="place-order__information__list-container">
+                <div className="place-order__information__list-container__description">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. In
+                  repellat earum ea voluptates vel, vitae qui hic. Fugiat modi,
+                  nam iste expedita ex autem, eveniet, maiores ad unde dicta
+                  molestias! Modi facere quasi laboriosam ad alias reprehenderit
+                  fugiat eligendi laborum vel dignissimos eius, corporis vitae
+                  odit aut blanditiis praesentium neque sequi. Numquam nisi
+                  nobis ipsam amet modi molestiae beatae. Facilis.
                 </div>
-                <div className="place-order__addresses-container__add-address">
+                <div className="place-order__information__button-container">
+                  <Field
+                    id="phone"
+                    label="Téléphone (requis)"
+                    type="text"
+                    value={phone}
+                    onChange={handleChange}
+                    error={errors.phone}
+                  />
                   <button
-                    className="place-order__addresses-container__add-address__button"
+                    onClick={() => handleClick(delivery)}
+                    className="place-order__information__button-container__button"
                     type="button"
                   >
-                    Ajouter une adresse
+                    Suivant
                   </button>
                 </div>
               </div>
@@ -545,7 +620,44 @@ function PlaceOrder() {
                 Choix du point relais
               </h2>
               <div className="place-order__addresses-container__list-container">
-                <div className="">TEST</div>
+                <div className="place-order__information__list-container__description">
+                  TEST
+                </div>
+              </div>
+            </div>
+          )}
+          {delivery === "marketplace" && (
+            <div className="place-order__information">
+              <h2 className="place-order__information__title">
+                Informations marché
+              </h2>
+              <div className="place-order__information__list-container">
+                <div className="place-order__information__list-container__description">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. In
+                  repellat earum ea voluptates vel, vitae qui hic. Fugiat modi,
+                  nam iste expedita ex autem, eveniet, maiores ad unde dicta
+                  molestias! Modi facere quasi laboriosam ad alias reprehenderit
+                  fugiat eligendi laborum vel dignissimos eius, corporis vitae
+                  odit aut blanditiis praesentium neque sequi. Numquam nisi
+                  nobis ipsam amet modi molestiae beatae. Facilis.
+                </div>
+                <div className="place-order__information__button-container">
+                  <Field
+                    id="phone"
+                    label="Téléphone (requis)"
+                    type="text"
+                    value={phone}
+                    onChange={handleChange}
+                    error={errors.phone}
+                  />
+                  <button
+                    onClick={() => handleClick(delivery)}
+                    className="place-order__information__button-container__button"
+                    type="button"
+                  >
+                    Suivant
+                  </button>
+                </div>
               </div>
             </div>
           )}

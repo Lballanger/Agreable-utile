@@ -10,6 +10,9 @@ export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
+  const userEmail = useSelector((state) => state.userSlice?.userData.email);
+
+  const [email, setEmail] = useState(userEmail || "");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,6 +65,7 @@ export default function CheckoutForm() {
       confirmParams: {
         // Make sure to change this to your payment completion page
         return_url: "http://localhost:3000/success",
+        receipt_email: email,
       },
     });
 
@@ -73,6 +77,7 @@ export default function CheckoutForm() {
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {
+      console.log(error.message);
       setMessage("An unexpected error occurred.");
     }
 
@@ -81,6 +86,13 @@ export default function CheckoutForm() {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
+      <input
+        id="email"
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter email address"
+      />
       <PaymentElement id="payment-element" />
       <button
         type="submit"

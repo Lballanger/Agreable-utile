@@ -32,15 +32,40 @@ export const signOut = createAsyncThunk("/auth/signOut", async () => {
   removeToken();
 });
 
+export const createAddress = createAsyncThunk(
+  "/address",
+  async (payload, { getState }) => {
+    const state = getState();
+    const response = await instance.post("/address", {
+      ...payload,
+      userId: state.userSlice.userData.id,
+    });
+    return response.data;
+  },
+);
+
+export const fetchAddressesByUserId = createAsyncThunk(
+  "address/getByUser",
+  async () => {
+    const response = await instance.get("/address");
+    return response.data;
+  },
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
     token: localStorage?.getItem("REFRESH_KEY") || null,
     loading: false,
     userData: null,
+    addresses: [],
     error: "",
   },
-  reducers: {},
+  reducers: {
+    getToken(state, { payload }) {
+      state.token = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
       state.loading = true;
@@ -82,8 +107,29 @@ const userSlice = createSlice({
     builder.addCase(register.rejected, (state, action) => {
       state.error = action.error.message;
     });
+    builder.addCase(createAddress.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(createAddress.fulfilled, (state, action) => {
+      state.loading = false;
+      state.addresses.push(action.payload);
+    });
+    builder.addCase(createAddress.rejected, (state, action) => {
+      state.error = action.error.message;
+    });
+
+    builder.addCase(fetchAddressesByUserId.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchAddressesByUserId.fulfilled, (state, action) => {
+      state.loading = false;
+      state.addresses = action.payload;
+    });
+    builder.addCase(fetchAddressesByUserId.rejected, (state, action) => {
+      state.error = action.error.message;
+    });
   },
 });
 
-export const {} = userSlice.actions;
+export const { getToken } = userSlice.actions;
 export default userSlice.reducer;

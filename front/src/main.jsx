@@ -6,7 +6,6 @@ import App from "./components/App/App";
 import store from "./store/store";
 import ScrollToTop from "./hooks/useScrollTop";
 
-import "./main.scss";
 import { getToken } from "./utils/tokenStorage";
 import { fetchUserData } from "./slices/userSlice";
 
