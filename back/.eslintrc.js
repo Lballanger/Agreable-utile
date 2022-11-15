@@ -5,19 +5,19 @@ module.exports = {
     node: true,
     es2021: true,
   },
-  extends: ['airbnb-base', 'prettier'],
+  extends: ["airbnb-base", "prettier"],
   parserOptions: {
     ecmaVersion: 12,
   },
-  plugins: ['prettier'],
+  plugins: ["prettier"],
   rules: {
-    'no-console': 'off',
-    'prettier/prettier': [
-      'error',
+    "no-console": "off",
+    "prettier/prettier": [
+      "error",
       {
         semi: true,
-        singleQuote: true,
-        endOfLine: 'auto',
+        singleQuote: false,
+        endOfLine: "auto",
       },
     ],
   },

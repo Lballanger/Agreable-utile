@@ -4,6 +4,8 @@ BEGIN;
 
 DROP TABLE private.order;
 
+DROP TABLE private.temporary_user;
+
 DROP TABLE private.user;
 
 DROP DOMAIN email_type;

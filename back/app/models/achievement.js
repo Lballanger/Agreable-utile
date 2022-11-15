@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
-const client = require('../database');
+const client = require("../database");
 
 class Achievement {
   constructor(obj = {}) {
@@ -11,7 +11,7 @@ class Achievement {
 
   static async findAll() {
     try {
-      const { rows } = await client.query('SELECT * FROM private.achievement');
+      const { rows } = await client.query("SELECT * FROM private.achievement");
       return rows.map((achievement) => new Achievement(achievement));
     } catch (error) {
       return new Error(error.detail ? error.detail : error.message);
@@ -21,7 +21,7 @@ class Achievement {
   static async findOneById(id) {
     try {
       const { rows } = await client.query(
-        'SELECT * FROM private.achievement WHERE id=$1',
+        "SELECT * FROM private.achievement WHERE id=$1",
         [id],
       );
       if (rows.length > 0) return new Achievement(rows[0]);

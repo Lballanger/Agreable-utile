@@ -16,20 +16,34 @@ CREATE TABLE private."user" (
   civility TEXT NOT NULL,
   firstname TEXT NOT NULL,
   lastname TEXT NOT NULL,
-  email email_type UNIQUE,
-  email_verified_at TIMESTAMPTZ DEFAULT NULL,
+  email email_type NOT NULL,
+  email_verified BOOLEAN DEFAULT FALSE,
   password TEXT NOT NULL,
-  date_of_birth DATE NOT NULL,
-  city TEXT,
-  postal_code INT
+  date_of_birth DATE,
+  role TEXT NOT NULL DEFAULT 'visitor'
+);
+
+CREATE TABLE private."temporary_user" (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  civility TEXT NOT NULL,
+  firstname TEXT NOT NULL,
+  lastname TEXT NOT NULL,
+  email email_type NOT NULL,
+  country TEXT NOT NULL,
+  address TEXT NOT NULL,
+  city TEXT NOT NULL,
+  postal_code TEXT NOT NULL, 
+  additional_info TEXT,
+  phone TEXT NOT NULL
 );
 
 CREATE TABLE private.order (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  user_id INT NOT NULL REFERENCES private."user"(id),
-  order_number INT NOT NULL UNIQUE,
+  order_number TEXT NOT NULL UNIQUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  status BOOLEAN DEFAULT false
+  status TEXT DEFAULT null,
+  user_id INT NOT NULL REFERENCES private."user"(id),
+  temporary_user_id INT NOT NULL REFERENCES private."temporary_user"(id)
 );
 
 COMMIT;
