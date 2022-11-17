@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-case-declarations */
+/* eslint-disable import/no-unresolved */
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 const Order = require("../models/order");
 const OrderLine = require("../models/orderLine");

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const Address = require("../models/address");
 const User = require("../models/user");
 
