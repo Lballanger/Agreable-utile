@@ -196,7 +196,12 @@ function Header() {
                                 <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
                                   <img
                                     className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container__img"
-                                    src={`/src/assets/img/shop/articles/${article.image[0]}`}
+                                    src={
+                                      import.meta.env.VITE_NODE_ENV !==
+                                      "production"
+                                        ? `/src/assets/img/shop/articles/${article.image[0]}`
+                                        : `dist/assets/img/shop/articles/${article.image[0]}`
+                                    }
                                     alt={article.name}
                                     srcSet=""
                                   />
@@ -304,7 +309,12 @@ function Header() {
                               <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
                                 <img
                                   className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container__img"
-                                  src={`/src/assets/img/shop/articles/${article.image[0]}`}
+                                  src={
+                                    import.meta.env.VITE_NODE_ENV !==
+                                    "production"
+                                      ? `/src/assets/img/shop/articles/${article.image[0]}`
+                                      : `dist/assets/img/shop/articles/${article.image[0]}`
+                                  }
                                   alt={article.name}
                                   srcSet=""
                                 />

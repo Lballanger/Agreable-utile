@@ -142,7 +142,11 @@ function Detail() {
                                   ? "detail__pictures-container__list-container__container__img-container__img"
                                   : "detail__pictures-container__list-container__container__img-container__img--selected"
                               }
-                              src={`/src/assets/img/shop/articles/${article.image[index]}`}
+                              src={
+                                import.meta.env.VITE_NODE_ENV !== "production"
+                                  ? `/src/assets/img/shop/articles/${article.image[index]}`
+                                  : `dist/assets/img/shop/articles/${article.image[index]}`
+                              }
                               alt=""
                               onLoad={() => setLoaded(true)}
                               style={loaded ? {} : { display: "none" }}
@@ -175,7 +179,11 @@ function Detail() {
             <div className="detail__pictures-container__image-container">
               <img
                 className="detail__pictures-container__image-container__image"
-                src={`/src/assets/img/shop/articles/${article.image[imgSelected]}`}
+                src={
+                  import.meta.env.VITE_NODE_ENV !== "production"
+                    ? `/src/assets/img/shop/articles/${article.image[imgSelected]}`
+                    : `dist/assets/img/shop/articles/${article.image[imgSelected]}`
+                }
                 alt=""
                 srcSet=""
               />

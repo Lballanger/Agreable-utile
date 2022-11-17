@@ -53,7 +53,11 @@ function Cart() {
                 <div className="cart__cart-container__articles-container__product-container__img-container">
                   <img
                     className="cart__cart-container__articles-container__product-container__img-container__img"
-                    src={`/src/assets/img/shop/articles/${article.image[0]}`}
+                    src={
+                      import.meta.env.VITE_NODE_ENV !== "production"
+                        ? `/src/assets/img/shop/articles/${article.image[0]}`
+                        : `dist/assets/img/shop/articles/${article.image[0]}`
+                    }
                     alt={article.name}
                   />
                 </div>
