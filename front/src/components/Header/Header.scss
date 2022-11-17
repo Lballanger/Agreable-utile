@@ -309,6 +309,7 @@
 
         @include breakpoint(medium) {
           width: 25%;
+          height: 100%;
         }
 
         &__item {
@@ -351,7 +352,6 @@
 
               @include breakpoint(medium) {
                 width: 100vw;
-                min-height: 605px;
                 right: 0;
               }
 
