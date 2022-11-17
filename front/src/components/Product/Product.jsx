@@ -145,7 +145,7 @@ function Detail() {
                               src={
                                 import.meta.env.VITE_NODE_ENV !== "production"
                                   ? `/src/assets/img/shop/articles/${article.image[index]}`
-                                  : `dist/assets/img/shop/articles/${article.image[index]}`
+                                  : `/assets/img/shop/articles/${article.image[index]}`
                               }
                               alt=""
                               onLoad={() => setLoaded(true)}
@@ -182,7 +182,7 @@ function Detail() {
                 src={
                   import.meta.env.VITE_NODE_ENV !== "production"
                     ? `/src/assets/img/shop/articles/${article.image[imgSelected]}`
-                    : `../../../assets/img/shop/articles/${article.image[imgSelected]}`
+                    : `/assets/img/shop/articles/${article.image[imgSelected]}`
                 }
                 alt=""
                 srcSet=""

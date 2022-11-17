@@ -56,7 +56,7 @@ function Cart() {
                     src={
                       import.meta.env.VITE_NODE_ENV !== "production"
                         ? `/src/assets/img/shop/articles/${article.image[0]}`
-                        : `dist/assets/img/shop/articles/${article.image[0]}`
+                        : `/assets/img/shop/articles/${article.image[0]}`
                     }
                     alt={article.name}
                   />
