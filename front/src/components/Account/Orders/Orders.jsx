@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOrders } from "../../../slices/orderSlice";
 
-import test from "../../../assets";
-
 function Orders() {
   const dispatch = useDispatch();
 
