@@ -182,7 +182,7 @@ function Detail() {
                 src={
                   import.meta.env.VITE_NODE_ENV !== "production"
                     ? `/src/assets/img/shop/articles/${article.image[imgSelected]}`
-                    : `dist/assets/img/shop/articles/${article.image[imgSelected]}`
+                    : `../../../assets/img/shop/articles/${article.image[imgSelected]}`
                 }
                 alt=""
                 srcSet=""

@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOrders } from "../../../slices/orderSlice";
 
+import test from "../../../assets";
+
 function Orders() {
   const dispatch = useDispatch();
 
   const orders = useSelector((state) => state.orderSlice.orders);
-  console.log(orders);
+
   useEffect(() => {
     if (!orders.length) {
       dispatch(fetchOrders());
@@ -31,7 +33,7 @@ function Orders() {
                       src={
                         import.meta.env.VITE_NODE_ENV !== "production"
                           ? `/src/assets/img/shop/articles/${article.image[0]}`
-                          : `dist/assets/img/shop/articles/${article.image[0]}`
+                          : `../../../assets/img/shop/articles/${article.image[0]}`
                       }
                       alt=""
                       srcSet=""
