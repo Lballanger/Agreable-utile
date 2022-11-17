@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://lballanger.fr//api/",
+  baseURL:
+    import.meta.env.VITE_NODE_ENV !== "production"
+      ? "http://localhost:3500/api/"
+      : "https://lballanger.fr/api/",
   headers: {
     "Content-Type": "application/json",
   },

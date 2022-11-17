@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-return-await */
 const bcrypt = require("bcrypt");
 
 exports.hash = async (password) => await bcrypt.hash(password, 10);
