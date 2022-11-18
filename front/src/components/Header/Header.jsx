@@ -200,7 +200,7 @@ function Header() {
                                       import.meta.env.VITE_NODE_ENV !==
                                       "production"
                                         ? `/src/assets/img/shop/articles/${article.image[0]}`
-                                        : `/assets/${article.image[0]}`
+                                        : `/${article.image[0]}`
                                     }
                                     alt={article.name}
                                     srcSet=""
@@ -313,7 +313,7 @@ function Header() {
                                     import.meta.env.VITE_NODE_ENV !==
                                     "production"
                                       ? `/src/assets/img/shop/articles/${article.image[0]}`
-                                      : `/assets/${article.image[0]}`
+                                      : `/${article.image[0]}`
                                   }
                                   alt={article.name}
                                   srcSet=""

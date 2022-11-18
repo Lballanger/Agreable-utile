@@ -145,7 +145,7 @@ function Detail() {
                               src={
                                 import.meta.env.VITE_NODE_ENV !== "production"
                                   ? `/src/assets/img/shop/articles/${article.image[index]}`
-                                  : `/assets/${article.image[index]}`
+                                  : `/${article.image[index]}`
                               }
                               alt=""
                               onLoad={() => setLoaded(true)}
@@ -182,7 +182,7 @@ function Detail() {
                 src={
                   import.meta.env.VITE_NODE_ENV !== "production"
                     ? `/src/assets/img/shop/articles/${article.image[imgSelected]}`
-                    : `/assets/${article.image[imgSelected]}`
+                    : `/${article.image[imgSelected]}`
                 }
                 alt=""
                 srcSet=""
