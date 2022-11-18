@@ -34,7 +34,7 @@ function Orders() {
                           : new URL(
                               `/assets/img/shop/articles/${article.image[0]}`,
                               import.meta.url,
-                            ).href
+                            )
                       }
                       alt=""
                       srcSet=""
