@@ -32,7 +32,7 @@ function Orders() {
                         import.meta.env.VITE_NODE_ENV !== "production"
                           ? `/src/assets/img/shop/articles/${article.image[0]}`
                           : new URL(
-                              `./assets/img/shop/articles/${article.image[0]}`,
+                              `/assets/img/shop/articles/${article.image[0]}`,
                               import.meta.url,
                             ).href
                       }
