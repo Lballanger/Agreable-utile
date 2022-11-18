@@ -28,9 +28,7 @@ function Orders() {
                     <img
                       className="orders__container__order__top-container__articles__img-container__img"
                       key={article.id}
-                      src={
-                        new URL(`./${article.image[0]}`, import.meta.url).href
-                      }
+                      src={`./${article.image[0]}`}
                       alt=""
                       srcSet=""
                     />
