@@ -6,6 +6,7 @@ import {
   removeFromCart,
   changeTheCartQuantity,
 } from "../../slices/articlesSlice";
+import dynamicUrl from "../../utils/viteURL";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ function Cart() {
                     src={
                       import.meta.env.VITE_NODE_ENV !== "production"
                         ? `/src/assets/img/shop/articles/${article.image[0]}`
-                        : `/${article.image[0]}`
+                        : dynamicUrl(article.image[0])
                     }
                     alt={article.name}
                   />

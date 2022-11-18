@@ -11,6 +11,7 @@ import {
 } from "../../slices/articlesSlice";
 
 import arrow from "../../assets/img/arrow.svg";
+import dynamicUrl from "../../utils/viteURL";
 
 function Detail() {
   const dispatch = useDispatch();
@@ -145,7 +146,7 @@ function Detail() {
                               src={
                                 import.meta.env.VITE_NODE_ENV !== "production"
                                   ? `/src/assets/img/shop/articles/${article.image[index]}`
-                                  : `/${article.image[index]}`
+                                  : dynamicUrl(article.image[index])
                               }
                               alt=""
                               onLoad={() => setLoaded(true)}
@@ -182,7 +183,7 @@ function Detail() {
                 src={
                   import.meta.env.VITE_NODE_ENV !== "production"
                     ? `/src/assets/img/shop/articles/${article.image[imgSelected]}`
-                    : `/${article.image[imgSelected]}`
+                    : dynamicUrl(article.image[imgSelected])
                 }
                 alt=""
                 srcSet=""

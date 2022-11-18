@@ -14,6 +14,7 @@ import logo from "../../assets/img/logo2.svg";
 import { signOut } from "../../slices/userSlice";
 
 import useWindowSize from "../../hooks/useWindowSize";
+import dynamicUrl from "../../utils/viteURL";
 
 function Header() {
   const dispatch = useDispatch();
@@ -200,7 +201,7 @@ function Header() {
                                       import.meta.env.VITE_NODE_ENV !==
                                       "production"
                                         ? `/src/assets/img/shop/articles/${article.image[0]}`
-                                        : `/${article.image[0]}`
+                                        : dynamicUrl(article.image[0])
                                     }
                                     alt={article.name}
                                     srcSet=""
@@ -313,7 +314,7 @@ function Header() {
                                     import.meta.env.VITE_NODE_ENV !==
                                     "production"
                                       ? `/src/assets/img/shop/articles/${article.image[0]}`
-                                      : `/${article.image[0]}`
+                                      : dynamicUrl(article.image[0])
                                   }
                                   alt={article.name}
                                   srcSet=""

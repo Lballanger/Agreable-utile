@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOrders } from "../../../slices/orderSlice";
+import dynamicUrl from "../../../utils/viteURL";
 
 function Orders() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function Orders() {
                       src={
                         import.meta.env.VITE_NODE_ENV !== "production"
                           ? `/src/assets/img/shop/articles/${article.image[0]}`
-                          : `/${article.image[0]}`
+                          : dynamicUrl(article.image[0])}
                       }
                       alt=""
                       srcSet=""
