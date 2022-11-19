@@ -89,7 +89,7 @@ function Shop() {
                           <div className="shop__articles-container__main-container__product__img-container">
                             <img
                               src={dynamicUrl(
-                                `/img/shop/articles/${article.image[0]}`,
+                                `img/shop/articles/${article.image[0]}`,
                               )}
                               alt=""
                               className="shop__articles-container__main-container__product__img-container__img"
