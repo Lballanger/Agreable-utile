@@ -88,12 +88,7 @@ function Shop() {
                         <Link to={`/shop/${article.article_id}`}>
                           <div className="shop__articles-container__main-container__product__img-container">
                             <img
-                              src={
-                                new URL(
-                                  `/src/assets/img/shop/articles/${article.image[0]}`,
-                                  import.meta.url,
-                                ).href
-                              }
+                              src="../../assets/img/shop/articles/filet-a-provision2.jpg"
                               alt=""
                               className="shop__articles-container__main-container__product__img-container__img"
                             />
