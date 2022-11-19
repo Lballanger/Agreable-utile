@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { fetchArticles, fetchCategories } from "../../slices/articlesSlice";
 
 import loader from "../../assets/img/loader.svg";
+
 import dynamicUrl from "../../utils/viteURL";
 
 function Shop() {
@@ -87,7 +88,9 @@ function Shop() {
                         <Link to={`/shop/${article.article_id}`}>
                           <div className="shop__articles-container__main-container__product__img-container">
                             <img
-                              src={`src/assets/img/shop/articles/${article.image[0]}`}
+                              src={dynamicUrl(
+                                `/img/shop/articles/${article.image[0]}`,
+                              )}
                               alt=""
                               className="shop__articles-container__main-container__product__img-container__img"
                             />

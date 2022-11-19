@@ -1,6 +1,6 @@
 // The function is used so that Vite can include the assets during production
 const dynamicUrl = (name) => {
-  return new URL(`./src/assets/img/shop/articles/${name}`, import.meta.url);
+  return new URL(`./assets/${name}`, import.meta.url).href;
 };
 
 export default dynamicUrl;
