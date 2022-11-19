@@ -28,7 +28,7 @@ function Orders() {
                     <img
                       className="orders__container__order__top-container__articles__img-container__img"
                       key={article.id}
-                      src={`./${article.image[0]}`}
+                      src={`/src/assets/img/shop/articles/${article.image[0]}`}
                       alt=""
                       srcSet=""
                     />
