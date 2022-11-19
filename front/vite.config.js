@@ -15,12 +15,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        chunkFileNames: "assets/img/shop/articles/[name]-[hash].js",
-        entryFileNames: "assets/img/shop/articles/[name]-[hash].js",
+        chunkFileNames: "src/assets/img/shop/articles/[name]-[hash].js",
+        entryFileNames: "src/assets/img/shop/articles/[name]-[hash].js",
 
         assetFileNames: ({ name }) => {
           if (/\.(gif|jpe?g|png|svg|jpg)$/.test(name ?? "")) {
-            return "assets/img/shop/articles/[name]-[hash][extname]";
+            return "assets/[name]-[hash][extname]";
           }
 
           if (/\.css$/.test(name ?? "")) {

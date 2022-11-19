@@ -87,11 +87,7 @@ function Shop() {
                         <Link to={`/shop/${article.article_id}`}>
                           <div className="shop__articles-container__main-container__product__img-container">
                             <img
-                              src={
-                                import.meta.env.VITE_NODE_ENV !== "production"
-                                  ? `/src/assets/img/shop/articles/${article.image[0]}`
-                                  : `/assets/img/shop/articles/${article.image[0]}`
-                              }
+                              src={`src/assets/img/shop/articles/${article.image[0]}`}
                               alt=""
                               className="shop__articles-container__main-container__product__img-container__img"
                             />
