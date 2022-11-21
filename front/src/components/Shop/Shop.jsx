@@ -7,13 +7,15 @@ import { fetchArticles, fetchCategories } from "../../slices/articlesSlice";
 
 import loader from "../../assets/img/loader.svg";
 
-import dynamicUrl from "../../utils/viteURL";
-
 function Shop() {
   const dispatch = useDispatch();
   const articles = useSelector((state) => state.articlesSlice.articles);
   const categories = useSelector((state) => state.articlesSlice.categories);
   const isLoading = useSelector((state) => state.articlesSlice.loading);
+
+  const allImages = import.meta.globEager(
+    `../../assets/img/shop/articles/*.jpg`,
+  );
 
   const [categorySelected, setCategorySelected] = useState("");
 
@@ -29,15 +31,8 @@ function Shop() {
     }
   }, [categories]);
 
-  const getAllImages = async (name) => {
-    try {
-      const images = await dynamicUrl(name);
-      console.log(images);
-      return images;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const getAllImages = async (name) =>
+    allImages[`../../assets/img/shop/articles/${name}.jpg`].default;
 
   return (
     <div className="shop">
@@ -98,7 +93,9 @@ function Shop() {
                         <Link to={`/shop/${article.article_id}`}>
                           <div className="shop__articles-container__main-container__product__img-container">
                             <img
-                              src={getAllImages(article.image[0])}
+                              src={JSON.stringify(
+                                getAllImages(article.image[0]),
+                              )}
                               alt=""
                               className="shop__articles-container__main-container__product__img-container__img"
                             />

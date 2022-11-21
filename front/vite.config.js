@@ -15,8 +15,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        chunkFileNames: "src/assets/img/shop/articles/[name]-[hash].js",
-        entryFileNames: "src/assets/img/shop/articles/[name]-[hash].js",
+        chunkFileNames: "front/src/assets/img/shop/articles/[name]-[hash].js",
+        entryFileNames: "front/src/assets/img/shop/articles/[name]-[hash].js",
 
         assetFileNames: ({ name }) => {
           if (/\.(gif|jpe?g|png|svg|jpg)$/.test(name ?? "")) {
