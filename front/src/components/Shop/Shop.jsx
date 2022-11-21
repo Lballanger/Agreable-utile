@@ -91,7 +91,7 @@ function Shop() {
                         <Link to={`/shop/${article.article_id}`}>
                           <div className="shop__articles-container__main-container__product__img-container">
                             <img
-                              src={img.article.image[0]}
+                              src={img?.article.image[0]}
                               alt=""
                               className="shop__articles-container__main-container__product__img-container__img"
                             />
