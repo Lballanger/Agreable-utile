@@ -181,7 +181,12 @@ function Detail() {
             <div className="detail__pictures-container__image-container">
               <img
                 className="detail__pictures-container__image-container__image"
-                src={`/src/assets/img/shop/articles/${article.image[imgSelected]}.jpg`}
+                src={
+                  new URL(
+                    `/src/assets/img/shop/articles/${article.image[imgSelected]}.jpg`,
+                    import.meta.url,
+                  ).href
+                }
                 alt=""
                 srcSet=""
               />
