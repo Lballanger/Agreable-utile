@@ -7,8 +7,6 @@ import { fetchArticles, fetchCategories } from "../../slices/articlesSlice";
 
 import loader from "../../assets/img/loader.svg";
 
-import dynamicUrl from "../../utils/viteURL";
-
 function Shop() {
   const dispatch = useDispatch();
   const articles = useSelector((state) => state.articlesSlice.articles);
@@ -88,7 +86,9 @@ function Shop() {
                         <Link to={`/shop/${article.article_id}`}>
                           <div className="shop__articles-container__main-container__product__img-container">
                             <img
-                              src={`../../assets/img/${article.image[0]}`}
+                              src={`../../assets/img/shop/articles/${import.meta.glob(
+                                `./assets/${article.image[0]}`,
+                              )}`}
                               alt=""
                               className="shop__articles-container__main-container__product__img-container__img"
                             />
