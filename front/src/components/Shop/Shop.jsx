@@ -92,7 +92,7 @@ function Shop() {
                             <img
                               src={
                                 allImages[
-                                  `../../assets/img/shop/articles/${article.image[0]}.jpg`
+                                  `/src/assets/img/shop/articles/${article.image[0]}.jpg`
                                 ]
                               }
                               alt=""
