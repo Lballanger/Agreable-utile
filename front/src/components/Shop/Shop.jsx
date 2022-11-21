@@ -7,9 +7,7 @@ import { fetchArticles, fetchCategories } from "../../slices/articlesSlice";
 
 import loader from "../../assets/img/loader.svg";
 
-const allImages = import.meta.glob("../../assets/img/shop/articles/*.jpg", {
-  import: "default",
-});
+const allImages = import.meta.glob("../../assets/img/shop/articles/*.jpg");
 
 function Shop() {
   const dispatch = useDispatch();
@@ -30,6 +28,8 @@ function Shop() {
       dispatch(fetchCategories());
     }
   }, [categories]);
+
+  console.log(allImages);
 
   return (
     <div className="shop">
@@ -82,7 +82,7 @@ function Shop() {
                       }
                       return article;
                     })
-                    .map(async (article) => (
+                    .map((article) => (
                       <div
                         key={article.article_id}
                         className="shop__articles-container__main-container__product"
@@ -90,7 +90,9 @@ function Shop() {
                         <Link to={`/shop/${article.article_id}`}>
                           <div className="shop__articles-container__main-container__product__img-container">
                             <img
-                              src={allImages[`/assets/${article.image[0]}.jpg`]}
+                              src={allImages[
+                                `../../assets/img/shop/articles/${article.image[0]}.jpg`
+                              ]().then((img) => img.default)}
                               alt=""
                               className="shop__articles-container__main-container__product__img-container__img"
                             />
