@@ -7,6 +7,11 @@ import { fetchArticles, fetchCategories } from "../../slices/articlesSlice";
 
 import loader from "../../assets/img/loader.svg";
 
+const img = import.meta.glob("../../assets/img/shop/articles/*.jpg", {
+  import: "default",
+  eager: true,
+});
+
 function Shop() {
   const dispatch = useDispatch();
   const articles = useSelector((state) => state.articlesSlice.articles);
@@ -78,7 +83,7 @@ function Shop() {
                       }
                       return article;
                     })
-                    .map((article) => (
+                    .map(async (article) => (
                       <div
                         key={article.article_id}
                         className="shop__articles-container__main-container__product"
@@ -86,9 +91,7 @@ function Shop() {
                         <Link to={`/shop/${article.article_id}`}>
                           <div className="shop__articles-container__main-container__product__img-container">
                             <img
-                              src={`../../assets/img/shop/articles/${import.meta.glob(
-                                `./assets/${article.image[0]}`,
-                              )}`}
+                              src={img.article.image[0]}
                               alt=""
                               className="shop__articles-container__main-container__product__img-container__img"
                             />
