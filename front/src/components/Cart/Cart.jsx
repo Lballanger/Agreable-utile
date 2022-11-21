@@ -55,9 +55,10 @@ function Cart() {
                   <img
                     className="cart__cart-container__articles-container__product-container__img-container__img"
                     src={
-                      import.meta.env.VITE_NODE_ENV !== "production"
-                        ? `/src/assets/img/shop/articles/${article.image[0]}`
-                        : dynamicUrl(article.image[0])
+                      new URL(
+                        `/src/assets/img/shop/articles/${article.image[0]}.jpg`,
+                        import.meta.url,
+                      ).href
                     }
                     alt={article.name}
                   />
