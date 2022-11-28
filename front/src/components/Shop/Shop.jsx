@@ -13,10 +13,6 @@ function Shop() {
   const categories = useSelector((state) => state.articlesSlice.categories);
   const isLoading = useSelector((state) => state.articlesSlice.loading);
 
-  const allImages = import.meta.globEager(
-    `../../assets/img/shop/articles/*.jpg`,
-  );
-
   const [categorySelected, setCategorySelected] = useState("");
 
   useEffect(() => {
@@ -30,9 +26,6 @@ function Shop() {
       dispatch(fetchCategories());
     }
   }, [categories]);
-
-  const getAllImages = async (name) =>
-    allImages[`../../assets/img/shop/articles/${name}.jpg`].default;
 
   return (
     <div className="shop">

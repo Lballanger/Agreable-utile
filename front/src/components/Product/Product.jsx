@@ -11,7 +11,7 @@ import {
 } from "../../slices/articlesSlice";
 
 import arrow from "../../assets/img/arrow.svg";
-import dynamicUrl from "../../utils/viteURL";
+import Breadcrumb from "../Shared/Breadcrumb/Breadcrumb";
 
 function Detail() {
   const dispatch = useDispatch();
@@ -93,6 +93,7 @@ function Detail() {
     <main className="detail">
       {article ? (
         <>
+          <Breadcrumb />
           <div className="detail__pictures-container">
             <div className="detail__pictures-container__list-container">
               <div className="detail__pictures-container__list-container__top-button">

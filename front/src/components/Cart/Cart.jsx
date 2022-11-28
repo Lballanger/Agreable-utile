@@ -6,7 +6,6 @@ import {
   removeFromCart,
   changeTheCartQuantity,
 } from "../../slices/articlesSlice";
-import dynamicUrl from "../../utils/viteURL";
 
 function Cart() {
   const dispatch = useDispatch();

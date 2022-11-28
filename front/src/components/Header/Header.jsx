@@ -10,11 +10,10 @@ import Connexion from "../Connexion/Connexion";
 import facebook from "../../assets/img/facebook.svg";
 import instagram from "../../assets/img/instagram.svg";
 import arrow from "../../assets/img/arrow.png";
-import logo from "../../assets/img/logo2.svg";
+import logo from "../../assets/img/logo3.png";
 import { signOut } from "../../slices/userSlice";
 
 import useWindowSize from "../../hooks/useWindowSize";
-import dynamicUrl from "../../utils/viteURL";
 
 function Header() {
   const dispatch = useDispatch();
@@ -46,7 +45,7 @@ function Header() {
   };
 
   return (
-    <header className={`header ${small ? "small" : ""}`}>
+    <header className={`header ${small ? "header small" : ""}`}>
       {!isMobile ? (
         <div className="header__navigation">
           <nav className="header__navigation__nav">
@@ -86,14 +85,19 @@ function Header() {
             </ul>
           </nav>
           <div className="header__navigation__logo-container">
-            <h1 className="header__navigation__logo-container__title">
-              <Link
-                className="header__navigation__logo-container__title"
-                to="/"
-              >
-                <strong>L&apos;agréable Utile</strong>
-              </Link>
-            </h1>
+            <Link className="header__navigation__logo-container" to="/">
+              <img
+                className={`header__navigation__logo-container__logo 
+                ${
+                  small
+                    ? "header__navigation__logo-container__logo small__logo"
+                    : ""
+                } `}
+                src={logo}
+                alt=""
+                srcSet=""
+              />
+            </Link>
           </div>
           <nav className="header__navigation__nav">
             {token && userData ? (
@@ -197,12 +201,7 @@ function Header() {
                                 <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
                                   <img
                                     className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container__img"
-                                    src={
-                                      import.meta.env.VITE_NODE_ENV !==
-                                      "production"
-                                        ? `/src/assets/img/shop/articles/${article.image[0]}`
-                                        : dynamicUrl(article.image[0])
-                                    }
+                                    src={`/src/assets/img/shop/articles/${article.image[0]}`}
                                     alt={article.name}
                                     srcSet=""
                                   />
@@ -278,6 +277,18 @@ function Header() {
             />
           </Link>
           <ul className="header__navigation__nav__cart">
+            <li className="">
+              <button type="button" onClick={() => setIsModalOpen(true)}>
+                <div className="">
+                  <img
+                    className=""
+                    src="https://api.iconify.design/mdi/account-outline.svg"
+                    alt=""
+                    srcSet=""
+                  />
+                </div>
+              </button>
+            </li>
             <li className="header__navigation__nav__cart__item">
               <Link to="/cart">
                 <div className="header__navigation__nav__cart__item__img-container">
@@ -310,12 +321,7 @@ function Header() {
                               <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
                                 <img
                                   className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container__img"
-                                  src={
-                                    import.meta.env.VITE_NODE_ENV !==
-                                    "production"
-                                      ? `/src/assets/img/shop/articles/${article.image[0]}`
-                                      : dynamicUrl(article.image[0])
-                                  }
+                                  src={`/src/assets/img/shop/articles/${article.image[0]}`}
                                   alt={article.name}
                                   srcSet=""
                                 />

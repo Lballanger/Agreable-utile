@@ -1,0 +1,15 @@
+.breadcrumb {
+  padding: 0 0 2.5rem 2.5rem;
+  width: 100%;
+
+  &__link {
+    padding-left: 1rem;
+    &--active {
+      color: rgba(238, 238, 238, 0.288);
+    }
+
+    &--not-active {
+      color: black;
+    }
+  }
+}

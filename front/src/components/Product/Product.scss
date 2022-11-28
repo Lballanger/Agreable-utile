@@ -1,8 +1,7 @@
 .detail {
-  padding-top: 5rem;
+  padding-top: 2.5rem;
   display: flex;
   flex-wrap: wrap;
-  min-height: 75vh;
 
   @include breakpoint(medium) {
     flex-direction: column;

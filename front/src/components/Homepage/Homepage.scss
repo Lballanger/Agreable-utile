@@ -3,19 +3,17 @@
 .main {
   font-family: "Cormorant Garamond", serif;
 
+  background-color: #f6f4f0;
+
   &__presentation {
-    height: 90vh;
     width: 100%;
-    background: url(../../assets/img/homepage-background7.svg);
-    background-position: 0 97%;
-    background-repeat: no-repeat;
+    padding: 8rem 0;
 
     &__content-container {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      min-height: 82vh;
-      width: 57%;
+      width: 90%;
       margin: 0 auto;
 
       @include breakpoint(medium) {
@@ -24,12 +22,12 @@
       }
 
       &__image-container {
-        width: 43%;
+        width: 35%;
         animation: apparition-opacity 1.9s ease-in-out 0s;
 
         &__img {
           transform: rotate(3deg);
-          width: 69%;
+          width: 55%;
         }
 
         @include breakpoint(medium) {
@@ -40,7 +38,7 @@
       &__content {
         display: flex;
         flex-direction: column;
-        width: 59%;
+        width: 60%;
         margin-right: 5rem;
         animation: apparition 1.9s ease-in-out 0s, opacity 1.3s ease-in-out 2s;
         padding: 2rem;
@@ -52,14 +50,14 @@
         }
 
         &__title {
-          text-transform: uppercase;
-          font-size: 3.7rem;
-          font-weight: 600;
-          font-family: serif;
-          padding-bottom: 1.7rem;
-          letter-spacing: 0.4rem;
-          color: #bf3b58;
-          backdrop-filter: blur(15px);
+          font-family: cormorant, serif;
+          font-size: 5rem;
+          font-weight: 300;
+          letter-spacing: 0.3rem;
+          line-height: 1;
+
+          padding: 2rem 0;
+          color: #e06075;
 
           @include breakpoint(medium) {
             font-size: 2rem;
@@ -70,11 +68,10 @@
           width: 100%;
 
           &__content {
-            font-weight: 300;
-            line-height: 29px;
+            font-weight: 400;
+            line-height: 1.625;
             font-size: 18px;
-            font-family: "Avenir LT Pro", Arial, Helvetica, sans-serif;
-            color: #bf3b58;
+            font-family: "Avenir Light";
 
             @include breakpoint(medium) {
               font-size: 1rem;
@@ -87,22 +84,16 @@
 
   &__shop-presentation {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     width: 100%;
-    background-color: #fbf0e9;
-
-    @include breakpoint(medium) {
-      min-height: 100vh;
-    }
+    padding: 8rem 0;
 
     &__container {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      height: 70%;
-      width: 85%;
+      width: 90%;
 
       @include breakpoint(medium) {
         flex-direction: column;
@@ -112,7 +103,7 @@
       }
 
       &__description-container {
-        width: 40%;
+        width: 45%;
         padding: 1rem;
 
         @include breakpoint(medium) {
@@ -124,16 +115,15 @@
         &__description {
           display: flex;
           flex-direction: column;
-          height: 190px;
 
           &__title-container {
+            margin-bottom: 1rem;
             &__title {
-              font-size: 2.5vw;
-              font-weight: 600;
-              text-transform: uppercase;
-              letter-spacing: 0.1rem;
-              color: #d41757;
-              padding-bottom: 2rem;
+              font-family: cormorant, serif;
+              font-size: 3.5rem;
+              font-weight: 300;
+              letter-spacing: -1px;
+              line-height: 1;
 
               @include breakpoint(medium) {
                 font-size: 1.5rem;
@@ -142,19 +132,18 @@
           }
 
           &__content {
-            height: 100%;
             width: 80%;
+            padding: 2rem 0;
 
             @include breakpoint(medium) {
               width: 97%;
             }
 
             &__paragraph {
-              font-weight: 300;
-              line-height: 29px;
-              font-size: 1rem;
-              font-family: "Avenir LT Pro", Arial, Helvetica, sans-serif;
-              color: #d41757;
+              font-weight: 400;
+              line-height: 1.625;
+              font-size: 18px;
+              font-family: "Avenir Light";
 
               @include breakpoint(medium) {
                 font-size: 1rem;
@@ -164,7 +153,6 @@
 
           &__link-container {
             display: flex;
-            justify-content: flex-end;
             align-items: center;
             height: 3rem;
             width: 100%;
@@ -191,7 +179,7 @@
       &__product-container {
         display: flex;
         flex-wrap: wrap;
-        height: 80%;
+        height: 600px;
         width: 55%;
 
         @include breakpoint(medium) {
@@ -242,28 +230,25 @@
   &__sewing {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 110vh;
     width: 100%;
     margin: 0 auto;
-    background-color: #fbf0e9;
+
+    padding: 8rem 0;
 
     @include breakpoint(medium) {
       height: auto;
-      width: 97%;
+      width: 90%;
     }
 
     &__title {
-      font-size: 2.5vw;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1rem;
+      font-family: cormorant, serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      letter-spacing: -1px;
+      line-height: 1;
       padding-bottom: 4rem;
-
-      font-weight: 700;
-      margin: 0;
-      font-size: 2.5vw;
 
       @include breakpoint(medium) {
         font-size: 1.5rem;
@@ -272,8 +257,8 @@
 
     &__sewing-container {
       display: flex;
-      width: 70%;
-      margin: 0 auto;
+      justify-content: space-between;
+      width: 80%;
 
       @include breakpoint(medium) {
         flex-direction: column;
@@ -286,11 +271,10 @@
         position: relative;
         flex-direction: column;
         width: 40%;
-        padding-left: 2rem;
+        padding: 0 1.5rem;
 
         @include breakpoint(medium) {
           width: 100%;
-          padding-left: 0;
         }
 
         &__description {
@@ -302,9 +286,10 @@
           }
 
           &__paragraph {
-            font-weight: 300;
-            line-height: 29px;
-            font-family: "Avenir LT Pro", Arial, Helvetica, sans-serif;
+            font-weight: 400;
+            line-height: 1.625;
+            font-size: 1rem;
+            font-family: "Avenir Light";
 
             @include breakpoint(medium) {
               line-height: 17px;
@@ -342,7 +327,7 @@
 
       &__img-container {
         max-height: 800px;
-        width: 60%;
+        width: 55%;
 
         @include breakpoint(medium) {
           width: 100%;
@@ -350,7 +335,6 @@
         }
 
         &__img {
-          height: 100%;
           width: 100%;
         }
       }

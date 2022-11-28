@@ -7,7 +7,7 @@ import summaryProduct from "../../assets/img/summary-product1.jpg";
 import product3 from "../../assets/img/shop/articles/product6.jpg";
 import product4 from "../../assets/img/shop/articles/product1.jpg";
 import summaryProduct3 from "../../assets/img/summary-product4.jpg";
-import couture from "../../assets/img/couture.jpg";
+import couture from "../../assets/img/couture2.jpg";
 
 function Homepage() {
   return (
@@ -16,7 +16,7 @@ function Homepage() {
         <div className="main__presentation__content-container ">
           <div className="main__presentation__content-container__content">
             <h5 className="main__presentation__content-container__content__title">
-              Bienvenue
+              L'agréable Utile
             </h5>
             <div className="main__presentation__content-container__content__presentation-container">
               <p className="main__presentation__content-container__content__presentation-container__content">
@@ -27,7 +27,13 @@ function Homepage() {
                 Je conçois et fabrique dans mon atelier à Thorigny-sur-Marne, en
                 pièce unique, des accessoires textiles pour l&#8217;univers de
                 la petite enfance, les plaisirs de la maison, la beauté et le
-                bien-être ainsi que la mode pour les hommes et les femmes.
+                bien-être ainsi que la mode pour les hommes et les femmes. Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Optio
+                recusandae dolor veritatis possimus laudantium, voluptate sunt
+                enim inventore quidem quas voluptates error! Ex atque rem
+                delectus? Quibusdam quisquam a eaque. Debitis maiores nulla
+                exercitationem consectetur dolores nesciunt cum nemo cumque
+                molestias dolore harum natus, dolorum, possimus obcaecati
               </p>
             </div>
           </div>
@@ -54,7 +60,14 @@ function Homepage() {
                 <p className="main__shop-presentation__container__description-container__description__content__paragraph">
                   Retrouvez des produits réalisé par moi même, chaque pièce est
                   unique et responsable de l&#8217;environnement et made in
-                  france.
+                  france. Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Eos sit iste, aliquid aut assumenda perferendis sequi
+                  obcaecati magnam autem nam ducimus blanditiis ab eligendi
+                  repellat nobis velit, voluptatem fugiat nemo. Repellat
+                  architecto illo deserunt eligendi, veniam, amet ex possimus
+                  sit corporis similique inventore atque alias numquam tempore
+                  sunt ad quidem autem praesentium cumque molestiae quam, hic
+                  suscipit explicabo. Consequuntur, accusamus?
                   {/* Vous pouvez retrouver tout mes produits dans ma boutique. */}
                 </p>
               </div>
