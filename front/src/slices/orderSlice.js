@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../utils/axiosConfig";
 
-export const fetchOrders = createAsyncThunk("/orders", async (payload) => {
-  const response = await instance.get("/orders", payload);
-  return response.data;
-});
+export const fetchOrdersByUserId = createAsyncThunk(
+  "/orders",
+  async (payload) => {
+    const response = await instance.get("/orders", payload);
+    return response.data;
+  },
+);
 
 export const createOrder = createAsyncThunk("/order", async (payload) => {
   const response = await instance.post("/order", payload);
@@ -34,14 +37,14 @@ const orderSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchOrders.pending, (state) => {
+    builder.addCase(fetchOrdersByUserId.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(fetchOrders.fulfilled, (state, action) => {
+    builder.addCase(fetchOrdersByUserId.fulfilled, (state, action) => {
       state.loading = false;
       state.orders = action.payload;
     });
-    builder.addCase(fetchOrders.rejected, (state, action) => {
+    builder.addCase(fetchOrdersByUserId.rejected, (state, action) => {
       state.error = action.error.message;
     });
   },

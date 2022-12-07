@@ -2,7 +2,7 @@ import "./Orders.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchOrders } from "../../../slices/orderSlice";
+import { fetchOrdersByUserId } from "../../../slices/orderSlice";
 
 function Orders() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ function Orders() {
 
   useEffect(() => {
     if (!orders.length) {
-      dispatch(fetchOrders());
+      dispatch(fetchOrdersByUserId());
     }
   }, []);
 
