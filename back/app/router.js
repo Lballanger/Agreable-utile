@@ -44,7 +44,7 @@ router.get("/api/categories", categoryController.findAll);
 /** ********************** ORDER *********************** */
 
 router.post("/api/order", orderController.create);
-router.get("/api/orders", authMiddleware(), orderController.findById);
+router.get("/api/orders", authMiddleware(), orderController.findByUserId);
 
 /** ********************** STRIPE *********************** */
 

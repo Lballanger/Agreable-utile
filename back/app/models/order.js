@@ -19,7 +19,7 @@ class Order {
     return createdOrder.rows[0];
   }
 
-  static async findById(id) {
+  static async findByUserId(id) {
     try {
       const { rows } = await client.query(
         `WITH order_line AS (

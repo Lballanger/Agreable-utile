@@ -28,11 +28,11 @@ const OrderController = {
     }
   },
 
-  findById: async (request, response) => {
+  findByUserId: async (request, response) => {
     const { id } = request.user;
 
     try {
-      const orders = await Order.findById(id);
+      const orders = await Order.findByUserId(id);
       response.status(200).json(orders);
     } catch (error) {
       response.status(500).json(error.message);
