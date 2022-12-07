@@ -28,7 +28,12 @@ function Orders() {
                     <img
                       className="orders__container__order__top-container__articles__img-container__img"
                       key={article.id}
-                      src={`../../assets/img/shop/articles/${article.image[0]}`}
+                      src={
+                        new URL(
+                          `/src/assets/img/shop/articles/${article.image[0]}.jpg`,
+                          import.meta.url,
+                        ).href
+                      }
                       alt=""
                       srcSet=""
                     />
