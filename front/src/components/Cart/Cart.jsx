@@ -173,7 +173,7 @@ function Cart() {
                 </p>
               </div>
               <div className="cart__cart-container__summary__detail-container__submit-container">
-                <Link to="/place-order">
+                <Link to="/checkout">
                   <button
                     className="cart__cart-container__summary__detail-container__submit-container__button"
                     type="button"

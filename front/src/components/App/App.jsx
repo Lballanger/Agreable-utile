@@ -11,15 +11,13 @@ import Homepage from "../Homepage/Homepage";
 import Product from "../Product/Product";
 import Shop from "../Shop/Shop";
 import Register from "../Register/Register";
-import Logon from "../Logon/Logon";
 import Account from "../Account/Account";
 import Profil from "../Account/Profil/Profil";
 import Orders from "../Account/Orders/Orders";
 import Cart from "../Cart/Cart";
-import PlaceOrder from "../PlaceOrder/PlaceOrder";
 import Footer from "../Footer/Footer";
-import Payment from "../Payment/Payment";
-import Success from "../Success/Success";
+import Success from "../Checkout/Success/Success";
+import Checkout from "../Checkout/Checkout";
 
 // Hooks
 import useAuth from "../../hooks/useAuth";
@@ -38,7 +36,9 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path="/logon" element={<Logon />} />
+        <Route exact path="/checkout" element={<Checkout />} />
+        <Route exact path="/success" element={<Success />} />
+
         <Route
           exact
           path="/order/guest-registration"
@@ -47,9 +47,6 @@ function App() {
         <Route exact path="/shop" element={<Shop />} />
         <Route exact path="/shop/:id" element={<Product />} />
         <Route exact path="/cart" element={<Cart />} />
-        <Route exact path="/place-order" element={<PlaceOrder />} />
-        <Route exact path="/payment" element={<Payment />} />
-        <Route exact path="/success" element={<Success />} />
         <Route
           path="/account/:id"
           element={

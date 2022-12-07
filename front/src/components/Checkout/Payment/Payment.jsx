@@ -7,8 +7,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
-import CheckoutForm from "../CheckoutForm/CheckoutForm";
-import { paymentIntent } from "../../slices/cartSlice";
+import CheckoutForm from "../../CheckoutForm/CheckoutForm";
+import { paymentIntent } from "../../../slices/cartSlice";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.

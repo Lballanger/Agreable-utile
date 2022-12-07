@@ -1,21 +1,38 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../slices/userSlice";
-import Field from "../Shared/Field/Field";
 import "./Logon.scss";
+
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { login } from "../../../slices/userSlice";
+
+import Field from "../../Shared/Field/Field";
 
 const initialState = {
   email: "",
   password: "",
 };
 
-function Logon() {
+function Logon({ setSteps, setActiveStep }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const token = useSelector((state) => state.userSlice.token);
 
   const [inputs, setInputs] = useState({ ...initialState });
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      setSteps((state) => {
+        return {
+          ...state,
+          logon: true,
+        };
+      });
+      setActiveStep("placeOrder");
+    }
+  }, [token]);
 
   const inputChange = (event) => {
     setInputs((state) => ({
@@ -30,11 +47,23 @@ function Logon() {
       await dispatch(login(inputs))
         .unwrap()
         .then(() => {
-          navigate("/place-order");
+          setSteps((state) => {
+            return {
+              ...state,
+              logon: true,
+            };
+          });
+          setActiveStep("placeOrder");
         })
         .catch((error) => {
           console.log(error.message);
           setError(true);
+          setSteps((state) => {
+            return {
+              ...state,
+              logon: false,
+            };
+          });
         });
     } catch (error) {
       console.log(error);
@@ -109,5 +138,10 @@ function Logon() {
     </div>
   );
 }
+
+Logon.propTypes = {
+  setSteps: PropTypes.bool.isRequired,
+  setActiveStep: PropTypes.func.isRequired,
+};
 
 export default Logon;

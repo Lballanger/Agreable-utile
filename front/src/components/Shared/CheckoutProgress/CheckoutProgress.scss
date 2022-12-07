@@ -1,0 +1,78 @@
+.checkoutprogress {
+  display: flex;
+  margin: 0 auto;
+  padding: 2rem 0;
+  width: 80%;
+
+  &__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+
+    &__circle-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 2rem;
+      width: 2rem;
+      border: 0.2rem solid rgb(206, 206, 206);
+      border-radius: 100%;
+      background-color: white;
+
+      &--activated {
+        background-color: #f987a8;
+        border: 0.2rem solid#f987a8;
+      }
+
+      &--current {
+        border: 0.2rem solid #f987a8;
+      }
+
+      &__circle {
+        font-weight: 600;
+        color: rgb(206, 206, 206);
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 55%;
+          top: 25%;
+          height: 2px;
+          width: 90%;
+          background-color: #ddd;
+        }
+
+        &--activated {
+          color: white;
+
+          &::before {
+            background-color: #f987a8;
+          }
+        }
+
+        &--current {
+          color: #f987a8;
+        }
+      }
+
+      &__step-name {
+        color: rgb(206, 206, 206);
+        padding-top: 1rem;
+
+        &--activated,
+        &--current {
+          color: #f987a8;
+        }
+      }
+    }
+
+    &:last-child > div > span {
+      &::before {
+        content: none;
+      }
+    }
+  }
+}

@@ -30,7 +30,6 @@
     padding-left: 1rem;
     height: 80vh;
     width: 15%;
-    padding-top: 5rem;
 
     @include breakpoint(medium) {
       display: flex;
@@ -66,7 +65,6 @@
   }
 
   &__articles-container {
-    padding-top: 5rem;
     width: 85%;
 
     @include breakpoint(medium) {

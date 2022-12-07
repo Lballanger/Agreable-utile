@@ -201,7 +201,7 @@ function Header() {
                                 <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
                                   <img
                                     className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container__img"
-                                    src={`/src/assets/img/shop/articles/${article.image[0]}`}
+                                    src={`/src/assets/img/shop/articles/${article.image[0]}.jpg`}
                                     alt={article.name}
                                     srcSet=""
                                   />
@@ -321,7 +321,7 @@ function Header() {
                               <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
                                 <img
                                   className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container__img"
-                                  src={`/src/assets/img/shop/articles/${article.image[0]}`}
+                                  src={`/src/assets/img/shop/articles/${article.image[0]}.jpg`}
                                   alt={article.name}
                                   srcSet=""
                                 />

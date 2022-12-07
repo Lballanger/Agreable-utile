@@ -9,7 +9,7 @@ function Breadcrumb() {
   const product = useSelector((state) => state.articlesSlice.articles);
 
   const getNameProduct = (id) => {
-    return product.find((product) => product.article_id === Number(id));
+    return product?.find((product) => product.article_id === Number(id));
   };
 
   const nameProduct = getNameProduct(id);
@@ -36,7 +36,6 @@ function Breadcrumb() {
       >
         Boutique{" "}
       </Link>
-      <span className="breadcrumb__link-arrow">&gt;</span>
       <Link
         to={`/shop/${id}`}
         className={
@@ -45,7 +44,7 @@ function Breadcrumb() {
             : "breadcrumb__link"
         }
       >
-        {nameProduct?.article_name}
+        {nameProduct?.article_name ? `> ${nameProduct?.article_name}` : ""}
       </Link>
     </nav>
   );

@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchArticles, fetchCategories } from "../../slices/articlesSlice";
 
+import Breadcrumb from "../Shared/Breadcrumb/Breadcrumb";
+
 import loader from "../../assets/img/loader.svg";
 
 function Shop() {
@@ -39,6 +41,7 @@ function Shop() {
         </div>
       ) : (
         <>
+          <Breadcrumb />
           <div className="shop__category-container">
             <h3 className="shop__category-container__title">Categorie</h3>
             <ul className="shop__category-container__list">

@@ -1,5 +1,4 @@
 .detail {
-  padding-top: 2.5rem;
   display: flex;
   flex-wrap: wrap;
 
@@ -41,6 +40,7 @@
         &__button {
           width: 15%;
           cursor: pointer;
+          transform: rotate(180deg);
 
           @include breakpoint(medium) {
             width: 100%;

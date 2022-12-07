@@ -1,4 +1,6 @@
 import "./PlaceOrder.scss";
+
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,20 +8,20 @@ import {
   register,
   createAddress,
   fetchAddressesByUserId,
-} from "../../slices/userSlice";
+} from "../../../slices/userSlice";
 
-import Field from "../Shared/Field/Field";
-import AddressControl from "../Shared/AddressControl/AddressControl";
-import Connexion from "../Connexion/Connexion";
-import AddAddress from "../Shared/Modal/AddAddress/AddAddress";
+import Field from "../../Shared/Field/Field";
+import AddressControl from "../../Shared/AddressControl/AddressControl";
+import Connexion from "../../Connexion/Connexion";
+import AddAddress from "../../Shared/Modal/AddAddress/AddAddress";
 
-import athome from "../../assets/img/athome.svg";
-import workshop from "../../assets/img/workshop.svg";
-import inpoint from "../../assets/img/inpoint.svg";
-import marketplace from "../../assets/img/marketplace.svg";
-import { deliverySelected } from "../../slices/cartSlice";
+import athome from "../../../assets/img/athome.svg";
+import workshop from "../../../assets/img/workshop.svg";
+import inpoint from "../../../assets/img/inpoint.svg";
+import marketplace from "../../../assets/img/marketplace.svg";
+import { deliverySelected } from "../../../slices/cartSlice";
 
-function PlaceOrder() {
+function PlaceOrder({ setSteps, setActiveStep }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -88,7 +90,7 @@ function PlaceOrder() {
   }, [addresses, token]);
 
   useEffect(() => {
-    if (!token) navigate("/logon");
+    if (!token) navigate("/checkout");
   }, [user]);
 
   useEffect(() => {
@@ -142,12 +144,24 @@ function PlaceOrder() {
       !errors.phone
     ) {
       dispatch(deliverySelected({ delivery, phone }));
-      navigate("/payment");
+      setSteps((state) => {
+        return {
+          ...state,
+          placeOrder: true,
+        };
+      });
+      setActiveStep("payment");
     }
 
     if (delivery === "atHome") {
       dispatch(deliverySelected({ delivery, address }));
-      navigate("/payment");
+      setSteps((state) => {
+        return {
+          ...state,
+          placeOrder: true,
+        };
+      });
+      setActiveStep("payment");
     }
   };
 
@@ -182,7 +196,13 @@ function PlaceOrder() {
                 email: data.email,
               }),
             );
-            navigate("/payment");
+            setSteps((state) => {
+              return {
+                ...state,
+                placeOrder: true,
+              };
+            });
+            setActiveStep("payment");
           })
           .catch((error) => {
             console.error(error);
@@ -201,7 +221,13 @@ function PlaceOrder() {
           });
         // In the case of a user already logged in
       } else if (user) {
-        navigate("/payment");
+        setSteps((state) => {
+          return {
+            ...state,
+            placeOrder: true,
+          };
+        });
+        setActiveStep("payment");
       } else {
         dispatch(
           register({
@@ -227,7 +253,13 @@ function PlaceOrder() {
                 userId: data.id,
               }),
             );
-            navigate("/payment");
+            setSteps((state) => {
+              return {
+                ...state,
+                placeOrder: true,
+              };
+            });
+            setActiveStep("payment");
           });
       }
     }
@@ -900,5 +932,10 @@ function PlaceOrder() {
     </div>
   );
 }
+
+PlaceOrder.propTypes = {
+  setSteps: PropTypes.bool.isRequired,
+  setActiveStep: PropTypes.func.isRequired,
+};
 
 export default PlaceOrder;
