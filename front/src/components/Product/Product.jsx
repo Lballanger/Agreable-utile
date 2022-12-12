@@ -70,8 +70,10 @@ function Detail() {
   };
 
   const handleChange = (id, e) => {
-    setQuantity(e.target.value);
-    dispatch(changeTheCartQuantity({ id, value: e.target.value }));
+    if (e.target.value >= 1 && e.target.value <= 99) {
+      setQuantity(e.target.value);
+      dispatch(changeTheCartQuantity({ id, value: e.target.value }));
+    }
   };
 
   const nextImage = () => {

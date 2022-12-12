@@ -24,7 +24,9 @@ function Cart() {
   };
 
   const handleChange = (id, e) => {
-    dispatch(changeTheCartQuantity({ id, value: e.target.value }));
+    if (e.target.value >= 1 && e.target.value <= 99) {
+      dispatch(changeTheCartQuantity({ id, value: e.target.value }));
+    }
   };
 
   return (
