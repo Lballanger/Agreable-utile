@@ -20,6 +20,7 @@ const stripeController = {
   payment: async (request, response) => {
     const { cart, delivery, userId } = request.body;
 
+    const generateOrderNumber = new Date().valueOf();
     try {
       const paymentIntent = await stripe.paymentIntents.create({
         amount: calculateOrderAmount(cart),
@@ -28,6 +29,7 @@ const stripeController = {
         receipt_email: "ballanger.loic@gmail.com",
         metadata: {
           userId,
+          orderNumber: generateOrderNumber,
           articles: JSON.stringify(
             cart.map((article) => ({
               id: article.id,
@@ -64,24 +66,15 @@ const stripeController = {
     switch (event.type) {
       case "payment_intent.succeeded":
         const paymentIntent = event.data.object;
-        // console.log(
-        //   `PaymentIntent for ${paymentIntent.amount} was successful!`,
-        // );
-        // console.log("PAYMENT INTENT :::::::::::::::::", paymentIntent);
 
-        // Then define and call a method to handle the successful payment intent.
-        // handlePaymentIntentSucceeded(paymentIntent);
+        console.log("payment_intent.succeeded", paymentIntent.charges.data);
+
         try {
-          const generateOrderNumber = new Date().valueOf();
-
-          console.log("Ordernumber", generateOrderNumber);
-          console.log("PaymentIntent : ", paymentIntent);
-
           const articles = JSON.parse(paymentIntent.metadata.articles);
 
           const order = await new Order({
             user_id: paymentIntent.metadata.userId,
-            order_number: generateOrderNumber,
+            order_number: paymentIntent.metadata.orderNumber,
             status: "En attente de paiement",
           }).create();
 
@@ -104,7 +97,22 @@ const stripeController = {
         break;
       case "charge.succeeded":
         const chargeSucceeded = event.data.object;
-        // console.log("chargeSucceeded : _____", chargeSucceeded);
+
+        console.log("chargeSucceeded : _____", chargeSucceeded);
+        try {
+          const existingOrder = await Order.getByOrderNumber(
+            chargeSucceeded.metadata.orderNumber,
+          );
+
+          if (!existingOrder)
+            return response.status(404).json("Order not found");
+
+          existingOrder.status = "Paiement réussi";
+
+          const updateOrder = await existingOrder.update();
+        } catch (error) {
+          return response.status(500).json(error.message);
+        }
 
         break;
       default:

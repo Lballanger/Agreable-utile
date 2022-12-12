@@ -46,6 +46,29 @@ class Order {
       return new Error(error.detail ? error.detail : error.message);
     }
   }
+
+  static async getByOrderNumber(orderNumber) {
+    try {
+      const { rows } = await client.query(
+        `SELECT * FROM private."order" WHERE order_number= $1`,
+        [orderNumber],
+      );
+
+      if (rows.length === 0) return null;
+
+      return new Order(rows[0]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async update() {
+    const updateOrder = await client.query(
+      `UPDATE private."order" SET status = $1 WHERE order_number = $2`,
+      [this.status, this.order_number],
+    );
+    return updateOrder.rows[0];
+  }
 }
 
 module.exports = Order;
