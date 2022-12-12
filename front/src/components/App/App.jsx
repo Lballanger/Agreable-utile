@@ -18,10 +18,11 @@ import Cart from "../Cart/Cart";
 import Footer from "../Footer/Footer";
 import Success from "../Checkout/Success/Success";
 import Checkout from "../Checkout/Checkout";
+import GuestRegistration from "../GuestRegistration/GuestRegistration";
+import NotFound from "../NotFound/NotFound";
 
 // Hooks
 import useAuth from "../../hooks/useAuth";
-import GuestRegistration from "../GuestRegistration/GuestRegistration";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ function App() {
           <Route path="/account/:id/profil" element={<Profil />} />
           <Route path="/account/:id/orders" element={<Orders />} />
         </Route>
+        <Route exact path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>
