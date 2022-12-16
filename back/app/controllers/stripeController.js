@@ -2,6 +2,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable import/no-unresolved */
 const stripe = require("stripe")(process.env.STRIPE_KEY);
+const Guest = require("../models/guest");
 const Order = require("../models/order");
 const OrderLine = require("../models/orderLine");
 
@@ -20,7 +21,11 @@ const stripeController = {
   payment: async (request, response) => {
     const { cart, delivery, userId } = request.body;
 
+    const guestInformation = JSON.stringify(request.body.guestInformation);
+    console.log("guestInformation________", guestInformation);
+
     const generateOrderNumber = new Date().valueOf();
+
     try {
       const paymentIntent = await stripe.paymentIntents.create({
         amount: calculateOrderAmount(cart),
@@ -29,6 +34,7 @@ const stripeController = {
         receipt_email: "ballanger.loic@gmail.com",
         metadata: {
           userId,
+          guestInformation,
           orderNumber: generateOrderNumber,
           articles: JSON.stringify(
             cart.map((article) => ({
@@ -67,24 +73,67 @@ const stripeController = {
       case "payment_intent.succeeded":
         const paymentIntent = event.data.object;
 
-        console.log("payment_intent.succeeded", paymentIntent.charges.data);
-
         try {
           const articles = JSON.parse(paymentIntent.metadata.articles);
 
-          const order = await new Order({
-            user_id: paymentIntent.metadata.userId,
-            order_number: paymentIntent.metadata.orderNumber,
-            status: "En attente de paiement",
-          }).create();
+          // Guest
+          if (
+            !paymentIntent.metadata.userId &&
+            paymentIntent.metadata.guestInformation
+          ) {
+            const {
+              firstname,
+              lastname,
+              email,
+              country,
+              address,
+              city,
+              postalCode,
+              additionalInfo,
+              phone,
+            } = JSON.parse(paymentIntent.metadata.guestInformation);
 
-          articles.forEach(async (article) => {
-            await new OrderLine({
-              quantity: article.quantity,
-              order_id: order.id,
-              article_id: article.id,
+            const guest = await new Guest({
+              civility: "Mr",
+              firstname,
+              lastname,
+              email,
+              country,
+              address,
+              city,
+              postal_code: postalCode,
+              additional_info: additionalInfo,
+              phone,
             }).create();
-          });
+
+            const order = await new Order({
+              userId: null,
+              temporary_user_id: guest.id,
+              order_number: paymentIntent.metadata.orderNumber,
+              status: "En attente de paiement",
+            }).create();
+          }
+
+          if (
+            paymentIntent.metadata.userId &&
+            paymentIntent.metadata.guestInformation === "null"
+          ) {
+            // Auth User
+            const order = await new Order({
+              user_id: paymentIntent.metadata.userId,
+              temporary_user_id: null,
+              order_number: paymentIntent.metadata.orderNumber,
+              status: "En attente de paiement",
+            }).create();
+
+            articles.forEach(async (article) => {
+              await new OrderLine({
+                quantity: article.quantity,
+                order_id: order.id,
+                article_id: article.id,
+              }).create();
+            });
+          }
         } catch (error) {
           console.log(error);
           return response.status(500).json(error.message);
@@ -98,7 +147,6 @@ const stripeController = {
       case "charge.succeeded":
         const chargeSucceeded = event.data.object;
 
-        console.log("chargeSucceeded : _____", chargeSucceeded);
         try {
           const existingOrder = await Order.getByOrderNumber(
             chargeSucceeded.metadata.orderNumber,
@@ -111,6 +159,7 @@ const stripeController = {
 
           const updateOrder = await existingOrder.update();
         } catch (error) {
+          console.log(error);
           return response.status(500).json(error.message);
         }
 

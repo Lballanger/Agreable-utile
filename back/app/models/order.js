@@ -11,10 +11,10 @@ class Order {
 
   async create() {
     const createdOrder = await client.query(
-      `INSERT INTO private."order" ("user_id", "order_number", "status") 
-       VALUES ($1, $2, $3)
+      `INSERT INTO private."order" ("user_id", "temporary_user_id", "order_number", "status") 
+       VALUES ($1, $2, $3, $4)
        RETURNING *`,
-      [this.user_id, this.order_number, this.status],
+      [this.user_id, this.temporary_user_id, this.order_number, this.status],
     );
     return createdOrder.rows[0];
   }
