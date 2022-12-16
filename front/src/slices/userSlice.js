@@ -65,6 +65,12 @@ const userSlice = createSlice({
     getToken(state, { payload }) {
       state.token = payload;
     },
+    addGuestPersonalInfo(state, { payload }) {
+      state.userData = payload;
+    },
+    addGuestAddress(state, { payload }) {
+      state.addresses.push(payload);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
@@ -80,10 +86,12 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.error.message;
     });
+
     builder.addCase(signOut.fulfilled, (state) => {
       state.token = null;
       state.userData = null;
     });
+
     builder.addCase(fetchUserData.pending, (state) => {
       state.loading = true;
     });
@@ -95,6 +103,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.error.message;
     });
+
     builder.addCase(register.pending, (state) => {
       state.loading = true;
     });
@@ -107,6 +116,7 @@ const userSlice = createSlice({
     builder.addCase(register.rejected, (state, action) => {
       state.error = action.error.message;
     });
+
     builder.addCase(createAddress.pending, (state) => {
       state.loading = true;
     });
@@ -131,5 +141,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { getToken } = userSlice.actions;
+export const { getToken, addGuestPersonalInfo, addGuestAddress } =
+  userSlice.actions;
 export default userSlice.reducer;

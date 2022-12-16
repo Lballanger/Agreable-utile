@@ -31,6 +31,13 @@ function Logon({ setSteps, setActiveStep }) {
         };
       });
       setActiveStep("placeOrder");
+    } else {
+      setSteps((state) => {
+        return {
+          ...state,
+          logon: false,
+        };
+      });
     }
   }, [token]);
 
@@ -129,10 +136,19 @@ function Logon({ setSteps, setActiveStep }) {
               du processus.
             </p>
           </div>
-          <Link
-            to="/order/guest-registration"
+          <button
+            onClick={() => {
+              setSteps((state) => {
+                return {
+                  ...state,
+                  logon: true,
+                };
+              });
+              setActiveStep("guest");
+            }}
+            type="button"
             className="logon__container__guest-container__link"
-          >{`Continuez en tant qu'invité(e)`}</Link>
+          >{`Continuez en tant qu'invité(e)`}</button>
         </div>
       </div>
     </div>

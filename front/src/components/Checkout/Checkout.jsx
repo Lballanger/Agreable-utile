@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import CheckoutProgress from "../Shared/CheckoutProgress/CheckoutProgress";
 import Logon from "./Logon/Logon";
 import PlaceOrder from "./PlaceOrder/PlaceOrder";
 import Payment from "./Payment/Payment";
 import Success from "./Success/Success";
+import GuestRegistration from "./GuestRegistration/GuestRegistration";
 
 const initialSteps = {
   logon: false,
+  guest: false,
   placeOrder: false,
   payment: false,
   success: false,
@@ -24,8 +26,16 @@ function Checkout() {
       {activeStep === "logon" && (
         <Logon setSteps={setSteps} setActiveStep={setActiveStep} />
       )}
+      {activeStep === "guest" && (
+        <GuestRegistration setSteps={setSteps} setActiveStep={setActiveStep} />
+      )}
+
       {activeStep === "placeOrder" && (
-        <PlaceOrder setSteps={setSteps} setActiveStep={setActiveStep} />
+        <PlaceOrder
+          steps={steps}
+          setSteps={setSteps}
+          setActiveStep={setActiveStep}
+        />
       )}
       {activeStep === "payment" && (
         <Payment setSteps={setSteps} setActiveStep={setActiveStep} />

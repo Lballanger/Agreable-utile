@@ -18,7 +18,7 @@ import Cart from "../Cart/Cart";
 import Footer from "../Footer/Footer";
 import Success from "../Checkout/Success/Success";
 import Checkout from "../Checkout/Checkout";
-import GuestRegistration from "../GuestRegistration/GuestRegistration";
+import GuestRegistration from "../Checkout/GuestRegistration/GuestRegistration";
 import NotFound from "../NotFound/NotFound";
 
 // Hooks

@@ -1,4 +1,6 @@
 import "./GuestRegistration.scss";
+
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,13 +8,14 @@ import {
   register,
   createAddress,
   fetchAddressesByUserId,
-} from "../../slices/userSlice";
+  addGuestPersonalInfo,
+  addGuestAddress,
+} from "../../../slices/userSlice";
 
-import Field from "../Shared/Field/Field";
-import AddressControl from "../Shared/AddressControl/AddressControl";
-import { createGuestRegistration } from "../../slices/orderSlice";
+import Field from "../../Shared/Field/Field";
+import AddressControl from "../../Shared/AddressControl/AddressControl";
 
-function GuestRegistration() {
+function GuestRegistration({ setSteps, setActiveStep }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -129,7 +132,13 @@ function GuestRegistration() {
                 email: data.email,
               }),
             );
-            navigate("/place-order");
+            setSteps((state) => {
+              return {
+                ...state,
+                guest: true,
+              };
+            });
+            setActiveStep("placeOrder");
           })
           .catch((error) => {
             console.error(error);
@@ -149,20 +158,38 @@ function GuestRegistration() {
         // In the case of a user already logged in
       } else {
         dispatch(
-          createGuestRegistration({
-            civility: "Mr",
+          addGuestPersonalInfo({
             firstname,
             lastname,
-            email,
             country,
             address,
             city,
             postalCode,
             additionalInfo: addressInformation,
             phone,
+            email,
           }),
         );
-        navigate("/payment");
+        dispatch(
+          addGuestAddress({
+            firstname,
+            lastname,
+            country,
+            address,
+            city,
+            postalCode,
+            additionalInfo: addressInformation,
+            phone,
+            email,
+          }),
+        );
+        setSteps((state) => {
+          return {
+            ...state,
+            guest: true,
+          };
+        });
+        setActiveStep("placeOrder");
       }
     }
   };
@@ -343,7 +370,7 @@ function GuestRegistration() {
     <div className="guest-registration">
       <div className="guest-registration__left-container">
         <h2 className="guest-registration__left-container__title">
-          INDIQUEZ LES DÉTAILS DE LIVRAISON
+          INDIQUEZ VOS INFORMATIONS PERSONNELLES
         </h2>
         <form
           className="guest-registration__left-container__form"
@@ -555,5 +582,10 @@ function GuestRegistration() {
     </div>
   );
 }
+
+GuestRegistration.propTypes = {
+  setSteps: PropTypes.bool.isRequired,
+  setActiveStep: PropTypes.func.isRequired,
+};
 
 export default GuestRegistration;

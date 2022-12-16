@@ -6,7 +6,20 @@ export const paymentIntent = createAsyncThunk(
   async (payload, { getState }) => {
     const state = getState();
     const response = await instance.post("/payment", {
-      userId: state.userSlice.userData.id,
+      userId: state.userSlice.userData?.id,
+      guestInformation: state.userSlice.userData?.id
+        ? null
+        : {
+            firstname: state.userSlice.userData?.firstname,
+            lastname: state.userSlice.userData?.lastname,
+            email: state.userSlice.userData?.email,
+            country: state.userSlice.userData?.country,
+            address: state.userSlice.userData?.address,
+            city: state.userSlice.userData?.city,
+            postalCode: state.userSlice.userData?.postalCode,
+            additionalInfo: state.userSlice.userData?.additionalInfo,
+            phone: state.userSlice.userData?.phone,
+          },
       cart: state.articlesSlice.cart,
       articles: state.cartSlice.cart,
       delivery: state.cartSlice.delivery,
