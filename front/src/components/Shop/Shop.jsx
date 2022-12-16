@@ -68,7 +68,7 @@ function Shop() {
                       <label htmlFor={category.name}> {category.name}</label>
                     </li>
                   ))
-                : " "}
+                : ""}
             </ul>
           </div>
           <div className="shop__articles-container">
@@ -119,7 +119,7 @@ function Shop() {
                         </Link>
                       </div>
                     ))
-                : ""}
+                : "Une erreur est survenue. Veuillez nous excuser pour la gêne occasionnée."}
             </div>
           </div>
         </>

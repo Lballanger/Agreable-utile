@@ -96,6 +96,7 @@ const articlesSlice = createSlice({
       state.articles = action.payload;
     });
     builder.addCase(fetchArticles.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.error.message;
     });
 
@@ -108,6 +109,7 @@ const articlesSlice = createSlice({
       state.categories = action.payload;
     });
     builder.addCase(fetchCategories.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.error.message;
     });
   },
