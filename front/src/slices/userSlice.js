@@ -102,6 +102,7 @@ const userSlice = createSlice({
     builder.addCase(fetchUserData.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
+      state.token = null;
     });
 
     builder.addCase(register.pending, (state) => {

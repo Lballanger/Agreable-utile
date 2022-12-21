@@ -1,6 +1,6 @@
 import "./App.scss";
 
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getOldCart } from "../../slices/articlesSlice";
@@ -49,17 +49,12 @@ function App() {
         <Route exact path="/shop" element={<Shop />} />
         <Route exact path="/shop/:id" element={<Product />} />
         <Route exact path="/cart" element={<Cart />} />
-        <Route
-          path="/account/:id"
-          element={
-            <ProtectedRoute>
-              <Account />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="/account/:id/profil" element={<Profil />} />
-          <Route path="/account/:id/orders" element={<Orders />} />
-          <Route path="/account/:id/order/:id" element={<Order />} />
+        <Route element={<PrivateRoute />}>
+          <Route element={<Account />}>
+            <Route path="/account/:id/profil" element={<Profil />} />
+            <Route path="/account/:id/orders" element={<Orders />} />
+            <Route path="/account/:id/order/:id" element={<Order />} />
+          </Route>
         </Route>
         <Route exact path="*" element={<NotFound />} />
       </Routes>
@@ -68,15 +63,15 @@ function App() {
   );
 }
 
-// eslint-disable-next-line react/prop-types
-function ProtectedRoute({ children }) {
+function PrivateRoute() {
   const accessToken = useAuth();
+  const { pathname } = useLocation();
 
-  if (!accessToken) {
-    return <Navigate to="/" replace />;
-  }
-
-  return children;
+  return accessToken ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/" state={{ from: pathname }} replace />
+  );
 }
 
 export default App;
