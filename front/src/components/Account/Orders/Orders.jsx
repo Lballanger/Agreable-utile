@@ -7,6 +7,7 @@ import { fetchOrdersByUserId } from "../../../slices/orderSlice";
 function Orders() {
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.userSlice.userData);
   const orders = useSelector((state) => state.orderSlice.orders);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function Orders() {
                       key={article.id}
                       src={
                         new URL(
-                          `/src/assets/img/shop/articles/${article.image[0]}.jpg`,
+                          `/src/assets/img/shop/articles/${article.article.image[0]}.jpg`,
                           import.meta.url,
                         ).href
                       }
@@ -79,7 +80,7 @@ function Orders() {
               <div className="orders__container__order__bottom-container__link-container">
                 <Link
                   className="orders__container__order__bottom-container__link-container__link"
-                  to={`/order/${order.order_number}`}
+                  to={`/account/${user.id}/order/${order.order_number}`}
                 >
                   Voir la commande
                 </Link>

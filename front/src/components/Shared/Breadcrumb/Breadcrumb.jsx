@@ -9,7 +9,8 @@ function Breadcrumb() {
   const product = useSelector((state) => state.articlesSlice.articles);
 
   const getNameProduct = (id) => {
-    return product?.find((product) => product.article_id === Number(id));
+    if (!product) return null;
+    return product.find((product) => product.article_id === Number(id));
   };
 
   const nameProduct = getNameProduct(id);

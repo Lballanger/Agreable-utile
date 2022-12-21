@@ -14,6 +14,7 @@ import Register from "../Register/Register";
 import Account from "../Account/Account";
 import Profil from "../Account/Profil/Profil";
 import Orders from "../Account/Orders/Orders";
+import Order from "../Account/Order/Order";
 import Cart from "../Cart/Cart";
 import Footer from "../Footer/Footer";
 import Success from "../Checkout/Success/Success";
@@ -58,6 +59,7 @@ function App() {
         >
           <Route path="/account/:id/profil" element={<Profil />} />
           <Route path="/account/:id/orders" element={<Orders />} />
+          <Route path="/account/:id/order/:id" element={<Order />} />
         </Route>
         <Route exact path="*" element={<NotFound />} />
       </Routes>
