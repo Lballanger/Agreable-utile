@@ -23,22 +23,23 @@ class Order {
     try {
       const { rows } = await client.query(
         `WITH order_line AS (
-              SELECT 
-                order_id,
-                article_id
-              FROM private.order_line
-              GROUP BY order_id, article_id	
-	        )
-          SELECT
-            private.order.order_number, private.order.created_at, private.order.status,
-            json_agg(private.article.*) AS articles
-          FROM private.order
-          LEFT JOIN order_line
-            ON private.order.id = order_line.order_id
-          JOIN private.article ON order_line.article_id=article.id	
-          WHERE private.order.user_id =$1
-          GROUP BY private.order.id
-          ORDER BY "order".created_at DESC;`,
+          SELECT 
+            order_id,
+            article_id,
+            quantity
+          FROM private.order_line
+          GROUP BY order_id, article_id, quantity
+        )
+        SELECT
+          private.order.order_number, private.order.created_at, private.order.status,
+          json_agg(json_build_object('article', row_to_json(private.article.*), 'quantity', order_line.quantity)) AS articles
+        FROM private.order
+        LEFT JOIN order_line
+          ON private.order.id = order_line.order_id
+        JOIN private.article ON order_line.article_id=article.id	
+        WHERE private.order.user_id =$1
+        GROUP BY private.order.id
+        ORDER BY "order".created_at DESC;`,
         [id],
       );
       return rows.map((order) => new Order(order));
