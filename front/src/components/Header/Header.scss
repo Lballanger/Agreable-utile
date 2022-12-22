@@ -6,7 +6,6 @@
   width: 100%;
   top: 0;
 
-  background-color: #f6f4f0;
   transition: 0.3s;
   z-index: 3;
 
@@ -475,6 +474,7 @@
   }
 }
 
+// Animation with scroll
 .small {
   animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
   box-shadow: 0 2px 24px 0 rgba(0, 0, 0, 0.171);
@@ -483,4 +483,9 @@
   &__logo {
     width: 30%;
   }
+}
+
+// For the homepage color background
+.header-color {
+  background-color: #f6f4f0;
 }

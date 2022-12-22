@@ -1,6 +1,6 @@
 import "./Header.scss";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,6 +17,8 @@ import useWindowSize from "../../hooks/useWindowSize";
 
 function Header() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location.pathname);
 
   const token = useSelector((state) => state.userSlice.token);
   const userData = useSelector((state) => state.userSlice.userData);
@@ -45,7 +47,12 @@ function Header() {
   };
 
   return (
-    <header className={`header ${small ? "header small" : ""}`}>
+    <header
+      className={`header 
+    ${small ? "header small" : ""}
+    ${location.pathname === "/" ? "header-color" : ""}
+    `}
+    >
       {!isMobile ? (
         <div className="header__navigation">
           <nav className="header__navigation__nav">
