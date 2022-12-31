@@ -60,6 +60,35 @@
             text-decoration: underline;
           }
         }
+
+        &__input {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-color: #fff;
+          cursor: pointer;
+          width: 1.5rem;
+          height: 1.5rem;
+          border: 0.01rem solid rgba(128, 128, 128, 0.247);
+          border-radius: 1rem;
+          transform: translateY(0.5rem);
+          margin-right: 0.7rem;
+          padding: 0.2rem;
+        }
+
+        &__label,
+        &__input {
+          cursor: pointer;
+        }
+
+        :checked {
+          transition: 0.5s;
+          background-color: rgb(247, 114, 136);
+          background: rgb(247, 114, 136)
+            url("data:image/gif;base64,R0lGODlhCwAKAIABAP////3cnSH5BAEKAAEALAAAAAALAAoAAAIUjH+AC73WHIsw0UCjglraO20PNhYAOw==")
+            3px 3px no-repeat;
+          background-position: 0.4rem 0.4rem;
+        }
       }
     }
   }

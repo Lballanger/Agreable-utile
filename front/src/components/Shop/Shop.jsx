@@ -15,7 +15,7 @@ function Shop() {
   const categories = useSelector((state) => state.articlesSlice.categories);
   const isLoading = useSelector((state) => state.articlesSlice.loading);
 
-  const [categorySelected, setCategorySelected] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
     if (!articles) {
@@ -28,6 +28,15 @@ function Shop() {
       dispatch(fetchCategories());
     }
   }, [categories]);
+
+  function handleCategoryChange(event) {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedCategories([...selectedCategories, value]);
+    } else {
+      setSelectedCategories(selectedCategories.filter((c) => c !== value));
+    }
+  }
 
   return (
     <div className="shop">
@@ -54,18 +63,18 @@ function Shop() {
                       <input
                         className="shop__category-container__list__link-container__input"
                         type="checkbox"
-                        name={category.name}
+                        value={category.name}
                         id={category.name}
-                        checked={categorySelected === category.name}
-                        onChange={() =>
-                          setCategorySelected(
-                            categorySelected === category.name
-                              ? ""
-                              : category.name,
-                          )
-                        }
+                        checked={selectedCategories.includes(category.name)}
+                        onChange={handleCategoryChange}
                       />
-                      <label htmlFor={category.name}> {category.name}</label>
+                      <label
+                        className="shop__category-container__list__link-container__label"
+                        htmlFor={category.name}
+                      >
+                        {" "}
+                        {category.name}
+                      </label>
                     </li>
                   ))
                 : ""}
@@ -76,10 +85,12 @@ function Shop() {
               {articles && Object.keys(articles).length > 0
                 ? articles
                     .filter((article) => {
-                      if (categorySelected) {
-                        return article.category_name === categorySelected;
+                      if (selectedCategories.includes(article.category_name)) {
+                        return article;
                       }
-                      return article;
+                      if (selectedCategories.length === 0) {
+                        return article;
+                      }
                     })
                     .map((article) => (
                       <div
