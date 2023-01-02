@@ -1,4 +1,5 @@
 const { Router, raw } = require("express");
+const multerMiddleware = require("./middlewares/multer");
 
 const router = Router();
 
@@ -12,6 +13,7 @@ const addressController = require("./controllers/addressController");
 const stripeController = require("./controllers/stripeController");
 const orderController = require("./controllers/orderController");
 const guestController = require("./controllers/guestController");
+const adminController = require("./controllers/adminController");
 
 /** ********************** USER *********************** */
 router.get("/api/user", authMiddleware(), userController.user);
@@ -59,5 +61,14 @@ router.post(
 
 router.get("/api/achievements", achievementController.findAll);
 router.get("/api/achievement/:id", achievementController.findOneById);
+
+/** ********************** ADMIN *********************** */
+
+router.post(
+  "/api/admin/image",
+  authMiddleware(),
+  multerMiddleware.single("file"),
+  adminController.uploadImage,
+);
 
 module.exports = router;
