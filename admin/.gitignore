@@ -7,17 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-front/node_modules
-front/dist
-front/dist-ssr
-back/node_modules
-back/sqitch.conf
-back/api.http
-admin/node_modules
-admin/dist
-admin/dist-ssr
+node_modules
+dist
+dist-ssr
 *.local
-*/.env
 
 # Editor directories and files
 .vscode/*
