@@ -105,7 +105,9 @@ function Products() {
   );
 
   useEffect(() => {
-    if (products.length === 0) dispatch(getProducts());
+    if (!products.length) {
+      dispatch(getProducts());
+    }
   }, [products]);
 
   const isNonMobile = useMediaQuery("(min-width: 1000px)");

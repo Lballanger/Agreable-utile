@@ -1,14 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../api/axiosConfig";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 export const getProducts = createAsyncThunk(
   "/articles",
   async (_,{ rejectWithValue }) => {
     try {
         const { data } = await instance.get(`/articles`);
-        console.log(data);
         return data;
     } catch (error) {
       return rejectWithValue(error.response.data);

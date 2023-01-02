@@ -21,7 +21,6 @@ function Navbar({
 }) {
     const dispatch = useDispatch();
     const theme = useTheme();
-    console.log("theme", theme);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const isOpen = Boolean(anchorEl);
