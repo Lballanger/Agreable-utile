@@ -1,9 +1,12 @@
 const { Router, raw } = require("express");
 const multerMiddleware = require("./middlewares/multer");
+const {
+  authMiddleware,
+  authAndAdminMiddleware,
+} = require("./middlewares/authMiddleware");
 
 const router = Router();
 
-const authMiddleware = require("./middlewares/authMiddleware");
 const userController = require("./controllers/userController");
 const authController = require("./controllers/authController");
 const articleController = require("./controllers/articleController");
@@ -17,6 +20,7 @@ const adminController = require("./controllers/adminController");
 
 /** ********************** USER *********************** */
 router.get("/api/user", authMiddleware(), userController.user);
+router.get("/api/users", authAndAdminMiddleware(), userController.findAllUsers);
 
 /** ********************** GUEST *********************** */
 router.post("/api/guest", guestController.create);

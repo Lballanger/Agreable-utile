@@ -73,6 +73,15 @@ class User {
       throw new Error(error);
     }
   }
+
+  static async getAll() {
+    try {
+      const { rows } = await client.query(`SELECT * FROM private."user"`);
+      return rows.map((row) => new User(row));
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = User;
