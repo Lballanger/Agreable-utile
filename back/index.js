@@ -19,7 +19,7 @@ app.use(
     origin:
       process.env.NODE_ENV === "production"
         ? "https://lagreable-utile-r92cy.ondigitalocean.app"
-        : "http://127.0.0.1:5173",
+        : ["http://127.0.0.1:5173", "http://127.0.0.1:5174"],
   }),
 );
 
