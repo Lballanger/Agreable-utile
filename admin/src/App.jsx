@@ -11,6 +11,7 @@ import Layout from './scenes/layout';
 import Dashboard from "./scenes/dashboard";
 import Products from "./scenes/products";
 import Login from './scenes/login';
+import Customers from './scenes/customers';
 
 function App() {
     const mode = useSelector((state) => state.globalSlice.mode);
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/articles" element={<Products />} />
+                <Route path="/clients" element={<Customers />} />
               </Route> 
             </Route>
           </Routes>

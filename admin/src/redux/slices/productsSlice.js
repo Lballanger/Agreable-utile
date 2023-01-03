@@ -1,6 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../api/axiosConfig";
 
+const initialState = {
+    isLoading: false,
+    products: [],
+    categories: [],
+    error: "",
+};
 export const getProducts = createAsyncThunk(
   "/articles",
   async (_,{ rejectWithValue }) => {
@@ -15,12 +21,7 @@ export const getProducts = createAsyncThunk(
 
 const productsSlice = createSlice({
   name: "products ",
-  initialState: {
-    isLoading: false,
-    products: [],
-    categories: [],
-    error: "",
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state) => {

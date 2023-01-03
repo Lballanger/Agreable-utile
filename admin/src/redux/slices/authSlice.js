@@ -25,14 +25,11 @@ export const login = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk("/user", async (_, { rejectWithValue}) => {
+export const authUser = createAsyncThunk("/user", async (_, { rejectWithValue}) => {
    try {
       const response = await instance.get("/user");
-      console.log(response);
       return response.data;
     } catch (error) {
-      console.log(error);
-      removeToken();
       return rejectWithValue(error.response.data);
     }
 });
@@ -52,7 +49,6 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-
     /* Login */
     builder.addCase(login.pending, (state) => {
       state.isLoading = true;
@@ -70,14 +66,14 @@ const authSlice = createSlice({
     });
 
     /* Get User */
-    builder.addCase(getUser.pending, (state) => {
+    builder.addCase(authUser.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getUser.fulfilled, (state, { payload }) => {
+    builder.addCase(authUser.fulfilled, (state, { payload }) => {
       state.user = payload;
       state.isLoading = false;
     });
-    builder.addCase(getUser.rejected, (state, { payload }) => {
+    builder.addCase(authUser.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload.message;
       state.token = null;
