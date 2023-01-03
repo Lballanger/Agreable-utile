@@ -86,7 +86,8 @@ const authController = {
   refreshToken: async (request, response) => {
     const { id } = request.user;
     try {
-      const newToken = await jwtService.generateToken({ id });
+      const user = await User.getById(id);
+      const newToken = await jwtService.generateToken({ id, role: user.role });
       return response.json({ accessToken: newToken });
     } catch (error) {
       return response.status(500).json(error.message);

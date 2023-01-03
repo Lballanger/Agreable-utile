@@ -21,6 +21,7 @@ const adminController = require("./controllers/adminController");
 /** ********************** USER *********************** */
 router.get("/api/user", authMiddleware(), userController.user);
 router.get("/api/users", authAndAdminMiddleware(), userController.findAllUsers);
+router.put("/api/user", authAndAdminMiddleware(), userController.update);
 
 /** ********************** GUEST *********************** */
 router.post("/api/guest", guestController.create);
@@ -55,6 +56,8 @@ router.get("/api/orders", authMiddleware(), orderController.findByUserId);
 /** ********************** STRIPE *********************** */
 
 router.post("/api/payment", stripeController.payment);
+
+// Hook for stripe
 router.post(
   "/api/webhook",
   raw({ type: "application/json" }),
