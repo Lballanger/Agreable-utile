@@ -5,6 +5,7 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const Guest = require("../models/guest");
 const Order = require("../models/order");
 const OrderLine = require("../models/orderLine");
+const Payment = require("../models/payment");
 
 const calculateOrderAmount = (items) => {
   const price = items
@@ -73,6 +74,8 @@ const stripeController = {
       case "payment_intent.succeeded":
         const paymentIntent = event.data.object;
 
+        console.log("paymentIntent________", paymentIntent);
+
         try {
           const articles = JSON.parse(paymentIntent.metadata.articles);
 
@@ -112,8 +115,29 @@ const stripeController = {
               order_number: paymentIntent.metadata.orderNumber,
               status: "En attente de paiement",
             }).create();
+
+            articles.forEach(async (article) => {
+              await new OrderLine({
+                quantity: article.quantity,
+                order_id: order.id,
+                article_id: article.id,
+              }).create();
+            });
+
+            const payment = await new Payment({
+              cost: paymentIntent.amount,
+              currency: paymentIntent.currency,
+              payment_id: paymentIntent.id,
+              payment_organisation: "Stripe",
+              payment_method: paymentIntent.payment_method_types[0],
+              payment_status: paymentIntent.status,
+              order_id: order.id,
+            }).create();
+
+            return response.status(200).json(payment);
           }
 
+          // Auth User
           if (
             paymentIntent.metadata.userId &&
             paymentIntent.metadata.guestInformation === "null"
@@ -133,6 +157,18 @@ const stripeController = {
                 article_id: article.id,
               }).create();
             });
+
+            const payment = await new Payment({
+              cost: paymentIntent.amount,
+              currency: paymentIntent.currency,
+              payment_id: paymentIntent.id,
+              payment_organisation: "Stripe",
+              payment_method: paymentIntent.payment_method_types[0],
+              payment_status: paymentIntent.status,
+              order_id: order.id,
+            }).create();
+
+            return response.status(200).json(payment);
           }
         } catch (error) {
           console.log(error);
