@@ -11,6 +11,8 @@ CREATE TABLE private.payment (
     payment_organisation TEXT NOT NULL,
     payment_method TEXT NOT NULL,
     payment_status TEXT NOT NULL DEFAULT FALSE,
+    user_id INT REFERENCES private."user"(id),
+    temporary_user_id INT REFERENCES private."temporary_user"(id),
     order_id INT NOT NULL REFERENCES private.order(id)
 );
 

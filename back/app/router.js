@@ -17,6 +17,7 @@ const stripeController = require("./controllers/stripeController");
 const orderController = require("./controllers/orderController");
 const guestController = require("./controllers/guestController");
 const adminController = require("./controllers/adminController");
+const paymentController = require("./controllers/paymentController");
 
 /** ********************** USER *********************** */
 router.get("/api/user", authMiddleware(), userController.user);
@@ -52,6 +53,14 @@ router.get("/api/categories", categoryController.findAll);
 
 router.post("/api/order", orderController.create);
 router.get("/api/orders", authMiddleware(), orderController.findByUserId);
+
+/** ********************** PAYMENT *********************** */
+
+router.get(
+  "/api/payments",
+  authAndAdminMiddleware(),
+  paymentController.findAllPayments,
+);
 
 /** ********************** STRIPE *********************** */
 

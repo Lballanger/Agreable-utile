@@ -74,8 +74,6 @@ const stripeController = {
       case "payment_intent.succeeded":
         const paymentIntent = event.data.object;
 
-        console.log("paymentIntent________", paymentIntent);
-
         try {
           const articles = JSON.parse(paymentIntent.metadata.articles);
 
@@ -131,6 +129,7 @@ const stripeController = {
               payment_organisation: "Stripe",
               payment_method: paymentIntent.payment_method_types[0],
               payment_status: paymentIntent.status,
+              temporary_user_id: guest.id,
               order_id: order.id,
             }).create();
 
@@ -165,6 +164,7 @@ const stripeController = {
               payment_organisation: "Stripe",
               payment_method: paymentIntent.payment_method_types[0],
               payment_status: paymentIntent.status,
+              user_id: paymentIntent.metadata.userId,
               order_id: order.id,
             }).create();
 
