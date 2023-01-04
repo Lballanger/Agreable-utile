@@ -53,7 +53,7 @@ const navItems = [
     icon: <Groups2Outlined />,
   },
   {
-    text: "Opérations",
+    text: "Paiements",
     icon: <ReceiptLongOutlined />,
   },
   {

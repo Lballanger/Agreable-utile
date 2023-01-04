@@ -114,7 +114,7 @@ function Products() {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="PRODUCTS" subtitle="See your list of products." />
+      <Header title="Articles" subtitle="Retrouver ici l'ensemble des articles." />
       {products || !isLoading ? (
         <Box
           mt="20px"
