@@ -17,7 +17,7 @@ function Daily() {
       (state) => state.statsSlice
     );
 
-    const [startDate, setStartDate] = useState(new Date("2023-01-01"));
+    const [startDate, setStartDate] = useState(new Date("2022-06-01"));
     const [endDate, setEndDate] = useState(new Date("2023-01-07"));
 
     useEffect(() => {
@@ -217,7 +217,6 @@ function Daily() {
             enablePointLabel
             enableSlices="x"
             sliceTooltip={({ slice }) => {
-              console.log(slice);
               return (
                 <div
                   style={{
@@ -227,7 +226,7 @@ function Daily() {
                     border: "1px solid #ccc",
                   }}
                 >
-                    <div>{slice.points[0].data.xFormatted}</div>
+                  <div>{slice.points[0].data.xFormatted}</div>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <div
                       style={{
@@ -240,7 +239,7 @@ function Daily() {
                     />
                     <div>Produits vendues : </div>
                     <strong style={{ marginLeft: "0.3rem" }}>
-                      {slice.points[0].data.yFormatted} €
+                      {parseInt(slice.points[0].data.yFormatted, 10)}
                     </strong>
                   </div>
                   <div style={{ display: "flex", alignItems: "center" }}>

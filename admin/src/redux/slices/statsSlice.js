@@ -7,16 +7,18 @@ const initialState = {
     dailySales: [],
     monthlySales: [],
     yearlySales: [],
+    salesPerCategory: [],
+    dashboardData: null,
   },
   isLoading: false,
   error: null,
 };
 
-export const getTotalCustomers = createAsyncThunk(
-  "/stats/total-customers",
+export const getDashboardStats = createAsyncThunk(
+  "/stats/dashboard",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await instance.get("/stats/total-customers");
+      const response = await instance.get("/stats/dashboard");
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -72,18 +74,6 @@ const statsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
 
-    builder.addCase(getTotalCustomers.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(getTotalCustomers.fulfilled, (state, { payload }) => {
-      state.stats.totalCustomers = payload;
-      state.isLoading = false;
-    });
-    builder.addCase(getTotalCustomers.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload.message;
-    });
-
     builder.addCase(getYearlySales.pending, (state) => {
       state.isLoading = true;
     });
@@ -116,6 +106,18 @@ const statsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(getDailySales.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload.message;
+    });
+
+    builder.addCase(getDashboardStats.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getDashboardStats.fulfilled, (state, { payload }) => {
+      state.stats.dashboardData = payload;
+      state.isLoading = false;
+    });
+    builder.addCase(getDashboardStats.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload.message;
     });
