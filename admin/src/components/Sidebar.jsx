@@ -67,34 +67,35 @@ const navItems = [
     pathname: null,
   },
   {
-    text: "Overview",
+    text: "Vue d'ensemble",
     icon: <PointOfSaleOutlined />,
     pathname: "vue-d-ensemble",
   },
   {
-    text: "Quotidien ",
+    text: "Quotidiennes",
     icon: <TodayOutlined />,
+    pathname: "journalier",
   },
-  {
-    text: "Mensuel",
-    icon: <CalendarMonthOutlined />,
-  },
-  {
-    text: "Breakdown",
-    icon: <PieChartOutlined />,
-  },
-  {
-    text: "Management",
-    icon: null,
-  },
-  {
-    text: "Admin",
-    icon: <AdminPanelSettingsOutlined />,
-  },
-  {
-    text: "Performance",
-    icon: <TrendingUpOutlined />,
-  },
+  // {
+  //   text: "Mensuel",
+  //   icon: <CalendarMonthOutlined />,
+  // },
+  // {
+  //   text: "Breakdown",
+  //   icon: <PieChartOutlined />,
+  // },
+  // {
+  //   text: "Management",
+  //   icon: null,
+  // },
+  // {
+  //   text: "Admin",
+  //   icon: <AdminPanelSettingsOutlined />,
+  // },
+  // {
+  //   text: "Performance",
+  //   icon: <TrendingUpOutlined />,
+  // },
 ];
 
 const Sidebar = ({

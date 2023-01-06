@@ -14,6 +14,7 @@ import Login from './scenes/login';
 import Customers from './scenes/customers';
 import Payments from './scenes/payments';
 import Overview from './scenes/overview';
+import Daily from './scenes/daily';
 
 function App() {
     const mode = useSelector((state) => state.globalSlice.mode);
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/clients" element={<Customers />} />
                 <Route path="/paiements" element={<Payments />} />
                 <Route path='/vue-d-ensemble' element={<Overview />} />
+                <Route path='/journalier' element={<Daily />} />
               </Route> 
             </Route>
           </Routes>

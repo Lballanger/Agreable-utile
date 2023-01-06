@@ -4,8 +4,9 @@ import instance from "../api/axiosConfig";
 const initialState = {
   stats: {
     totalCustomers: null,
-    yearlySales: [],
+    dailySales: [],
     monthlySales: [],
+    yearlySales: [],
   },
   isLoading: false,
   error: null,
@@ -28,7 +29,6 @@ export const getYearlySales = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await instance.get("/stats/yearly");
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -48,6 +48,18 @@ export const getMonthlySales = createAsyncThunk(
        }));
        
       return convertedData;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getDailySales = createAsyncThunk(
+  "/stats/daily",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await instance.get("/stats/daily", {params});    
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -92,6 +104,18 @@ const statsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(getMonthlySales.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload.message;
+    });
+
+    builder.addCase(getDailySales.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getDailySales.fulfilled, (state, { payload }) => {
+      state.stats.dailySales = payload;
+      state.isLoading = false;
+    });
+    builder.addCase(getDailySales.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload.message;
     });
