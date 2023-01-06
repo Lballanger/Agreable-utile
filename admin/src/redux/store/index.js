@@ -5,6 +5,7 @@ import authSlice, { authUser } from "../slices/authSlice";
 import usersSlice from "../slices/usersSlice";
 import productsSlice from "../slices/productsSlice";
 import paymentsSlice from "../slices/paymentsSlice";
+import statsSlice from "../slices/statsSlice";
 
 
 const reducer = combineReducers({
@@ -13,6 +14,7 @@ const reducer = combineReducers({
     usersSlice,
     productsSlice,
     paymentsSlice,
+    statsSlice,
 });
 
 const store = configureStore({

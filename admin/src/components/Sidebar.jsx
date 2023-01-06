@@ -39,34 +39,37 @@ const navItems = [
   {
     text: "Dashboard",
     icon: <HomeOutlined />,
+    pathname: "",
   },
   {
     text: "Espace client",
     icon: null,
+    pathname: null,
   },
   {
     text: "Articles",
     icon: <ShoppingCartOutlined />,
+    pathname: "articles",
   },
   {
     text: "Clients",
     icon: <Groups2Outlined />,
+    pathname: "clients",
   },
   {
     text: "Paiements",
     icon: <ReceiptLongOutlined />,
-  },
-  {
-    text: "Géographie",
-    icon: <PublicOutlined />,
+    pathname: "paiements",
   },
   {
     text: "Ventes",
     icon: null,
+    pathname: null,
   },
   {
-    text: "Vue d'ensemble",
+    text: "Overview",
     icon: <PointOfSaleOutlined />,
+    pathname: "vue-d-ensemble",
   },
   {
     text: "Quotidien ",
@@ -145,7 +148,7 @@ const Sidebar = ({
               </FlexBetween>
             </Box>
             <List>
-              {navItems.map(({ text, icon }) => {
+              {navItems.map(({ text, icon, pathname }) => {
                 if (!icon) {
                   return (
                     <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
@@ -159,7 +162,7 @@ const Sidebar = ({
                   <ListItem key={text} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        navigate(`/${lcText}`);
+                        navigate(`/${pathname}`);
                         setActive(lcText);
                       }}
                       sx={{
