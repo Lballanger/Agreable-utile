@@ -20,16 +20,29 @@ function Daily() {
     const [startDate, setStartDate] = useState(new Date("2022-06-01"));
     const [endDate, setEndDate] = useState(new Date("2023-01-07"));
 
-    useEffect(() => {
+    const [isLoaded, setIsLoaded] = useState(false);
 
+    useEffect(() => {
+      if (!stats.dailySales.length) {
         dispatch(
           getDailySales({
             startDate: startDate,
             endDate: endDate,
           })
         );
-      
-    }, [stats, startDate, endDate]);
+        setIsLoaded(true);
+      }
+      if (isLoaded) {
+        dispatch(
+          getDailySales({
+            startDate: startDate,
+            endDate: endDate,
+          })
+        );
+      }
+    }, [startDate, endDate]);
+
+
 
 
     const [formatttedData] = useMemo(() => {
