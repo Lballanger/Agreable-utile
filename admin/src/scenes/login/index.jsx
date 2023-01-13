@@ -64,7 +64,7 @@ function Login() {
                   password: values.password,
                 })
               ).then(() => {
-                navigate("/dashboard", { replace: true });
+                navigate("/tableau-de-bord", { replace: true });
               });
             } catch (err) {
               setStatus({ success: false });

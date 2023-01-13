@@ -26,7 +26,6 @@ function Detail() {
   const [loaded, setLoaded] = useState(true);
 
   const [quantity, setQuantity] = useState(1);
-
   // Retrieve the item if not already in the store
   useEffect(async () => {
     if (!article) {
@@ -146,12 +145,7 @@ function Detail() {
                                   ? "detail__pictures-container__list-container__container__img-container__img"
                                   : "detail__pictures-container__list-container__container__img-container__img--selected"
                               }
-                              src={
-                                new URL(
-                                  `/src/assets/img/shop/articles/${article.image[index]}.jpg`,
-                                  import.meta.url,
-                                ).href
-                              }
+                              src={article.image[index]}
                               alt=""
                               onLoad={() => setLoaded(true)}
                               style={loaded ? {} : { display: "none" }}
@@ -184,12 +178,7 @@ function Detail() {
             <div className="detail__pictures-container__image-container">
               <img
                 className="detail__pictures-container__image-container__image"
-                src={
-                  new URL(
-                    `/src/assets/img/shop/articles/${article.image[imgSelected]}.jpg`,
-                    import.meta.url,
-                  ).href
-                }
+                src={article.image[imgSelected]}
                 alt=""
                 srcSet=""
               />

@@ -28,20 +28,23 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route element={<PrivateRoute />}>
               <Route element={<Layout />}>
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route
+                  path="/"
+                  element={<Navigate to="/tableau-de-bord" replace />}
+                />
+                <Route path="/tableau-de-bord" element={<Dashboard />} />
                 <Route path="/articles" element={<Products />} />
                 <Route path="/clients" element={<Customers />} />
                 <Route path="/paiements" element={<Payments />} />
-                <Route path='/vue-d-ensemble' element={<Overview />} />
-                <Route path='/journalier' element={<Daily />} />
-              </Route> 
+                <Route path="/vue-d-ensemble" element={<Overview />} />
+                <Route path="/journalier" element={<Daily />} />
+              </Route>
             </Route>
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
 function PrivateRoute() {

@@ -19,8 +19,6 @@ function Payments() {
 
   const { payments, isLoading, error } = useSelector((state) => state.paymentsSlice);
 
-  console.log(payments);
-
     useEffect(() => {
       if (!payments.length) {
         dispatch(findAllPayments({

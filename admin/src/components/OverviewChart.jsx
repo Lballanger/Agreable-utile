@@ -26,7 +26,7 @@ function OverviewChart({ isDashboard = false, view }) {
     const { stats, isLoading, error } = useSelector((state) => state.statsSlice);
 
     useEffect(() => {
-      if (!stats.yearlySales.length) {
+      if (!stats.yearlySales?.length) {
         dispatch(
           getYearlySales()
         );
@@ -34,9 +34,10 @@ function OverviewChart({ isDashboard = false, view }) {
     }, [stats]);
 
     const [ totalSalesLine, totalUnitsLine ] = useMemo(() => {
-      if (!stats) return [];
+      if (!stats.yearlySales) return [];
 
       const { yearlySales } = stats;
+      
       
       const totalSalesLine = {
         id: "totalSales",
@@ -73,7 +74,7 @@ function OverviewChart({ isDashboard = false, view }) {
     }, [stats]);
 
 
-    if (!stats || isLoading) return "Chargement...";
+    if (!stats.yearlySales || isLoading) return "Chargement...";
 
   return (
     <ResponsiveLine
