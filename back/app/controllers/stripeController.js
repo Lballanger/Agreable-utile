@@ -123,7 +123,7 @@ const stripeController = {
             });
 
             const payment = await new Payment({
-              cost: paymentIntent.amount,
+              cost: paymentIntent.amount / 100,
               currency: paymentIntent.currency,
               payment_id: paymentIntent.id,
               payment_organisation: "Stripe",
@@ -158,7 +158,7 @@ const stripeController = {
             });
 
             const payment = await new Payment({
-              cost: paymentIntent.amount,
+              cost: paymentIntent.amount / 100,
               currency: paymentIntent.currency,
               payment_id: paymentIntent.id,
               payment_organisation: "Stripe",
