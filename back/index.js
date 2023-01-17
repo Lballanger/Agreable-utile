@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const router = require("./app/router");
 
 const app = express();
@@ -10,9 +11,11 @@ app.use((req, res, next) => {
   if (req.originalUrl === "/api/webhook") {
     next();
   } else {
-    express.json()(req, res, next);
+    bodyParser.json()(req, res, next);
   }
 });
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
