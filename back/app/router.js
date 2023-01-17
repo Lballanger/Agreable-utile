@@ -16,8 +16,8 @@ const addressController = require("./controllers/addressController");
 const stripeController = require("./controllers/stripeController");
 const orderController = require("./controllers/orderController");
 const guestController = require("./controllers/guestController");
-const adminController = require("./controllers/adminController");
 const paymentController = require("./controllers/paymentController");
+const statsController = require("./controllers/statsController");
 
 /** ********************** USER *********************** */
 router.get("/api/user", authMiddleware(), userController.user);
@@ -44,6 +44,12 @@ router.post(
 
 router.get("/api/articles", articleController.findAll);
 router.get("/api/article/:id", articleController.findOneById);
+router.post(
+  "/api/article",
+  authAndAdminMiddleware(),
+  multerMiddleware.array("img", 5),
+  articleController.create,
+);
 
 /** ********************** CATEGORIES *********************** */
 
@@ -80,11 +86,44 @@ router.get("/api/achievement/:id", achievementController.findOneById);
 
 /** ********************** ADMIN *********************** */
 
-router.post(
-  "/api/admin/image",
-  authMiddleware(),
-  multerMiddleware.single("file"),
-  adminController.uploadImage,
+// Stats
+
+router.get(
+  "/api/stats/dashboard",
+  authAndAdminMiddleware(),
+  statsController.getDashboardData,
+);
+
+router.get(
+  "/api/stats/total-customers",
+  authAndAdminMiddleware(),
+  statsController.getTotalCustomers,
+);
+router.get(
+  "/api/stats/yearly",
+  authAndAdminMiddleware(),
+  statsController.getYearlyData,
+);
+router.get(
+  "/api/stats/monthly",
+  authAndAdminMiddleware(),
+  statsController.getMonthlyData,
+);
+router.get(
+  "/api/stats/daily",
+  authAndAdminMiddleware(),
+  statsController.getDailyData,
+);
+router.get(
+  "/api/stats/categorys",
+  authAndAdminMiddleware(),
+  statsController.getTotalSalesPerCategory,
+);
+
+router.get(
+  "/api/stats/sales",
+  authAndAdminMiddleware(),
+  statsController.getAllSales,
 );
 
 module.exports = router;
