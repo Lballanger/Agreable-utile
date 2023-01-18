@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/slices/productsSlice";
 import { Link as RouterLink } from "react-router-dom";
+import cloudinary from "../../lib/cloudinary";
 
 // Components
 import Header from "../../components/Header";
@@ -24,6 +25,7 @@ import {
   useMediaQuery,
   CardMedia,
   Link,
+  Badge,
 } from "@mui/material";
 import {
   Add,
@@ -40,6 +42,9 @@ import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
+
+// Utils
+import formatDate from "../../utils/formatDate";
 
 function Products() {
   const dispatch = useDispatch();
@@ -63,13 +68,6 @@ function Products() {
   const [search, setSearch] = useState("");
 
   const [open, setOpen] = useState(false);
-
-  // Create and configure your Cloudinary instance.
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "dcqlpb3vu",
-    },
-  });
 
   return (
     <Box m="1.5rem 2.5rem">
@@ -129,13 +127,14 @@ function Products() {
               headerName: "NOM",
               flex: 0.8,
               renderCell: (params) => {
-                const myImage = cld
-                  .image(params.row.image[0])
-                  .resize(thumbnail().width(80).height(80));
                 return (
                   <FlexBetween>
                     <Box display="flex" alignItems="center" mr="0.7rem">
-                      <AdvancedImage cldImg={myImage} />
+                      <AdvancedImage
+                        cldImg={cloudinary
+                          .image(params.row.image[0])
+                          .resize(thumbnail().width(80).height(80))}
+                      />
                     </Box>
                     <Box>
                       <Link
@@ -171,14 +170,28 @@ function Products() {
               flex: 0.4,
             },
             {
-              field: "stock",
-              headerName: "STATUS",
+              field: "status",
+              headerName: "STOCK",
               flex: 0.4,
+              renderCell: (params) => {
+                return (
+                  <Badge
+                    badgeContent={params.row.status}
+                    color={params.row.quantity > 0 ? "success" : "error"}
+                    overlap="rectangle"
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  />
+                );
+              },
             },
             {
-              field: "user_id",
+              field: "updated_at",
               headerName: "MISE A JOUR",
-              flex: 0.4,
+              flex: 0.7,
+              valueGetter: ({ value }) => formatDate(value),
             },
             {
               field: "order_id",
