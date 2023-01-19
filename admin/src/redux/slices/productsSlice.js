@@ -4,9 +4,11 @@ import instance from "../api/axiosConfig";
 const initialState = {
     isLoading: false,
     products: [],
+    productDetail: null,
     categories: [],
     error: "",
 };
+
 export const getProducts = createAsyncThunk(
   "/articles",
   async (_,{ rejectWithValue }) => {
@@ -18,6 +20,19 @@ export const getProducts = createAsyncThunk(
     }
   }
 );
+export const getProductById = createAsyncThunk(
+  "/article/:id",
+  async (payload,{ rejectWithValue }) => {
+    try {
+        const { data } = await instance.get(`/article/${payload}`);
+        return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
 
 export const getCategories = createAsyncThunk(
   "/categories",
@@ -60,6 +75,18 @@ const productsSlice = createSlice({
       state.products = payload;
     });
     builder.addCase(getProducts.rejected, (state, {payload}) => {
+      state.isLoading = false;
+      state.error = payload;
+    });
+
+    builder.addCase(getProductById.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getProductById.fulfilled, (state, {payload}) => {
+      state.isLoading = false;
+      state.productDetail = payload;
+    });
+    builder.addCase(getProductById.rejected, (state, {payload}) => {
       state.isLoading = false;
       state.error = payload;
     });

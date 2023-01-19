@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/slices/productsSlice";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import cloudinary from "../../lib/cloudinary";
 
 // Components
@@ -49,6 +49,8 @@ import formatDate from "../../utils/formatDate";
 function Products() {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const navigate = useNavigate();
+
   const { products, isLoading, error } = useSelector(
     (state) => state.productsSlice
   );
@@ -119,11 +121,11 @@ function Products() {
       >
         <DataGrid
           loading={isLoading || !products.length}
-          getRowId={(row) => row.article_id}
+          getRowId={(row) => row.id}
           rows={products || []}
           columns={[
             {
-              field: "article_name",
+              field: "name",
               headerName: "NOM",
               flex: 0.8,
               renderCell: (params) => {
@@ -139,12 +141,12 @@ function Products() {
                     <Box>
                       <Link
                         component={RouterLink}
-                        to={`/articles/${params.row.article_id}`}
+                        to={`/articles/${params.id}`}
                         underline="none"
                         color="inherit"
                         fontWeight="700"
                       >
-                        {params.row.article_name}
+                        {params.row.name}
                       </Link>
                     </Box>
                   </FlexBetween>
@@ -179,10 +181,6 @@ function Products() {
                     badgeContent={params.row.status}
                     color={params.row.quantity > 0 ? "success" : "error"}
                     overlap="rectangle"
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
                   />
                 );
               },
@@ -206,7 +204,7 @@ function Products() {
                 <GridActionsCellItem
                   icon={<Visibility />}
                   label="Voir"
-                  onClick={() => {}}
+                  onClick={() => navigate(`/articles/${params.row.id}`)}
                   showInMenu
                 />,
                 <GridActionsCellItem
