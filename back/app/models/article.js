@@ -46,7 +46,23 @@ class Article {
   static async findAll() {
     try {
       const { rows } = await client.query(
-        "SELECT article.id AS article_id, description, image, article.name AS article_name, price_wt, quantity, status, created_at, updated_at, category.name AS category_name, category.id AS category_id FROM private.article  JOIN private.category ON article.category_id= category.id;",
+        `SELECT 
+          article.id AS id, 
+          description, 
+          image, 
+          article.name AS name, 
+          price_wt, quantity, 
+          status, 
+          created_at, 
+          updated_at, 
+          category.name AS category_name, 
+          category.id AS category_id 
+        FROM 
+          private.article  
+        JOIN 
+          private.category 
+        ON 
+          article.category_id = category.id;`,
       );
       return rows.map((article) => new Article(article));
     } catch (error) {
@@ -57,7 +73,26 @@ class Article {
   static async findOneById(id) {
     try {
       const { rows } = await client.query(
-        "SELECT * FROM private.article WHERE id=$1",
+        `SELECT 
+          article.id AS id, 
+          description, 
+          image, 
+          article.name AS name, 
+          price_wt, 
+          quantity, 
+          status, 
+          created_at, 
+          updated_at, 
+          category.name AS category_name, 
+          category.id AS category_id 
+        FROM 
+          private.article  
+        JOIN 
+          private.category 
+        ON 
+          article.category_id = category.id
+        WHERE 
+          private.article.id= $1`,
         [id],
       );
       if (rows.length > 0) return new Article(rows[0]);
