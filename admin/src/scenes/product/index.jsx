@@ -30,12 +30,10 @@ function Product() {
   );
 
   useEffect(() => {
-    if (!productDetail) {
+    if (!productDetail || productDetail.id !== params.id) {
       dispatch(getProductById(params.id));
     }
   }, [productDetail]);
-
-  console.log(productDetail);
 
   return (
     <Box m="1.5rem 2.5rem">
@@ -188,11 +186,6 @@ function Product() {
                 {productDetail?.image && productDetail?.image.length > 0 && (
                   <ImageSlider images={productDetail?.image} />
                 )}
-                {/* <AdvancedImage
-                  cldImg={cloudinary
-                    .image(product?.image[0])
-                    .resize(scale().width(300))}
-                /> */}
               </Box>
             </Box>
           </Box>
