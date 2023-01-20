@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -7,7 +7,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
+import { ArrowBack, EditOutlined } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -17,6 +17,10 @@ import { AdvancedImage } from "@cloudinary/react";
 import cloudinary from "../../lib/cloudinary";
 import { scale, thumbnail } from "@cloudinary/url-gen/actions/resize";
 import ImageSlider from "../../components/ImageSlider";
+import FlexBetween from "../../components/FlexBetween";
+
+import AddProductModal from "../../components/ModalProduct.jsx";
+import EditProductModal from "../../components/EditProductModal";
 
 function Product() {
   const dispatch = useDispatch();
@@ -33,10 +37,13 @@ function Product() {
     if (!productDetail || productDetail.id !== params.id) {
       dispatch(getProductById(params.id));
     }
-  }, [productDetail]);
+  }, []);
+
+  const [open, setOpen] = useState(false);
 
   return (
     <Box m="1.5rem 2.5rem">
+      {open && <EditProductModal productDetail={productDetail} open setOpen={setOpen} />}
       <Button
         startIcon={<ArrowBack />}
         size="medium"
@@ -60,9 +67,24 @@ function Product() {
         >
           <Box>
             <Box>
-              <Box p="1.25rem 1rem">
+              <FlexBetween p="1.25rem 1rem">
                 <Typography variant="h4">Informations</Typography>
-              </Box>
+                <Box>
+                  <Button
+                    sx={{
+                      backgroundColor: theme.palette.secondary.light,
+                      color: theme.palette.background.alt,
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                      padding: "10px 20px",
+                    }}
+                    onClick={() => setOpen(true)}
+                  >
+                    <EditOutlined sx={{ mr: "10px" }} />
+                    Éditer
+                  </Button>
+                </Box>
+              </FlexBetween>
             </Box>
             <Divider variant="fullWidth" />
 
@@ -180,9 +202,7 @@ function Product() {
                   </Box>
                 </Box>
               </Box>
-              <Box 
-              width="60%"
-              >
+              <Box width="60%">
                 {productDetail?.image && productDetail?.image.length > 0 && (
                   <ImageSlider images={productDetail?.image} />
                 )}

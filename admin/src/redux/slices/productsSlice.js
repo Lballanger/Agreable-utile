@@ -20,6 +20,7 @@ export const getProducts = createAsyncThunk(
     }
   }
 );
+
 export const getProductById = createAsyncThunk(
   "/article/:id",
   async (payload,{ rejectWithValue }) => {
@@ -32,7 +33,17 @@ export const getProductById = createAsyncThunk(
   }
 );
 
-
+export const updateProductById = createAsyncThunk(
+  "/article/update/:id",
+  async (payload,{ rejectWithValue }) => {
+    try {
+        const { data } = await instance.patch(`/article/${payload.id}`, payload);
+        return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const getCategories = createAsyncThunk(
   "/categories",
@@ -87,6 +98,18 @@ const productsSlice = createSlice({
       state.productDetail = payload;
     });
     builder.addCase(getProductById.rejected, (state, {payload}) => {
+      state.isLoading = false;
+      state.error = payload;
+    });
+    
+    builder.addCase(updateProductById.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateProductById.fulfilled, (state, {payload}) => {
+      state.isLoading = false;
+      state.productDetail = payload;
+    });
+    builder.addCase(updateProductById.rejected, (state, {payload}) => {
       state.isLoading = false;
       state.error = payload;
     });
