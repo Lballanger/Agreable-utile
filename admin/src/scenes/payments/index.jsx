@@ -132,6 +132,11 @@ const columns = [
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           onSortModelChange={(newSortModel) => setSort(...newSortModel)}
           components={{ Toolbar: DataGridCustomToolbar }}
+          localeText={{
+            toolbarColumns: "Colonnes",
+            toolbarDensity: "Densité",
+            toolbarExport: "Exporter",
+          }}
           componentsProps={{
             toolbar: { searchInput, setSearchInput, setSearch },
           }}

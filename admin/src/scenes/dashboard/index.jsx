@@ -91,7 +91,7 @@ const Dashboard = () => {
       <FlexBetween>
         <Header title="Tableau de bord" />
         <Box>
-          <Button
+          {/* <Button
             sx={{
               backgroundColor: theme.palette.secondary.light,
               color: theme.palette.background.alt,
@@ -102,7 +102,7 @@ const Dashboard = () => {
           >
             <DownloadOutlined sx={{ mr: "10px" }} />
             Télécharger le rapport
-          </Button>
+          </Button> */}
         </Box>
       </FlexBetween>
 
@@ -118,7 +118,7 @@ const Dashboard = () => {
       >
         <StatBox
           title="Nombre d'utilisateurs"
-          value={stats.dashboardData?.totalCustomers}
+          value={stats.dashboardData?.totalCustomers || 0}
           increase="" //"+43%"
           description="Depuis le mois dernier"
           icon={
@@ -129,7 +129,7 @@ const Dashboard = () => {
         />
         <StatBox
           title="Ventes d'aujourd'hui"
-          value={stats.dashboardData?.dailySales}
+          value={stats.dashboardData?.dailySales || 0}
           increase="" //"+43%"
           description="Depuis le mois dernier"
           icon={
@@ -150,7 +150,7 @@ const Dashboard = () => {
         </Box>
         <StatBox
           title="Ventes du mois"
-          value={stats.dashboardData?.monthlySales}
+          value={stats.dashboardData?.monthlySales || 0}
           increase="" //"+43%"
           description="Depuis le mois dernier"
           icon={
@@ -161,7 +161,7 @@ const Dashboard = () => {
         />
         <StatBox
           title="Ventes de l'année"
-          value={stats.dashboardData?.yearlySales}
+          value={stats.dashboardData?.yearlySales || 0}
           increase="" //"+43%"
           description="Depuis le mois dernier"
           icon={

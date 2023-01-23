@@ -43,7 +43,7 @@ import profileImage from "../assets/profile.jpg";
 
 const navItems = [
   {
-    text: "Dashboard",
+    text: "Tableau de bord",
     icon: <HomeOutlined />,
     pathname: "tableau-de-bord",
   },

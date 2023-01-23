@@ -12,6 +12,7 @@ import FlexBetween from "./FlexBetween";
 function DataGridCustomToolbar({ searchInput, setSearchInput, setSearch}) {
   return (
     <GridToolbarContainer>
+      
       <FlexBetween width="100%">
         <FlexBetween>
         <GridToolbarColumnsButton />
@@ -20,7 +21,7 @@ function DataGridCustomToolbar({ searchInput, setSearchInput, setSearch}) {
       </FlexBetween>
       
       <TextField
-        label="Search..."
+        label="Recherche..."
         sx={{ mb: "0.5rem", width: "15rem" }}
         onChange={(e) => setSearchInput(e.target.value)}
         value={searchInput}

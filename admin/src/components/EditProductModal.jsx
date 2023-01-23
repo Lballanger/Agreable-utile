@@ -121,6 +121,14 @@ function EditProductModal({ open, setOpen, productData }) {
                       mt: 1,
                       mb: 1,
                     },
+                    "& label.Mui-focused": {
+                      color: theme.palette.secondary.main,
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: theme.palette.secondary.main,
+                      },
+                    },
                   }}
                 >
                   <TextField

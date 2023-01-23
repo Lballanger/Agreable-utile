@@ -227,7 +227,7 @@ function Products() {
                   icon={<Edit />}
                   label="Editer"
                   onClick={() => {
-                    setOpenEditModal(true)
+                    setOpenEditModal(true);
                     setSelectedId(params.row.id);
                   }}
                   showInMenu
@@ -256,6 +256,11 @@ function Products() {
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           onSortModelChange={(newSortModel) => setSort(...newSortModel)}
           components={{ Toolbar: DataGridCustomToolbar }}
+          localeText={{
+            toolbarColumns: "Colonnes",
+            toolbarDensity: "Densité",
+            toolbarExport: "Exporter",
+          }}
           componentsProps={{
             toolbar: { searchInput, setSearchInput, setSearch },
           }}
