@@ -58,6 +58,32 @@ const articleController = {
       response.status(500).json(error.message);
     }
   },
+
+  updateById: async (request, response) => {
+    try {
+      const id = parseInt(request.params.id, 10);
+
+      const { name, description, price, quantity, categoryId } = request.body;
+
+      const article = await Article.findOneById(id);
+
+      if (!article)
+        return response.status(404).json(`Article with id ${id} doesn't exist`);
+
+      article.name = name;
+      article.description = description;
+      article.price_wt = price;
+      article.quantity = quantity;
+      article.category_id = categoryId;
+
+      await article.update();
+
+      return response.json(article);
+    } catch (error) {
+      console.log(error);
+      response.status(500).json(error.message);
+    }
+  },
 };
 
 module.exports = articleController;

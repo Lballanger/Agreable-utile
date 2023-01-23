@@ -101,6 +101,41 @@ class Article {
       return new Error(error.detail ? error.detail : error.message);
     }
   }
+
+  async update() {
+    try {
+      const { rows } = await client.query(
+        `UPDATE 
+          private.article 
+        SET 
+          description = $1,
+          image = $2,
+          name = $3,
+          price_wt = $4,
+          quantity = $5,
+          status = $6,
+          updated_at = NOW(),
+          category_id = $7
+        WHERE 
+          id = $8
+        RETURNING *`,
+        [
+          this.description,
+          this.image,
+          this.name,
+          this.price_wt,
+          this.quantity,
+          this.status,
+          this.category_id,
+          this.id,
+        ],
+      );
+      if (!rows.length) return null;
+      return new Article(rows[0]);
+    } catch (error) {
+      return new Error(error.detail ? error.detail : error.message);
+    }
+  }
 }
 
 module.exports = Article;

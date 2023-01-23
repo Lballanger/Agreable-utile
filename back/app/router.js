@@ -44,6 +44,11 @@ router.post(
 
 router.get("/api/articles", articleController.findAll);
 router.get("/api/article/:id", articleController.findOneById);
+router.patch(
+  "/api/article/:id",
+  authMiddleware(),
+  articleController.updateById,
+);
 router.post(
   "/api/article",
   authAndAdminMiddleware(),
