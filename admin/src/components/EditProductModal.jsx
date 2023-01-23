@@ -29,7 +29,7 @@ import cloudinary from "../lib/cloudinary";
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 
-function EditProductModal({ open, setOpen, productDetail }) {
+function EditProductModal({ open, setOpen, productData }) {
   const dispatch = useDispatch();
   const theme = useTheme();
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
@@ -49,7 +49,7 @@ function EditProductModal({ open, setOpen, productDetail }) {
 
   const handleFormSubmit = (values) => {
     dispatch(updateProductById({
-        id: productDetail.id,
+        id: productData.id,
         name: values.name,
         description: values.description,
         price: values.price,
@@ -57,8 +57,6 @@ function EditProductModal({ open, setOpen, productDetail }) {
         categoryId: values.category,
     }));
   };
-
-  console.log(productDetail);
 
   return (
     <div>
@@ -94,11 +92,11 @@ function EditProductModal({ open, setOpen, productDetail }) {
           <Formik
             onSubmit={handleFormSubmit}
             initialValues={{
-              name: productDetail.name,
-              description: productDetail.description,
-              price: productDetail.price_wt,
-              quantity: productDetail.quantity,
-              category: productDetail.category_id,
+              name: productData.name,
+              description: productData.description,
+              price: productData.price_wt,
+              quantity: productData.quantity,
+              category: productData.category_id,
               tags: "",
               img: [],
             }}
@@ -209,7 +207,7 @@ function EditProductModal({ open, setOpen, productDetail }) {
                     alignContent="center"
                     m="2rem 0"
                   >
-                    {productDetail.image?.map((image) => (
+                    {productData.image?.map((image) => (
                       <Box
                         display="flex"
                         flexDirection="column"

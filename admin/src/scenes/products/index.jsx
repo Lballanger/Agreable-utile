@@ -10,6 +10,7 @@ import Header from "../../components/Header";
 import FlexBetween from "../../components/FlexBetween";
 import DataGridCustomToolbar from "../../components/DataGridCustomToolbar.jsx";
 import AddProductModal from "../../components/ModalProduct.jsx";
+import EditProductModal from "../../components/EditProductModal";
 
 // Material UI
 import {
@@ -69,16 +70,31 @@ function Products() {
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
 
-  const [open, setOpen] = useState(false);
+  const [openAddProductModal, setOpenAddProductModal] = useState(false);
+  const [openEditProductModal, setOpenEditModal] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
 
   return (
     <Box m="1.5rem 2.5rem">
-      {open && <AddProductModal open setOpen={setOpen} />}
+      {openAddProductModal && (
+        <AddProductModal
+          open={openAddProductModal}
+          setOpen={setOpenAddProductModal}
+        />
+      )}
+      {openEditProductModal && (
+        <EditProductModal
+          open={openEditProductModal}
+          setOpen={setOpenEditModal}
+          productData={products.find((product) => product.id === selectedId)}
+        />
+      )}
       <FlexBetween>
         <Header title="Articles" />
         <Box>
           <Button
-            onClick={() => setOpen(true)}
+            onClick={() => setOpenAddProductModal(true)}
             sx={{
               backgroundColor: theme.palette.secondary.light,
               color: theme.palette.background.alt,
@@ -210,7 +226,10 @@ function Products() {
                 <GridActionsCellItem
                   icon={<Edit />}
                   label="Editer"
-                  onClick={() => {}}
+                  onClick={() => {
+                    setOpenEditModal(true)
+                    setSelectedId(params.row.id);
+                  }}
                   showInMenu
                 />,
                 <GridActionsCellItem
