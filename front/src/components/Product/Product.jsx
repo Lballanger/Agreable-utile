@@ -3,6 +3,18 @@ import "./Product.scss";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+
+// Cloudinary
+import {
+  AdvancedImage,
+  lazyload,
+  responsive,
+  placeholder,
+} from "@cloudinary/react";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { grayscale } from "@cloudinary/url-gen/actions/effect";
+import cloudinary from "../../lib/cloudinary";
+
 import API from "../../api/api";
 import {
   setArticlesData,
@@ -23,7 +35,6 @@ function Detail() {
   const [imgSelected, setImgSelected] = useState(0);
   const [topButtonStatus, setTopButtonStatus] = useState(false);
   const [bottomButtonStatus, setBottomButtonStatus] = useState(true);
-  const [loaded, setLoaded] = useState(true);
 
   const [quantity, setQuantity] = useState(1);
   // Retrieve the item if not already in the store
@@ -87,8 +98,7 @@ function Detail() {
     setImgSelected(index);
   };
 
-  if (article)
-    article = article.find((elem) => elem.article_id === parseInt(id, 10));
+  if (article) article = article.find((elem) => elem.id === parseInt(id, 10));
 
   return (
     <main className="detail">
@@ -139,16 +149,23 @@ function Detail() {
                             aria-hidden
                             key={img}
                           >
-                            <img
+                            <AdvancedImage
                               className={
                                 imgSelected !== index
                                   ? "detail__pictures-container__list-container__container__img-container__img"
                                   : "detail__pictures-container__list-container__container__img-container__img--selected"
                               }
-                              src={article.image[index]}
-                              alt=""
-                              onLoad={() => setLoaded(true)}
-                              style={loaded ? {} : { display: "none" }}
+                              cldImg={cloudinary
+                                .image(article.image[index])
+                                .resize(fill())
+                                .effect(
+                                  imgSelected !== index ? grayscale() : "",
+                                )}
+                              plugins={[
+                                responsive({ steps: 700 }),
+                                lazyload(),
+                                placeholder("blur"),
+                              ]}
                             />
                           </div>
                         );
@@ -176,11 +193,17 @@ function Detail() {
               </div>
             </div>
             <div className="detail__pictures-container__image-container">
-              <img
+              <AdvancedImage
                 className="detail__pictures-container__image-container__image"
-                src={article.image[imgSelected]}
-                alt=""
-                srcSet=""
+                style={{ maxWidth: "100%", maxHeight: "75vh" }}
+                cldImg={cloudinary
+                  .image(article.image[imgSelected])
+                  .resize(fill())}
+                plugins={[
+                  responsive({ steps: 700 }),
+                  lazyload(),
+                  placeholder("blur"),
+                ]}
               />
             </div>
           </div>
@@ -188,7 +211,7 @@ function Detail() {
             <div className="detail__container__info">
               <header className="detail__container__info__header">
                 <h2 className="detail__container__info__header__title">
-                  {article.article_name}
+                  {article.name}
                 </h2>
                 <div className="detail__container__info__header__price">
                   {article.price_wt} €

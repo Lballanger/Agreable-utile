@@ -1,8 +1,19 @@
 import "./Shop.scss";
 
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
+// Cloudinary
+import {
+  AdvancedImage,
+  lazyload,
+  responsive,
+  placeholder,
+} from "@cloudinary/react";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import cloudinary from "../../lib/cloudinary";
+
 import { fetchArticles, fetchCategories } from "../../slices/articlesSlice";
 
 import Breadcrumb from "../Shared/Breadcrumb/Breadcrumb";
@@ -97,20 +108,30 @@ function Shop() {
                         key={article.article_id}
                         className="shop__articles-container__main-container__product"
                       >
-                        <Link to={`/shop/${article.article_id}`}>
+                        <Link to={`/shop/${article.id}`}>
                           <div className="shop__articles-container__main-container__product__img-container">
-                            <img
-                              src={article.image[0]}
-                              alt=""
-                              className="shop__articles-container__main-container__product__img-container__img"
+                            <AdvancedImage
+                              style={{
+                                width: "100%",
+                                height: "300px",
+                                objectFit: "cover",
+                              }}
+                              cldImg={cloudinary
+                                .image(article.image[0])
+                                .resize(fill())}
+                              plugins={[
+                                responsive({ steps: 700 }),
+                                lazyload(),
+                                placeholder("blur"),
+                              ]}
                             />
                           </div>
                         </Link>
-                        <Link to={`/shop/${article.article_id}`}>
+                        <Link to={`/shop/${article.id}`}>
                           <div className="shop__articles-container__main-container__product__infos-container">
                             <h2 className="shop__articles-container__main-container__product__infos-container__infos">
                               <div className="shop__articles-container__main-container__product__infos-container__infos__title">
-                                {article.article_name}
+                                {article.name}
                               </div>
                               <div className="shop__articles-container__main-container__product__infos-container__infos__description">
                                 {article.description.length > 80

@@ -3,9 +3,17 @@ import "./Cart.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
+  AdvancedImage,
+  lazyload,
+  placeholder,
+  responsive,
+} from "@cloudinary/react";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import {
   removeFromCart,
   changeTheCartQuantity,
 } from "../../slices/articlesSlice";
+import cloudinary from "../../lib/cloudinary";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -53,15 +61,16 @@ function Cart() {
                 key={article.id}
               >
                 <div className="cart__cart-container__articles-container__product-container__img-container">
-                  <img
-                    className="cart__cart-container__articles-container__product-container__img-container__img"
-                    src={
-                      new URL(
-                        `/src/assets/img/shop/articles/${article.image[0]}.jpg`,
-                        import.meta.url,
-                      ).href
-                    }
-                    alt={article.name}
+                  <AdvancedImage
+                    style={{
+                      width: "100%",
+                      height: "180px",
+                      objectFit: "cover",
+                    }}
+                    cldImg={cloudinary
+                      .image(article.image[0])
+                      .resize(fill().width(1.3).height(1.3))}
+                    plugins={[lazyload(), placeholder("blur")]}
                   />
                 </div>
                 <div className="cart__cart-container__articles-container__product-container__infos">

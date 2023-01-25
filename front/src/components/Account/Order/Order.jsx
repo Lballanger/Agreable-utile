@@ -3,7 +3,10 @@ import "./Order.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { AdvancedImage, lazyload } from "@cloudinary/react";
+import { fill } from "@cloudinary/url-gen/actions/resize";
 import { fetchOrdersByUserId } from "../../../slices/orderSlice";
+import cloudinary from "../../../lib/cloudinary";
 
 function Order() {
   const dispatch = useDispatch();
@@ -13,8 +16,6 @@ function Order() {
   const user = useSelector((state) => state.userSlice.userData);
   const orders = useSelector((state) => state.orderSlice.orders);
   const order = orders.find((order) => order.order_number === id);
-
-  console.log(order);
 
   useEffect(() => {
     if (!orders.length && user) {
@@ -42,11 +43,12 @@ function Order() {
               <Link to={`/shop/${article.article.id}`} key={article.article.id}>
                 <div className="order__articles__article">
                   <div className="order__articles__article__img-container">
-                    <img
+                    <AdvancedImage
                       className="order__articles__article__img-container__img"
-                      src={`/src/assets/img/shop/articles/${article.article.image[0]}.jpg`}
-                      alt={article.article.name}
-                      srcSet=""
+                      cldImg={cloudinary
+                        .image(article?.article.image[0])
+                        .resize(fill().width(500).height(500))}
+                      plugins={[lazyload()]}
                     />
                   </div>
                   <div className="order__articles__article__info-container">

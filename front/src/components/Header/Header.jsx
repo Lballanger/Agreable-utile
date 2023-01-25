@@ -4,6 +4,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import {
+  AdvancedImage,
+  lazyload,
+  placeholder,
+  responsive,
+} from "@cloudinary/react";
+import { fill, crop } from "@cloudinary/url-gen/actions/resize";
 import { IconBurger, IconTimes } from "../../assets/icons";
 import Connexion from "../Connexion/Connexion";
 
@@ -14,11 +21,11 @@ import logo from "../../assets/img/logo3.png";
 import { signOut } from "../../slices/userSlice";
 
 import useWindowSize from "../../hooks/useWindowSize";
+import cloudinary from "../../lib/cloudinary";
 
 function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location.pathname);
 
   const token = useSelector((state) => state.userSlice.token);
   const userData = useSelector((state) => state.userSlice.userData);
@@ -206,16 +213,20 @@ function Header() {
                             <Link to={`/shop/${article.id}`} key={article.id}>
                               <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product">
                                 <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
-                                  <img
-                                    className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container__img"
-                                    src={
-                                      new URL(
-                                        `/src/assets/img/shop/articles/${article.image[0]}.jpg`,
-                                        import.meta.url,
-                                      ).href
-                                    }
-                                    alt={article.name}
-                                    srcSet=""
+                                  <AdvancedImage
+                                    style={{
+                                      width: "100%",
+                                      height: "120px",
+                                      objectFit: "cover",
+                                    }}
+                                    cldImg={cloudinary
+                                      .image(article.image[0])
+                                      .resize(crop())}
+                                    plugins={[
+                                      responsive({ steps: 700 }),
+                                      lazyload(),
+                                      placeholder("blur"),
+                                    ]}
                                   />
                                 </div>
                                 <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container">
@@ -331,11 +342,20 @@ function Header() {
                           <Link to={`/shop/${article.id}`} key={article.id}>
                             <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product">
                               <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
-                                <img
-                                  className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container__img"
-                                  src={`/src/assets/img/shop/articles/${article.image[0]}.jpg`}
-                                  alt={article.name}
-                                  srcSet=""
+                                <AdvancedImage
+                                  style={{
+                                    width: "100%",
+                                    height: "120px",
+                                    objectFit: "cover",
+                                  }}
+                                  cldImg={cloudinary
+                                    .image(article.image[0])
+                                    .resize(crop())}
+                                  plugins={[
+                                    responsive({ steps: 700 }),
+                                    lazyload(),
+                                    placeholder("blur"),
+                                  ]}
                                 />
                               </div>
                               <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container">

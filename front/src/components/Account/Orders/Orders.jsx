@@ -2,7 +2,10 @@ import "./Orders.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
+import { crop, fill } from "@cloudinary/url-gen/actions/resize";
 import { fetchOrdersByUserId } from "../../../slices/orderSlice";
+import cloudinary from "../../../lib/cloudinary";
 
 function Orders() {
   const dispatch = useDispatch();
@@ -26,17 +29,12 @@ function Orders() {
               <div className="orders__container__order__top-container__articles">
                 {order.articles.map((article) => (
                   <div className="orders__container__order__top-container__articles__img-container">
-                    <img
+                    <AdvancedImage
                       className="orders__container__order__top-container__articles__img-container__img"
-                      key={article.id}
-                      src={
-                        new URL(
-                          `/src/assets/img/shop/articles/${article.article.image[0]}.jpg`,
-                          import.meta.url,
-                        ).href
-                      }
-                      alt=""
-                      srcSet=""
+                      cldImg={cloudinary
+                        .image(article?.article.image[0])
+                        .resize(fill().width(500).height(500))}
+                      plugins={[lazyload()]}
                     />
                   </div>
                 ))}
