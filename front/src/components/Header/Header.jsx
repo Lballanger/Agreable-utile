@@ -10,7 +10,7 @@ import {
   placeholder,
   responsive,
 } from "@cloudinary/react";
-import { fill, crop } from "@cloudinary/url-gen/actions/resize";
+import { fill } from "@cloudinary/url-gen/actions/resize";
 import { IconBurger, IconTimes } from "../../assets/icons";
 import Connexion from "../Connexion/Connexion";
 
@@ -221,7 +221,7 @@ function Header() {
                                     }}
                                     cldImg={cloudinary
                                       .image(article.image[0])
-                                      .resize(crop())}
+                                      .resize(fill())}
                                     plugins={[
                                       responsive({ steps: 700 }),
                                       lazyload(),
@@ -350,7 +350,7 @@ function Header() {
                                   }}
                                   cldImg={cloudinary
                                     .image(article.image[0])
-                                    .resize(crop())}
+                                    .resize(fill())}
                                   plugins={[
                                     responsive({ steps: 700 }),
                                     lazyload(),

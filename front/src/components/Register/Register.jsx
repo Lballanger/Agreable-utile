@@ -43,7 +43,7 @@ function Register() {
 
   useEffect(() => {
     if (userData?.id) {
-      navigate(`/account/${userData.id}`);
+      navigate(`/account/${userData.id}/profil`);
     }
   }, [userData]);
 
