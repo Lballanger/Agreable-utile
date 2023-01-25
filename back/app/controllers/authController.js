@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const jwtService = require("../services/jwtService");
 const { compare, hash } = require("../services/bcryptService");
+const mailer = require("../services/nodemailer");
 
 const authController = {
   login: async (request, response) => {
@@ -69,6 +70,17 @@ const authController = {
         true,
       );
 
+      // Send the mail
+      const params = {
+        sender: "lballanger.dev@gmail.com",
+        type: "registred",
+        username: newUser.firstname,
+        urlLink: "",
+        revokeLink: null,
+        subject: null,
+      };
+      await mailer(params);
+
       return response.json({
         id: newUser.id,
         civility: newUser.civility,
@@ -79,6 +91,7 @@ const authController = {
         refreshToken,
       });
     } catch (error) {
+      console.log(error);
       return response.status(500).json(error.message);
     }
   },
