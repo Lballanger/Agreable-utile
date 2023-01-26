@@ -2,6 +2,10 @@
 
 BEGIN;
 
+DROP TRIGGER update_article_status_insert ON private.article;
+
+DROP FUNCTION private.update_article_status();
+
 DROP TABLE private.article;
 
 COMMIT;

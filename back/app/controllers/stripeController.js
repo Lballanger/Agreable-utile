@@ -2,8 +2,10 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable import/no-unresolved */
 const stripe = require("stripe")(process.env.STRIPE_KEY);
+const Guest = require("../models/guest");
 const Order = require("../models/order");
 const OrderLine = require("../models/orderLine");
+const Payment = require("../models/payment");
 
 const calculateOrderAmount = (items) => {
   const price = items
@@ -20,6 +22,11 @@ const stripeController = {
   payment: async (request, response) => {
     const { cart, delivery, userId } = request.body;
 
+    const guestInformation = JSON.stringify(request.body.guestInformation);
+    console.log("guestInformation________", guestInformation);
+
+    const generateOrderNumber = new Date().valueOf();
+
     try {
       const paymentIntent = await stripe.paymentIntents.create({
         amount: calculateOrderAmount(cart),
@@ -28,6 +35,8 @@ const stripeController = {
         receipt_email: "ballanger.loic@gmail.com",
         metadata: {
           userId,
+          guestInformation,
+          orderNumber: generateOrderNumber,
           articles: JSON.stringify(
             cart.map((article) => ({
               id: article.id,
@@ -64,34 +73,103 @@ const stripeController = {
     switch (event.type) {
       case "payment_intent.succeeded":
         const paymentIntent = event.data.object;
-        // console.log(
-        //   `PaymentIntent for ${paymentIntent.amount} was successful!`,
-        // );
-        // console.log("PAYMENT INTENT :::::::::::::::::", paymentIntent);
 
-        // Then define and call a method to handle the successful payment intent.
-        // handlePaymentIntentSucceeded(paymentIntent);
         try {
-          const generateOrderNumber = new Date().valueOf();
-
-          console.log("Ordernumber", generateOrderNumber);
-          console.log("PaymentIntent : ", paymentIntent);
-
           const articles = JSON.parse(paymentIntent.metadata.articles);
 
-          const order = await new Order({
-            user_id: paymentIntent.metadata.userId,
-            order_number: generateOrderNumber,
-            status: "En attente de paiement",
-          }).create();
+          // Guest
+          if (
+            !paymentIntent.metadata.userId &&
+            paymentIntent.metadata.guestInformation
+          ) {
+            const {
+              firstname,
+              lastname,
+              email,
+              country,
+              address,
+              city,
+              postalCode,
+              additionalInfo,
+              phone,
+            } = JSON.parse(paymentIntent.metadata.guestInformation);
 
-          articles.forEach(async (article) => {
-            await new OrderLine({
-              quantity: article.quantity,
-              order_id: order.id,
-              article_id: article.id,
+            const guest = await new Guest({
+              civility: "Mr",
+              firstname,
+              lastname,
+              email,
+              country,
+              address,
+              city,
+              postal_code: postalCode,
+              additional_info: additionalInfo,
+              phone,
             }).create();
-          });
+
+            const order = await new Order({
+              userId: null,
+              temporary_user_id: guest.id,
+              order_number: paymentIntent.metadata.orderNumber,
+              status: "En attente de paiement",
+            }).create();
+
+            articles.forEach(async (article) => {
+              await new OrderLine({
+                quantity: article.quantity,
+                order_id: order.id,
+                article_id: article.id,
+              }).create();
+            });
+
+            const payment = await new Payment({
+              cost: paymentIntent.amount / 100,
+              currency: paymentIntent.currency,
+              payment_id: paymentIntent.id,
+              payment_organisation: "Stripe",
+              payment_method: paymentIntent.payment_method_types[0],
+              payment_status: paymentIntent.status,
+              temporary_user_id: guest.id,
+              order_id: order.id,
+            }).create();
+
+            return response.status(200).json(payment);
+          }
+
+          // Auth User
+          if (
+            paymentIntent.metadata.userId &&
+            paymentIntent.metadata.guestInformation === "null"
+          ) {
+            // Auth User
+            const order = await new Order({
+              user_id: paymentIntent.metadata.userId,
+              temporary_user_id: null,
+              order_number: paymentIntent.metadata.orderNumber,
+              status: "En attente de paiement",
+            }).create();
+
+            articles.forEach(async (article) => {
+              await new OrderLine({
+                quantity: article.quantity,
+                order_id: order.id,
+                article_id: article.id,
+              }).create();
+            });
+
+            const payment = await new Payment({
+              cost: paymentIntent.amount / 100,
+              currency: paymentIntent.currency,
+              payment_id: paymentIntent.id,
+              payment_organisation: "Stripe",
+              payment_method: paymentIntent.payment_method_types[0],
+              payment_status: paymentIntent.status,
+              user_id: paymentIntent.metadata.userId,
+              order_id: order.id,
+            }).create();
+
+            return response.status(200).json(payment);
+          }
         } catch (error) {
           console.log(error);
           return response.status(500).json(error.message);
@@ -104,7 +182,22 @@ const stripeController = {
         break;
       case "charge.succeeded":
         const chargeSucceeded = event.data.object;
-        // console.log("chargeSucceeded : _____", chargeSucceeded);
+
+        try {
+          const existingOrder = await Order.getByOrderNumber(
+            chargeSucceeded.metadata.orderNumber,
+          );
+
+          if (!existingOrder)
+            return response.status(404).json("Order not found");
+
+          existingOrder.status = "Paiement réussi";
+
+          const updateOrder = await existingOrder.update();
+        } catch (error) {
+          console.log(error);
+          return response.status(500).json(error.message);
+        }
 
         break;
       default:

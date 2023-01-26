@@ -42,8 +42,8 @@ CREATE TABLE private.order (
   order_number TEXT NOT NULL UNIQUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   status TEXT DEFAULT null,
-  user_id INT NOT NULL REFERENCES private."user"(id),
-  temporary_user_id INT NOT NULL REFERENCES private."temporary_user"(id)
+  user_id INT REFERENCES private."user"(id),
+  temporary_user_id INT REFERENCES private."temporary_user"(id)
 );
 
 COMMIT;
