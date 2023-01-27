@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const nodemailer = require("nodemailer");
 
 const mailOptions = {
@@ -25,6 +26,7 @@ const sendingMail = async (params) => {
   mailOptions.to = sender;
   mailOptions.subject =
     type === "registred" ? "Bienvenue chez L'agréable Utile" : subject;
+  // eslint-disable-next-line global-require
   mailOptions.html = require("../templates/registred");
 
   try {

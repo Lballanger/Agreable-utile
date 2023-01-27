@@ -67,8 +67,9 @@ const articleController = {
 
       const article = await Article.findOneById(id);
 
-      if (!article)
+      if (!article) {
         return response.status(404).json(`Article with id ${id} doesn't exist`);
+      }
 
       article.name = name;
       article.description = description;
@@ -80,8 +81,7 @@ const articleController = {
 
       return response.json(article);
     } catch (error) {
-      console.log(error);
-      response.status(500).json(error.message);
+      return response.status(500).json(error.message);
     }
   },
 };
