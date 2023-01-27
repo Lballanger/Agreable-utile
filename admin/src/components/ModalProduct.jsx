@@ -1,3 +1,5 @@
+// modalProduct
+
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -13,12 +15,16 @@ import {
   MenuItem,
   IconButton,
 } from "@mui/material";
+import { ArrowBack, Close } from "@mui/icons-material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
-import { createProduct, getCategories } from "../redux/slices/productsSlice";
+import {
+  createCategory,
+  createProduct,
+  getCategories,
+} from "../redux/slices/productsSlice";
 import FlexBetween from "./FlexBetween";
-import { Close } from "@mui/icons-material";
 import ImageDropzone from "./ImageDropzone";
 
 function ModalProduct({ open, setOpen }) {
@@ -26,22 +32,30 @@ function ModalProduct({ open, setOpen }) {
   const theme = useTheme();
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
+  // Cloudinary
   const [files, setFiles] = useState([]);
   const [imageSent, setImageSent] = useState([]);
 
+  // Categories data from redux
   const { categories, isLoading, error } = useSelector(
     (state) => state.productsSlice
   );
 
+  // Fetch categories
   useEffect(() => {
     if (!categories.length) {
       dispatch(getCategories());
     }
   }, [categories]);
 
+  // Add category input
+  const [addingCategory, setAddingCategory] = useState(false);
+
+  // Modal open/close
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // Formik
   const handleFormSubmit = (values) => {
     const formData = new FormData();
 
@@ -117,6 +131,14 @@ function ModalProduct({ open, setOpen }) {
                       mt: 1,
                       mb: 1,
                     },
+                    "& label.Mui-focused": {
+                      color: theme.palette.secondary.main,
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: theme.palette.secondary.main,
+                      },
+                    },
                   }}
                 >
                   <TextField
@@ -139,11 +161,122 @@ function ModalProduct({ open, setOpen }) {
                     value={values.category}
                     name="category"
                   >
-                    {categories.map((category) => (
-                      <MenuItem key={category.id} value={category.id}>
-                        {category.name}
-                      </MenuItem>
-                    ))}
+                    {!addingCategory &&
+                      categories.map((category) => (
+                        <MenuItem key={category.id} value={category.id}>
+                          {category.name}
+                        </MenuItem>
+                      ))}
+                    <MenuItem>
+                      {!addingCategory && (
+                        <Button onClick={() => setAddingCategory(true)}>
+                          <Typography
+                            color={theme.palette.secondary[100]}
+                            variant="h7"
+                          >
+                            {"+ Ajouter une nouvelle catégorie"}
+                          </Typography>
+                        </Button>
+                      )}
+                      {addingCategory && (
+                        <Formik
+                          onSubmit={(values, actions) => {
+                            dispatch(
+                              createCategory({ name: values.newCategory })
+                            )
+                              .unwrap()
+                              .then(() => {
+                                setAddingCategory(false);
+                              })
+                              .catch((err) => {
+                                console.log(actions);
+                                actions.setFieldError(
+                                  "newCategory",
+                                  "Une catégorie avec ce nom existe déjà"
+                                );
+                              });
+                          }}
+                          initialValues={{ newCategory: "" }}
+                          validationSchema={yup.object().shape({
+                            newCategory: yup.string().required(),
+                          })}
+                        >
+                          {({
+                            values,
+                            errors,
+                            touched,
+                            handleBlur,
+                            handleChange,
+                            handleSubmit,
+                          }) => (
+                            <form
+                              onSubmit={handleSubmit}
+                              style={{
+                                display: "flex",
+                                width: "100%",
+                                flexDirection: "column",
+                              }}
+                            >
+                              <Box>
+                                <Button
+                                  startIcon={<ArrowBack />}
+                                  size="medium"
+                                  sx={{
+                                    color: theme.palette.secondary.light,
+                                  }}
+                                  onClick={() => setAddingCategory(false)}
+                                >
+                                  Retour
+                                </Button>
+                              </Box>
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <TextField
+                                  fullWidth
+                                  label="Nom de la nouvelle catégorie"
+                                  onBlur={handleBlur}
+                                  onChange={handleChange}
+                                  value={values.newCategory}
+                                  name="newCategory"
+                                  variant="standard"
+                                  error={
+                                    !!touched.newCategory &&
+                                    !!errors.newCategory
+                                  }
+                                  helperText={
+                                    touched.newCategory && errors.newCategory
+                                  }
+                                  sx={{
+                                    "& label.Mui-focused": {
+                                      color: theme.palette.secondary.main,
+                                    },
+                                    "& .MuiOutlinedInput-root": {
+                                      "&.Mui-focused fieldset": {
+                                        borderColor:
+                                          theme.palette.secondary.main,
+                                      },
+                                    },
+                                  }}
+                                />
+                                <Button
+                                  type="submit"
+                                  color="secondary"
+                                  variant="text"
+                                  sx={{ ml: 2 }}
+                                >
+                                  AJOUTER
+                                </Button>
+                              </Box>
+                            </form>
+                          )}
+                        </Formik>
+                      )}
+                    </MenuItem>
                   </TextField>
                   <TextField
                     fullWidth
@@ -249,6 +382,7 @@ const initialValues = {
   quantity: "",
   tags: "",
   img: [],
+  newCategory: "",
 };
 
 export default ModalProduct;
