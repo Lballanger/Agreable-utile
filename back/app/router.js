@@ -59,6 +59,7 @@ router.post(
 /** ********************** CATEGORIES *********************** */
 
 router.get("/api/categories", categoryController.findAll);
+router.get("/api/category/:id", categoryController.findOneById);
 router.post(
   "/api/category",
   authAndAdminMiddleware(),

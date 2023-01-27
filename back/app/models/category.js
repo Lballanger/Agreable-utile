@@ -29,6 +29,18 @@ class Category {
       return new Error(error.detail ? error.detail : error.message);
     }
   }
+
+  static async findByName(name) {
+    try {
+      const { rows } = await client.query(
+        "SELECT * FROM private.category WHERE name = $1",
+        [name],
+      );
+      return new Category(rows[0]);
+    } catch (error) {
+      return new Error(error.detail ? error.detail : error.message);
+    }
+  }
 }
 
 module.exports = Category;
