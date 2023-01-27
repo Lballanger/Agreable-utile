@@ -41,10 +41,13 @@ function ModalProduct({ open, setOpen }) {
     (state) => state.productsSlice
   );
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
   // Fetch categories
   useEffect(() => {
-    if (!categories.length) {
+    if (!categories.length && !isLoaded) {
       dispatch(getCategories());
+      setIsLoaded(true);
     }
   }, [categories]);
 
