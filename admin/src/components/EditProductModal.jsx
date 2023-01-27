@@ -55,7 +55,9 @@ function EditProductModal({ open, setOpen, productData }) {
         price: values.price,
         quantity: values.quantity,
         categoryId: values.category,
-    }));
+    })).then(() => {
+        handleClose();
+    });
   };
 
   return (
@@ -271,7 +273,7 @@ const checkoutSchema = yup.object().shape({
   description: yup.string().required("required"),
   price: yup.number().required("required").positive(),
   quantity: yup.number().required("required"),
-  tags: yup.string().required("required"),
+  tags: yup.string(),
   img: yup.array().required("required"),
 });
 
