@@ -71,7 +71,9 @@ function ModalProduct({ open, setOpen }) {
     formData.append("quantity", values.quantity);
     formData.append("categoryId", values.category);
 
-    dispatch(createProduct(formData));
+    dispatch(createProduct(formData)).then(() => {
+      handleClose();
+    });
   };
 
   useEffect(() => {
@@ -373,7 +375,7 @@ const checkoutSchema = yup.object().shape({
   description: yup.string().required("required"),
   price: yup.number().required("required").positive(),
   quantity: yup.number().required("required"),
-  tags: yup.string().required("required"),
+  tags: yup.string(),
   img: yup.array().required("required"),
 });
 
