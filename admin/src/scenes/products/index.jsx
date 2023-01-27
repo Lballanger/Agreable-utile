@@ -196,7 +196,9 @@ function Products() {
                   <Badge
                     badgeContent={params.row.status}
                     color={params.row.quantity > 0 ? "success" : "error"}
-                    overlap="rectangle"
+                    sx={{
+                      left: "20%",
+                    }}
                   />
                 );
               },
