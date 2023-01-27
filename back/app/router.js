@@ -59,6 +59,11 @@ router.post(
 /** ********************** CATEGORIES *********************** */
 
 router.get("/api/categories", categoryController.findAll);
+router.post(
+  "/api/category",
+  authAndAdminMiddleware(),
+  categoryController.create,
+);
 
 /** ********************** ORDER *********************** */
 
