@@ -36,6 +36,11 @@ class Category {
         "SELECT * FROM private.category WHERE name = $1",
         [name],
       );
+
+      if (rows.length === 0) {
+        return null;
+      }
+
       return new Category(rows[0]);
     } catch (error) {
       return new Error(error.detail ? error.detail : error.message);
