@@ -116,6 +116,19 @@ const productsSlice = createSlice({
       state.error = payload;
     });
 
+    builder.addCase(createProduct.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createProduct.fulfilled, (state, { payload }) => {
+      console.log(payload);
+      state.isLoading = false;
+      state.products.push(payload);
+    });
+    builder.addCase(createProduct.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    });
+
     builder.addCase(updateProductById.pending, (state) => {
       state.isLoading = true;
     });
