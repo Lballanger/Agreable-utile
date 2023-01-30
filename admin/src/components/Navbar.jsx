@@ -80,7 +80,7 @@ function Navbar({
               <Box
                 component="img"
                 alt="profile"
-                src={profileImage}
+                src={`https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}&background=CCA752&color=fff&rounded=true&size=95&font-size=0.33`}
                 height="32px"
                 width="32px"
                 borderRadius="50%"
@@ -104,21 +104,21 @@ function Navbar({
                 >
                   {"Admin"}
                 </Typography>
-                </Box>
-                <ArrowDropDownOutlined 
-                  sx={{
-                    color: theme.palette.secondary[300],
-                    fontSize: "25px"
-                  }}
-                />
+              </Box>
+              <ArrowDropDownOutlined
+                sx={{
+                  color: theme.palette.secondary[300],
+                  fontSize: "25px",
+                }}
+              />
             </Button>
-            <Menu 
-              anchorEl={anchorEl} 
-              open={isOpen} 
-              onClose={handleClose} 
+            <Menu
+              anchorEl={anchorEl}
+              open={isOpen}
+              onClose={handleClose}
               anchorOrigin={{
-                vertical: "bottom", 
-                horizontal: "center"
+                vertical: "bottom",
+                horizontal: "center",
               }}
             >
               <MenuItem onClick={handleClose}>Déconnexion</MenuItem>

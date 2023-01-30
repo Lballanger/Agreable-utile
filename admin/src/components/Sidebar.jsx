@@ -161,7 +161,7 @@ const Sidebar = ({
               </FlexBetween>
             </Box>
             <List>
-              {navItems.map(({ text, icon, pathname, collapse, children}) => {
+              {navItems.map(({ text, icon, pathname, collapse, children }) => {
                 if (!icon) {
                   return (
                     <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
@@ -287,36 +287,37 @@ const Sidebar = ({
               <Box
                 component="img"
                 alt="profile"
-                src={profileImage}
+                src={`https://ui-avatars.com/api/?name=${user.firstname}+${user.lastname}&background=CCA752&color=fff&rounded=true&size=95&font-size=0.33`}
                 height="40px"
                 width="40px"
                 borderRadius="50%"
                 sx={{ objectFit: "cover" }}
               />
-                <Box textAlign="left">
-                  <Typography
-                    fontWeight="bold"
-                    fontSize="0.9rem"
-                    sx={{
-                      color: theme.palette.secondary[100],
-                    }}
-                  >
-                    {user.firstname}
-                  </Typography>
-                  <Typography
-                    fontSize="0.8rem"
-                    sx={{
-                      color: theme.palette.secondary[200],
-                    }}
-                  >
-                    {"Admin"}
-                  </Typography>
-                </Box>
-                <SettingsOutlined
+              <Box textAlign="left">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="0.9rem"
                   sx={{
-                    color: theme.palette.secondary[300],
-                    fontSize: "25px"}}
-                />
+                    color: theme.palette.secondary[100],
+                  }}
+                >
+                  {user.firstname}
+                </Typography>
+                <Typography
+                  fontSize="0.8rem"
+                  sx={{
+                    color: theme.palette.secondary[200],
+                  }}
+                >
+                  {"Admin"}
+                </Typography>
+              </Box>
+              <SettingsOutlined
+                sx={{
+                  color: theme.palette.secondary[300],
+                  fontSize: "25px",
+                }}
+              />
             </FlexBetween>
           </Box>
         </Drawer>
