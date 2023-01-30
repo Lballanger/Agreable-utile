@@ -12,10 +12,10 @@ const initialState = {
 };
 
 export const login = createAsyncThunk(
-  "/auth/login",
+  "/auth/admin-login",
   async (payload, { rejectWithValue }) => {
     try {
-        const response = await instance.post("/auth/login", payload);
+        const response = await instance.post("/auth/admin-login", payload);
         instance.defaults.headers.Authorization = `Bearer ${response.data.accessToken}`;
         setToken(response.data.refreshToken);
         return response.data;
