@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export const login = createAsyncThunk(
-  "/auth/login",
+  "/auth/admin-login",
   async (payload, { rejectWithValue }) => {
     try {
         const response = await instance.post("/auth/login", payload);
