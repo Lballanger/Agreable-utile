@@ -49,7 +49,10 @@ const authController = {
     try {
       const user = await User.getByEmail(email);
       if (!user) return response.status(400).json("Invalid credentials");
-      if (!(await compare(password, user.password)) && user.role !== "admin") {
+      if (!(await compare(password, user.password))) {
+        return response.status(400).json("Invalid credentials");
+      }
+      if (user.role !== "admin") {
         return response.status(400).json("Invalid credentials");
       }
 
