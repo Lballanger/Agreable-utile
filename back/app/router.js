@@ -34,6 +34,7 @@ router.get("/api/address", authMiddleware(), addressController.findByUserId);
 /** ********************** AUTH *********************** */
 router.post("/api/auth/register", authController.register);
 router.post("/api/auth/login", authController.login);
+router.post("/api/auth/admin-login", authController.adminLogin);
 router.post(
   "/api/auth/refresh-token",
   authMiddleware(true),

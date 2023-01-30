@@ -43,6 +43,45 @@ const authController = {
     }
   },
 
+  adminLogin: async (request, response) => {
+    const { email, password } = request.body;
+
+    try {
+      const user = await User.getByEmail(email);
+      if (!user) return response.status(400).json("Invalid credentials");
+      if (!(await compare(password, user.password)) && user.role !== "admin") {
+        return response.status(400).json("Invalid credentials");
+      }
+
+      delete user.password;
+      delete user.email_verified_at;
+
+      const accessToken = await jwtService.generateToken({
+        id: user.id,
+        role: user.role,
+      });
+
+      const refreshToken = await jwtService.generateToken(
+        { id: user.id, role: user.role },
+        true,
+      );
+
+      return response.json({
+        id: user.id,
+        civility: user.civility,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        date_of_birth: user.date_of_birth,
+        addresses: user.address,
+        accessToken,
+        refreshToken,
+      });
+    } catch (error) {
+      return response.status(500).json(error.message);
+    }
+  },
+
   register: async (request, response) => {
     try {
       const { civility, firstname, lastname, email, password } = request.body;
