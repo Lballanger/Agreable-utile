@@ -94,8 +94,7 @@ function Navbar({
                     color: theme.palette.secondary[100],
                   }}
                 >
-                  {user.name}
-                  {"Loïc"}
+                  {user.firstname}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
@@ -103,7 +102,6 @@ function Navbar({
                     color: theme.palette.secondary[200],
                   }}
                 >
-                  {user.role}
                   {"Admin"}
                 </Typography>
                 </Box>

@@ -301,8 +301,7 @@ const Sidebar = ({
                       color: theme.palette.secondary[100],
                     }}
                   >
-                    {user.name}
-                    {"Loïc"}
+                    {user.firstname}
                   </Typography>
                   <Typography
                     fontSize="0.8rem"
@@ -310,7 +309,6 @@ const Sidebar = ({
                       color: theme.palette.secondary[200],
                     }}
                   >
-                    {user.role}
                     {"Admin"}
                   </Typography>
                 </Box>
