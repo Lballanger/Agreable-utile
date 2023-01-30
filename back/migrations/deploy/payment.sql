@@ -4,7 +4,7 @@ BEGIN;
 
 CREATE TABLE private.payment (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    cost INT NOT NULL,
+    cost NUMERIC NOT NULL,
     currency TEXT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     payment_id TEXT NOT NULL,
