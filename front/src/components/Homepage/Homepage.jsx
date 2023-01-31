@@ -12,7 +12,7 @@ import couture from "../../assets/img/couture2.jpg";
 function Homepage() {
   return (
     <main className="main">
-      <div className="main__presentation">
+      {/* <div className="main__presentation">
         <div className="main__presentation__content-container ">
           <div className="main__presentation__content-container__content">
             <h5 className="main__presentation__content-container__content__title">
@@ -45,7 +45,7 @@ function Homepage() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="main__shop-presentation">
         <div className="main__shop-presentation__container">
@@ -122,6 +122,27 @@ function Homepage() {
         </div>
       </div>
 
+      <div className="main__story">
+        <div className="main__story__container">
+          <p className="main__story__container__content">
+            <strong>L&#8217;Agréable Utile</strong> c&#8217;est la création
+            d&#8217;accessoires qui vous ressemblent et qui facilite votre
+            quotidien.
+          </p>
+          <p className="main__story__container__content">
+            En effet, ma philosophie est de "joindre l&#8217;utile à
+            l&#8217;agréable".
+          </p>
+          <p className="main__story__container__content">
+            C&#8217;est pourquoi, aujourd&#8217;hui ce sont les maîtres mots de
+            ma société.
+          </p>
+        </div>
+        <div className="main__story__container">
+          <p className="main__story__container__content">Sandrine</p>
+        </div>
+      </div>
+
       <div className="main__sewing">
         <h3 className="main__sewing__title">
           Apprendre la couture, ça vous dit ?
@@ -178,6 +199,11 @@ function Homepage() {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="main__testimony">
+        <h3 className="main__testimony__title">Témoignages</h3>
+        <div className="main__testimony__testimony-container" />
       </div>
     </main>
   );
