@@ -67,21 +67,21 @@ const navItems = [
     icon: <ReceiptLongOutlined />,
     pathname: "paiements",
   },
-  {
-    text: "Ventes",
-    icon: null,
-    pathname: null,
-  },
-  {
-    text: "Vue d'ensemble",
-    icon: <PointOfSaleOutlined />,
-    pathname: "vue-d-ensemble",
-  },
-  {
-    text: "Quotidiennes",
-    icon: <TodayOutlined />,
-    pathname: "journalier",
-  },
+  // {
+  //   text: "Ventes",
+  //   icon: null,
+  //   pathname: null,
+  // },
+  // {
+  //   text: "Vue d'ensemble",
+  //   icon: <PointOfSaleOutlined />,
+  //   pathname: "vue-d-ensemble",
+  // },
+  // {
+  //   text: "Quotidiennes",
+  //   icon: <TodayOutlined />,
+  //   pathname: "journalier",
+  // },
   // {
   //   text: "Mensuel",
   //   icon: <CalendarMonthOutlined />,

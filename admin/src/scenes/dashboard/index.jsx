@@ -146,7 +146,8 @@ const Dashboard = () => {
           p="1rem"
           borderRadius="0.55rem"
         >
-          <OverviewChart view="sales" isDashboard={true} />
+          {/* <OverviewChart view="sales" isDashboard={true} /> */}
+          {"Futur données de vente"}
         </Box>
         <StatBox
           title="Ventes du mois"
