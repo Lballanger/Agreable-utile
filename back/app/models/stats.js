@@ -26,38 +26,33 @@ class Stats {
     try {
       const { rows } = await client.query(
         `SELECT
-  date_trunc('month', "order".created_at) as month,
-  SUM("subquery".total_amount) as totalSales,
-  SUM("order_line".quantity) as totalUnits
-FROM (
-  SELECT
-    "order".id,
-    SUM("order_line".quantity * "article".price_wt) as total_amount
-  FROM 
-    private."order"
-  INNER JOIN 
-    private."order_line" 
-  ON 
-    "order".id = "order_line".order_id
-  INNER JOIN 
-    private."article" 
-  ON 
-    "order_line".article_id = "article".id
-  GROUP BY "order".id
-) as "subquery"
-INNER JOIN 
-  private."order_line" 
-ON 
-  "subquery".id = private."order_line".order_id
-INNER JOIN 
-  private."order" 
-ON 
-  private."order_line".order_id = private."order".id
-WHERE
-  private."order".status IN ('Paiement réussi', 'Expédié')
-AND
-  private."order".created_at BETWEEN date_trunc('year', NOW()) + '1hour' AND date_trunc('year', NOW()) + INTERVAL '1 year' - INTERVAL '1 day'
-GROUP BY month ORDER BY month ASC;`,
+            date_trunc('month', "order".created_at) as month,
+          SUM(
+            "order_line".quantity * "article".price_wt
+          ) as totalSales,
+          SUM("order_line".quantity) as totalUnits
+        FROM
+          private."order"
+        INNER JOIN 
+          private."order_line" 
+        ON 
+          "order".id = "order_line".order_id
+        INNER JOIN 
+          private."article" 
+        ON
+          "order_line".article_id = "article".id
+        WHERE
+          private."order".status IN ('Paiement réussi', 'Expédié')
+        AND
+          private."order".created_at 
+        BETWEEN 
+          date_trunc('year', NOW()) + '1hour' 
+        AND 
+          date_trunc('year', NOW()) + INTERVAL '1 year' - INTERVAL '1 day'
+        GROUP BY 
+          month 
+        ORDER BY 
+          month ASC;`,
       );
 
       if (rows.length === 0) return null;
