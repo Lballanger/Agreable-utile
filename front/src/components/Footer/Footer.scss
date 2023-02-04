@@ -1,11 +1,13 @@
 .footer {
+  min-height: 30vh;
   padding: 2rem 0rem;
   display: flex;
-  justify-content: space-evenly;
-  background-color: #805050;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #faf9fe;
 
   a {
-    color: white;
+    color: rgb(0, 0, 0);
   }
 
   ul > li {

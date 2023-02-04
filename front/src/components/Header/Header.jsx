@@ -36,13 +36,6 @@ function Header() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [small, setSmall] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", () => setSmall(window.scrollY >= 120));
-    }
-  }, []);
 
   const handleCloseModal = (event) => {
     event.stopPropagation();
@@ -56,12 +49,21 @@ function Header() {
   return (
     <header
       className={`header 
-    ${small ? "header small" : ""}
     ${location.pathname === "/" ? "header-color" : ""}
     `}
     >
       {!isMobile ? (
         <div className="header__navigation">
+          <div className="header__navigation__logo-container">
+            <Link className="header__navigation__logo-container" to="/">
+              <img
+                className="header__navigation__logo-container__logo"
+                src={logo}
+                alt=""
+                srcSet=""
+              />
+            </Link>
+          </div>
           <nav className="header__navigation__nav">
             <ul className="header__navigation__nav__menu">
               <li className="header__navigation__nav__menu__item">
@@ -98,22 +100,7 @@ function Header() {
               </li>
             </ul>
           </nav>
-          <div className="header__navigation__logo-container">
-            <Link className="header__navigation__logo-container" to="/">
-              <img
-                className={`header__navigation__logo-container__logo 
-                ${
-                  small
-                    ? "header__navigation__logo-container__logo small__logo"
-                    : ""
-                } `}
-                src={logo}
-                alt=""
-                srcSet=""
-              />
-            </Link>
-          </div>
-          <nav className="header__navigation__nav">
+          <nav className="header__navigation__identification">
             {token && userData ? (
               <ul className="header__navigation__nav__connected-menu">
                 <li className="header__navigation__nav__connected-menu__item">
@@ -208,58 +195,68 @@ function Header() {
                   </div>
                   <div className="header__navigation__nav__cart__item__cart-container__articles-container">
                     <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles">
-                      {cart.length > 0
-                        ? cart.map((article) => (
-                            <Link to={`/shop/${article.id}`} key={article.id}>
-                              <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product">
-                                <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
-                                  <AdvancedImage
-                                    style={{
-                                      width: "100%",
-                                      height: "120px",
-                                      objectFit: "cover",
-                                    }}
-                                    cldImg={cloudinary
-                                      .image(article.image[0])
-                                      .resize(fill())}
-                                    plugins={[
-                                      responsive({ steps: 700 }),
-                                      lazyload(),
-                                      placeholder("blur"),
-                                    ]}
-                                  />
+                      {cart.length > 0 ? (
+                        cart.map((article) => (
+                          <Link to={`/shop/${article.id}`} key={article.id}>
+                            <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product">
+                              <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__img-container">
+                                <AdvancedImage
+                                  style={{
+                                    width: "100%",
+                                    height: "120px",
+                                    objectFit: "cover",
+                                  }}
+                                  cldImg={cloudinary
+                                    .image(article.image[0])
+                                    .resize(fill())}
+                                  plugins={[
+                                    responsive({ steps: 700 }),
+                                    lazyload(),
+                                    placeholder("blur"),
+                                  ]}
+                                />
+                              </div>
+                              <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container">
+                                <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__infos">
+                                  <p className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__infos__title">
+                                    {article.name}
+                                  </p>
                                 </div>
-                                <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container">
-                                  <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__infos">
-                                    <p className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__infos__title">
-                                      {article.name}
-                                    </p>
-                                  </div>
-                                  <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container">
-                                    <span className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container__quantity">
-                                      Quantité : {article.quantity}
-                                    </span>
-                                    <p className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container__price">
-                                      {(article.price_wt * article.quantity)
-                                        .toFixed(2)
-                                        .replace(".", ",")}{" "}
-                                      €
-                                    </p>
-                                  </div>
+                                <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container">
+                                  <span className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container__quantity">
+                                    Quantité : {article.quantity}
+                                  </span>
+                                  <p className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container__price">
+                                    {(article.price_wt * article.quantity)
+                                      .toFixed(2)
+                                      .replace(".", ",")}{" "}
+                                    €
+                                  </p>
                                 </div>
                               </div>
-                            </Link>
-                          ))
-                        : ""}
+                            </div>
+                          </Link>
+                        ))
+                      ) : (
+                        <div className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product">
+                          <p className="header__navigation__nav__cart__item__cart-container__articles-container__articles__product__info-container__quantity-container__quantity">
+                            Votre panier est vide
+                          </p>
+                        </div>
+                      )}
                     </div>
-                    <div className="header__navigation__nav__cart__item__cart-container__subtotal-container">
-                      <p className="header__navigation__nav__cart__item__cart-container__subtotal-container__subtotal">
-                        Total (TVA incluse)
-                      </p>
-                      <p className="header__navigation__nav__cart__item__cart-container__subtotal-container__price">
-                        {subtotal.toFixed(2).toString().replace(".", ",")} €
-                      </p>
-                    </div>
+                    {cart.length > 0 ? (
+                      <div className="header__navigation__nav__cart__item__cart-container__subtotal-container">
+                        <p className="header__navigation__nav__cart__item__cart-container__subtotal-container__subtotal">
+                          "Total (TVA incluse)
+                        </p>
+                        <p className="header__navigation__nav__cart__item__cart-container__subtotal-container__price">
+                          {subtotal.toFixed(2).toString().replace(".", ",")} €
+                        </p>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                     <div className="header__navigation__nav__cart__item__cart-container__footer">
                       <div className="header__navigation__nav__cart__item__cart-container__footer__button-container">
                         <Link

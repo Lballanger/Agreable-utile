@@ -29,3 +29,6 @@ admin/dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# OS generated files
+**/*Zone.Identifier
