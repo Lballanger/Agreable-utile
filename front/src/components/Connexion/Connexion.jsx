@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../slices/userSlice";
 import Field from "../Shared/Field/Field";
@@ -41,10 +41,25 @@ function Connexion({ handleCloseModal }) {
     }
   };
 
+  const modalRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      handleCloseModal(event);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
+
   return (
     <div className="connexion">
       <div className="connexion__modal">
-        <div className="connexion__modal__container">
+        <div className="connexion__modal__container" ref={modalRef}>
           <form
             className="connexion__modal__container__form"
             onSubmit={handleSubmit}
