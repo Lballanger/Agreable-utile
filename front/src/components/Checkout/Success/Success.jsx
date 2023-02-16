@@ -1,4 +1,4 @@
-import "./Success.scss";
+// import "./Success.scss";
 
 function Success() {
   return (

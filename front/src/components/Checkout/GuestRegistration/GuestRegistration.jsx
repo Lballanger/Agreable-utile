@@ -1,4 +1,4 @@
-import "./GuestRegistration.scss";
+// import "./GuestRegistration.scss";
 
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";

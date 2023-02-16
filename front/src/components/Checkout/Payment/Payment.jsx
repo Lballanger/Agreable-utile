@@ -1,4 +1,4 @@
-import "./Payment.scss";
+// import "./Payment.scss";
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";

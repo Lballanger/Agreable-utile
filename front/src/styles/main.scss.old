@@ -1,0 +1,63 @@
+@import "./globals/";
+
+@import url("https://fonts.googleapis.com/css2?family=Waterfall&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Spectral&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap");
+@import url("htttps://db.onlinewebfonts.com/c/80ef43d3685d74fc0e7ba8490cd6adc1?family=Avenir+LT+Pro");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant:wght@300;600;700&display=swap");
+@import url("https://db.onlinewebfonts.com/c/116af611cbcd9e4bada60b4e700430c1?family=Avenir+Light");
+
+@font-face {
+  font-family: "Afrah-Regular";
+  src: url(./assets/fonts/Afrah-Regular.woff) format("woff");
+}
+
+@keyframes apparition {
+  0% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes apparition-opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+*:visited {
+  color: black;
+}
+
+body {
+  font-family: "Sora", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fda1b0;
+  border-radius: 100px;
+}

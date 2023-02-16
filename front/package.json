@@ -35,6 +35,6 @@
     "eslint-plugin-react-hooks": "^4.4.0",
     "husky": "^7.0.0",
     "prettier": "^2.6.2",
-    "sass": "^1.50.0"
+    "sass": "^1.58.0"
   }
 }

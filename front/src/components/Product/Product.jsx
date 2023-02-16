@@ -1,4 +1,4 @@
-import "./Product.scss";
+// import "./Product.scss";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
