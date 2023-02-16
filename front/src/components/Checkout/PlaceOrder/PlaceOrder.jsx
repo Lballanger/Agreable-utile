@@ -1,4 +1,4 @@
-import "./PlaceOrder.scss";
+// import "./PlaceOrder.scss";
 
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";

@@ -1,4 +1,4 @@
-import "./Shop.scss";
+// import "./Shop.scss";
 
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -129,19 +129,13 @@ function Shop() {
                         </Link>
                         <Link to={`/shop/${article.id}`}>
                           <div className="shop__articles-container__main-container__product__infos-container">
-                            <h2 className="shop__articles-container__main-container__product__infos-container__infos">
-                              <div className="shop__articles-container__main-container__product__infos-container__infos__title">
-                                {article.name}
-                              </div>
-                              <div className="shop__articles-container__main-container__product__infos-container__infos__description">
-                                {article.description.length > 80
-                                  ? `${article.description.slice(0, 80)}...`
-                                  : article.description}
-                              </div>
-                            </h2>
-                            <div className="shop__articles-container__main-container__product__infos-container__price">
-                              {article.price_wt} €
+                            <h3>{article.name}</h3>
+                            <div>
+                              {article.description.length > 80
+                                ? `${article.description.slice(0, 80)}...`
+                                : article.description}
                             </div>
+                            <div>{article.price_wt} €</div>
                           </div>
                         </Link>
                       </div>

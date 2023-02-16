@@ -1,0 +1,40 @@
+body {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-default);
+  line-height: var(--line-height-base);
+  color: var(--color-black);
+  text-align: left;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-family-title);
+  color: var(--color-primary);
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: 5.5rem;
+  letter-spacing: 13px;
+}
+
+h2 {
+  font-size: 3.8rem;
+  letter-spacing: 10px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-family: var(--font-family-content);
+  font-size: 1.3rem;
+}
+
+a,
+a:visited,
+a:active {
+  color: var(--color-black);
+  text-decoration: none;
+}

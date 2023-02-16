@@ -1,4 +1,4 @@
-import "./Homepage.scss";
+// import "./Homepage.scss";
 
 import { Link } from "react-router-dom";
 import { Slide } from "react-slideshow-image";
@@ -85,9 +85,7 @@ function Homepage() {
           <div className="main__shop-presentation__container__description-container">
             <div className="main__shop-presentation__container__description-container__description">
               <div className="main__shop-presentation__container__description-container__description__title-container">
-                <h3 className="main__shop-presentation__container__description-container__description__title-container__title">
-                  L&#8217;agréable Utile
-                </h3>
+                <h1>L&#8217;agréable Utile</h1>
               </div>
               <div className="main__shop-presentation__container__description-container__description__content">
                 <p className="main__shop-presentation__container__description-container__description__content__paragraph">
@@ -109,7 +107,7 @@ function Homepage() {
                   className="main__shop-presentation__container__description-container__description__link-container__link"
                   to="/shop"
                 >
-                  Visiter la boutique
+                  Visiter la boutique{" "}
                 </Link>
               </div>
             </div>
@@ -156,9 +154,7 @@ function Homepage() {
       </div>
 
       <div className="main__categories">
-        <h3 className="main__categories__title">
-          Découvrez les principales catégories de produits
-        </h3>
+        <h2>Découvrez les principales catégories de produits</h2>
         <div className="main__categories__container">
           <div className="main__categories__container__category">
             <div className="main__categories__container__category__img-container">
@@ -257,11 +253,11 @@ function Homepage() {
           </div>
           <div className="main__services__sewing__sewing-container__content-container">
             <div className="main__services__sewing__sewing-container__content-container__description">
-              <h3 className="main__services__sewing__sewing-container__content-container__description__title">
+              <h2>
                 Apprendre la couture,
                 <br />
                 ça vous dit ?
-              </h3>
+              </h2>
               <p className="main__services__sewing__sewing-container__content-container__description__content">
                 Venez découvrir les secrets du faire soi-même par la couture sur
                 machine à coudre.
@@ -325,9 +321,7 @@ function Homepage() {
       </div>
 
       <div className="main__embroidery">
-        <h3 className="main__embroidery__title">
-          Service de broderie personnalisée
-        </h3>
+        <h2>Service de broderie personnalisée</h2>
         <div className="slide-container">
           <Slide
             slidesToScroll={1}
@@ -355,9 +349,9 @@ function Homepage() {
 
       <div className="main__marketplace">
         <div className="main__marketplace__description-container">
-          <h3 className="main__marketplace__description-container__title">
+          <h2 className="main__marketplace__description-container__title">
             Retrouvez moi sur le marché à Lagny sur Marne
-          </h3>
+          </h2>
           <p className="main__marketplace__description-container__content">
             Vous pouvez me retrouver sur le marché de Lagny sur Marne tous les
             dimanches matins de 8h à 13h.
