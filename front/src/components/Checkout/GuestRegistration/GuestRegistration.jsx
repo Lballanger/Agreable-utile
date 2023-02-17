@@ -1,4 +1,4 @@
-// import "./GuestRegistration.scss";
+import "./GuestRegistration.scss";
 
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
@@ -341,15 +341,15 @@ function GuestRegistration({ setSteps, setActiveStep }) {
         break;
 
       case "at-home":
-        setDelivery(event.target.value);
+        // setDelivery(event.target.value);
         break;
 
       case "on-site":
-        setDelivery(event.target.value);
+        // setDelivery(event.target.value);
         break;
 
       case "relay-point":
-        setDelivery(event.target.value);
+        // setDelivery(event.target.value);
         break;
 
       default:
@@ -369,9 +369,9 @@ function GuestRegistration({ setSteps, setActiveStep }) {
   return (
     <div className="guest-registration">
       <div className="guest-registration__left-container">
-        <h2 className="guest-registration__left-container__title">
+        <h3 className="guest-registration__left-container__title">
           INDIQUEZ VOS INFORMATIONS PERSONNELLES
-        </h2>
+        </h3>
         <form
           className="guest-registration__left-container__form"
           onSubmit={handleSubmit}

@@ -1,17 +1,12 @@
-// import "./PlaceOrder.scss";
+import "./PlaceOrder.scss";
 
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  register,
-  createAddress,
-  fetchAddressesByUserId,
-} from "../../../slices/userSlice";
+import { fetchAddressesByUserId } from "../../../slices/userSlice";
 
 import Field from "../../Shared/Field/Field";
-import AddressControl from "../../Shared/AddressControl/AddressControl";
 import Connexion from "../../Connexion/Connexion";
 import AddAddress from "../../Shared/Modal/AddAddress/AddAddress";
 

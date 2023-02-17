@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-// import "./Field.scss";
+import "./Field.scss";
 
 function Field({
   id,

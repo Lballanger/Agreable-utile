@@ -5,7 +5,7 @@ import { createAddress } from "../../../../slices/userSlice";
 import AddressControl from "../../AddressControl/AddressControl";
 import Field from "../../Field/Field";
 
-// import "./AddAddress.scss";
+import "./AddAddress.scss";
 
 const phoneRule = /^([+]\d{2})?\d{10}$/;
 

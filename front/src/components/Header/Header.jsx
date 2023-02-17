@@ -1,7 +1,5 @@
-// import "./Header.scss";
-
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -82,7 +80,7 @@ function Header() {
                   Boutique
                 </Link>
               </li>
-              <li className="header__navigation__nav__menu__item">
+              {/* <li className="header__navigation__nav__menu__item">
                 <Link
                   className="header__navigation__nav__menu__item__link"
                   to="/sewing"
@@ -97,7 +95,7 @@ function Header() {
                 >
                   Tissues
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
           <nav className="header__navigation__identification">
@@ -421,7 +419,7 @@ function Header() {
                     Boutique
                   </Link>
                 </li>
-                <li className="header__mobile-nav__nav__menu__item">
+                {/* <li className="header__mobile-nav__nav__menu__item">
                   <Link
                     className="header__mobile-nav__nav__menu__item__link"
                     to="/sewing"
@@ -438,7 +436,7 @@ function Header() {
                   >
                     Tissus
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </nav>
           )}

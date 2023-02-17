@@ -1,13 +1,8 @@
-// import "./Cart.scss";
+import "./Cart.scss";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  AdvancedImage,
-  lazyload,
-  placeholder,
-  responsive,
-} from "@cloudinary/react";
+import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import {
   removeFromCart,
@@ -43,7 +38,7 @@ function Cart() {
         <div className="cart__cart-container">
           <div className="cart__cart-container__articles-container">
             <div className="cart__cart-container__articles-container__title-container">
-              <h2 className="cart__cart-container__articles-container__title-container__title">
+              <h3 className="cart__cart-container__articles-container__title-container__title">
                 Mon panier ({" "}
                 {articlesInCart.reduce(
                   (previousValue, currentValue) =>
@@ -52,7 +47,7 @@ function Cart() {
                 )}{" "}
                 article
                 {articlesInCart.length > 1 ? "s" : ""} )
-              </h2>
+              </h3>
             </div>
 
             {articlesInCart.map((article) => (
@@ -76,9 +71,9 @@ function Cart() {
                 <div className="cart__cart-container__articles-container__product-container__infos">
                   <div className="cart__cart-container__articles-container__product-container__infos__description">
                     <div className="cart__cart-container__articles-container__product-container__infos__description__title-container">
-                      <h2 className="cart__cart-container__articles-container__product-container__infos__description__title-container__title">
+                      <h3 className="cart__cart-container__articles-container__product-container__infos__description__title-container__title">
                         {article.name}
-                      </h2>
+                      </h3>
                     </div>
                     <div className="cart__cart-container__articles-container__product-container__infos__description__color-container">
                       <div className="cart__cart-container__articles-container__product-container__infos__description__color-container__color">

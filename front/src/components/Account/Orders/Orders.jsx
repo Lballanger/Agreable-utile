@@ -2,8 +2,8 @@ import "./Orders.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
-import { crop, fill } from "@cloudinary/url-gen/actions/resize";
+import { AdvancedImage, lazyload } from "@cloudinary/react";
+import { fill } from "@cloudinary/url-gen/actions/resize";
 import { fetchOrdersByUserId } from "../../../slices/orderSlice";
 import cloudinary from "../../../lib/cloudinary";
 

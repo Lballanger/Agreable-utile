@@ -1,9 +1,8 @@
-// import "./Logon.scss";
+import "./Logon.scss";
 
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { login } from "../../../slices/userSlice";
 
@@ -85,9 +84,9 @@ function Logon({ setSteps, setActiveStep }) {
               className="logon__container__login-container__inputs-container__form"
               onSubmit={handleSubmit}
             >
-              <h2 className="logon__container__login-container__inputs-container__form__title">
+              <h3 className="logon__container__login-container__inputs-container__form__title">
                 CONNEXION
-              </h2>
+              </h3>
               {error ? (
                 <div className="connexion__modal__container__form__error">
                   Votre adresse e-mail ou votre mot de passe est incorrect.
@@ -121,7 +120,7 @@ function Logon({ setSteps, setActiveStep }) {
           </div>
         </div>
         <div className="logon__container__guest-container">
-          <h2 className="logon__container__guest-container__title">{`Acheter en tant qu'invité(e)`}</h2>
+          <h3 className="logon__container__guest-container__title">{`Acheter en tant qu'invité(e)`}</h3>
           <div className="logon__container__guest-container__content-container">
             <p className="logon__container__guest-container__content-container__content">
               {`Vous pouvez réaliser votre achat en tant qu'invité.`}

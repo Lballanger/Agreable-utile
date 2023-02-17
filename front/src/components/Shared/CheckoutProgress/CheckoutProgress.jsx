@@ -1,4 +1,4 @@
-// import "./CheckoutProgress.scss";
+import "./CheckoutProgress.scss";
 
 function CheckoutProgress({ steps, activeStep }) {
   const { logon, placeOrder, payment, success } = steps;
