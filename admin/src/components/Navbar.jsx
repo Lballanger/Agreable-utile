@@ -11,8 +11,9 @@ import {
 import FlexBetween from './FlexBetween';
 import { useDispatch } from 'react-redux';
 import { setMode } from '../redux/slices/globalSlice';
-import profileImage from "../assets/profile.jpg";
 import { AppBar, Box, Button, IconButton, InputBase, Menu, MenuItem, Toolbar, Typography, useTheme } from '@mui/material';
+import { signOut } from "../redux/slices/authSlice";
+import { useNavigate } from 'react-router-dom';
 
 function Navbar({
   user,
@@ -20,12 +21,19 @@ function Navbar({
   setIsSidebarOpen,
 }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = useState(null);
     const isOpen = Boolean(anchorEl);
     const handleClick = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
+
+      const handleLogout = () => {
+        dispatch(signOut());
+        handleClose();
+        navigate("/login", {replace: true});
+      };
 
   return (
     <AppBar
@@ -121,7 +129,7 @@ function Navbar({
                 horizontal: "center",
               }}
             >
-              <MenuItem onClick={handleClose}>Déconnexion</MenuItem>
+              <MenuItem onClick={handleLogout}>Déconnexion</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>

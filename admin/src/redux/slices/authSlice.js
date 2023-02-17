@@ -34,6 +34,10 @@ export const authUser = createAsyncThunk("/user", async (_, { rejectWithValue}) 
     }
 });
 
+export const signOut = createAsyncThunk("/auth/signOut", async () => {
+  removeToken();
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
