@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Slide } from "react-slideshow-image";
+import useWindowSize from "../../hooks/useWindowSize";
 import "react-slideshow-image/dist/styles.css";
 
 import summaryProduct from "../../assets/img/summary-product1.jpg";
@@ -30,17 +31,19 @@ const images = [
   broderie7,
 ];
 
-const divStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  height: "340px",
-  margin: "0 1rem",
-};
-
 function Homepage() {
+  const { isMobile } = useWindowSize();
+
+  const divStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: `${!isMobile ? "340px" : "540px"}`,
+    margin: "0 1rem",
+  };
+
   return (
     <main className="main">
       {/* <div className="main__presentation">
@@ -82,9 +85,9 @@ function Homepage() {
         <div className="main__shop-presentation__container">
           <div className="main__shop-presentation__container__description-container">
             <div className="main__shop-presentation__container__description-container__description">
-              <div className="main__shop-presentation__container__description-container__description__title-container">
-                <h1>L&#8217;agréable Utile</h1>
-              </div>
+              <h1 className="main__shop-presentation__container__description-container__description__title-container">
+                L&#8217;agréable Utile
+              </h1>
               <div className="main__shop-presentation__container__description-container__description__content">
                 <p className="main__shop-presentation__container__description-container__description__content__paragraph">
                   Retrouvez des produits réalisé par moi même, chaque pièce est
@@ -105,7 +108,18 @@ function Homepage() {
                   className="main__shop-presentation__container__description-container__description__link-container__link"
                   to="/shop"
                 >
-                  Visiter la boutique{" "}
+                  Visiter la boutique
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4Z"
+                    />
+                  </svg>
                 </Link>
               </div>
             </div>
@@ -323,7 +337,7 @@ function Homepage() {
         <div className="slide-container">
           <Slide
             slidesToScroll={1}
-            slidesToShow={4}
+            slidesToShow={isMobile ? 3 : 4}
             infinite
             easing="linear"
             arrows={false}
@@ -336,7 +350,8 @@ function Homepage() {
                   style={{
                     ...divStyle,
                     backgroundImage: `url(${slideImage})`,
-                    width: "80%",
+                    width: "95%",
+                    height: `${isMobile ? "240px" : "420px"}`,
                   }}
                 />
               </div>

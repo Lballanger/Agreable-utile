@@ -91,6 +91,10 @@
     width: 100%;
     padding: 4rem 0 2rem 0;
 
+    @include breakpoint(medium) {
+      padding: 0rem 0 2rem 0;
+    }
+
     &__container {
       display: flex;
       justify-content: center;
@@ -110,8 +114,7 @@
 
         @include breakpoint(medium) {
           width: 100%;
-          order: 2;
-          margin-top: 1rem;
+          margin: 1rem;
         }
 
         &__description {
@@ -194,7 +197,6 @@
         @include breakpoint(medium) {
           width: 97%;
           height: auto;
-          order: 1;
         }
 
         &__article {

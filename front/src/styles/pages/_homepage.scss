@@ -86,27 +86,33 @@
     width: 100%;
     padding: 4rem 0 2rem 0;
 
+    @include breakpoint(large) {
+      padding: 0rem 0 2rem 0;
+    }
+
     &__container {
       display: flex;
       justify-content: center;
       width: 90%;
       padding: 2rem 0;
 
-      @include breakpoint(medium) {
+      @include breakpoint(large) {
         flex-direction: column;
         justify-content: flex-start;
-        width: 97%;
+        width: 94%;
         height: 90%;
+        margin: 0 auto;
       }
 
       &__description-container {
         width: 45%;
         padding: 1rem;
 
-        @include breakpoint(medium) {
+        @include breakpoint(large) {
           width: 100%;
           order: 2;
           margin-top: 1rem;
+          padding: 0 0.2rem;
         }
 
         &__description {
@@ -115,15 +121,20 @@
           flex-direction: column;
 
           &__title-container {
-            margin-bottom: 1rem;
+            padding: 1rem 0;
+
+            @include breakpoint(large) {
+              text-align: center;
+            }
           }
 
           &__content {
             width: 85%;
             padding: 4rem 0;
 
-            @include breakpoint(medium) {
+            @include breakpoint(large) {
               width: 97%;
+              padding: 2rem 0;
             }
 
             &__paragraph {
@@ -131,7 +142,7 @@
               font-family: "Montserrat", sans-serif;
               font-weight: 300;
 
-              @include breakpoint(medium) {
+              @include breakpoint(large) {
                 font-size: 1rem;
               }
             }
@@ -139,31 +150,25 @@
 
           &__link-container {
             display: flex;
-            align-items: center;
             justify-content: flex-end;
-            height: 6rem;
-            width: 85%;
+            align-items: center;
+            width: 95%;
+            padding: 2rem 0;
 
-            &__link,
-            :visited {
-              padding: 1.2rem;
-              background-color: #e05a83;
-              color: white;
+            &__link {
+              padding: 0.8rem 2rem;
               transition: 200ms;
               text-transform: uppercase;
+              border-radius: 5px;
+              font-size: 1.3rem;
 
-              @include breakpoint(medium) {
-                padding: 0.7rem 1.3rem;
-                margin-top: 1.5rem;
+              @include breakpoint(xlarge) {
+                font-size: 1rem;
               }
             }
 
-            &__link {
-              font-size: 0.9rem;
-            }
-
             &__link:hover {
-              background-color: var(--color-placeholder);
+              text-decoration: underline;
             }
           }
         }
@@ -175,10 +180,11 @@
         height: 560px;
         width: 46%;
 
-        @include breakpoint(medium) {
+        @include breakpoint(large) {
           width: 97%;
           height: auto;
           order: 1;
+          margin: 0 auto;
         }
 
         &__article {
@@ -191,7 +197,7 @@
             padding-right: 0.3rem;
             padding-bottom: 0.3rem;
 
-            @include breakpoint(medium) {
+            @include breakpoint(large) {
               height: 200px;
             }
 
@@ -229,11 +235,19 @@
     margin: 0 auto;
     width: 90%;
 
+    @include breakpoint(medium) {
+      padding: 2rem 0;
+    }
+
     &__container {
       display: flex;
       justify-content: center;
       margin: 0 auto;
       width: 100%;
+
+      @include breakpoint(large) {
+        flex-direction: column;
+      }
 
       &__category {
         display: flex;
@@ -242,15 +256,30 @@
         width: 25%;
         margin: 0 auto;
 
+        @include breakpoint(large) {
+          width: 90%;
+          padding: 1rem 0;
+        }
+
         &__img-container {
-          width: 100%;
           position: relative;
+          display: flex;
+          justify-content: center;
+
+          @include breakpoint(large) {
+            height: 100%;
+          }
 
           &__img {
             height: 100%;
             width: 100%;
             object-fit: cover;
             object-position: center;
+
+            @include breakpoint(large) {
+              width: 70%;
+              height: 83%;
+            }
           }
 
           &__content,
@@ -271,6 +300,13 @@
             color: white;
             font-size: 1.5rem;
             text-transform: uppercase;
+
+            @include breakpoint(large) {
+              width: 65%;
+              left: 18%;
+              bottom: 15%;
+              font-size: 1.2rem;
+            }
 
             &:hover {
               border-bottom: 1px solid white;
@@ -319,6 +355,10 @@
         width: 75%;
         box-shadow: 0 0 10px 0 rgba(187, 183, 183, 0.5);
 
+        @include breakpoint(medium) {
+          width: 95%;
+        }
+
         &__content,
         > strong {
           background-color: #ffffff;
@@ -346,7 +386,8 @@
 
       @include breakpoint(medium) {
         height: auto;
-        width: 90%;
+        width: 95%;
+        padding: 2rem 0;
       }
 
       &__sewing-container {
@@ -355,9 +396,9 @@
         justify-content: flex-start;
         width: 100%;
 
-        @include breakpoint(medium) {
+        @include breakpoint(xlarge) {
           flex-direction: column;
-          width: 97%;
+          width: 95%;
         }
 
         &__content-container {
@@ -366,7 +407,8 @@
           width: 45%;
           padding: 0 2.5rem;
 
-          @include breakpoint(medium) {
+          @include breakpoint(xlarge) {
+            padding: 0;
             width: 100%;
           }
 
@@ -378,7 +420,7 @@
             height: 100%;
 
             @include breakpoint(medium) {
-              line-height: 1rem;
+              line-height: 1.2rem;
             }
 
             &__title {
@@ -400,21 +442,23 @@
               font-weight: 300;
 
               @include breakpoint(medium) {
-                line-height: 1rem;
+                line-height: 1.8rem;
               }
             }
 
             &__link-container {
               display: flex;
-              justify-content: flex-end;
+              justify-content: center;
+              align-items: center;
               width: 100%;
+              padding: 2rem 0;
 
               &__link {
                 padding: 0.8rem 2rem;
                 transition: 200ms;
                 text-transform: uppercase;
                 border-radius: 5px;
-                font-size: 1.2rem;
+                font-size: 1.5rem;
               }
 
               &__link:hover {
@@ -428,8 +472,9 @@
           height: 900px;
           width: 44%;
 
-          @include breakpoint(medium) {
+          @include breakpoint(xlarge) {
             width: 100%;
+            height: 700px;
             padding-bottom: 1rem;
           }
 
@@ -453,6 +498,10 @@
     margin: 0 auto;
     width: 100%;
 
+    @include breakpoint(xlarge) {
+      padding: 2rem 0;
+    }
+
     &__title {
       font-family: "Great Vibes", cursive;
       font-size: 3.8rem;
@@ -467,6 +516,10 @@
       width: 100%;
       margin: 0 auto;
       padding: 1rem 0 8rem 0;
+
+      @include breakpoint(xlarge) {
+        padding: 1rem 0;
+      }
     }
   }
 
@@ -478,6 +531,11 @@
     padding: 5rem 0;
     margin: 0 auto;
 
+    @include breakpoint(xlarge) {
+      flex-direction: column;
+      padding: 2rem 0;
+    }
+
     &__description-container {
       animation: apparition-opacity 1.9s ease-in-out 0s;
       display: flex;
@@ -485,6 +543,11 @@
       height: 650px;
       width: 45%;
       padding-left: 2.5rem;
+
+      @include breakpoint(xlarge) {
+        order: 2;
+        width: 100%;
+      }
 
       &__title {
         font-family: "Great Vibes", cursive;
@@ -505,6 +568,13 @@
     &__img-container {
       height: 850px;
       width: 50%;
+      order: 1;
+
+      @include breakpoint(xlarge) {
+        width: 100%;
+        height: 700px;
+        padding-bottom: 2rem;
+      }
 
       &__img {
         height: 100%;
