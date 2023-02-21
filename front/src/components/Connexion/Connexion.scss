@@ -24,6 +24,10 @@
       box-shadow: rgb(0 0 0 / 25%) 0px 3px 4px;
       border-radius: 5px;
 
+      @include breakpoint(xlarge) {
+        width: 80%;
+      }
+
       &__form {
         display: flex;
         flex-direction: column;

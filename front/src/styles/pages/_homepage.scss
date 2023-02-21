@@ -155,15 +155,19 @@
             width: 95%;
             padding: 2rem 0;
 
+            @include breakpoint(xlarge) {
+              justify-content: center;
+            }
+
             &__link {
               padding: 0.8rem 2rem;
               transition: 200ms;
               text-transform: uppercase;
               border-radius: 5px;
-              font-size: 1.3rem;
+              font-size: 1.2rem;
 
               @include breakpoint(xlarge) {
-                font-size: 1rem;
+                font-size: 1.2rem;
               }
             }
 

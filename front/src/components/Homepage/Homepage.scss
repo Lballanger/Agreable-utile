@@ -505,6 +505,10 @@
     padding: 5rem 0;
     margin: 0 auto;
 
+    @include breakpoint(medium) {
+      width: 95%;
+    }
+
     &__description-container {
       animation: apparition-opacity 1.9s ease-in-out 0s;
       display: flex;
@@ -512,6 +516,12 @@
       height: 650px;
       width: 45%;
       padding-left: 2.5rem;
+
+      @include breakpoint(medium) {
+        width: 100%;
+        justify-content: center;
+        padding-left: 0;
+      }
 
       &__title {
         font-family: "Great Vibes", cursive;

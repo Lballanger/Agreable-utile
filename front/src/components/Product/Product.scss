@@ -78,7 +78,7 @@
         @include breakpoint(medium) {
           width: 80%;
           flex-direction: row;
-          margin: 0 auto;
+          margin: 0 1rem;
         }
 
         &__img-container {
