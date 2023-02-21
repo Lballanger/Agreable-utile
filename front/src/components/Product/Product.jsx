@@ -11,13 +11,13 @@ import {
   responsive,
   placeholder,
 } from "@cloudinary/react";
+
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { grayscale } from "@cloudinary/url-gen/actions/effect";
 import cloudinary from "../../lib/cloudinary";
 
-import API from "../../api/api";
 import {
-  setArticlesData,
+  fetchArticles,
   addToCart,
   changeTheCartQuantity,
 } from "../../slices/articlesSlice";
@@ -40,9 +40,7 @@ function Detail() {
   // Retrieve the item if not already in the store
   useEffect(async () => {
     if (!article) {
-      // TODO : Changer la méthode pour récupérer uniquement un article avec le paramètre url
-      const data = await API.getAllArticles();
-      dispatch(setArticlesData(data));
+      dispatch(fetchArticles());
     }
   }, []);
 
@@ -71,9 +69,8 @@ function Detail() {
   }, [imgSelected, imgLength]);
 
   const handleClick = async () => {
-    const data = await API.getArticle(id);
     const payload = {
-      ...data,
+      ...article,
       quantity,
     };
     dispatch(addToCart(payload));
