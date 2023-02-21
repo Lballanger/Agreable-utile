@@ -66,7 +66,7 @@ function Shop() {
               {categories && Object.keys(categories).length > 0
                 ? categories.map((category) => (
                     <li
-                      key={category.name}
+                      key={category.id}
                       className="shop__category-container__list__link-container"
                     >
                       <input
@@ -100,10 +100,11 @@ function Shop() {
                       if (selectedCategories.length === 0) {
                         return article;
                       }
+                      return "";
                     })
                     .map((article) => (
                       <div
-                        key={article.article_id}
+                        key={article.id}
                         className="shop__articles-container__main-container__product"
                       >
                         <Link to={`/shop/${article.id}`}>
