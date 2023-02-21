@@ -583,9 +583,14 @@ function GuestRegistration({ setSteps, setActiveStep }) {
   );
 }
 
+GuestRegistration.defaultProps = {
+  setSteps: false,
+  setActiveStep: () => {},
+};
+
 GuestRegistration.propTypes = {
-  setSteps: PropTypes.bool.isRequired,
-  setActiveStep: PropTypes.func.isRequired,
+  setSteps: PropTypes.bool,
+  setActiveStep: PropTypes.func,
 };
 
 export default GuestRegistration;
