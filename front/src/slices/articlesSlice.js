@@ -52,12 +52,12 @@ const articlesSlice = createSlice({
         );
         state.cart = result;
         state.cart.push(foundArticle);
-        state.subtotal += Number(payload.price_wt);
+        state.subtotal += Number(payload.price_wt) * payload.quantity;
         localStorage.setItem("CART", JSON.stringify(state.cart));
       } else {
         params.quantity = payload.quantity;
         state.cart.push(params);
-        state.subtotal += Number(payload.price_wt);
+        state.subtotal += Number(payload.price_wt) * payload.quantity;
         localStorage.setItem("CART", JSON.stringify(state.cart));
       }
     },
