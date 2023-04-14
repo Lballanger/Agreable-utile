@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import {
   register,
   createAddress,
-  fetchAddressesByUserId,
   addGuestPersonalInfo,
   addGuestAddress,
 } from "../../../slices/userSlice";
@@ -20,9 +19,8 @@ function GuestRegistration({ setSteps, setActiveStep }) {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.userSlice.userData);
-  const cart = useSelector((state) => state.articlesSlice.cart);
-  const addresses = useSelector((state) => state.userSlice.addresses);
   const token = useSelector((state) => state.userSlice.token);
+  const cart = useSelector((state) => state.articlesSlice.cart);
 
   if (!cart.length) navigate("/cart", { replace: true });
 
@@ -47,16 +45,18 @@ function GuestRegistration({ setSteps, setActiveStep }) {
 
   const [errors, setErrors] = useState(initialErrors);
 
-  const [email, setEmail] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastName] = useState("");
+  const [email, setEmail] = useState(user?.email);
+  const [firstname, setFirstname] = useState(user?.firstname);
+  const [lastname, setLastName] = useState(user?.lastname);
   const [country, setCountry] = useState("France");
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(user?.address);
   const [suggestion, setSuggestion] = useState(false);
-  const [addressInformation, setAddressInformation] = useState("");
-  const [city, setCity] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [phone, setPhone] = useState("");
+  const [addressInformation, setAddressInformation] = useState(
+    user?.additionalInfo,
+  );
+  const [city, setCity] = useState(user?.city);
+  const [postalCode, setPostalCode] = useState(user?.postalCode);
+  const [phone, setPhone] = useState(user?.phone);
   const [createAccount, setCreateAccount] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -73,11 +73,16 @@ function GuestRegistration({ setSteps, setActiveStep }) {
   const passwordRule =
     /^.*(?=.{6,120})(?!.*\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!\@\#\$\%\^\&\*\(\)\-\=\¡\£\_\+\`\~\.\,\<\>\/\?\;\:\'\"\\\|\[\]\{\}]).*$/;
 
+  // If the user has already entered personal information
   useEffect(() => {
-    if (!addresses.length && token) {
-      dispatch(fetchAddressesByUserId());
+    if (user) {
+      setDisabled(false);
+      delete errors.email;
+      delete errors.firstname;
+      delete errors.lastname;
+      delete errors.postalCode;
     }
-  }, [addresses, token]);
+  }, [user, createAccount]);
 
   useEffect(() => {
     if (createAccount) {
@@ -96,13 +101,19 @@ function GuestRegistration({ setSteps, setActiveStep }) {
     }
   }, [createAccount]);
 
+  // Changing the state of the button when there are no more errors
   useEffect(() => {
     if (Object.keys(errors).length && !disabled) setDisabled(true);
   }, [errors]);
 
+  /**
+   Manages the submission of the form.  
+   Checks for errors and handles two use cases: creating an account, as a visitor.
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Checks for errors
     const error = Object.values(errors);
 
     if (error.length === 0) {
@@ -120,6 +131,7 @@ function GuestRegistration({ setSteps, setActiveStep }) {
           .unwrap()
           .then((data) => {
             dispatch(
+              // Creates the address if the account creation is successful
               createAddress({
                 firstname,
                 lastname,
@@ -155,34 +167,36 @@ function GuestRegistration({ setSteps, setActiveStep }) {
               });
             }
           });
-        // In the case of a user already logged in
+        // Visitor case
       } else {
-        dispatch(
-          addGuestPersonalInfo({
-            firstname,
-            lastname,
-            country,
-            address,
-            city,
-            postalCode,
-            additionalInfo: addressInformation,
-            phone,
-            email,
-          }),
-        );
-        dispatch(
-          addGuestAddress({
-            firstname,
-            lastname,
-            country,
-            address,
-            city,
-            postalCode,
-            additionalInfo: addressInformation,
-            phone,
-            email,
-          }),
-        );
+        if (!user) {
+          dispatch(
+            addGuestPersonalInfo({
+              firstname,
+              lastname,
+              country,
+              address,
+              city,
+              postalCode,
+              additionalInfo: addressInformation,
+              phone,
+              email,
+            }),
+          );
+          dispatch(
+            addGuestAddress({
+              firstname,
+              lastname,
+              country,
+              address,
+              city,
+              postalCode,
+              additionalInfo: addressInformation,
+              phone,
+              email,
+            }),
+          );
+        }
         setSteps((state) => {
           return {
             ...state,
@@ -194,6 +208,7 @@ function GuestRegistration({ setSteps, setActiveStep }) {
     }
   };
 
+  // Handle change on inputs
   const handleChange = (event) => {
     switch (event.target.name) {
       case "email-order":
@@ -363,6 +378,7 @@ function GuestRegistration({ setSteps, setActiveStep }) {
     setCity(data.city);
     setPostalCode(data.postcode);
 
+    // TODO : Fix this error
     delete errors.postalCode;
   };
 
@@ -466,7 +482,7 @@ function GuestRegistration({ setSteps, setActiveStep }) {
             />
             <AddressControl
               setCitySuggest={setCitySuggest}
-              inputValue={address}
+              inputValue={address || ""}
               setFocus={suggestion}
               setSuggestionFocus={setSuggestion}
             />
@@ -519,7 +535,7 @@ function GuestRegistration({ setSteps, setActiveStep }) {
               error={errors.phone}
             />
           </div>
-          {!user ? (
+          {!token ? (
             <>
               <div className="guest-registration__left-container__form__full-container">
                 <label
