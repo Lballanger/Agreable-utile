@@ -4,7 +4,7 @@ const instance = axios.create({
   baseURL:
     import.meta.env.VITE_NODE_ENV !== "production"
       ? "http://localhost:3500/api/"
-      : "https://lballanger.fr/lagreable/api/",
+      : "https://207.154.216.23/lagreable/api/",
   headers: {
     "Content-Type": "application/json",
   },

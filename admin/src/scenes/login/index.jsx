@@ -1,23 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
-import { Box, Button, Divider, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { login } from '../../redux/slices/authSlice';
-import { useNavigate } from 'react-router-dom';
+import {
+  Box,
+  Button,
+  Divider,
+  FormHelperText,
+  Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-      const dispatch = useDispatch();
-      const navigate = useNavigate();
-      const [showPassword, setShowPassword] = useState(false);
-      const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
-      };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
-      const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-      };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <Box
@@ -27,6 +39,24 @@ function Login() {
       flexDirection="column"
       sx={{ minHeight: "100vh" }}
     >
+      <Box
+        position="absolute"
+        top="2rem"
+        left="2rem"
+        backgroundColor="#FFD48E"
+        border="1px solid black"
+        padding="1rem 3rem"
+      >
+        <Typography variant="h5" mb="2rem">
+          Données de test :
+        </Typography>
+        <Typography variant="h6" mb="0.3rem">
+          Email : test@test.fr
+        </Typography>
+        <Typography variant="h6" mb="2rem">
+          Password : T$st853
+        </Typography>
+      </Box>
       <Grid item xs={12}>
         <Stack
           direction="row"
@@ -99,12 +129,7 @@ function Login() {
                       error={Boolean(touched.email && errors.email)}
                     />
                     {touched.email && errors.email && (
-                      <FormHelperText
-                        error
-                        id="standard-weight-helper-text-email-login"
-                      >
-                        {errors.email}
-                      </FormHelperText>
+                      <FormHelperText errors>{errors.email}</FormHelperText>
                     )}
                   </Stack>
                 </Grid>
