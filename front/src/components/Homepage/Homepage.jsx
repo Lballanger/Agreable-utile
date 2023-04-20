@@ -7,19 +7,19 @@ import summaryProduct from "../../assets/img/summary-product1.jpg";
 import product3 from "../../assets/img/shop/articles/product6.jpg";
 import product4 from "../../assets/img/shop/articles/product1.jpg";
 import summaryProduct3 from "../../assets/img/summary-product4.jpg";
-import sewing from "../../assets/img/sewing.jpg";
+import sewing from "../../assets/img/sewing.webp";
 import bathroom from "../../assets/img/salledebain.webp";
-import kitchen from "../../assets/img/cuisine.jpg";
-import salon from "../../assets/img/salon.jpg";
-import market from "../../assets/img/market.jpg";
+import kitchen from "../../assets/img/kitchen.webp";
+import salon from "../../assets/img/salon.webp";
+import market from "../../assets/img/market.webp";
 
-import broderie1 from "../../assets/img/broderie1.jpg";
-import broderie2 from "../../assets/img/broderie2.jpg";
-import broderie3 from "../../assets/img/broderie3.jpg";
-import broderie4 from "../../assets/img/broderie4.jpg";
-import broderie5 from "../../assets/img/broderie5.jpg";
-import broderie6 from "../../assets/img/broderie6.jpg";
-import broderie7 from "../../assets/img/broderie7.jpg";
+import broderie1 from "../../assets/img/broderie1.webp";
+import broderie2 from "../../assets/img/broderie2.webp";
+import broderie3 from "../../assets/img/broderie3.webp";
+import broderie4 from "../../assets/img/broderie4.webp";
+import broderie5 from "../../assets/img/broderie5.webp";
+import broderie6 from "../../assets/img/broderie6.webp";
+import broderie7 from "../../assets/img/broderie7.webp";
 
 const images = [
   broderie1,

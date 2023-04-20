@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export default function useWindowSize() {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
   const [isTablet, setIsTablet] = useState(
     window.innerWidth >= 769 && window.innerWidth < 900,
   );
@@ -18,7 +18,7 @@ export default function useWindowSize() {
       const windowHeight = window.innerHeight;
       setWidth(windowWidth);
       setHeight(windowHeight);
-      setIsMobile(windowWidth < 701);
+      setIsMobile(windowWidth < 901);
       setIsTablet(windowWidth >= 700 && windowWidth < 900);
       setIsDesktop(windowWidth >= 900);
       setIsLandscape(windowWidth > windowHeight);
