@@ -1,27 +1,27 @@
 import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getOldCart } from "../../slices/articlesSlice";
+import { getOldCart } from "../slices/articlesSlice";
 
 // Components
 
-import Homepage from "../Homepage/Homepage";
-import Product from "../Product/Product";
-import Shop from "../Shop/Shop";
-import Register from "../Register/Register";
-import Account from "../Account/Account";
-import Profil from "../Account/Profil/Profil";
-import Orders from "../Account/Orders/Orders";
-import Order from "../Account/Order/Order";
-import Cart from "../Cart/Cart";
-import Success from "../Checkout/Success/Success";
-import Checkout from "../Checkout/Checkout";
-import GuestRegistration from "../Checkout/GuestRegistration/GuestRegistration";
-import NotFound from "../NotFound/NotFound";
+import Homepage from "./Homepage/Homepage";
+import Product from "../components/Product/Product";
+import Shop from "../components/Shop/Shop";
+import Register from "../components/Register/Register";
+import Account from "../components/Account/Account";
+import Profil from "../components/Account/Profil/Profil";
+import Orders from "../components/Account/Orders/Orders";
+import Order from "../components/Account/Order/Order";
+import Cart from "../components/Cart/Cart";
+import Success from "../components/Checkout/Success/Success";
+import Checkout from "../components/Checkout/Checkout";
+import GuestRegistration from "../components/Checkout/GuestRegistration/GuestRegistration";
+import NotFound from "../components/NotFound/NotFound";
 
 // Hooks
-import useAuth from "../../hooks/useAuth";
-import Layout from "../Layout/Layout";
+import useAuth from "../hooks/useAuth";
+import Layout from "../components/Layout/Layout";
 
 function App() {
   const dispatch = useDispatch();
