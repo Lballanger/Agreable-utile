@@ -65,7 +65,6 @@ instance.interceptors.response.use(
       const refreshToken = localStorage.getItem(REFRESH_KEY);
       if (refreshToken && refreshToken !== "") {
         instance.defaults.headers.common.authorization = `Bearer ${refreshToken}`;
-        console.log("refreshToken");
         try {
           const { data } = await instance.post("/auth/refreshToken");
           instance.defaults.headers.common.authorization = `Bearer ${data.accessToken}`;
