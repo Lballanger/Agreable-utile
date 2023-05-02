@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { Link, useLocation, useParams } from "react-router-dom";
-import "./Breadcrumb.scss";
 
 function Breadcrumb() {
   const location = useLocation();

@@ -23,7 +23,7 @@ import {
 } from "../../slices/articlesSlice";
 
 import arrow from "../../assets/img/arrow.svg";
-import Breadcrumb from "../Shared/Breadcrumb/Breadcrumb";
+import Breadcrumb from "../Breadcrumb";
 
 function Detail() {
   const dispatch = useDispatch();
