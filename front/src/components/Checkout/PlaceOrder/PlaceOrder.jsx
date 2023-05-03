@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchAddressesByUserId } from "../../../slices/userSlice";
 
 import Field from "../../Shared/Field/Field";
-import Connexion from "../../Connexion/Connexion";
+import Connexion from "../../Connexion";
 import AddAddress from "../../Shared/Modal/AddAddress/AddAddress";
 
 import athome from "../../../assets/img/athome.svg";
