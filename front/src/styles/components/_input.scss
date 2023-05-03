@@ -5,14 +5,12 @@
   &__input {
     width: 100%;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #e05a83;
     padding: 0.75rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 700;
     letter-spacing: 0.5px;
 
     &:focus {
-      outline: 1px solid #0071dc;
+      outline: 1px solid #e05a83;
     }
 
     &:focus + label,
@@ -32,7 +30,6 @@
     position: absolute;
     font-size: 13px;
     pointer-events: none;
-    color: #ccc;
     font-weight: 300;
     transition: all 0.3s ease-in-out;
     top: 50%;

@@ -2,9 +2,10 @@ import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../slices/userSlice";
-import Field from "../Shared/Field/Field";
 
 import "./Connexion.scss";
+import Loader from "../Loader";
+import Input from "../Input";
 
 const initialState = {
   email: "",
@@ -16,6 +17,7 @@ function Connexion({ handleCloseModal }) {
 
   const [inputs, setInputs] = useState({ ...initialState });
   const [error, setError] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const inputChange = (event) => {
     setInputs((state) => ({
@@ -27,17 +29,16 @@ function Connexion({ handleCloseModal }) {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      setLoader(true);
       await dispatch(login(inputs))
         .unwrap()
         .then(() => {
           handleCloseModal(event);
-        })
-        .catch((error) => {
-          console.log(error.message);
-          setError(true);
         });
     } catch (error) {
-      console.log(error);
+      setError(error.message);
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -84,26 +85,26 @@ function Connexion({ handleCloseModal }) {
               ""
             )}
             <div className="connexion__modal__container__form__inputs-container">
-              <Field
-                id="email"
-                label="Adresse e-mail"
-                type="email"
-                onChange={inputChange}
+              <Input
+                name="email"
                 value={inputs.email}
-              />
-              <Field
-                id="password"
-                label="Mot de passe"
-                type="password"
                 onChange={inputChange}
+                htmlFor="email"
+                placeholder="Adresse e-mail"
+              />
+              <Input
+                name="password"
                 value={inputs.password}
+                onChange={inputChange}
+                htmlFor="password"
+                placeholder="Mot de passe"
               />
             </div>
             <button
               className="connexion__modal__container__form__submit"
               type="submit"
             >
-              Connexion
+              {loader ? <Loader width="30px" height="30px" /> : "Connexion"}
             </button>
           </form>
         </div>

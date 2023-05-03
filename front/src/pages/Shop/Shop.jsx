@@ -58,79 +58,78 @@ function Shop() {
           <div className="shop__category-container">
             <h3 className="shop__category-container__title">Categorie</h3>
             <ul className="shop__category-container__list">
-              {categories && Object.keys(categories).length > 0
-                ? categories.map((category) => (
-                    <li
-                      key={category.id}
-                      className="shop__category-container__list__link-container"
-                    >
-                      <Input
-                        type="checkbox"
-                        value={category.name}
-                        id={category.name}
-                        htmlFor={category.name}
-                        checked={selectedCategories.includes(category.name)}
-                        onChange={handleCategoryChange}
-                        placeholder={category.name}
-                        inputClassName="shop__category-container__list__link-container__input"
-                        labelClassName="shop__category-container__list__link-container__label"
-                      />
-                    </li>
-                  ))
-                : ""}
+              {categories?.map((category) => (
+                <li
+                  key={category.id}
+                  className="shop__category-container__list__link-container"
+                >
+                  <Input
+                    type="checkbox"
+                    value={category.name}
+                    id={category.name}
+                    htmlFor={category.name}
+                    checked={selectedCategories.includes(category.name)}
+                    onChange={handleCategoryChange}
+                    placeholder={category.name}
+                    inputClassName="shop__category-container__list__link-container__input"
+                    labelClassName="shop__category-container__list__link-container__label"
+                  />
+                </li>
+              ))}
             </ul>
           </div>
           <div className="shop__articles-container">
             <div className="shop__articles-container__main-container">
-              {articles &&
-                articles
-                  .filter((article) => {
-                    if (selectedCategories.includes(article.category_name)) {
-                      return article;
-                    }
-                    if (selectedCategories.length === 0) {
-                      return article;
-                    }
-                    return "";
-                  })
-                  .map((article) => (
-                    <div
-                      key={article.id}
-                      className="shop__articles-container__main-container__product"
-                    >
-                      <Link to={`/shop/${article.id}`}>
-                        <div className="shop__articles-container__main-container__product__img-container">
-                          <AdvancedImage
-                            style={{
-                              width: "100%",
-                              height: "300px",
-                              objectFit: "cover",
-                            }}
-                            cldImg={cloudinary
-                              .image(article.image[0])
-                              .resize(fill())}
-                            plugins={[
-                              responsive({ steps: 370 }),
-                              lazyload(),
-                              placeholder("blur"),
-                            ]}
-                          />
+              {articles
+                ?.filter((article) => {
+                  if (selectedCategories.includes(article.category_name)) {
+                    return article;
+                  }
+                  if (selectedCategories.length === 0) {
+                    return article;
+                  }
+                  return "";
+                })
+                .map((article) => (
+                  <div
+                    key={article.id}
+                    className="shop__articles-container__main-container__product"
+                  >
+                    <Link to={`/shop/${article.id}`}>
+                      <div className="shop__articles-container__main-container__product__img-container">
+                        <AdvancedImage
+                          style={{
+                            width: "100%",
+                            height: "300px",
+                            objectFit: "cover",
+                          }}
+                          cldImg={cloudinary
+                            .image(article.image[0])
+                            .resize(fill())}
+                          plugins={[
+                            responsive({ steps: 370 }),
+                            lazyload(),
+                            placeholder("blur"),
+                          ]}
+                        />
+                      </div>
+                    </Link>
+                    <Link to={`/shop/${article.id}`}>
+                      <div className="shop__articles-container__main-container__product__infos-container">
+                        <h3>{article.name}</h3>
+                        <div>
+                          {article.description.length > 80
+                            ? `${article.description.slice(0, 80)}...`
+                            : article.description}
                         </div>
-                      </Link>
-                      <Link to={`/shop/${article.id}`}>
-                        <div className="shop__articles-container__main-container__product__infos-container">
-                          <h3>{article.name}</h3>
-                          <div>
-                            {article.description.length > 80
-                              ? `${article.description.slice(0, 80)}...`
-                              : article.description}
-                          </div>
-                          <div>{article.price_wt} €</div>
-                        </div>
-                      </Link>
-                    </div>
-                  ))}
-              {error && <div>{error}</div>}
+                        <div>{article.price_wt} €</div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              {error && (
+                <div>Veuillez nous excuser une erreur est survenue.</div>
+              )}
             </div>
           </div>
         </>
