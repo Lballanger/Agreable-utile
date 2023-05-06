@@ -80,53 +80,57 @@ function Shop() {
           </div>
           <div className="shop__articles-container">
             <div className="shop__articles-container__main-container">
-              {articles
-                ?.filter((article) => {
-                  if (selectedCategories.includes(article.category_name)) {
-                    return article;
-                  }
-                  if (selectedCategories.length === 0) {
-                    return article;
-                  }
-                  return "";
-                })
-                .map((article) => (
-                  <div
-                    key={article.id}
-                    className="shop__articles-container__main-container__product"
-                  >
-                    <Link to={`/shop/${article.id}`}>
-                      <div className="shop__articles-container__main-container__product__img-container">
-                        <AdvancedImage
-                          style={{
-                            width: "100%",
-                            height: "300px",
-                            objectFit: "cover",
-                          }}
-                          cldImg={cloudinary
-                            .image(article.image[0])
-                            .resize(fill())}
-                          plugins={[
-                            responsive({ steps: 370 }),
-                            lazyload(),
-                            placeholder("blur"),
-                          ]}
-                        />
-                      </div>
-                    </Link>
-                    <Link to={`/shop/${article.id}`}>
-                      <div className="shop__articles-container__main-container__product__infos-container">
-                        <h3>{article.name}</h3>
-                        <div>
-                          {article.description.length > 80
-                            ? `${article.description.slice(0, 80)}...`
-                            : article.description}
+              {articles.length ? (
+                articles
+                  .filter((article) => {
+                    if (selectedCategories.includes(article.category_name)) {
+                      return article;
+                    }
+                    if (selectedCategories.length === 0) {
+                      return article;
+                    }
+                    return "";
+                  })
+                  .map((article) => (
+                    <div
+                      key={article.id}
+                      className="shop__articles-container__main-container__product"
+                    >
+                      <Link to={`/shop/${article.id}`}>
+                        <div className="shop__articles-container__main-container__product__img-container">
+                          <AdvancedImage
+                            style={{
+                              width: "100%",
+                              height: "300px",
+                              objectFit: "cover",
+                            }}
+                            cldImg={cloudinary
+                              .image(article.image[0])
+                              .resize(fill())}
+                            plugins={[
+                              responsive({ steps: 370 }),
+                              lazyload(),
+                              placeholder("blur"),
+                            ]}
+                          />
                         </div>
-                        <div>{article.price_wt} €</div>
-                      </div>
-                    </Link>
-                  </div>
-                ))}
+                      </Link>
+                      <Link to={`/shop/${article.id}`}>
+                        <div className="shop__articles-container__main-container__product__infos-container">
+                          <h3>{article.name}</h3>
+                          <div>
+                            {article.description.length > 80
+                              ? `${article.description.slice(0, 80)}...`
+                              : article.description}
+                          </div>
+                          <div>{article.price_wt} €</div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+              ) : (
+                <h3>Aucun article de disponible pour le moment.</h3>
+              )}
               {error && (
                 <div>Veuillez nous excuser une erreur est survenue.</div>
               )}

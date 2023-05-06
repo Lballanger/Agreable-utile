@@ -15,9 +15,9 @@ const articlesSlice = createSlice({
   name: "articles",
   initialState: {
     loading: false,
-    articles: null,
+    articles: [],
     cart: [],
-    categories: null,
+    categories: [],
     subtotal: 0,
     error: "",
   },
