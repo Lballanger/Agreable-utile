@@ -10,7 +10,7 @@ import {
 } from "@cloudinary/react";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { IconBurger, IconTimes } from "../../assets/icons";
-import Connexion from "../Connexion/Connexion";
+import Connexion from "../Connexion";
 
 import facebook from "../../assets/img/facebook.svg";
 import instagram from "../../assets/img/instagram.svg";

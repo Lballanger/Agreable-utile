@@ -8,7 +8,7 @@ import { getOldCart } from "../slices/articlesSlice";
 import Homepage from "./Homepage/Homepage";
 import Product from "../components/Product/Product";
 import Shop from "./Shop/Shop";
-import Register from "../components/Register/Register";
+import Register from "./Register/Register";
 import Account from "../components/Account/Account";
 import Profil from "../components/Account/Profil/Profil";
 import Orders from "../components/Account/Orders/Orders";

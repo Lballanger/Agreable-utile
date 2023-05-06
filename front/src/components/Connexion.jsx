@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../../slices/userSlice";
+import { login } from "../slices/userSlice";
 
-import "./Connexion.scss";
-import Loader from "../Loader";
-import Input from "../Input";
+import Loader from "./Loader";
+import Input from "./Input";
 
 const initialState = {
   email: "",

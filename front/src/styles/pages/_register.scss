@@ -25,18 +25,17 @@
       &__radio-container {
         display: flex;
         width: 350px;
-        margin-bottom: 1.8rem;
-        padding: 0 1rem;
       }
 
       &__birth-container {
         display: flex;
         flex-direction: column;
         width: 100%;
-        margin-bottom: 1.8rem;
+        padding: 0 0.2rem;
 
         &__input-container {
           display: flex;
+          justify-content: space-between;
         }
 
         &__legend {
@@ -55,19 +54,25 @@
       &__submit {
         width: 100%;
         padding: 1rem 0rem;
-        background-color: #d0b2a9;
+        background-color: #e05a83;
         color: white;
         border-radius: 15px;
         transition: 0.4s;
+        margin: 2rem 0;
 
         &:hover {
           cursor: pointer;
-          background-color: #ead8c5;
         }
 
         &--disabled {
           background-color: grey;
         }
+      }
+
+      &__error {
+        color: red;
+        font-size: 0.75rem;
+        margin: 0.5rem;
       }
     }
   }

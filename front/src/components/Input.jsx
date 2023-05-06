@@ -11,18 +11,27 @@ function Input({
   readOnly,
   inputClassName,
   labelClassName,
+  checked,
+  error,
+  min,
+  max,
 }) {
   return (
     <div className="field">
       <input
         type={type || "text"}
-        className={inputClassName || "field__input"}
+        className={
+          inputClassName || `field__input ${error ? "field__input--error" : ""}`
+        }
         name={name}
         value={value}
         onChange={onChange}
         required={notRequired || true}
         readOnly={readOnly || false}
         id={htmlFor}
+        checked={checked}
+        min={min}
+        max={max}
       />
       <label htmlFor={htmlFor} className={labelClassName || "field__label"}>
         {placeholder}
@@ -42,12 +51,22 @@ Input.propTypes = {
   notRequired: PropTypes.bool,
   value: PropTypes.string.isRequired,
   readOnly: PropTypes.bool,
-  inputClassName: PropTypes.string.isRequired,
-  labelClassName: PropTypes.string.isRequired,
+  inputClassName: PropTypes.string,
+  labelClassName: PropTypes.string,
+  checked: PropTypes.bool,
+  error: PropTypes.bool,
+  min: PropTypes.number,
+  max: PropTypes.number,
 };
 
 Input.defaultProps = {
   type: "text",
   notRequired: false,
   readOnly: false,
+  inputClassName: "",
+  labelClassName: "",
+  checked: false,
+  error: false,
+  min: 0,
+  max: 100,
 };

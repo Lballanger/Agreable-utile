@@ -1,9 +1,8 @@
-import "./Register.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../slices/userSlice";
-import Field from "../Shared/Field/Field";
+import Input from "../../components/Input";
 
 function Register() {
   const initialErrors = {
@@ -20,7 +19,6 @@ function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [focus, setfocus] = useState(false);
   const [errors, setErrors] = useState(initialErrors);
   const [civility, setCivility] = useState("mme");
   const [firstname, setFirstname] = useState("");
@@ -57,40 +55,31 @@ function Register() {
       password,
       dateOfBirth: `${year}-${month}-${day}`,
     };
-    try {
-      const error = Object.values(errors);
-      if (error.length === 0) {
-        await dispatch(register({ ...inputs }))
-          .unwrap()
-          .catch((error) => {
-            console.error(error);
-            if (error === "User already exists") {
-              setErrors((state) => {
-                return {
-                  ...state,
-                  email: {
-                    error: true,
-                    message:
-                      "L'adresse e-mail est déjà utilisée, merci de vous connecter ou de créer un compte",
-                  },
-                };
-              });
-            }
-          });
-      }
-    } catch (error) {
-      console.log(error);
+
+    const error = Object.values(errors);
+    if (error.length === 0) {
+      await dispatch(register({ ...inputs }))
+        .unwrap()
+        .catch((error) => {
+          if (error === "User already exists") {
+            setErrors((state) => {
+              return {
+                ...state,
+                email: {
+                  error: true,
+                  message:
+                    "L'adresse e-mail est déjà utilisée, merci de vous connecter ou de créer un compte avec une autre adresse e-mail.",
+                },
+              };
+            });
+          }
+        });
     }
   };
 
-  const handleFocus = () => setfocus(true);
-
   const handleChange = (event) => {
     switch (event.target.name) {
-      case "m":
-        setCivility(event.target.value);
-        break;
-      case "mme":
+      case "civility":
         setCivility(event.target.value);
         break;
       case "firstname":
@@ -101,7 +90,7 @@ function Register() {
               ...state,
               firstname: {
                 error: true,
-                message: `Votre prénom doit contenir au minimum 2 caractères`,
+                message: `Votre prénom doit contenir au minimum 2 caractères.`,
               },
             };
           });
@@ -116,7 +105,7 @@ function Register() {
               ...state,
               lastname: {
                 error: true,
-                message: `Votre nom doit contenir au minimum 2 caractères`,
+                message: `Votre nom doit contenir au minimum 2 caractères.`,
               },
             };
           });
@@ -137,7 +126,7 @@ function Register() {
               ...state,
               day: {
                 error: true,
-                message: `Le jour saisi n'est pas valide`,
+                message: `Le jour saisi n'est pas valide.`,
               },
             };
           });
@@ -159,7 +148,7 @@ function Register() {
               ...state,
               month: {
                 error: true,
-                message: `Le mois saisi n'est pas valide`,
+                message: `Le mois saisi n'est pas valide.`,
               },
             };
           });
@@ -172,7 +161,7 @@ function Register() {
           event.target.value.length > 4 ||
           event.target.value.length < 2 ||
           event.target.value === 0 ||
-          event.target.value > 2022 ||
+          event.target.value > 2023 ||
           event.target.value < 1917
         ) {
           setErrors((state) => {
@@ -180,7 +169,7 @@ function Register() {
               ...state,
               year: {
                 error: true,
-                message: `L'année saisie n'est pas valide`,
+                message: `L'année saisie n'est pas valide.`,
               },
             };
           });
@@ -195,7 +184,7 @@ function Register() {
               ...state,
               email: {
                 error: true,
-                message: `L'e-mail saisi n'est pas valide`,
+                message: `L'e-mail saisi n'est pas valide.`,
               },
             };
           });
@@ -240,40 +229,58 @@ function Register() {
             Civilité
           </legend>
           <div className="register__container__form__radio-container">
-            <Field
-              id="mme"
-              label="Mme"
+            <Input
+              htmlFor="mme"
               type="radio"
+              name="civility"
               onChange={handleChange}
+              placeholder="Madame"
               value="Mme"
               checked={civility === "Mme"}
             />
-            <Field
-              id="m"
-              label="M."
+            <Input
+              htmlFor="m"
               type="radio"
+              name="civility"
               onChange={handleChange}
-              value="M."
-              checked={civility === "M."}
+              placeholder="Monsieur"
+              value="M"
+              checked={civility === "M"}
             />
           </div>
-          <Field
-            id="firstname"
+          <Input
+            htmlFor="firstname"
+            name="firstname"
             label="Prénom"
             type="text"
             onChange={handleChange}
             value={firstname}
-            error={errors.firstname}
+            placeholder="Prénom"
+            error={errors.firstname?.error}
           />
 
-          <Field
-            id="lastname"
+          {errors.firstname?.message && (
+            <p className="register__container__form__error">
+              {errors.firstname.message}
+            </p>
+          )}
+
+          <Input
+            htmlFor="lastname"
+            name="lastname"
             label="Nom"
             type="text"
             onChange={handleChange}
             value={lastname}
-            error={errors.lastname}
+            placeholder="Nom"
+            error={errors.lastname?.error}
           />
+
+          {errors.lastname?.message && (
+            <p className="register__container__form__error">
+              {errors.lastname.message}
+            </p>
+          )}
 
           <div className="register__container__form__birth-container">
             <legend className="register__container__form__birth-container__legend">
@@ -283,69 +290,116 @@ function Register() {
               </span>
             </legend>
             <div className="register__container__form__birth-container__input-container">
-              <Field
+              <Input
+                htmlFor="day"
+                name="day"
                 label="Jour"
-                id="day"
                 type="number"
+                placeholder="Jour"
                 onChange={handleChange}
-                onFocus={handleFocus}
-                focus={focus}
                 value={day}
                 min={1}
                 max={31}
-                error={errors.day}
+                error={errors.day?.error}
               />
-              <Field
+              <Input
+                htmlFor="month"
+                name="month"
                 label="Mois"
-                id="month"
                 type="number"
+                placeholder="Mois"
                 onChange={handleChange}
-                onFocus={handleFocus}
-                focus={focus}
                 value={month}
                 min={1}
                 max={12}
-                error={errors.month}
+                error={errors.month?.error}
               />
-              <Field
+              <Input
+                htmlFor="year"
+                name="year"
                 label="Année"
-                id="year"
                 type="number"
+                placeholder="Année"
                 onChange={handleChange}
-                onFocus={handleFocus}
-                focus={focus}
                 value={year}
                 min={1917}
-                max={2022}
-                error={errors.year}
+                max={2023}
+                error={errors.year?.error}
               />
             </div>
+
+            {(errors.day || errors.month || errors.year) && (
+              <>
+                {errors.day?.message && (
+                  <p className="register__container__form__error">
+                    {errors.day?.message}
+                  </p>
+                )}
+                {errors.month?.message && (
+                  <p className="register__container__form__error">
+                    {errors.month?.message}
+                  </p>
+                )}
+                {errors.year?.message && (
+                  <p className="register__container__form__error">
+                    {errors.year?.message}
+                  </p>
+                )}
+              </>
+            )}
           </div>
 
-          <Field
-            id="email"
+          <Input
+            htmlFor="email"
+            name="email"
             label="Adresse e-mail"
             type="email"
+            placeholder="Adresse e-mail"
             onChange={handleChange}
             value={email}
-            error={errors.email}
+            error={errors.email?.error}
           />
-          <Field
-            id="password"
+
+          {errors.email?.message && (
+            <p className="register__container__form__error">
+              {errors.email?.message}
+            </p>
+          )}
+
+          <Input
+            htmlFor="password"
+            name="password"
             label="Mot de passe"
             type="password"
+            placeholder="Mot de passe"
             onChange={handleChange}
             value={password}
-            error={errors.password}
+            error={errors.password?.error}
           />
-          <Field
-            id="password-confirm"
+
+          {errors.password?.message && (
+            <p className="register__container__form__error">
+              {errors.password.message}
+            </p>
+          )}
+
+          <Input
+            htmlFor="password-confirm"
+            name="password-confirm"
             label="Confirmation du mot de passe"
             type="password"
+            placeholder="Confirmation du mot de passe"
             onChange={handleChange}
             value={passwordConfirm}
-            error={errors.passwordConfirm}
+            error={errors.passwordConfirm?.error}
           />
+
+          {errors.passwordConfirm?.message && (
+            <p className="register__container__form__error">
+              {errors.passwordConfirm.message}
+            </p>
+          )}
+
           <button
             className={
               !disabled

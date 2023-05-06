@@ -1,11 +1,12 @@
 .field {
   position: relative;
-  margin-bottom: 2rem;
+  margin: 0.7rem 0;
+  padding: 0 0.2rem;
 
   &__input {
     width: 100%;
     border-radius: 8px;
-    border: 1px solid #e05a83;
+    border: 1px solid #bebebe;
     padding: 0.75rem 1rem;
     letter-spacing: 0.5px;
 
@@ -23,6 +24,25 @@
       opacity: 1;
       background-color: #fff;
       border-radius: 8px;
+    }
+
+    &--error {
+      border: 1px solid red;
+    }
+  }
+
+  &__input[type="radio"] + label,
+  &__input[type="radio"] {
+    font-size: 16px;
+    outline: none;
+    accent-color: #e05a83;
+    top: 0%;
+
+    &:checked + label,
+    &:checked:after {
+      outline: none;
+      font-size: 1rem;
+      color: #e05a83;
     }
   }
 
