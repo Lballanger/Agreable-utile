@@ -1,5 +1,3 @@
-import "./Cart.scss";
-
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
@@ -14,7 +12,7 @@ function Cart() {
   const dispatch = useDispatch();
 
   const subtotal = useSelector((state) => state.articlesSlice.subtotal);
-  const articlesInCart = useSelector((state) => state.articlesSlice.cart);
+  const { cart } = useSelector((state) => state.articlesSlice);
 
   const handleClick = (id) => {
     dispatch(removeFromCart(id));
@@ -34,23 +32,23 @@ function Cart() {
 
   return (
     <div className="cart">
-      {articlesInCart.length > 0 ? (
+      {cart.length > 0 ? (
         <div className="cart__cart-container">
           <div className="cart__cart-container__articles-container">
             <div className="cart__cart-container__articles-container__title-container">
               <h3 className="cart__cart-container__articles-container__title-container__title">
                 Mon panier ({" "}
-                {articlesInCart.reduce(
-                  (previousValue, currentValue) =>
-                    previousValue + currentValue.quantity,
-                  0,
-                )}{" "}
-                article
-                {articlesInCart.length > 1 ? "s" : ""} )
+                {cart
+                  .map((item) =>
+                    Array.from({ length: item.quantity }, () => item),
+                  )
+                  .flat()
+                  .reduce((previousValue) => previousValue + 1, 0)}{" "}
+                article{cart.length > 1 ? "s" : ""} )
               </h3>
             </div>
 
-            {articlesInCart.map((article) => (
+            {cart.map((article) => (
               <div
                 className="cart__cart-container__articles-container__product-container"
                 key={article.id}
@@ -75,15 +73,11 @@ function Cart() {
                         {article.name}
                       </h3>
                     </div>
-                    <div className="cart__cart-container__articles-container__product-container__infos__description__color-container">
-                      <div className="cart__cart-container__articles-container__product-container__infos__description__color-container__color">
-                        Couleur : Bleu
-                      </div>
+                    <div className="cart__cart-container__articles-container__product-container__infos__description__content">
+                      Couleur : Bleu
                     </div>
-                    <div className="cart__cart-container__articles-container__product-container__infos__description__size-container">
-                      <div className="cart__cart-container__articles-container__product-container__infos__description__size-container__size">
-                        Taille : S
-                      </div>
+                    <div className="cart__cart-container__articles-container__product-container__infos__description__content">
+                      Taille : Universelle
                     </div>
                   </div>
                   <div className="cart__cart-container__articles-container__product-container__infos__quantity-container">

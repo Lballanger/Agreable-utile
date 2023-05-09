@@ -28,13 +28,13 @@ function Shop() {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
-    if (!articles) {
+    if (!articles.length) {
       dispatch(fetchArticles());
     }
   }, [articles]);
 
   useEffect(() => {
-    if (!categories) {
+    if (!categories.length) {
       dispatch(fetchCategories());
     }
   }, [categories]);
@@ -80,9 +80,9 @@ function Shop() {
           </div>
           <div className="shop__articles-container">
             <div className="shop__articles-container__main-container">
-              {articles.length ? (
+              {articles.length > 0 ? (
                 articles
-                  .filter((article) => {
+                  ?.filter((article) => {
                     if (selectedCategories.includes(article.category_name)) {
                       return article;
                     }

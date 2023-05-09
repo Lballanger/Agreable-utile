@@ -13,7 +13,7 @@ import Account from "../components/Account/Account";
 import Profil from "../components/Account/Profil/Profil";
 import Orders from "../components/Account/Orders/Orders";
 import Order from "../components/Account/Order/Order";
-import Cart from "../components/Cart/Cart";
+import Cart from "./Cart/Cart";
 import Success from "../components/Checkout/Success/Success";
 import Checkout from "../components/Checkout/Checkout";
 import GuestRegistration from "../components/Checkout/GuestRegistration/GuestRegistration";
