@@ -64,6 +64,7 @@
 .dropdown {
   position: relative;
   height: 100%;
+  width: max-content;
 
   > a {
     display: flex;

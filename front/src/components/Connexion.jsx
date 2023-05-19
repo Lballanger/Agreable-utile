@@ -105,6 +105,7 @@ function Connexion({ handleCloseModal }) {
               />
             </div>
             <Button
+              type="submit"
               buttonType="primary"
               style={{ padding: "0.6rem", marginTop: "1rem" }}
             >

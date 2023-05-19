@@ -8,8 +8,8 @@ import CartDropDown from "./CartDropDown";
 import Logo from "../assets/img/Logo";
 
 function Navbar({
-  menuItems = [],
-  connectedMenuItems = [],
+  menuItems,
+  connectedMenuItems,
   setIsModalOpen,
   handleLogout,
 }) {
