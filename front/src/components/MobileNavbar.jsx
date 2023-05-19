@@ -26,7 +26,7 @@ function MobileNavbar({ menuItems = [], setIsModalOpen }) {
         </Button>
       </div>
       <div
-        className="navigation__logo-container"
+        className="mobile-nav__logo-container"
         style={{
           position: "absolute",
           top: "-30%",
@@ -38,7 +38,7 @@ function MobileNavbar({ menuItems = [], setIsModalOpen }) {
           <Logo />
         </Link>
       </div>
-      <div className="cart__item">
+      <div className="mobile-nav__icons">
         <div className="cart__item__img-container">
           <Button buttonType="text" onClick={() => setIsModalOpen(true)}>
             <Account width="23" height="23" color="black" />

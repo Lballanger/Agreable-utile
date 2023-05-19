@@ -5,6 +5,11 @@
   margin-top: 0.5rem;
   width: 100%;
   top: 0;
+  margin-bottom: 0rem;
+
+  @include breakpoint(large) {
+    margin-bottom: 2rem;
+  }
 
   transition: 0.3s;
   z-index: 3;

@@ -1,4 +1,4 @@
-.cart {
+.cart-dropdown {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,6 +15,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     &__img-container {
       display: flex;
       position: relative;

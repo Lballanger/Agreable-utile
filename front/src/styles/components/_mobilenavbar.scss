@@ -15,7 +15,18 @@
   &__logo-container {
     display: flex;
     justify-content: center;
-    width: 40%;
+    width: 150px;
+
+    @include breakpoint(xlarge) {
+      width: 90px;
+    }
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
   }
 
   &__nav {
