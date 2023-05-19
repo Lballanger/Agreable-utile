@@ -5,6 +5,8 @@ import { login } from "../slices/userSlice";
 
 import Loader from "./Loader";
 import Input from "./Input";
+import Button from "./Button";
+import IconTimes from "../assets/icons/IconTimes";
 
 const initialState = {
   email: "",
@@ -71,7 +73,7 @@ function Connexion({ handleCloseModal }) {
               onKeyDown={handleCloseModal}
               type="close"
             >
-              X
+              <IconTimes width="40" height="40" color="rgb(247, 114, 136)" />
             </div>
             <h2 className="connexion__modal__container__form__title">
               {`S'identifier`}
@@ -85,26 +87,29 @@ function Connexion({ handleCloseModal }) {
             )}
             <div className="connexion__modal__container__form__inputs-container">
               <Input
+                htmlFor="email"
+                type="email"
                 name="email"
                 value={inputs.email}
                 onChange={inputChange}
-                htmlFor="email"
                 placeholder="Adresse e-mail"
               />
+              <br />
               <Input
+                htmlFor="password"
+                type="password"
                 name="password"
                 value={inputs.password}
                 onChange={inputChange}
-                htmlFor="password"
                 placeholder="Mot de passe"
               />
             </div>
-            <button
-              className="connexion__modal__container__form__submit"
-              type="submit"
+            <Button
+              buttonType="primary"
+              style={{ padding: "0.6rem", marginTop: "1rem" }}
             >
               {loader ? <Loader width="30px" height="30px" /> : "Connexion"}
-            </button>
+            </Button>
           </form>
         </div>
       </div>

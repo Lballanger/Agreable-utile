@@ -1,17 +1,20 @@
-@forward "./abstracts/";
-@forward "./base/";
+@import "./abstracts/";
+@import "./base/";
 
 @import "abstracts/mixins";
 
 // Pages
 @import "pages/homepage";
-@import "pages/header";
 @import "pages/shop";
 @import "pages/register";
 @import "pages/cart";
 
 // Components
+@import "components/header";
 @import "components/button";
 @import "components/input";
 @import "components/breadcrumb";
 @import "components/connexion";
+@import "components/navbar";
+@import "components/mobilenavbar";
+@import "components/cartDropDown";

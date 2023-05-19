@@ -1,19 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
-function IconTimes(props) {
+function IconTimes({ width, height, color }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={props?.width || 24}
-      height={props?.height || 24}
-      fill={props?.color || "none"}
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
+      id="close"
+      width={width || 48}
+      height={height || 48}
+      viewBox="0 0 30 30"
     >
-      <path d="M18 6 6 18M6 6l12 12" />
+      <path
+        d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"
+        fill={color || "black"}
+      />
     </svg>
   );
 }
