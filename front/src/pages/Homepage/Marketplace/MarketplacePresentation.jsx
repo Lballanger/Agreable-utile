@@ -4,9 +4,7 @@ function MarketplacePresentation() {
   return (
     <div className="main__marketplace">
       <div className="main__marketplace__description-container">
-        <h2 className="main__marketplace__description-container__title">
-          Retrouvez moi sur le marché à Lagny sur Marne
-        </h2>
+        <h2>Retrouvez moi sur le marché à Lagny sur Marne</h2>
         <p className="main__marketplace__description-container__content">
           Vous pouvez me retrouver sur le marché de Lagny sur Marne tous les
           dimanches matins de 8h à 13h.
@@ -36,7 +34,7 @@ function MarketplacePresentation() {
           Dolorum, omnis placeat dolor fugiat assumenda consequatur odio
           laboriosam, maiores recusandae fuga quisquam mollitia reiciendis
           temporibus nemo unde doloremque, atque aut impedit eligendi minima
-          maxime natus sint alias. Consequatur, a.
+          maxime natus sint alias. Consequatur.
         </p>
       </div>
       <div className="main__marketplace__img-container">

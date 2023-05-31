@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { login } from "../slices/userSlice";
 
 import Loader from "./Loader";
@@ -111,6 +112,10 @@ function Connexion({ handleCloseModal }) {
             >
               {loader ? <Loader width="30px" height="30px" /> : "Connexion"}
             </Button>
+            <br />
+            <Link to="/register" onClick={handleCloseModal}>
+              {`Vous n'avez pas de compte ?`} <span>{`S'inscrire`}</span>
+            </Link>
           </form>
         </div>
       </div>
