@@ -48,16 +48,16 @@ function EditProductModal({ open, setOpen, productData }) {
   const handleClose = () => setOpen(false);
 
   const handleFormSubmit = (values) => {
-    dispatch(updateProductById({
-        id: productData.id,
-        name: values.name,
-        description: values.description,
-        price: values.price,
-        quantity: values.quantity,
-        categoryId: values.category,
-    })).then(() => {
-        handleClose();
-    });
+    // dispatch(updateProductById({
+    //     id: productData.id,
+    //     name: values.name,
+    //     description: values.description,
+    //     price: values.price,
+    //     quantity: values.quantity,
+    //     categoryId: values.category,
+    // })).then(() => {
+    //     handleClose();
+    // });
   };
 
   return (

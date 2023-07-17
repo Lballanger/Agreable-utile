@@ -71,9 +71,9 @@ function ModalProduct({ open, setOpen }) {
     formData.append("quantity", values.quantity);
     formData.append("categoryId", values.category);
 
-    dispatch(createProduct(formData)).then(() => {
-      handleClose();
-    });
+    // dispatch(createProduct(formData)).then(() => {
+    //   handleClose();
+    // });
   };
 
   useEffect(() => {
