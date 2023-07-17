@@ -31,7 +31,7 @@ function SewingPresentation() {
               est le bienvenu.
               <br />
               Les ateliers sont proposés les mercredis et samedis sur
-              rendez-vous au 06.61.76.76.39.
+              rendez-vous au 00.00.00.00.00.
               <br />
               Pendant les vacances scolaires, des créneaux supplémentaires sont
               dispensés tous les après-midis.
@@ -50,7 +50,7 @@ function SewingPresentation() {
               Moment d'apprentissage et de partage.
               <br />
               Pour en savoir plus sur les conditions de participation et
-              tarifaires, je vous invite à me contacter au 06.61.76.76.39.
+              tarifaires, je vous invite à me contacter au 00.00.00.00.00.
               <br />
               Cartes cadeaux disponibles sur demande.
               <br />

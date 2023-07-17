@@ -21,7 +21,7 @@ import NotFound from "../components/NotFound/NotFound";
 
 // Hooks
 import useAuth from "../hooks/useAuth";
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/Layout";
 
 function App() {
   const dispatch = useDispatch();

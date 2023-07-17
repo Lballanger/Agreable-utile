@@ -1,0 +1,48 @@
+.footer {
+  position: relative;
+  padding: 3rem 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #faf9fe;
+
+  @include breakpoint(medium) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+  }
+
+  a {
+    color: rgb(0, 0, 0);
+  }
+
+  ul > li {
+    padding-bottom: 0.5rem;
+  }
+
+  & li > a {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      top: 80%;
+      left: 0;
+      background-color: var(--color-primary);
+      transform: scaleX(0);
+      transition: transform 0.6s ease;
+    }
+
+    &:hover::before {
+      transform: scaleX(1);
+    }
+  }
+
+  &__web-policy {
+    font-size: 1rem;
+  }
+
+  &__social-network {
+    font-size: 1rem;
+  }
+}

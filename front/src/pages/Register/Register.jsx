@@ -222,7 +222,7 @@ function Register() {
 
   return (
     <div className="register">
-      <h2 className="register__title">Rejoindre l&#8217;Agréable Utile</h2>
+      <h2 className="register__title">Rejoindre Nom de la boutique</h2>
       <div className="register__container">
         <form onSubmit={handleSubmit} className="register__container__form">
           <legend className="register__container__form__legend">

@@ -13,7 +13,7 @@ function ShopPresentation() {
         <div className="main__shop-presentation__container__description-container">
           <div className="main__shop-presentation__container__description-container__description">
             <h1 className="main__shop-presentation__container__description-container__description__title-container">
-              L&#8217;agréable Utile
+              Nom de la boutique
             </h1>
             <div className="main__shop-presentation__container__description-container__description__content">
               <p className="main__shop-presentation__container__description-container__description__content__paragraph">
